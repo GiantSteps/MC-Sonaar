@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EE16D048-9A64-436D-ACA9-EF5A5FD08BFA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>pd_essentia~</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8BD2A54C-C1E0-4A07-99AC-0D5C1089BE90</key>
+		<string>https://github.com/GiantSteps/Flext.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>pd_essentia~.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8BD2A54C-C1E0-4A07-99AC-0D5C1089BE90</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/GiantSteps/Flext.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8BD2A54C-C1E0-4A07-99AC-0D5C1089BE90</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8BD2A54C-C1E0-4A07-99AC-0D5C1089BE90</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pd_essentia</string>
+		</dict>
+	</array>
+</dict>
+</plist>
