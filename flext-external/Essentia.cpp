@@ -55,10 +55,6 @@ void Essentia::setup(int sampleRate, int frameSize, int hopSize)
     spec  = factory.create("Spectrum");
     mfcc  = factory.create("MFCC");
     loud = factory.create("Loudness");
-    
-    
-
-
 }
 
 void Essentia::compute(vector<Real> audioFrame)
@@ -78,6 +74,15 @@ void Essentia::compute(vector<Real> audioFrame)
 //    
 //    w->compute();
     
+    // FrameCutter -> Windowing -> Spectrum
+    vector<Real> frame, windowedFrame;
+    
+    // Spectrum -> MFCC
+    vector<Real> spectrum, mfccCoeffs, mfccBands;
+    
+    //Loudness
+    Real loudness;
+    
     pool.clear();
 
     spec->input("frame").set(audioFrame);
@@ -90,43 +95,36 @@ void Essentia::compute(vector<Real> audioFrame)
     loud->input("signal").set(audioFrame);
     loud->output("loudness").set(loudness);
     
+    //
     spec->compute();
     mfcc->compute();
     loud->compute();
     
     pool.add("lowlevel.mfcc", mfccCoeffs);
-    pool.add("spec", spectrum);
+    pool.add("lowlevel.spec", spectrum);
     pool.add("loudness", loudness);
     
-
     //IF WE GOT AN ONSET -> OUTPUT FEATURES
+    
 }
 
-vector<flext::AtomList> Essentia::getFeatures()
+//vector<flext::AtomList> Essentia::getFeatures()
+//{
+//    
+//
+//}
+
+std::map<string, vector<Real> > Essentia::getFeatures()
 {
-    vector<flext::AtomList> featureLists;
+    std::map<string, vector<vector<Real> > >  vectorsIn =     pool.getVectorRealPool();
+    std::map<string, vector<Real> > vectorsOut;
     
-    std::map<string, vector<Real> > poolMap =  pool.getRealPool();
-    
-    for(std::map<string,vector<Real> >::iterator iter = poolMap.begin(); iter != poolMap.end(); ++iter)
+    for(std::map<string, vector<vector<Real> > >::iterator iter = vectorsIn.begin(); iter != vectorsIn.end(); ++iter)
     {
         string k =  iter->first;
-        vector<Real> v = iter->second;
+        vector<Real> v = (iter->second)[0];
         
-        flext::AtomList listOut(v.size()+1);
-        t_atom value;
-        
-        flext::SetString(value, k.c_str());
-        listOut[0] = value;
-        
-        for(int i=0; v.size()+1; i++) {
-            t_atom value;
-//            flext::SetFloat(value, v[i]);
-            
-//            listOut[i+1] = value;
-        }
-        featureLists.push_back(listOut);
+        vectorsOut[k] = v;
     }
-    return featureLists;
-    
+    return vectorsOut;
 }

@@ -10,6 +10,7 @@
 #define __pd_essentia___Essentia__
 
 #include <iostream>
+#include <map>
 
 #include <essentia/algorithmfactory.h>
 #include <essentia/essentiamath.h>
@@ -29,7 +30,9 @@ public:
     
     void setup(int sampleRate, int frameSize, int hopSize);
     void compute(vector<Real> audioFrame);
-    vector<flext::AtomList> getFeatures();
+//    vector<flext::AtomList> getFeatures();
+//    void getFeatures();
+    std::map<string, vector<Real> > getFeatures();
     
     //////ALGS////////
     Algorithm *fc, *w, *spec, *mfcc, *loud;
@@ -39,14 +42,7 @@ public:
     
     /////STRUCTURES//////
     
-    // FrameCutter -> Windowing -> Spectrum
-    vector<Real> frame, windowedFrame;
-    
-    // Spectrum -> MFCC
-    vector<Real> spectrum, mfccCoeffs, mfccBands;
-    
-    //Loudness
-    Real loudness;
+
     
     Pool pool;
 };

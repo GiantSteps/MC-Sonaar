@@ -86,6 +86,8 @@ public:
 
     void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);    
     void my_bang();
+
+    void outputListOfFeatures(const std::map<string, vector<Real> >& features);
     
     int essentiaBufferCounter;
     vector<Real> audioBuffer;

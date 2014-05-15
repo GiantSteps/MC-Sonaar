@@ -43,21 +43,40 @@ void pd_essentia::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
             essentia.compute(audioBuffer);
             
             //Spit out the pool
-            
-//            vector<AtomList> features = essentia.getFeatures();
-//            for(int i=0; i<features.size(); i++)
-//                ToQueueList(1, features[i]);
+            std::map<string, vector<Real> > features = essentia.getFeatures();
+            outputListOfFeatures(features);
         }
         *(out++) = *(in++);
     }
 }
 
 
-
-
-
 void pd_essentia::my_bang() {
     
+}
+
+void pd_essentia::outputListOfFeatures(const std::map<string, vector<Real> >& features)
+{
+    for(std::map<string, vector<Real>  >::const_iterator iter = features.begin(); iter != features.end(); ++iter)
+    {
+        AtomList listOut(iter->second.size()+1);
+        t_atom featureName;
+        
+        SetString(featureName, iter->first.c_str());
+        
+        listOut[0] = featureName;
+        
+        for(int i=0; i<iter->second.size(); i++) {
+            t_atom featureValue;
+        
+            SetFloat(featureValue, iter->second[i]);
+            
+            listOut[i+1] = featureValue;
+            
+        }
+        
+        ToQueueList(1, listOut);
+    }
 }
     
 
