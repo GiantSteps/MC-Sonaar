@@ -13353,6 +13353,8 @@ structure of buffer;
 #X text 433 546 normal scenario;
 #X text 228 543 copy the end of circ buffer;
 #X text 16 533 copy the beginning;
+#X obj -43 -22 xsample;
+#X text -55 10 dummy for load lib;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 2 0 29 0;
