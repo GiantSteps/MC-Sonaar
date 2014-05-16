@@ -1,13 +1,19 @@
 #include "main.h"
 
 
-pd_essentia::pd_essentia()
+void pd_essentia::setup(t_classid c)
+{
+    FLEXT_CADDMETHOD_(c, 0, "features", m_features);
+}
+
+pd_essentia::pd_essentia(int argc,const t_atom *argv)
 {
     AddInSignal("In");
     AddOutSignal("Out");
     AddOutList("FFT");
     
     FLEXT_ADDBANG(0,my_bang);
+
     
     /////// PARAMS //////////////
     int sampleRate = Samplerate();
@@ -20,7 +26,10 @@ pd_essentia::pd_essentia()
         audioBuffer.push_back(0.0);
 
     essentiaBufferCounter = 0;
+    
+    m_features(argc, argv);
 }
+
 
 pd_essentia::~pd_essentia()
 {
@@ -43,16 +52,24 @@ void pd_essentia::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
             essentia.compute(audioBuffer);
             
             //Spit out the pool
-            std::map<string, vector<Real> > features = essentia.getFeatures();
-            outputListOfFeatures(features);
+//            std::map<string, vector<Real> > features = essentia.getFeatures();
+//            outputListOfFeatures(features);
         }
         *(out++) = *(in++);
     }
 }
 
+void pd_essentia::m_features(int argc, const t_atom *argv)
+{
+    essentia.currentAlgorithms.clear();
+    for(int i=0; i<argc; i++)
+        essentia.currentAlgorithms[GetString(argv[i])] = true;
+        
+}
 
 void pd_essentia::my_bang() {
-    
+    std::map<string, vector<Real> > features = essentia.getFeatures();
+    outputListOfFeatures(features);
 }
 
 void pd_essentia::outputListOfFeatures(const std::map<string, vector<Real> >& features)

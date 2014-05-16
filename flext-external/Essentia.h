@@ -24,7 +24,10 @@ using namespace essentia;
 using namespace essentia::standard;
 
 class Essentia {
+
 public:
+    std::map<string, bool> currentAlgorithms;
+
     Essentia();
     ~Essentia();
     
@@ -40,10 +43,7 @@ public:
     /////// PARAMS //////////////
     int sampleRate, frameSize, hopSize;
     
-    /////STRUCTURES//////
-    
-
-    
+    /////STRUCTURES//////    
     Pool pool;
 };
 

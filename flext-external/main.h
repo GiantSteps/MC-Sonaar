@@ -22,6 +22,8 @@
  This is an example of a simple object doing a float addition
  */
 
+//#define FLEXT_ATTRIBUTES 1
+
 // include flext header
 #include <flext.h>
 #include "math.h"
@@ -79,9 +81,9 @@ namespace Helper {
 class pd_essentia : public flext_dsp
 {
 public:
-    FLEXT_HEADER(pd_essentia, flext_dsp)
+    FLEXT_HEADER_S(pd_essentia, flext_dsp, setup)
 
-    pd_essentia();
+    pd_essentia(int argc,const t_atom *argv);
     ~pd_essentia();
 
     void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);    
@@ -93,11 +95,17 @@ public:
     vector<Real> audioBuffer;
     
     Essentia essentia;
+    
+protected:
+    virtual void m_features(int argc, const t_atom *argv);
 
+private:
+    static void setup(t_classid c);
 
-    FLEXT_CALLBACK(my_bang);
+    FLEXT_CALLBACK_V(m_features)
+    FLEXT_CALLBACK(my_bang)
 };
-FLEXT_NEW_DSP("pd_essentia~", pd_essentia)
+FLEXT_NEW_DSP_V("pd_essentia~", pd_essentia)
 
 
 #endif

@@ -76,10 +76,9 @@ void Essentia::compute(vector<Real> audioFrame)
     
     // FrameCutter -> Windowing -> Spectrum
     vector<Real> frame, windowedFrame;
-    
+
     // Spectrum -> MFCC
     vector<Real> spectrum, mfccCoeffs, mfccBands;
-    
     //Loudness
     Real loudness;
     
@@ -95,15 +94,19 @@ void Essentia::compute(vector<Real> audioFrame)
     loud->input("signal").set(audioFrame);
     loud->output("loudness").set(loudness);
     
-    //
     spec->compute();
-    mfcc->compute();
-    loud->compute();
     
-    pool.add("lowlevel.mfcc", mfccCoeffs);
-    pool.add("lowlevel.spec", spectrum);
-    pool.add("loudness", loudness);
+    if(currentAlgorithms["spectrum"] || currentAlgorithms["all"])
+        pool.add("lowlevel.spec", spectrum);
     
+    if(currentAlgorithms["mfcc"] || currentAlgorithms["all"]) {
+        mfcc->compute();
+        pool.add("lowlevel.mfcc", mfccCoeffs);
+    }
+    if(currentAlgorithms["loudness"] || currentAlgorithms["all"]) {
+        loud->compute();
+        pool.add("loudness", loudness);
+    }
     //IF WE GOT AN ONSET -> OUTPUT FEATURES
     
 }
@@ -126,5 +129,16 @@ std::map<string, vector<Real> > Essentia::getFeatures()
         
         vectorsOut[k] = v;
     }
+    
+    std::map<string, vector<Real > >  realsIn =  pool.getRealPool();
+    
+    for(std::map<string, vector<Real > >::iterator iter = realsIn.begin(); iter != realsIn.end(); ++iter)
+    {
+        string k =  iter->first;
+        vector<Real> v = iter->second;
+        
+        vectorsOut[k] = v;
+    }
+    
     return vectorsOut;
 }
