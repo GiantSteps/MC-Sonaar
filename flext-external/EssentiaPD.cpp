@@ -67,6 +67,8 @@ void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
     c2p = factory.create("CartesianToPolar");
     od = factory.create("OnsetDetection", "method", "complex");
     o = factory.create("Onsets");
+    
+    FLEXT_ADDTIMER(onsetTimer,m_timerA);
 }
 
 void EssentiaPD::compute(vector<Real> audioFrame)
@@ -87,6 +89,7 @@ void EssentiaPD::compute(vector<Real> audioFrame)
 //    w->compute();
     
     //Simple buffer shifting, prob simpler
+    onsetDetected = false;
     
     // shift signal buffer contents back.
 	for(int i=0; i<frameBuffer.size()-frameSize; i++)
@@ -178,10 +181,15 @@ void EssentiaPD::compute(vector<Real> audioFrame)
         c2p->compute();
         od->compute();
         
+    
+        //If we have detected an onset start the time before allowing detection again
+        if(onsetDetection >= 3.0 && onsetDetected == false) {
+            onsetDetected = true;
+            onsetTimer.Delay(50);
+        }
         
-        
-        if(onsetDetection > 0.0f)
-            std::cout << onsetDetection << "\n";
+//        if(onsetDetection > 0.0f)
+//            std::cout << onsetDetection << "\n";
         
         vector<Real> onsetDetections;
         onsetDetections.push_back(onsetDetection);

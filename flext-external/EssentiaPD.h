@@ -10,7 +10,13 @@
 #ifndef __pd_essentia___EssentiaPD__
 #define __pd_essentia___EssentiaPD__
 
-#include "flext.h"
+// include flext header
+#include <flext.h>
+
+// check for appropriate flext version
+#if !defined(FLEXT_VERSION) || (FLEXT_VERSION < 403)
+#error You need at least flext version 0.4.3
+#endif
 
 #include <iostream>
 #include <map>
@@ -23,9 +29,10 @@ using namespace std;
 using namespace essentia;
 using namespace essentia::standard;
 
-class EssentiaPD {
+class EssentiaPD : public flext_base{
 
 public:
+    FLEXT_HEADER(EssentiaPD, flext_base)
     std::map<string, bool> currentAlgorithms;
 
     EssentiaPD();
@@ -52,6 +59,18 @@ public:
     Pool pool;
     
     bool onsetDetected;
+    
+protected:
+    flext::Timer onsetTimer;
+    
+    //Reset the timer when we reach the appropriate time
+    void m_timerA(void *) { onsetDetected = false;} ;
+    
+private:
+    // register timer callbacks
+    
+    FLEXT_CALLBACK_T(m_timerA) 
+
 };
 
 #endif /* defined(__pd_essentia___EssentiaPD__) */

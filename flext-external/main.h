@@ -98,12 +98,32 @@ public:
     
 protected:
     virtual void m_features(int argc, const t_atom *argv);
+    
+    // timers
+	Timer tmrA;
+    
+	void m_timerA(void *);
+    
+	void m_resetA();
+
+	void m_oneshotA(int del);
+
+	void m_periodicA(int del);
+
 
 private:
     static void setup(t_classid c);
 
     FLEXT_CALLBACK_V(m_features)
     FLEXT_CALLBACK(my_bang)
+    
+    // register timer callbacks
+	FLEXT_CALLBACK_T(m_timerA)
+	
+	// register method callbacks
+	FLEXT_CALLBACK(m_resetA)
+	FLEXT_CALLBACK_I(m_oneshotA)
+	FLEXT_CALLBACK_I(m_periodicA)
 };
 FLEXT_NEW_DSP_V("pd_essentia~", pd_essentia)
 #endif
