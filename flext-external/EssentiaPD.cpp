@@ -1,18 +1,18 @@
 //
-//  Essentia.cpp
+//  EssentiaPD.cpp
 //  pd_essentia~
 //
 //  Created by Cárthach Ó Nuanáin on 15/05/2014.
 //
 //
 
-#include "Essentia.h"
+#include "EssentiaPD.h"
 
-Essentia::Essentia()
+EssentiaPD::EssentiaPD()
 {
 
 }
-Essentia::~Essentia()
+EssentiaPD::~EssentiaPD()
 {
     
     //        delete audio;
@@ -25,7 +25,7 @@ Essentia::~Essentia()
     essentia::shutdown();
 }
 
-void Essentia::setup(int sampleRate, int frameSize, int hopSize)
+void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
 {
 
     essentia::init();
@@ -55,9 +55,12 @@ void Essentia::setup(int sampleRate, int frameSize, int hopSize)
     spec  = factory.create("Spectrum");
     mfcc  = factory.create("MFCC");
     loud = factory.create("Loudness");
+    
+    pm = factory.create("PredominantMelody");
+    
 }
 
-void Essentia::compute(vector<Real> audioFrame)
+void EssentiaPD::compute(vector<Real> audioFrame)
 {
 //    fc->input("signal").set(audioFrame);
 
@@ -79,8 +82,11 @@ void Essentia::compute(vector<Real> audioFrame)
 
     // Spectrum -> MFCC
     vector<Real> spectrum, mfccCoeffs, mfccBands;
+    
     //Loudness
     Real loudness;
+    
+    vector<Real> pitch;
     
     pool.clear();
 
@@ -93,6 +99,9 @@ void Essentia::compute(vector<Real> audioFrame)
     
     loud->input("signal").set(audioFrame);
     loud->output("loudness").set(loudness);
+
+    pm->input("signal").set(audioFrame);
+    pm->output("pitch").set(pitch);
     
     spec->compute();
     
@@ -107,17 +116,21 @@ void Essentia::compute(vector<Real> audioFrame)
         loud->compute();
         pool.add("loudness", loudness);
     }
+    
+    if(currentAlgorithms["melody"] || currentAlgorithms["all"])
+        pm->compute();
+//        pool.add("melody", pitch);
     //IF WE GOT AN ONSET -> OUTPUT FEATURES
     
 }
 
-//vector<flext::AtomList> Essentia::getFeatures()
+//vector<flext::AtomList> EssentiaPD::getFeatures()
 //{
 //    
 //
 //}
 
-std::map<string, vector<Real> > Essentia::getFeatures()
+std::map<string, vector<Real> > EssentiaPD::getFeatures()
 {
     std::map<string, vector<vector<Real> > >  vectorsIn =     pool.getVectorRealPool();
     std::map<string, vector<Real> > vectorsOut;

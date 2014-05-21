@@ -15,9 +15,9 @@
 		073A71961920F1FF00F23449 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073A71951920F1FF00F23449 /* AVFoundation.framework */; };
 		073A71981920F20500F23449 /* VideoDecodeAcceleration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073A71971920F20500F23449 /* VideoDecodeAcceleration.framework */; };
 		075C17181924B06E00491DAB /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 075C17171924B06E00491DAB /* main.h */; };
-		075C171D1924B60100491DAB /* Essentia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 075C171B1924B60100491DAB /* Essentia.cpp */; };
-		075C171E1924B60100491DAB /* Essentia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 075C171B1924B60100491DAB /* Essentia.cpp */; };
-		075C171F1924B60100491DAB /* Essentia.h in Headers */ = {isa = PBXBuildFile; fileRef = 075C171C1924B60100491DAB /* Essentia.h */; };
+		075C171D1924B60100491DAB /* EssentiaPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 075C171B1924B60100491DAB /* EssentiaPD.cpp */; };
+		075C171E1924B60100491DAB /* EssentiaPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 075C171B1924B60100491DAB /* EssentiaPD.cpp */; };
+		075C171F1924B60100491DAB /* EssentiaPD.h in Headers */ = {isa = PBXBuildFile; fileRef = 075C171C1924B60100491DAB /* EssentiaPD.h */; };
 		076B5E0A192126EA00949237 /* VideoDecodeAcceleration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073A71971920F20500F23449 /* VideoDecodeAcceleration.framework */; };
 		076B5E0B192126EC00949237 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073A71951920F1FF00F23449 /* AVFoundation.framework */; };
 		076B5E0C192126EE00949237 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073A71931920F1F800F23449 /* CoreVideo.framework */; };
@@ -74,8 +74,8 @@
 		073A71951920F1FF00F23449 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		073A71971920F20500F23449 /* VideoDecodeAcceleration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoDecodeAcceleration.framework; path = System/Library/Frameworks/VideoDecodeAcceleration.framework; sourceTree = SDKROOT; };
 		075C17171924B06E00491DAB /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
-		075C171B1924B60100491DAB /* Essentia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Essentia.cpp; sourceTree = "<group>"; };
-		075C171C1924B60100491DAB /* Essentia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Essentia.h; sourceTree = "<group>"; };
+		075C171B1924B60100491DAB /* EssentiaPD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EssentiaPD.cpp; sourceTree = "<group>"; };
+		075C171C1924B60100491DAB /* EssentiaPD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaPD.h; sourceTree = "<group>"; };
 		076B5E101921286C00949237 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		07A1FE1B1917C48A00687664 /* vecLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vecLib.framework; path = /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework; sourceTree = "<absolute>"; };
 		07A1FE1F1917C53A00687664 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = /Library/Frameworks/MaxAPI.framework; sourceTree = "<absolute>"; };
@@ -161,8 +161,8 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				075C171B1924B60100491DAB /* Essentia.cpp */,
-				075C171C1924B60100491DAB /* Essentia.h */,
+				075C171B1924B60100491DAB /* EssentiaPD.cpp */,
+				075C171C1924B60100491DAB /* EssentiaPD.h */,
 				E98573560D9E52D300682171 /* main.cpp */,
 				075C17171924B06E00491DAB /* main.h */,
 			);
@@ -176,7 +176,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				075C171F1924B60100491DAB /* Essentia.h in Headers */,
+				075C171F1924B60100491DAB /* EssentiaPD.h in Headers */,
 				075C17181924B06E00491DAB /* main.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,7 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98573570D9E52D300682171 /* main.cpp in Sources */,
-				075C171D1924B60100491DAB /* Essentia.cpp in Sources */,
+				075C171D1924B60100491DAB /* EssentiaPD.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98573580D9E52D300682171 /* main.cpp in Sources */,
-				075C171E1924B60100491DAB /* Essentia.cpp in Sources */,
+				075C171E1924B60100491DAB /* EssentiaPD.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

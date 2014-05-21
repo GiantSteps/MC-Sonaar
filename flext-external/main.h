@@ -42,7 +42,7 @@ using namespace std;
 using namespace essentia;
 using namespace essentia::standard;
 
-#include "Essentia.h"
+#include "EssentiaPD.h"
 
 
 // check for appropriate flext version
@@ -94,7 +94,7 @@ public:
     int essentiaBufferCounter;
     vector<Real> audioBuffer;
     
-    Essentia essentia;
+    EssentiaPD essentia;
     
 protected:
     virtual void m_features(int argc, const t_atom *argv);

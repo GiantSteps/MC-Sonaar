@@ -1,13 +1,13 @@
 //
-//  Essentia.h
+//  EssentiaPD.h
 //  pd_essentia~
 //
 //  Created by Cárthach Ó Nuanáin on 15/05/2014.
 //
 //
 
-#ifndef __pd_essentia___Essentia__
-#define __pd_essentia___Essentia__
+#ifndef __pd_essentia___EssentiaPD__
+#define __pd_essentia___EssentiaPD__
 
 #include <iostream>
 #include <map>
@@ -23,13 +23,13 @@ using namespace std;
 using namespace essentia;
 using namespace essentia::standard;
 
-class Essentia {
+class EssentiaPD {
 
 public:
     std::map<string, bool> currentAlgorithms;
 
-    Essentia();
-    ~Essentia();
+    EssentiaPD();
+    ~EssentiaPD();
     
     void setup(int sampleRate, int frameSize, int hopSize);
     void compute(vector<Real> audioFrame);
@@ -38,7 +38,7 @@ public:
     std::map<string, vector<Real> > getFeatures();
     
     //////ALGS////////
-    Algorithm *fc, *w, *spec, *mfcc, *loud;
+    Algorithm *fc, *w, *spec, *mfcc, *loud, *pm;
     
     /////// PARAMS //////////////
     int sampleRate, frameSize, hopSize;
@@ -47,4 +47,4 @@ public:
     Pool pool;
 };
 
-#endif /* defined(__pd_essentia___Essentia__) */
+#endif /* defined(__pd_essentia___EssentiaPD__) */
