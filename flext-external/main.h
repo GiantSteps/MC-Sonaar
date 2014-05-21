@@ -106,6 +106,4 @@ private:
     FLEXT_CALLBACK(my_bang)
 };
 FLEXT_NEW_DSP_V("pd_essentia~", pd_essentia)
-
-
 #endif
