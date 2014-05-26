@@ -16,13 +16,20 @@ EssentiaPD::~EssentiaPD()
 {
     
     //        delete audio;
-    delete fc;
+//    delete fc;
     delete w;
     delete spec;
     delete mfcc;
     delete loud;
     delete pm;
+    
+    delete fft;
+    delete c2p;
     delete od;
+    delete o;
+    
+    delete el;
+//    delete pm;
     
     essentia::shutdown();
 }
@@ -35,23 +42,23 @@ void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
     this->sampleRate = sampleRate;
     this->frameSize = frameSize;
     this->hopSize = hopSize;
-    
-    for(int i=0; i<(frameSize*4); i++)
+
+    //Keep a history of four frames
+    for(int i=0; i<(frameSize*3); i++)
         frameBuffer.push_back(0.0f);
 
     // register the algorithms in the factory(ies)
     // we want to compute the MFCC of a file: we need the create the following:
     // audioloader -> framecutter -> windowing -> FFT -> MFCC
     
-    AlgorithmFactory& factory = standard::AlgorithmFactory::instance();
+    AlgorithmFactory &factory = standard::AlgorithmFactory::instance();
     
     //        Algorithm* audio = factory.create("MonoLoader",
     //                                          "filename", audioFilename,
     //                                          "sampleRate", sampleRate);
     
-    fc    = factory.create("FrameCutter",
-                                      "frameSize", frameSize,
-                                      "hopSize", hopSize);
+
+    
     
     w     = factory.create("Windowing",
                                       "type", "blackmanharris62");
@@ -61,7 +68,11 @@ void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
     mfcc  = factory.create("MFCC");
     loud = factory.create("Loudness");
     
-    pm = factory.create("PredominantMelody");
+    el = factory.create("EqualLoudness");
+    pm = factory.create("PredominantMelody",
+                        "frameSize", frameSize,
+                        "hopSize", hopSize,
+                        "sampleRate", sampleRate);
 
     fft = factory.create("FFT"); //Complex FFT for onset
     c2p = factory.create("CartesianToPolar");
@@ -71,7 +82,7 @@ void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
     FLEXT_ADDTIMER(onsetTimer,m_timerA);
 }
 
-void EssentiaPD::compute(vector<Real> audioFrame)
+void EssentiaPD::compute(const vector<Real>& audioFrameIn)
 {
 //    fc->input("signal").set(audioFrame);
 
@@ -88,21 +99,29 @@ void EssentiaPD::compute(vector<Real> audioFrame)
 //    
 //    w->compute();
     
-    //Simple buffer shifting, prob simpler
     onsetDetected = false;
+    pool.clear();
+    
+    //Simple circular buffer thing
     
     // shift signal buffer contents back.
 	for(int i=0; i<frameBuffer.size()-frameSize; i++)
 		frameBuffer[i] = frameBuffer[i+frameSize];
 	// write new block to end of signal buffer.
 	for(int i=0; i<frameSize; i++)
-		frameBuffer[frameBuffer.size()-frameSize+i] = audioFrame[i];
+		frameBuffer[frameBuffer.size()-frameSize+i] = audioFrameIn[i];
     
-    pool.clear();
+    AlgorithmFactory &factory = standard::AlgorithmFactory::instance();
+    
+    Algorithm *fc    = factory.create("FrameCutter",
+                           "frameSize", frameSize,
+                           "hopSize", hopSize);
+    
+    
     
     // FrameCutter -> Windowing -> Spectrum
     vector<Real> frame, windowedFrame;
-
+    
     // Spectrum -> MFCC
     vector<Real> spectrum, mfccCoeffs, mfccBands;
     
@@ -110,7 +129,8 @@ void EssentiaPD::compute(vector<Real> audioFrame)
     Real loudness;
     
     //Pitch
-    vector<Real> pitch;
+    vector<Real> pitch, pitchConfidence;
+    vector<Real> equalLoudnessSignal;
     
     //Onsets
     vector<Real> mag, phase;
@@ -118,13 +138,11 @@ void EssentiaPD::compute(vector<Real> audioFrame)
     
     Real onsetDetection;
     
-    fc->input("signal").set(audioFrame);
-    
+    fc->input("signal").set(frameBuffer);
     fc->output("frame").set(frame);
-    w->input("frame").set(windowedFrame);
-    
+
     //Window
-    w->input("frame").set(audioFrame);
+    w->input("frame").set(frame);
     w->output("frame").set(windowedFrame);
 
     //Spectrum
@@ -137,12 +155,15 @@ void EssentiaPD::compute(vector<Real> audioFrame)
     mfcc->output("mfcc").set(mfccCoeffs);
     
     //Loudness
-    loud->input("signal").set(audioFrame);
+    loud->input("signal").set(audioFrameIn);
     loud->output("loudness").set(loudness);
 
     //Pitch
-    pm->input("signal").set(audioFrame);
+    el->input("signal").set(frameBuffer);
+    el->output("signal").set(equalLoudnessSignal);
+    pm->input("signal").set(equalLoudnessSignal);
     pm->output("pitch").set(pitch);
+    pm->output("pitch").set(pitchConfidence);
     
     //Onsets
     fft->input("frame").set(windowedFrame);
@@ -156,47 +177,73 @@ void EssentiaPD::compute(vector<Real> audioFrame)
     od->input("phase").set(phase);
     od->output("onsetDetection").set(onsetDetection);
     
+    TNT::Array2D<Real> detections;
+    vector<Real> onsetDetections;
     
+    while (true) {
     
-    w->compute();
-    spec->compute();
+        //Get a frame
+        fc->compute();
+        
+        // if it was the last one (ie: it was empty), then we're done.
+        if (!frame.size()) {
+            break;
+        }
+            
+//        // if the frame is silent, just drop it and go on processing
+//        if (isSilent(frame)) continue;
+        
+        w->compute();
+        spec->compute();
 
+        
+        if(currentAlgorithms["mfcc"] || currentAlgorithms["all"]) {
+            mfcc->compute();
+        }
+        if(currentAlgorithms["loudness"] || currentAlgorithms["all"]) {
+            loud->compute();
+        }
+        
+    //    //Not working at the moment
+    //    if(currentAlgorithms["melody"] || currentAlgorithms["all"]) {
+    //        el->compute();
+    //        pm->compute();
+    //        pool.add("pitch", pitch);
+    //        pool.add("pitchConfidence", pitchConfidence);
+    //    }
+        
+        //Do the onset work
+        if(currentAlgorithms["onsets"] || currentAlgorithms["all"]) {
+            fft->compute();
+            c2p->compute();
+            od->compute();
+            
+//            //If we have detected an onset start the time before allowing detection again
+//            if(onsetDetection >= 2.0 && onsetDetected == false) {
+//                onsetDetected = true;
+//                onsetTimer.Delay(50);
+//            }
+            
+    //        if(onsetDetection > 0.0f)
+    //            std::cout << onsetDetection << "\n";
+            
+            onsetDetections.push_back(onsetDetection);
+        }
+    }
+    
     if(currentAlgorithms["spectrum"] || currentAlgorithms["all"])
         pool.add("lowlevel.spec", spectrum);
     
     if(currentAlgorithms["mfcc"] || currentAlgorithms["all"]) {
-        mfcc->compute();
         pool.add("lowlevel.mfcc", mfccCoeffs);
     }
     if(currentAlgorithms["loudness"] || currentAlgorithms["all"]) {
-        loud->compute();
         pool.add("loudness", loudness);
     }
-//    if(currentAlgorithms["melody"] || currentAlgorithms["all"])
-//        pm->compute();
     
-    //Do the onset work
     if(currentAlgorithms["onsets"] || currentAlgorithms["all"]) {
-        fft->compute();
-        c2p->compute();
-        od->compute();
-        
     
-        //If we have detected an onset start the time before allowing detection again
-        if(onsetDetection >= 3.0 && onsetDetected == false) {
-            onsetDetected = true;
-            onsetTimer.Delay(50);
-        }
-        
-//        if(onsetDetection > 0.0f)
-//            std::cout << onsetDetection << "\n";
-        
-        vector<Real> onsetDetections;
-        onsetDetections.push_back(onsetDetection);
-        
-        TNT::Array2D<Real> detections;
         detections = TNT::Array2D<Real>(1, onsetDetections.size());
-        
         for (int i=0; i < onsetDetections.size(); i++) {
             detections[0][i] = onsetDetections[i];
         }
@@ -209,17 +256,24 @@ void EssentiaPD::compute(vector<Real> audioFrame)
         o->input("detections").set(detections);
         o->input("weights").set(weights);
         o->output("onsets").set(onsetTimes);
-    }
         
+        o->compute();
+        
+        
+        //If an onset occurs in this frame trigger output
+        for(int i=0; i<onsetTimes.size(); i++)
+            if (onsetTimes[i] > 0.03) {
+                post("ONSET");
+                onsetDetected = true;
+            }
+    }
     
-//        pool.add("melody", pitch);
-    //IF WE GOT AN ONSET -> OUTPUT FEATURES
-    
+    delete fc;
 }
 
 //vector<flext::AtomList> EssentiaPD::getFeatures()
 //{
-//    
+//
 //
 //}
 

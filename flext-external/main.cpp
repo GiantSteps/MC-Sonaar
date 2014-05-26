@@ -22,7 +22,7 @@ pd_essentia::pd_essentia(int argc,const t_atom *argv)
     
     /////// PARAMS //////////////
     int sampleRate = Samplerate();
-    int frameSize = 1024;
+    int frameSize = 512;
     int hopSize = 512;
     
     essentia.setup(sampleRate, frameSize,hopSize);
@@ -77,7 +77,6 @@ void pd_essentia::m_features(int argc, const t_atom *argv)
     
     //Always want onsets
     essentia.currentAlgorithms["onsets"] = true;
-        
 }
 
 void pd_essentia::my_bang() {

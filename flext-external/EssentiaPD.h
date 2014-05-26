@@ -41,16 +41,20 @@ public:
     vector<Real> frameBuffer;
     
     void setup(int sampleRate, int frameSize, int hopSize);
-    void compute(vector<Real> audioFrame);
+    void compute(const vector<Real>& audioFrameIn);
     
 //    vector<flext::AtomList> getFeatures();
 //    void getFeatures();
     std::map<string, vector<Real> > getFeatures();
     
     //////ALGS////////
-    Algorithm *fc, *w, *spec, *mfcc, *loud, *pm;
+//    Algorithm *fc;
+    Algorithm *w, *spec, *mfcc, *loud;
+    
+    Algorithm *pm, *el;
     
     Algorithm *fft, *c2p, *od, *o;
+    
     
     /////// PARAMS //////////////
     int sampleRate, frameSize, hopSize;
