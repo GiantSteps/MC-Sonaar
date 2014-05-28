@@ -25,22 +25,32 @@
 #include <essentia/essentiamath.h>
 #include <essentia/pool.h>
 
+//Forward declaration of Main Class
+class pd_essentia;
+
 using namespace std;
 using namespace essentia;
 using namespace essentia::standard;
 
-class EssentiaPD : public flext_base{
+class EssentiaPD : public flext_dsp{
 
 public:
-    FLEXT_HEADER(EssentiaPD, flext_base)
+    FLEXT_HEADER(EssentiaPD, flext_dsp)
     std::map<string, bool> currentAlgorithms;
+    
+    typedef void (pd_essentia::*CallbackType)();
+
+    
+    CallbackType postCallback;
 
     EssentiaPD();
     ~EssentiaPD();
     
     vector<Real> frameBuffer;
     
+//    void setup(int sampleRate, int frameSize, int hopSize);
     void setup(int sampleRate, int frameSize, int hopSize);
+    
     void compute(const vector<Real>& audioFrameIn);
     
 //    vector<flext::AtomList> getFeatures();
@@ -53,7 +63,7 @@ public:
     
     Algorithm *pm, *el;
     
-    Algorithm *fft, *c2p, *od, *o;
+    Algorithm *fft, *c2p, *o, *od;
     
     
     /////// PARAMS //////////////
@@ -64,11 +74,14 @@ public:
     
     bool onsetDetected;
     
-protected:
+    float latestFrameTime;
+   
     flext::Timer onsetTimer;
     
+protected:    
     //Reset the timer when we reach the appropriate time
     void m_timerA(void *) { onsetDetected = false;} ;
+    void outputListOfFeatures(const std::map<string, vector<Real> >& features);
     
 private:
     // register timer callbacks

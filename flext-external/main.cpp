@@ -5,7 +5,6 @@ void pd_essentia::setup(t_classid c)
 {
     FLEXT_CADDMETHOD_(c, 0, "features", m_features);
     
-	
 	FLEXT_CADDMETHOD_(c,0,"resetA",m_resetA);  // register reset method for timer A
 	FLEXT_CADDMETHOD_(c,0,"oneshotA",m_oneshotA);  // register one shot method for timer A
 	FLEXT_CADDMETHOD_(c,0,"periodicA",m_periodicA);  // register periodic method for timer A
@@ -34,10 +33,13 @@ pd_essentia::pd_essentia(int argc,const t_atom *argv)
     
     FLEXT_ADDTIMER(tmrA,m_timerA);  // register method "m_timerA" for timer A
     
-    float  time =((float)frameSize/2.0f)/(float)sampleRate * 1000;
+    float  time =((float)frameSize)/(float)sampleRate * 1000;
     m_periodicA(time);
     
     m_features(argc, argv);
+    
+    listNotAlreadyOut = true;
+
 }
 
 
@@ -79,6 +81,8 @@ void pd_essentia::m_features(int argc, const t_atom *argv)
     essentia.currentAlgorithms["onsets"] = true;
 }
 
+
+
 void pd_essentia::my_bang() {
     std::map<string, vector<Real> > features = essentia.getFeatures();
     outputListOfFeatures(features);
@@ -101,7 +105,6 @@ void pd_essentia::outputListOfFeatures(const std::map<string, vector<Real> >& fe
             SetFloat(featureValue, iter->second[i]);
             
             listOut[i+1] = featureValue;
-            
         }
         
         ToQueueList(1, listOut);
@@ -111,16 +114,17 @@ void pd_essentia::outputListOfFeatures(const std::map<string, vector<Real> >& fe
 //---------------TIMER SHITE---------------
 void pd_essentia::m_timerA(void *)
 {
-    if(essentia.onsetDetected) {
+    //Messy hack to prevent double outputs and the fact that we can't output from a class
+    if(essentia.onsetDetected && listNotAlreadyOut) {
         std::map<string, vector<Real> > features = essentia.getFeatures();
         outputListOfFeatures(features);
-    }
+        listNotAlreadyOut = false;
+    } else if(!essentia.onsetDetected)
+        listNotAlreadyOut = true;
 }  // timer A method
 
 void pd_essentia::m_resetA() { tmrA.Reset(); }  // timer A reset
-
 void pd_essentia::m_oneshotA(int del) { tmrA.Delay(del*0.001); }  // timer A one shot
-
 void pd_essentia::m_periodicA(int del) { tmrA.Periodic(del*0.001); }  // timer A periodic
 
 
