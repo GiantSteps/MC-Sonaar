@@ -109,6 +109,8 @@ protected:
 	void m_oneshotA(int del);
 
 	void m_periodicA(int del);
+    
+    bool listNotAlreadyOut = true;
 
 
 private:

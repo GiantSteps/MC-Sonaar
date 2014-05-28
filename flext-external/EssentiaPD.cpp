@@ -35,17 +35,22 @@ EssentiaPD::~EssentiaPD()
 }
 
 void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
-{
-
+{    
     essentia::init();
+
     
     this->sampleRate = sampleRate;
     this->frameSize = frameSize;
     this->hopSize = hopSize;
-
+    
+    int noOfFramesInBuffer = 1;
+    int frameBufferSize = frameSize * noOfFramesInBuffer;
+    
     //Keep a history of four frames
-    for(int i=0; i<(frameSize*3); i++)
+    for(int i=0; i<(frameBufferSize); i++)
         frameBuffer.push_back(0.0f);
+    
+    latestFrameTime = (float)frameBufferSize / 44100.0;
 
     // register the algorithms in the factory(ies)
     // we want to compute the MFCC of a file: we need the create the following:
@@ -56,8 +61,6 @@ void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
     //        Algorithm* audio = factory.create("MonoLoader",
     //                                          "filename", audioFilename,
     //                                          "sampleRate", sampleRate);
-    
-
     
     
     w     = factory.create("Windowing",
@@ -82,24 +85,10 @@ void EssentiaPD::setup(int sampleRate, int frameSize, int hopSize)
     FLEXT_ADDTIMER(onsetTimer,m_timerA);
 }
 
+
+
 void EssentiaPD::compute(const vector<Real>& audioFrameIn)
 {
-//    fc->input("signal").set(audioFrame);
-
-//    // compute a frame
-//    fc->compute();
-//    
-////    // if it was the last one (ie: it was empty), then we're done.
-////    if (!frame.size()) {
-////        break;
-////    }
-////    
-////    // if the frame is silent, just drop it and go on processing
-////    if (isSilent(frame)) continue;
-//    
-//    w->compute();
-    
-    onsetDetected = false;
     pool.clear();
     
     //Simple circular buffer thing
@@ -116,8 +105,6 @@ void EssentiaPD::compute(const vector<Real>& audioFrameIn)
     Algorithm *fc    = factory.create("FrameCutter",
                            "frameSize", frameSize,
                            "hopSize", hopSize);
-    
-    
     
     // FrameCutter -> Windowing -> Spectrum
     vector<Real> frame, windowedFrame;
@@ -180,8 +167,8 @@ void EssentiaPD::compute(const vector<Real>& audioFrameIn)
     TNT::Array2D<Real> detections;
     vector<Real> onsetDetections;
     
+    int i=0;
     while (true) {
-    
         //Get a frame
         fc->compute();
         
@@ -189,10 +176,10 @@ void EssentiaPD::compute(const vector<Real>& audioFrameIn)
         if (!frame.size()) {
             break;
         }
-            
-//        // if the frame is silent, just drop it and go on processing
+    
+        // if the frame is silent, just drop it and go on processing
 //        if (isSilent(frame)) continue;
-        
+    
         w->compute();
         spec->compute();
 
@@ -211,71 +198,105 @@ void EssentiaPD::compute(const vector<Real>& audioFrameIn)
     //        pool.add("pitch", pitch);
     //        pool.add("pitchConfidence", pitchConfidence);
     //    }
+
         
-        //Do the onset work
-        if(currentAlgorithms["onsets"] || currentAlgorithms["all"]) {
-            fft->compute();
-            c2p->compute();
-            od->compute();
-            
-//            //If we have detected an onset start the time before allowing detection again
-//            if(onsetDetection >= 2.0 && onsetDetected == false) {
-//                onsetDetected = true;
-//                onsetTimer.Delay(50);
-//            }
-            
-    //        if(onsetDetection > 0.0f)
-    //            std::cout << onsetDetection << "\n";
-            
-            onsetDetections.push_back(onsetDetection);
-        }
+        
+        fft->compute();
+        c2p->compute();
+        od->compute();
+        
+        onsetDetections.push_back(onsetDetection);
     }
-    
+
     if(currentAlgorithms["spectrum"] || currentAlgorithms["all"])
-        pool.add("lowlevel.spec", spectrum);
+        pool.add("spectrum", spectrum);
     
     if(currentAlgorithms["mfcc"] || currentAlgorithms["all"]) {
-        pool.add("lowlevel.mfcc", mfccCoeffs);
+        pool.add("mfcc", mfccCoeffs);
     }
     if(currentAlgorithms["loudness"] || currentAlgorithms["all"]) {
         pool.add("loudness", loudness);
     }
     
-    if(currentAlgorithms["onsets"] || currentAlgorithms["all"]) {
     
-        detections = TNT::Array2D<Real>(1, onsetDetections.size());
-        for (int i=0; i < onsetDetections.size(); i++) {
-            detections[0][i] = onsetDetections[i];
-        }
-        
-        vector<Real> weights(1);
-        weights[0] = 1.0f;
-        
-        vector<Real> onsetTimes;
-        
-        o->input("detections").set(detections);
-        o->input("weights").set(weights);
-        o->output("onsets").set(onsetTimes);
-        
-        o->compute();
-        
-        
-        //If an onset occurs in this frame trigger output
-        for(int i=0; i<onsetTimes.size(); i++)
-            if (onsetTimes[i] > 0.03) {
-                post("ONSET");
-                onsetDetected = true;
-            }
+    detections = TNT::Array2D<Real>(1, onsetDetections.size());
+    for (int i=0; i < onsetDetections.size(); i++) {
+        detections[0][i] = onsetDetections[i];
     }
+        
+    vector<Real> weights(1);
+    weights[0] = 1.0f;
+        
+    vector<Real> onsetTimes;
+        
+    o->input("detections").set(detections);
+    o->input("weights").set(weights);
+    o->output("onsets").set(onsetTimes);
+        
+    o->compute();
+    
+    std::cout << "detection: " << onsetDetection << "\n";
+    std::cout << "onsetDetected: " << onsetDetected << "\n";
+    
+    //Quick and dirty onset detection that does no peak picking
+    //just select peak above threshold and start timer
+    if(onsetDetection >= 2.0f && onsetDetected == false) {
+//        std::map<string, vector<Real> > features = getFeatures();
+//        outputListOfFeatures(features);
+        
+        
+        onsetDetected = true;
+        
+        //takes seconds
+        onsetTimer.Delay(0.050);
+    }
+    
+    //Online Peak-picking
+    
+    
+//    //If an onset occurs in this frame trigger output
+//    for(int i=0; i<onsetTimes.size(); i++) {
+//        if (onsetTimes[i] >= latestFrameTime) {
+//            post("onset detected");
+//            onsetDetected = true;
+//        }
+//    }
     
     delete fc;
 }
+
+
 
 //vector<flext::AtomList> EssentiaPD::getFeatures()
 //{
 //
 //
 //}
+
+void EssentiaPD::outputListOfFeatures(const std::map<string, vector<Real> >& features)
+{
+    for(std::map<string, vector<Real>  >::const_iterator iter = features.begin(); iter != features.end(); ++iter)
+    {
+        AtomList listOut(iter->second.size()+1);
+        t_atom featureName;
+        
+        SetString(featureName, iter->first.c_str());
+        
+        listOut[0] = featureName;
+        
+        for(int i=0; i<iter->second.size(); i++) {
+            t_atom featureValue;
+            
+            SetFloat(featureValue, iter->second[i]);
+            
+            listOut[i+1] = featureValue;
+        }
+        
+        ToQueueList(1, listOut);
+        
+        
+    }
+}
 
 std::map<string, vector<Real> > EssentiaPD::getFeatures()
 {

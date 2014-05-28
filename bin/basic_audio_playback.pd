@@ -61,6 +61,8 @@
 #X msg 561 440 features spectrum;
 #X msg 674 484 features mfcc;
 #X msg 527 405 features all;
+#X msg 412 391 features loudness;
+#X msg 528 552 features melody;
 #X connect 0 0 1 0;
 #X connect 3 0 2 0;
 #X connect 3 0 2 1;
@@ -77,3 +79,5 @@
 #X connect 16 0 14 0;
 #X connect 17 0 14 0;
 #X connect 18 0 14 0;
+#X connect 19 0 14 0;
+#X connect 20 0 14 0;
