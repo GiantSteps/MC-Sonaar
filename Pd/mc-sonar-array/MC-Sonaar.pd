@@ -1,38 +1,39 @@
 #N canvas 687 40 552 898 10;
 #X declare -lib xsample;
-#X msg -62 -87 stop;
-#X obj -70 -63 s rec;
-#X obj -53 584 s global-slice;
-#X obj -53 562 prepend record;
-#X obj 135 515 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -4034 -1
--1 6;
-#X obj 135 577 s global-slice;
-#X obj 135 556 prepend play;
-#X obj 81 510 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+#X declare -path ../essentiaRT~;
+#X msg -62 -127 stop;
+#X obj -70 -103 s rec;
+#X obj -53 544 s global-slice;
+#X obj -53 522 prepend record;
+#X obj 135 475 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -4034 -1
+-1 0;
+#X obj 135 537 s global-slice;
+#X obj 135 516 prepend play;
+#X obj 81 470 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
 1;
-#X obj -33 519 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+#X obj -33 479 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
 1;
-#X obj -14 519 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+#X obj -14 479 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
 1;
-#X obj 4 519 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0 1
+#X obj 4 479 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0 1
 ;
-#X obj 23 519 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+#X obj 23 479 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
 1;
-#X obj 42 509 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+#X obj 42 469 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
 1;
-#X obj 62 510 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+#X obj 62 470 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
 1;
-#X obj -53 519 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+#X obj -53 479 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
 1;
-#X obj -53 541 funnel 8 1 1 1 1 1 1 1;
-#X obj 140 278 catch~ sliceout;
-#X obj 141 -163 circbuf;
-#X obj 219 326 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj -53 501 funnel 8 1 1 1 1 1 1 1;
+#X obj 140 238 catch~ sliceout;
+#X obj 141 -203 circbuf;
+#X obj 219 286 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj -146 46 radioin;
-#X obj -146 1 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144 -1
--1 5;
-#X obj -146 23 prepend station;
+#X obj -146 6 radioin;
+#X obj -146 -39 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X obj -146 -17 prepend station;
 #N canvas 1177 200 490 392 ifnointernet 0;
 #X obj -542 44 soundfiler;
 #N canvas 0 22 450 278 (subpatch) 0;
@@ -67,17 +68,17 @@ Yvboul Menerboul 2013/0. Best of Menerboul 2013.wav;
 #X connect 12 0 13 0;
 #X connect 12 1 11 0;
 #X connect 13 0 14 0;
-#X restore -91 46 pd ifnointernet;
-#X obj -154 178 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+#X restore -91 6 pd ifnointernet;
+#X obj -154 138 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
 0 1;
-#X obj -85 386 list-lastx 2;
-#X obj -85 408 unpack 0 0;
-#X obj -154 196 metro 2000;
-#X obj 185 438 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj -85 346 list-lastx 2;
+#X obj -85 368 unpack 0 0;
+#X obj -154 156 metro 2000;
+#X obj 185 398 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj -154 216 random 8;
-#X obj 185 456 metro 2000;
-#X obj -62 341 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj -154 176 random 8;
+#X obj 185 416 metro 2000;
+#X obj -62 301 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #N canvas 1240 371 365 275 record_manager 0;
 #X obj 16 43 inlet;
@@ -106,21 +107,21 @@ Yvboul Menerboul 2013/0. Best of Menerboul 2013.wav;
 #X connect 7 2 6 0;
 #X connect 8 0 9 0;
 #X connect 8 0 11 0;
-#X restore -41 360 pd record_manager;
-#X obj -35 338 s onset;
-#X obj 135 456 r onset;
-#X obj -146 96 *~ 1;
-#X floatatom -125 75 5 0 0 0 - - -;
-#X obj 198 298 r~ audioIn;
-#X obj -78 178 r~ audioIn;
-#X obj -146 120 s~ audioIn;
-#X obj -70 -153 loadbang;
-#X obj -70 -131 del 1000;
-#X obj -147 -94 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+#X restore -41 320 pd record_manager;
+#X obj -35 298 s onset;
+#X obj 135 416 r onset;
+#X obj -146 56 *~ 1;
+#X floatatom -125 35 5 0 0 0 - - -;
+#X obj 198 258 r~ audioIn;
+#X obj -78 138 r~ audioIn;
+#X obj -146 80 s~ audioIn;
+#X obj -70 -193 loadbang;
+#X obj -70 -171 del 1000;
+#X obj -147 -134 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
 1 1;
-#X obj 140 363 output~;
-#X msg -146 -76 \; pd dsp \$1 \;;
-#X obj -147 -114 del 200;
+#X obj 140 323 output~;
+#X msg -146 -116 \; pd dsp \$1 \;;
+#X obj -147 -154 del 200;
 #N canvas 475 606 148 163 declare-id 0;
 #X obj 8 -155 s declare-id;
 #X obj 8 -175 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
@@ -135,47 +136,48 @@ Yvboul Menerboul 2013/0. Best of Menerboul 2013.wav;
 #X connect 2 0 4 0;
 #X connect 3 0 6 0;
 #X connect 4 0 3 0;
-#X restore -51 -183 pd declare-id;
-#X text -64 150 trigger record on onsets;
-#X text 135 437 player;
-#X obj 198 344 *~ 0;
-#X text -148 -18 audio input;
-#X text 138 -189 circular buffer to store audio;
-#X text 139 -87 slices filled from circularbuffer;
-#X text 139 260 audio output;
-#X text -154 158 recorder;
-#X obj -147 -184 import xsample;
-#X obj -16 403 PRINT;
-#X obj 135 536 + 1;
-#X obj -70 -109 bng 15 250 50 0 empty empty start_circulartbuffer 17
+#X restore -51 -223 pd declare-id;
+#X text -64 110 trigger record on onsets;
+#X text 135 397 player;
+#X obj 198 304 *~ 0;
+#X text -148 -58 audio input;
+#X text 138 -229 circular buffer to store audio;
+#X text 139 -127 slices filled from circularbuffer;
+#X text 139 220 audio output;
+#X text -154 118 recorder;
+#X obj -147 -224 import xsample;
+#X obj -16 363 PRINT;
+#X obj 135 496 + 1;
+#X obj -70 -149 bng 15 250 50 0 empty empty start_circulartbuffer 17
 7 0 10 -262144 -1 -1;
-#X obj 141 -53 slice 1;
-#X obj 251 -53 slice 5;
-#X obj 141 27 slice 2;
-#X obj 141 107 slice 3;
-#X obj 141 187 slice 4;
-#X obj 251 27 slice 6;
-#X obj 251 107 slice 7;
-#X obj 251 187 slice 8;
-#X obj 135 489 random 7;
-#X obj -46 489 spray 8 0 0 0 0 0 0 0;
-#X text -150 489 similar to route;
-#X obj -73 607 PRINT;
-#X obj 28 275 print on;
-#X obj 140 299 *~ 0.5;
-#X obj 161 324 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 141 -93 slice 1;
+#X obj 251 -93 slice 5;
+#X obj 141 -13 slice 2;
+#X obj 141 67 slice 3;
+#X obj 141 147 slice 4;
+#X obj 251 -13 slice 6;
+#X obj 251 67 slice 7;
+#X obj 251 147 slice 8;
+#X obj 135 449 random 7;
+#X obj -46 449 spray 8 0 0 0 0 0 0 0;
+#X text -150 449 similar to route;
+#X obj -73 567 PRINT;
+#X obj 28 235 print on;
+#X obj 140 259 *~ 0.5;
+#X obj 161 284 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 140 342 *~ 1;
-#X obj -63 451 pack 1 1;
-#X obj -4 468 pack 1 0;
-#X obj -41 226 route list;
-#X obj -41 247 route onset_strength;
-#X obj -41 318 sel 1;
-#X floatatom -26 275 5 0 0 0 - - -;
-#X obj -41 296 > 1;
-#X obj -78 204 essentiaRT~ 5;
-#X obj -4 449 pipe 300;
-#X obj -39 100 agc~ 1 1 250 1000 0.2 1;
+#X obj 140 302 *~ 1;
+#X obj -63 411 pack 1 1;
+#X obj -4 428 pack 1 0;
+#X obj -41 186 route list;
+#X obj -41 207 route onset_strength;
+#X obj -41 278 sel 1;
+#X floatatom -26 235 5 0 0 0 - - -;
+#X obj -41 256 > 1;
+#X obj -78 164 essentiaRT~ 5;
+#X obj -4 409 pipe 300;
+#X obj -39 60 agc~ 1 1 250 1000 0.2 1;
+#X obj -147 -247 declare -path ../essentiaRT~;
 #X connect 0 0 1 0;
 #X connect 3 0 2 0;
 #X connect 4 0 56 0;
