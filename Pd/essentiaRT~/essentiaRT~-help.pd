@@ -57,7 +57,7 @@ function over the analysis window.;
 #X obj 417 -21 tabplay~ sample;
 #X obj 426 3 s~ input;
 #X obj 504 -1 spigot;
-#X obj 537 -22 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 537 -22 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 554 -23 loop;
 #X msg 389 -159 read -resize ./onsets.wav sample;
