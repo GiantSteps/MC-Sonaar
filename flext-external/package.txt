@@ -13,7 +13,7 @@
 #
 # ------------------------------------------------------------------------
 
-NAME=pd_essentia
+NAME=pd_essentia~
 
 #SRCDIR=source
 
@@ -22,5 +22,6 @@ NAME=pd_essentia
 #SRCS=main.cpp play.cpp groove.cpp record.cpp inter.cpp
 #HDRS=prefix.h main.h inter.h
 
-SRCS=main.cpp EssentiaPD.cpp
-HDRS=main.h EssentiaPD.h
+SRCS=main.cpp
+HDRS=main.h
+LIBS=-lessentia -lavcodec -lavformat -lavutil -ltag -lfftw3f -lsamplerate -lyaml
