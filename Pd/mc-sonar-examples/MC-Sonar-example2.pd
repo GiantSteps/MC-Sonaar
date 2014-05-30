@@ -72,7 +72,7 @@
 #X obj -90 -221 print STATION;
 #X obj -129 -243 radioin;
 #X obj -70 -104 hsl 100 15 0 1 0 1 empty init_volume empty -2 -8 0
-10 -262144 -1 -1 4200 1;
+10 -262144 -1 -1 9900 1;
 #X obj -33 9 line~;
 #X obj -73 9 line~;
 #X obj 21 41 *~;
