@@ -101,7 +101,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     network->runStack();
     
     output.resize(audioFrameIn.size());
-    int retrievedSize = DBGOUT->get(&output[0], 100);
+    int retrievedSize = DBGOUT->get(&output[0], 1);
     Real audioout = retrievedSize>0?output[retrievedSize-1] : 0;
     
 

@@ -84,7 +84,7 @@ void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsi
     }
     
     blockCount++;
-    if(blockCount>=blockCountMax) {
+    if(blockCount>blockCountMax) {
         essentiaBufferCounter=0;
         blockCount=0;
         Real onset = onsetDetection.compute(audioBuffer, audioBufferOut);
