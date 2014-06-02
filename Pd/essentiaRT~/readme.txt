@@ -18,16 +18,20 @@ Performance
 
 Check /PD/essentiaRT~/essentiaRT~_comparison.pd for performance details. Roughly, different instances yield different results and the performance of the onset detector is about 50% with very simple test samples.
 
-blocksize??
+
+Blocksize??
 —————————
 
 A weird behaviour: essentiaRT~ will not work in my computer when connecting a signal directly to its input. A pair of send~/receive~ needs to be inserted in-between.
 
 
-Object
-——————
 
-argument: threshold level for the Super Flux algorithm. (which unit???)
+============================================== essentiaRT~ =================================================
+
+Description
+————————————
+
+argument: threshold level for the Super Flux algorithm. (which unit is it???)
 
 inlet_#1: audio signal
 
