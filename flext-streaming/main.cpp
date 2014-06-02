@@ -16,10 +16,10 @@ essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
 {
     
     //Debug
-#ifdef DEBUG_PD
-    std::ofstream   fout("/dev/null");
-    std::cout.rdbuf(fout.rdbuf());
-#endif
+//#ifdef DEBUG_PD
+//    std::ofstream   fout("/dev/null");
+//    std::cout.rdbuf(fout.rdbuf());
+//#endif
     // Flext
     AddInSignal("In");
     AddOutSignal("Out");
@@ -89,7 +89,7 @@ void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsi
             vector<Real> tst(1,onset) ;
             pool.set("onset_strength",tst);
             
-            if(onset>0)onsetCB();
+            if(onset>1.25)onsetCB();
             
             framecount++;
 
@@ -102,6 +102,7 @@ void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsi
 
 void essentiaRT::onsetCB(){
     if(!isSFX){
+        SFX.clear();
         isSFX=true;
         SFXTimer.Delay(SFXLength);
         
@@ -143,7 +144,7 @@ void essentiaRT::m_sfxAggr(void *){
     SFX.aggregate();
     outputListOfFeatures(getFeatures(SFX.aggrPool),2);
     isSFX = false;
-    SFX.clear();
+    
     
 }
 

@@ -49,7 +49,7 @@ public:
     //// IO
     streaming::Algorithm* gen;
     streaming::RingBufferOutput* essout;
-
+    streaming::RingBufferOutput* DBGOUT;
     
     
     Pool* pool;
