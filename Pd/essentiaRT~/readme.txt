@@ -3,12 +3,9 @@ bugs/issues:
 Pd-version
 ———————————
 
-There is a problem when loading on the last Pd-extended (v. 0.43.4; Tcl v. 8.5.11). It seems that is related to TCL code. In my computer (angel), it loads the 1st time I open the patch after booting (and then I need to restart computer!). Then, when I try to modify it (change the threshold, for example) it will freeze the GUI for the object. 
-
-However, it seems to run better in in Pd-extended (v. 0.42.5, tcl v. 8.4.19), so I am testing in that environment temporarily.
-
-In general, I have been experiencing problems with GUI object, such as canvas, view-on-parent and the like in the newest pd-extended (0.43.4).
-
+—FIXED——FIXED——FIXED——FIXED——FIXED——FIXED——FIXED——FIXED——FIXED
+There is a problem when loading on the last Pd-extended (v. 0.43.4; Tcl v. 8.5.11). It seems that is related to TCL code. In my computer (angel), it loads the 1st time I open the patch after booting (and then I need to restart computer!). Then, when I try to modify it (change the threshold, for example) it will freeze the GUI for the object. However, it seems to run better in in Pd-extended (v. 0.42.5, tcl v. 8.4.19), so I am testing in that environment temporarily. In general, I have been experiencing problems with GUI object, such as canvas, view-on-parent and the like in the newest pd-extended (0.43.4).
+—FIXED——FIXED——FIXED——FIXED——FIXED——FIXED——FIXED——FIXED——FIXED
 
 Performance
 ———————————
@@ -22,13 +19,12 @@ Blocksize??
 A weird behaviour: essentiaRT~ will not work in my computer when connecting a signal directly to its input. A pair of send~/receive~ needs to be inserted in-between.
 
 
-
 ===================================== essentiaRT~ ==================================
 
 Description
 ————————————
 
-argument: threshold level for the Super Flux algorithm. (which unit is it???)
+argument: threshold level for the Super Flux algorithm.
 
 inlet_#1: audio signal
 
@@ -54,7 +50,7 @@ outlet_#3: list of higher-level features. These values are estimated over a bigg
 Possible Todo’s (besides  debugging)
 ————————————————————————————————————
  
-- It would be nice to be able to change the threshold of the super flux algorithm with a method/message: threshold $1
+- It would be nice to be able to change the threshold of the super flux algorithm with a method/message like “threshold $1”
 
 - And give the possibility to change the size of the higher-level feature extraction window.
 
