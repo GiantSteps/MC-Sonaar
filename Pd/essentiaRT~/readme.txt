@@ -1,6 +1,3 @@
-
-[essentiaRT~]
-
 bugs/issues:
 
 Pd-version
@@ -26,7 +23,7 @@ A weird behaviour: essentiaRT~ will not work in my computer when connecting a si
 
 
 
-============================================== essentiaRT~ =================================================
+===================================== essentiaRT~ ==================================
 
 Description
 ————————————
