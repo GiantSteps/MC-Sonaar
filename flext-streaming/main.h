@@ -153,7 +153,8 @@ private:
     
     
     
-    int framecount = 0;
+    int blockCount = 0;
+    int blockCountMax = 1;
     
 
 };

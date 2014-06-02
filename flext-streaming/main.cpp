@@ -34,9 +34,9 @@ essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
      frameSize = 2048;
      hopSize = 256;
     
+    blockCountMax = (int)(hopSize/Blocksize());
     
-    
-    framecount =0;
+
     
     for(int i=0; i<hopSize; i++){
         audioBuffer.push_back(0.0);
@@ -75,28 +75,27 @@ void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsi
     const t_sample *in = insigs[0];
     t_sample *out = outsigs[0];
     while(n--) {
-        //Fill Essentia vector
-        audioBuffer[essentiaBufferCounter] = *in;
-        
-        essentiaBufferCounter++;
-        if(essentiaBufferCounter>=hopSize) {
-            essentiaBufferCounter=0;
-            
-            Real onset = onsetDetection.compute(audioBuffer, audioBufferOut);
-            
-            if(isSFX)SFX.compute(audioBuffer);
-            
-            vector<Real> tst(1,onset) ;
-            pool.set("onset_strength",tst);
-            
-            if(onset>1.25)onsetCB();
-            
-            framecount++;
-
-
-        }
+        //Fill Essentia vector every hopsize , buffering is handled inside streaming algorithms
+        audioBuffer[essentiaBufferCounter] = *(in++);
         // trick to get onset at signal rate on outlet1
         *(out++) = audioBufferOut[essentiaBufferCounter];
+        essentiaBufferCounter++;
+
+    }
+    
+    blockCount++;
+    if(blockCount>=blockCountMax) {
+        essentiaBufferCounter=0;
+        blockCount=0;
+        Real onset = onsetDetection.compute(audioBuffer, audioBufferOut);
+        if(onset>0){
+            vector<Real> tst(1,onset) ;
+            pool.set("onset_strength",tst);
+            onsetCB();
+        }
+        if(isSFX)SFX.compute(audioBuffer);
+        
+        
     }
 }
 

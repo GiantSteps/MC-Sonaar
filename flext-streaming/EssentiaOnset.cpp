@@ -43,7 +43,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     triF = factory.create("Triangularbands","Log",true);
     
     superFluxF = factory.create("SuperFluxNovelty","Online",true);
-    superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",150);
+    superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",50);
     
     
     centroidF = factory.create("Centroid");
@@ -55,8 +55,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     gen = factory.create("RingBufferInput","bufferSize",frameSize*2,"blockSize",hopSize);
     
-    essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",10,"blockSize",(int)1);
-    DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",10,"blockSize",(int)1);
+    essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",hopSize,"blockSize",(int)1);
+    DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",hopSize,"blockSize",(int)1);
     
     gen->output("signal") >> fc->input("signal");
     fc->output("frame") >> w->input("frame");
@@ -101,7 +101,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     network->runStack();
     
     output.resize(audioFrameIn.size());
-    int retrievedSize = DBGOUT->get(&output[0], 1);
+    int retrievedSize = DBGOUT->get(&output[0], 100);
     Real audioout = retrievedSize>0?output[retrievedSize-1] : 0;
     
 
