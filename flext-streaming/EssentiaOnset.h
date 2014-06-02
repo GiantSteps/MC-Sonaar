@@ -35,7 +35,7 @@ public:
     ~EssentiaOnset();
     
     
-    void setup(int frameS,int hopS,int sR,Pool* poolin,Real threshold);
+    void setup(int frameS,int hopS,int sR,Pool& poolin,Real threshold);
     
     float compute(vector<Real>& audioFrameIn, vector<Real>& output);
     
@@ -44,12 +44,12 @@ public:
     
     /// ESSENTIA
     /// algos
-    essentia::streaming::Algorithm *w,*spectrum,*triF,*superFluxF,*superFluxP, * fc;
+    essentia::streaming::Algorithm *w,*spectrum,*triF,*superFluxF,*superFluxP, * fc,*centroidF;
     
     //// IO
     streaming::Algorithm* gen;
     streaming::RingBufferOutput* essout;
-    streaming::PoolStorage<vector<Real> >* triFP;
+
     
     
     Pool* pool;

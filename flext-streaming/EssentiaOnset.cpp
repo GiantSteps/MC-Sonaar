@@ -18,12 +18,12 @@ EssentiaOnset::EssentiaOnset(){
 
 }
 
-void EssentiaOnset::setup(int fS,int hS,int sR,Pool * poolin,Real threshold){
+void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
 
     this->sampleRate = sR;
     this->frameSize = fS;
     this->hopSize = hS;
-    this->pool = poolin;
+    this->pool = &poolin;
     
     
     AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
@@ -46,10 +46,10 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool * poolin,Real threshold){
     superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",50);
     
     
+    centroidF = factory.create("Centroid");
     
-    triFP = new PoolStorage<vector<Real> >(poolin,"inst.tri",true);
-    
-    cout<< superFluxP <<endl;
+
+
     
     
     
@@ -63,6 +63,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool * poolin,Real threshold){
     
     w->output("frame") >> spectrum->input("frame");
     spectrum->output("spectrum") >> triF->input("spectrum");
+
     
     triF->output("bands")>>superFluxF->input("bands");
     
@@ -72,7 +73,13 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool * poolin,Real threshold){
     
     
     //2 Pool
-    triF->output("bands") >> triFP->input("data");
+    
+    
+    spectrum->output("spectrum") >> centroidF->input("array");
+    connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
+
+    connectSingleValue(triF->output("bands"),poolin,"inst.tri");
+
     
     
     

@@ -14,6 +14,12 @@ void essentiaRT::setup(t_classid c)
 
 essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
 {
+    
+    //Debug
+#ifdef DEBUG_PD
+    std::ofstream   fout("/dev/null");
+    std::cout.rdbuf(fout.rdbuf());
+#endif
     // Flext
     AddInSignal("In");
     AddOutSignal("Out");
@@ -46,7 +52,7 @@ essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
     
     if(argc==1) onset_thresh = Helper::getReal(argv[0]);
     
-    onsetDetection.setup(frameSize, hopSize, sampleRate,&pool,onset_thresh);
+    onsetDetection.setup(frameSize, hopSize, sampleRate,pool,onset_thresh);
     
     SFX.setup(frameSize, hopSize, sampleRate, &pool);
     SFXLength = 0.1;

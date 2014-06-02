@@ -39,7 +39,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
                         "validFrameThresholdRatio", 1,
                         "lastFrameToEndOfFile",true);
     
-    w = factory.create("Windowing");
+    w = factory.create("Windowing","Normalize",false);
     
         // Core
     loudness = factory.create("Energy");
