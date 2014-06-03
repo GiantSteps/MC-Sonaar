@@ -33,11 +33,11 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
                         "hopSize",hopSize,
                         "startFromZero" , true,
                         "validFrameThresholdRatio", 1,
-                        "lastFrameToEndOfFile",false,
+                        "lastFrameToEndOfFile",true,
                         "silentFrames","keep"
                         );
     
-    w = factory.create("Windowing","Normalize",false,"zeroPhase",false);
+    w = factory.create("Windowing","type","hann","Normalize",false,"zeroPhase",false);
     
     spectrum = factory.create("Spectrum");
     triF = factory.create("Triangularbands","Log",true);
