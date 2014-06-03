@@ -1,82 +1,82 @@
-#N canvas 457 22 607 795 10;
-#X text -6 -186 [essentiaRT~];
-#X text -6 -146 inlet: audio signal;
-#X text -6 -103 outlet2: list of features at control rate:;
-#X text 4 -83 - onset_strength: same as in outlet1 but at control rate.
+#N canvas 890 22 993 902 10;
+#X declare -path ../utils;
+#X text -6 -106 [essentiaRT~];
+#X text -6 -66 inlet: audio signal;
+#X text -35 -26 outlet2: list of features at control rate:;
+#X text 4 -3 - onset_strength: same as in outlet1 but at control rate.
 ;
-#X text 4 -63 - inst.tri: 139 dimensional vector containing... ???????
+#X text 4 17 - inst.tri: 139 dimensional vector containing... ???????
 ;
-#X text -6 -13 outlet3: list of higher-level features. These values
+#X text -6 67 outlet3: list of higher-level features. These values
 are estimated over a bigger window once an onset is detected:;
-#X text 4 50 - nsdf.var: and its variance.;
-#X text 4 20 - nsdf.mean: mean of the normalized squared difference
+#X text 4 130 - nsdf.var: and its variance.;
+#X text 4 100 - nsdf.mean: mean of the normalized squared difference
 function over the analysis window.;
-#X text 4 103 - pitched.var: variance of the above-mentioned parameter.
+#X text 4 183 - pitched.var: variance of the above-mentioned parameter.
 ;
-#X obj -1 120 cnv 15 600 480 empty empty empty 20 12 0 14 -261234 -66577
+#X obj -1 200 cnv 15 600 480 empty empty empty 20 12 0 14 -261234 -66577
 0;
-#X obj 50 432 route list;
-#X obj 177 549 print inst.tri;
-#X obj 177 526 spigot 0;
-#X obj 222 505 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 50 512 route list;
+#X obj 177 629 print inst.tri;
+#X obj 177 606 spigot 0;
+#X obj 222 585 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 13 574 print~;
-#X obj 66 534 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 13 654 print~;
+#X obj 66 614 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 21 552 spigot 0;
-#X floatatom 50 480 5 0 0 0 - - -;
-#X obj 50 500 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#X obj 21 632 spigot 0;
+#X floatatom 50 560 5 0 0 0 - - -;
+#X obj 50 580 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X text 59 574 print vector signal;
-#X obj 88 305 route list;
-#X floatatom 247 431 5 0 0 1 nsdf.mean - -;
-#X obj 305 480 print more??;
-#X floatatom 257 411 12 0 0 1 nsdf.variance - -;
-#X floatatom 267 391 5 0 0 1 pitched.mean - -;
-#X floatatom 276 370 5 0 0 1 pitched.variance - -;
-#X obj 88 327 route nsdf.mean nsdf.var pitched.mean pitched.var;
-#X obj 380 -189 cnv 15 220 300 empty empty empty 20 12 0 14 -233017
+#X text 59 654 print vector signal;
+#X obj 88 385 route list;
+#X floatatom 247 511 5 0 0 1 nsdf.mean - -;
+#X obj 305 560 print more??;
+#X floatatom 257 491 12 0 0 1 nsdf.variance - -;
+#X floatatom 267 471 5 0 0 1 pitched.mean - -;
+#X floatatom 276 450 5 0 0 1 pitched.variance - -;
+#X obj 88 407 route nsdf.mean nsdf.var pitched.mean pitched.var;
+#X obj 380 -109 cnv 15 220 300 empty empty empty 20 12 0 14 -233017
 -66577 0;
-#X msg 424 -60 stop;
-#X msg 417 -82 bang;
-#X obj 389 -135 soundfiler;
-#X obj 389 -183 loadbang;
-#X obj 417 -31 tabplay~ sample;
-#X obj 462 17 s~ input;
-#X obj 504 -11 spigot;
-#X obj 537 -32 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X msg 424 20 stop;
+#X msg 417 -2 bang;
+#X obj 389 -55 soundfiler;
+#X obj 389 -103 loadbang;
+#X obj 417 49 tabplay~ sample;
+#X obj 462 97 s~ input;
+#X obj 513 67 spigot;
+#X obj 537 48 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
-#X text 554 -33 loop;
-#X msg 389 -159 read -resize ./onsets.wav sample;
-#X obj 389 51 output~;
-#X text 450 -83 play sample;
-#X obj 389 -113 table sample 44100;
-#X obj 96 195 timer;
-#X floatatom 96 216 5 0 0 0 - - -;
-#X text 98 257 once an onset is detected (on the second outlet) \,
+#X text 554 47 loop;
+#X msg 389 -79 read -resize ./onsets.wav sample;
+#X obj 389 131 output~;
+#X text 450 -3 play sample;
+#X obj 389 -33 table sample 44100;
+#X obj 106 283 timer;
+#X floatatom 106 304 5 0 0 0 - - -;
+#X text 98 337 once an onset is detected (on the second outlet) \,
 a larger window (currently fixed at 100 ms.) is used to estimate some
 higher level features on the event \, listed on outlet3.;
-#X obj 96 175 bang;
-#X obj 128 171 bang;
-#X text 131 216 delay between onset detection and high level features
+#X obj 106 263 bang;
+#X obj 138 259 bang;
+#X text 141 304 delay between onset detection and high level features
 calculation.;
-#X text 4 70 - pitched.mean: this gives the mean of the 'pitchniness'
+#X text 4 150 - pitched.mean: this gives the mean of the 'pitchniness'
 of the sound by measuring the peakiness in the spectrum.;
-#X text -6 -166 arg: threshold level for the Super Flux algorithm.
-;
-#X obj 241 503 spigot 0;
-#X obj 286 482 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X text -6 -86 arg: threshold level for the Super Flux algorithm.;
+#X obj 241 583 spigot 0;
+#X obj 286 562 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 241 526 print inst.centroid;
-#X obj 379 348 print more??;
-#X obj 13 154 essentiaRT~ 5;
-#X obj 13 133 r~ input;
-#X text -6 -126 outlet1: onset strenght value at audio rate (constant).
+#X obj 241 606 print inst.centroid;
+#X obj 379 428 print more??;
+#X obj 13 234 essentiaRT~ 5;
+#X obj 13 213 r~ input;
+#X text -6 -46 outlet1: onset strenght value at audio rate (constant).
 ;
-#X text 4 -43 - inst.centroid: spectral centroid of the input signal
+#X text 4 37 - inst.centroid: spectral centroid of the input signal
 (0-1) where 1 is SR/2;
-#X obj 50 454 route onset_strength inst.tri inst.centroid;
-#N canvas 1169 24 595 551 advanced 1;
+#X obj 50 534 route onset_strength inst.tri inst.centroid;
+#N canvas 1169 24 595 551 advanced 0;
 #X obj 40 -120 vline~;
 #X obj 44 -72 *~;
 #X floatatom 68 -206 5 0 0 0 - - -;
@@ -84,19 +84,34 @@ of the sound by measuring the peakiness in the spectrum.;
 #X obj 55 -25 osc~ 400;
 #X floatatom 87 -59 5 0 0 0 - - -;
 #X msg 34 -152 0 \, 1 100 \, 0 200 300;
-#X obj 154 53;
 #X connect 0 0 1 1;
 #X connect 2 0 3 0;
 #X connect 3 0 1 0;
 #X connect 5 0 4 0;
 #X connect 6 0 0 0;
-#X restore 390 171 pd advanced;
+#X restore 412 251 pd advanced;
+#X obj 91 583 print;
+#X obj 483 569 timer;
+#X obj 450 575 bang;
+#X obj 457 598 bang;
+#X floatatom 502 603 5 0 0 0 - - -;
+#X obj 51 -170 declare -path ../utils;
+#X floatatom 658 570 5 0 0 0 - - -;
+#X floatatom 740 563 5 0 0 0 - - -;
+#X floatatom 694 592 5 0 0 0 - - -;
+#X floatatom 636 594 5 0 0 0 - - -;
+#X obj 648 540 mstats 10;
+#X obj 669 628 -;
+#X floatatom 671 660 5 0 0 0 - - -;
+#X obj 724 627 -;
+#X floatatom 726 659 5 0 0 0 - - -;
 #X connect 10 0 57 0;
 #X connect 12 0 11 0;
 #X connect 13 0 12 1;
 #X connect 15 0 16 1;
 #X connect 16 0 14 0;
 #X connect 17 0 18 0;
+#X connect 17 0 59 0;
 #X connect 18 0 16 0;
 #X connect 20 0 26 0;
 #X connect 26 0 21 0;
@@ -126,6 +141,22 @@ of the sound by measuring the peakiness in the spectrum.;
 #X connect 53 2 45 0;
 #X connect 54 0 53 0;
 #X connect 57 0 17 0;
+#X connect 57 0 62 0;
+#X connect 57 0 69 0;
 #X connect 57 1 12 0;
+#X connect 57 1 61 0;
 #X connect 57 2 49 0;
 #X connect 57 3 22 0;
+#X connect 60 0 63 0;
+#X connect 61 0 60 0;
+#X connect 62 0 60 1;
+#X connect 66 0 72 1;
+#X connect 67 0 70 1;
+#X connect 68 0 70 0;
+#X connect 68 0 72 0;
+#X connect 69 0 68 0;
+#X connect 69 1 65 0;
+#X connect 69 2 67 0;
+#X connect 69 3 66 0;
+#X connect 70 0 71 0;
+#X connect 72 0 73 0;
