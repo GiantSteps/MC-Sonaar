@@ -69,10 +69,10 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
         // pitchiness
     spectrum->output("spectrum") >> flatness->input("array");
 
-    fc->output("frame") >> Nsdf->input("array");
-    Nsdf->output("nsdf") >> spec2->input("frame");
-    spec2->output("spectrum") >> cent->input("array");
-    cent->output("centroid") >> PC(pool,"nsdf");
+//    fc->output("frame") >> Nsdf->input("array");
+//    Nsdf->output("nsdf") >> spec2->input("frame");
+//    spec2->output("spectrum") >> cent->input("array");
+//    cent->output("centroid") >> PC(pool,"nsdf");
     
     
     

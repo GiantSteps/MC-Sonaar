@@ -32,6 +32,7 @@
 		6F0650241934A46500D735CA /* EssentiaOnset.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0650211934A46500D735CA /* EssentiaOnset.h */; };
 		6F15FD401934FBFC00A11C2E /* EssentiaSFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F15FD3E1934FBFC00A11C2E /* EssentiaSFX.cpp */; };
 		6F15FD411934FBFC00A11C2E /* EssentiaSFX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F15FD3F1934FBFC00A11C2E /* EssentiaSFX.h */; };
+		6F62F602193E363100B4D485 /* essentiaRT~.pd_darwin in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* essentiaRT~.pd_darwin */; };
 		E98573570D9E52D300682171 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E98573560D9E52D300682171 /* main.cpp */; };
 		E98573580D9E52D300682171 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E98573560D9E52D300682171 /* main.cpp */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,16 @@
 			dstSubfolderSpec = 0;
 			files = (
 				077FA32E191B9FF900D05B19 /* essentiaRT~.pd_darwin in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F62F601193E35EA00B4D485 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${PROJECT_DIR}/../Pd/essentiaRT~";
+			dstSubfolderSpec = 0;
+			files = (
+				6F62F602193E363100B4D485 /* essentiaRT~.pd_darwin in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +211,7 @@
 				D2AAC09A05546B4700DB518D /* Sources */,
 				0703FA0C191921F600B7841E /* CopyFiles */,
 				077FA32D191B9FF500D05B19 /* CopyFiles */,
+				6F62F601193E35EA00B4D485 /* CopyFiles */,
 			);
 			buildRules = (
 			);

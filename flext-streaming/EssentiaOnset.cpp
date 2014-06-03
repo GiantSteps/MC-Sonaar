@@ -37,6 +37,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
                         "silentFrames","keep"
                         );
     
+
+    
     w = factory.create("Windowing","type","hann","Normalize",false,"zeroPhase",false);
     
     spectrum = factory.create("Spectrum");
@@ -48,42 +50,47 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     centroidF = factory.create("Centroid");
     
-
+    mfccF = factory.create("MFCC","inputSize",frameSize/2);
 
     
     
     
     gen = factory.create("RingBufferInput","bufferSize",frameSize*2,"blockSize",hopSize);
     
+    // buffer for getting the onset back
     essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",hopSize,"blockSize",(int)1);
+    // Audio Rate output, ATM , SuperFlux Novelty function
     DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",hopSize,"blockSize",(int)1);
     
+    // cutting, overlapping
     gen->output("signal") >> fc->input("signal");
     fc->output("frame") >> w->input("frame");
-    
     w->output("frame") >> spectrum->input("frame");
+    
+    // SuperFlux
     spectrum->output("spectrum") >> triF->input("spectrum");
-
-    
     triF->output("bands")>>superFluxF->input("bands");
-    
-    superFluxF->output("Differences")  >>  DBGOUT->input("signal");
-
-    
     superFluxF->output("Differences")  >>superFluxP->input("novelty");
-    
     superFluxP->output("peaks") >> essout->input("signal");
     
-    //
-   //
+    // MFCC
+    spectrum->output("spectrum") >> mfccF->input("spectrum");
+    mfccF->output("bands") >> DEVNULL;
+    
+    
+    // centroid
+    spectrum->output("spectrum") >> centroidF->input("array");
+    
+    
+    //Audio out
+    superFluxF->output("Differences")  >>  DBGOUT->input("signal");
+   
     
     //2 Pool
-    
-    
-    spectrum->output("spectrum") >> centroidF->input("array");
     connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
+    connectSingleValue(mfccF->output("mfcc"),poolin,"inst.mfcc");
 
-    connectSingleValue(triF->output("bands"),poolin,"inst.tri");
+    //connectSingleValue(triF->output("bands"),poolin,"inst.tri");
 
     
     

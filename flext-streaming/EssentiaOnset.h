@@ -44,7 +44,7 @@ public:
     
     /// ESSENTIA
     /// algos
-    essentia::streaming::Algorithm *w,*spectrum,*triF,*superFluxF,*superFluxP, * fc,*centroidF;
+    essentia::streaming::Algorithm *w,*spectrum,*triF,*superFluxF,*superFluxP, * fc,*centroidF,*mfccF;
     
     //// IO
     streaming::Algorithm* gen;

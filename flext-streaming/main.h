@@ -52,6 +52,9 @@ using namespace essentia::standard;
 #error You need at least flext version 0.4.0
 #endif
 
+//stop aggregating after 10s if sfx are set on ioi (delMode = 0)
+#define MAX_SFX_TIME 10
+
 namespace Helper {
 
     flext::AtomList floatVectorToList(const std::vector<float>& floatVector) {
@@ -116,8 +119,8 @@ protected:
     Real onset_thresh;
     
     EssentiaSFX SFX;
-    Real SFXLength;
-    
+
+    int delayMode = 0;
     
     ///essentia Environement
     int essentiaBufferCounter;
@@ -137,6 +140,7 @@ protected:
     
     void m_settings(int argc, const t_atom *argv);
     void m_sfxAggr(void *);
+    void m_delayMode(int del);
     
     
     flext::Timer SFXTimer;
@@ -150,7 +154,8 @@ private:
     FLEXT_CALLBACK_V(m_features)
     FLEXT_CALLBACK(my_bang)
     FLEXT_CALLBACK_T(m_sfxAggr);
-    
+    FLEXT_CALLBACK_I(m_delayMode);
+
     
     
     int blockCount = 0;

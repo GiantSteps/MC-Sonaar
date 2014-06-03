@@ -5,7 +5,7 @@ void essentiaRT::setup(t_classid c)
 {
     FLEXT_CADDMETHOD_(c, 0, "features", m_features);
     FLEXT_CADDMETHOD_(c, 0, "settings", m_settings);
-    
+    FLEXT_CADDMETHOD_(c,0,"delayMode",m_delayMode);
     
     
     //essentia::setDebugLevel(essentia::EAll);
@@ -28,6 +28,7 @@ essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
     
     FLEXT_ADDBANG(0,my_bang);
     FLEXT_ADDTIMER(SFXTimer, m_sfxAggr);
+
     
     /////// PARAMS //////////////
      sampleRate = Samplerate();
@@ -55,7 +56,7 @@ essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
     onsetDetection.setup(frameSize, hopSize, sampleRate,pool,onset_thresh);
     
     SFX.setup(frameSize, hopSize, sampleRate, &pool);
-    SFXLength = 0.1;
+
     isSFX = false;
 
 
@@ -100,13 +101,37 @@ void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsi
 }
 
 void essentiaRT::onsetCB(){
-    if(!isSFX){
+    //trigger sfx
+    //ioi mode: output last,clear,then retrigger sfx
+    if(delayMode ==0 ){
+        m_sfxAggr(NULL);
         SFX.clear();
+        SFXTimer.Delay(MAX_SFX_TIME);
         isSFX=true;
-        SFXTimer.Delay(SFXLength);
         
     }
-    my_bang();
+    // delay mode clear, trigger sfx and start timer
+    else if(!isSFX){
+            SFX.clear();
+            isSFX=true;
+            SFXTimer.Delay(delayMode/1000.);
+        
+    }
+    //output onsetStrength first
+    std::map<string, vector<Real> > features = getFeatures(pool);
+    std::map<string, vector<Real>  >::iterator st = features.find("onset_strength");
+    AtomList listOut(2);
+    SetString(listOut[0],"onset_strength");
+    SetFloat(listOut[1],(st->second)[0]);
+    ToOutList(1, listOut);
+    features.erase(st);
+    
+    
+    //output the rest
+    outputListOfFeatures(features);
+    
+
+
 }
 
 void essentiaRT::m_features(int argc, const t_atom *argv)
@@ -136,6 +161,7 @@ void essentiaRT::m_settings(int argc, const t_atom *argv)
 
 void essentiaRT::my_bang() {
     std::map<string, vector<Real> > features = getFeatures(pool);
+    
     outputListOfFeatures(features);
 }
 
@@ -188,6 +214,7 @@ std::map<string, vector<Real> > essentiaRT::getFeatures(Pool p)
 
 void essentiaRT::outputListOfFeatures(const std::map<string, vector<Real> >& features,int outlet)
 {
+
     for(std::map<string, vector<Real>  >::const_iterator iter = features.begin(); iter != features.end(); ++iter)
     {
         AtomList listOut(iter->second.size()+1);
@@ -206,8 +233,19 @@ void essentiaRT::outputListOfFeatures(const std::map<string, vector<Real> >& fea
             
         }
         
-       ToQueueList(outlet, listOut);
+       ToOutList(outlet, listOut);
     }
+    
+}
+
+
+void essentiaRT::m_delayMode(int del){
+    
+    delayMode = del;
+    //isSFX=false;
+    
+    
+    
 }
     
 
