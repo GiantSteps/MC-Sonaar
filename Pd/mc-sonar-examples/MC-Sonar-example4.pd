@@ -28,7 +28,7 @@
 #X obj -207 237 print STATION;
 #X obj -246 215 radioin;
 #X obj -187 354 hsl 100 15 0 1 0 1 empty init_volume empty -2 -8 0
-10 -262144 -1 -1 6900 1;
+10 -262144 -1 -1 4950 1;
 #X obj -150 467 line~;
 #X obj -190 467 line~;
 #X obj -96 499 *~;
@@ -116,10 +116,17 @@ loops that change over time as the audio comes in and out the buffer.
 #X text 186 448 list_parameter receives single values on the right
 inlet and a list with onset times on its left inlet. The result is
 a new list with the same indexes as the onsetTimes.;
+#X floatatom 351 366 5 0 0 0 - - -;
+#X floatatom 311 367 5 0 0 0 - - -;
+#X floatatom 290 399 5 0 0 0 - - -;
+#X floatatom 250 372 5 0 0 0 - - -;
+#X obj 277 335 mstats 12;
+#X floatatom 331 297 5 0 0 0 - - -;
 #X connect 2 0 3 0;
 #X connect 3 0 6 0;
 #X connect 3 0 12 0;
 #X connect 3 0 73 1;
+#X connect 3 0 103 0;
 #X connect 4 0 0 0;
 #X connect 4 0 95 0;
 #X connect 5 0 6 1;
@@ -192,3 +199,8 @@ a new list with the same indexes as the onsetTimes.;
 #X connect 92 0 87 0;
 #X connect 95 0 39 0;
 #X connect 95 0 92 0;
+#X connect 103 0 102 0;
+#X connect 103 1 101 0;
+#X connect 103 2 100 0;
+#X connect 103 3 99 0;
+#X connect 104 0 103 1;
