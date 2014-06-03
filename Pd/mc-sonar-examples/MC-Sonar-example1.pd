@@ -1,38 +1,37 @@
 #N canvas 533 22 898 699 10;
 #X declare -path ../essentiaRT~ -path ../utils;
-#X obj 257 84 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#X obj 260 84 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
 #X obj -75 309 output~;
-#X obj 278 -45 route list;
-#X obj 278 -24 route onset_strength;
-#X obj 278 62 sel 1;
-#X floatatom 293 19 5 0 0 0 - init_threshold -;
-#X obj 278 40 > 1;
-#X obj 297 230 random;
-#X obj 330 189 length;
-#X obj 278 170 t l b l;
-#X obj 336 419 throw~ slices;
+#X obj 281 -45 route list;
+#X obj 281 -24 route onset_strength;
+#X obj 281 62 sel 1;
+#X floatatom 296 19 5 0 0 0 - init_threshold -;
+#X obj 281 40 > 1;
+#X obj 300 230 random;
+#X obj 333 189 length;
+#X obj 281 170 t l b l;
+#X obj 339 419 throw~ slices;
 #X obj 26 127 catch~ slices;
-#X obj 241 -89 essentiaRT~ 5;
 #X text -140 -234 ...assuming externals are in parent folder...;
 #X obj -139 -250 declare -path ../essentiaRT~ -path ../utils;
 #X text -143 -87 AUDIO INPUT;
 #X text -143 -79 =====================;
 #X text 237 -137 ONSET DETECTION;
 #X text 237 -129 =====================;
-#X floatatom 287 -2 5 0 0 0 - - -;
-#X text 324 -3 onset strength;
-#X text 331 19 <<-- will produce an onset when the onset strength is
+#X floatatom 290 -2 5 0 0 0 - - -;
+#X text 327 -3 onset strength;
+#X text 334 19 <<-- will produce an onset when the onset strength is
 greater than this value.;
-#X obj 306 373 delread~ \$0-deline;
+#X obj 309 373 delread~ \$0-deline;
 #X obj 237 -250 loadbang;
-#X obj 278 -67 spigot 1;
-#X obj 333 -87 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 281 -67 spigot 1;
+#X obj 336 -87 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
-#X text 354 -89 output onsets;
-#X floatatom 359 64 5 0 0 0 - init_filterevents -;
-#X text 397 63 <<-- outputs only 1 onset every n miliseconds.;
-#X floatatom 338 210 5 0 0 0 - - -;
+#X text 357 -89 output onsets;
+#X floatatom 362 64 5 0 0 0 - init_filterevents -;
+#X text 400 63 <<-- outputs only 1 onset every n miliseconds.;
+#X floatatom 341 210 5 0 0 0 - - -;
 #X text -143 87 =====================;
 #X text -143 79 AUDIO OUTPUT;
 #X msg -139 -36 station \$1;
@@ -40,7 +39,7 @@ greater than this value.;
 #X obj -100 10 print STATION;
 #X obj -139 -12 radioin;
 #X obj -80 127 hsl 100 15 0 1 0 1 empty init_volume empty -2 -8 0 10
--262144 -1 -1 4950 1;
+-262144 -1 -1 9900 1;
 #X obj -43 240 line~;
 #X obj -83 240 line~;
 #X obj 11 272 *~;
@@ -56,92 +55,93 @@ greater than this value.;
 #X obj 241 -110 r~ input;
 #X text -141 -207 essentiaRT~ example-1;
 #X text -143 -199 =====================;
-#X obj 374 188 print ONSET-TIMES;
-#X obj 278 84 filtevent 1000;
+#X obj 377 188 print ONSET-TIMES;
 #X text -141 -187 This example shows how to store and retrieve onset
 positions of audio stored in a buffer. We use essentiaRT~ onset_strength
 feature to discard weak onsets \, and then use each onset to jump to
 a previously detected onset in the buffer.;
-#X obj 336 397 *~;
-#X obj 257 104 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 339 397 *~;
+#X obj 260 104 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X msg -43 218 \$1 20;
-#X text 376 326 quasi-rectangular envelope. It only fades the edges
+#X text 379 326 quasi-rectangular envelope. It only fades the edges
 to avoid clipping when jumping between different positions in the buffer
 ;
 #X msg 237 -227 bang \; pd dsp 1 \; init_threshold set 1 \; init_filterevents
 set 1000 \; init_volume 0.5 \; init_buffer_size set 10000;
-#X obj 278 256 list split;
-#X obj 306 278 sum;
-#X text 342 229 at every onset \, pick a random onset in buffer (0
+#X obj 281 256 list split;
+#X obj 309 278 sum;
+#X text 345 229 at every onset \, pick a random onset in buffer (0
 = oldest);
-#X floatatom 315 301 7 0 0 0 - - -;
-#X text 414 128 stores elapsed time between detections!;
-#X text 372 209 number of onsets in buffer;
-#X text 362 294 add together all the time differences to compute time
+#X floatatom 318 301 7 0 0 0 - - -;
+#X text 417 128 stores elapsed time between detections!;
+#X text 375 209 number of onsets in buffer;
+#X text 365 294 add together all the time differences to compute time
 delay to selected onset;
-#X obj 306 340 quickenv 2;
+#X obj 309 340 quickenv 2;
 #X text -101 -58 pick a radio station (0-7);
-#X floatatom 355 253 5 0 0 0 - - -;
-#X obj 374 168 spigot 0;
-#X obj 419 150 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X floatatom 358 253 5 0 0 0 - - -;
+#X obj 377 168 spigot 0;
+#X obj 422 150 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj -131 32 delwrite~ \$0-deline 10000;
-#X obj 278 127 list_onsetTimes 10000;
-#X msg 284 105 reset;
-#X floatatom 401 105 5 0 0 0 - init_buffer_size -;
-#X text 440 104 <- memory size (ms);
+#X obj 281 127 list_onsetTimes 10000;
+#X msg 287 105 reset;
+#X floatatom 404 105 5 0 0 0 - init_buffer_size -;
+#X text 443 104 <- memory size (ms);
+#X obj 281 84 filtevent 50;
+#X obj 241 -89 essentiaRT~ 5;
 #X connect 2 0 3 0;
 #X connect 3 0 6 0;
-#X connect 3 0 19 0;
+#X connect 3 0 18 0;
 #X connect 4 0 0 0;
-#X connect 4 0 53 0;
+#X connect 4 0 75 0;
 #X connect 5 0 6 1;
 #X connect 6 0 4 0;
-#X connect 7 0 60 1;
-#X connect 7 0 69 0;
-#X connect 8 0 29 0;
+#X connect 7 0 58 1;
+#X connect 7 0 67 0;
+#X connect 8 0 28 0;
 #X connect 8 0 7 1;
-#X connect 9 0 60 0;
+#X connect 9 0 58 0;
 #X connect 9 1 7 0;
 #X connect 9 2 8 0;
-#X connect 11 0 39 1;
-#X connect 12 1 24 0;
-#X connect 22 0 55 0;
-#X connect 23 0 59 0;
-#X connect 24 0 2 0;
-#X connect 25 0 24 1;
-#X connect 27 0 53 1;
-#X connect 32 0 35 0;
-#X connect 33 0 32 0;
-#X connect 35 0 48 0;
-#X connect 35 0 72 0;
-#X connect 35 2 34 0;
-#X connect 36 0 41 0;
-#X connect 36 0 45 0;
-#X connect 37 0 39 0;
-#X connect 38 0 40 1;
-#X connect 39 0 1 1;
-#X connect 40 0 1 0;
+#X connect 11 0 38 1;
+#X connect 21 0 53 0;
+#X connect 22 0 57 0;
+#X connect 23 0 2 0;
+#X connect 24 0 23 1;
+#X connect 26 0 75 1;
+#X connect 31 0 34 0;
+#X connect 32 0 31 0;
+#X connect 34 0 47 0;
+#X connect 34 0 70 0;
+#X connect 34 2 33 0;
+#X connect 35 0 40 0;
+#X connect 35 0 44 0;
+#X connect 36 0 38 0;
+#X connect 37 0 39 1;
+#X connect 38 0 1 1;
+#X connect 39 0 1 0;
+#X connect 40 0 41 0;
 #X connect 41 0 42 0;
 #X connect 42 0 43 0;
-#X connect 43 0 44 0;
-#X connect 44 0 38 0;
-#X connect 45 0 57 0;
-#X connect 47 0 40 0;
-#X connect 49 0 12 0;
-#X connect 53 0 56 0;
-#X connect 53 0 73 0;
-#X connect 55 0 10 0;
-#X connect 57 0 37 0;
-#X connect 60 1 61 0;
-#X connect 61 0 63 0;
-#X connect 61 0 67 0;
-#X connect 67 0 22 0;
-#X connect 67 1 55 1;
-#X connect 70 0 52 0;
-#X connect 71 0 70 1;
-#X connect 73 0 70 0;
-#X connect 73 0 9 0;
-#X connect 74 0 73 0;
-#X connect 75 0 73 1;
+#X connect 43 0 37 0;
+#X connect 44 0 55 0;
+#X connect 46 0 39 0;
+#X connect 48 0 76 0;
+#X connect 53 0 10 0;
+#X connect 55 0 36 0;
+#X connect 58 1 59 0;
+#X connect 59 0 61 0;
+#X connect 59 0 65 0;
+#X connect 65 0 21 0;
+#X connect 65 1 53 1;
+#X connect 68 0 51 0;
+#X connect 69 0 68 1;
+#X connect 71 0 68 0;
+#X connect 71 0 9 0;
+#X connect 72 0 71 0;
+#X connect 73 0 71 1;
+#X connect 75 0 54 0;
+#X connect 75 0 71 0;
+#X connect 76 1 23 0;
