@@ -1,0 +1,31 @@
+#N canvas 686 290 343 344 10;
+#X obj 42 206 mstats 10;
+#X obj 42 126 random 1000;
+#X obj 42 83 metro 500;
+#X obj 42 63 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
+#X floatatom 93 229 5 0 0 0 - - -;
+#X floatatom 76 251 5 0 0 0 - - -;
+#X floatatom 59 273 5 0 0 0 - - -;
+#X floatatom 42 295 5 0 0 0 - - -;
+#X text 112 251 minimum value;
+#X text 130 229 maximum value;
+#X text 100 273 mean;
+#X text 80 296 standard deviation;
+#X floatatom 93 184 5 0 0 0 - - -;
+#X floatatom 52 149 5 0 0 0 - - -;
+#X floatatom 105 105 5 0 0 0 - - -;
+#X text 130 177 last n events over which;
+#X text 130 190 calculations are performed.;
+#X text 4 3 [mstats] outputs simple statistics about the last n incoming
+events.;
+#X connect 0 0 7 0;
+#X connect 0 1 6 0;
+#X connect 0 2 5 0;
+#X connect 0 3 4 0;
+#X connect 1 0 0 0;
+#X connect 1 0 13 0;
+#X connect 2 0 1 0;
+#X connect 3 0 2 0;
+#X connect 12 0 0 1;
+#X connect 14 0 1 1;

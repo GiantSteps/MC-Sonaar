@@ -1,0 +1,37 @@
+#N canvas 859 90 396 407 10;
+#X obj 9 137 delay;
+#X obj 49 137 random 5;
+#X msg 57 225 reset;
+#X msg 9 93 bang;
+#X msg 17 113 stop;
+#X floatatom 59 202 5 0 0 0 - - -;
+#X floatatom 124 288 5 0 0 0 - - -;
+#X obj 49 364 print list-iot;
+#X obj 49 310 list_iot 2000;
+#X text 162 287 change the buffer size (ms);
+#X text 17 4 [list_iot] keeps track of the elapsed times between consecutive
+units of incoming data within a pre-defined buffer size \, after which
+it will forget them. This is useful to keep track of onset times and
+be able to retrieve their position from a circular buffer such as [delwrite~]
+;
+#X obj 49 159 * 100;
+#X obj 49 181 + 100;
+#X text 100 218 clear list and start counting again;
+#X text 101 231 from the next incoming values;
+#X text 63 251 left inlet receives any data type (l \, f \, b and s)
+;
+#X text 63 266 and measures the elapsed time from the previous input
+;
+#X text 56 329 a list of elapsed times within the given time frame
+(buffersize) is updated when new data comes in.;
+#X connect 0 0 1 0;
+#X connect 1 0 11 0;
+#X connect 2 0 8 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 6 0 8 1;
+#X connect 8 0 7 0;
+#X connect 11 0 12 0;
+#X connect 12 0 5 0;
+#X connect 12 0 0 0;
+#X connect 12 0 8 0;

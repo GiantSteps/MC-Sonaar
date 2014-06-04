@@ -2,7 +2,9 @@
 ===================================== essentiaRT~ ==================================
 
 Description
-————————————
+———————————
+
+essentiaRT~ is a real-time implementation of MTG’s Essentia (an open-source C++ library for audio analysis and audio-based music information retrieval) as Pd and Max/MSP objects. As such, it does not yet include all of Essentia’s algorithms, but a number of featyure extractors considered useful in a real-time scenario to provide on-the-fly classification of sounds.
 
 <argument>: threshold level for the Super-Flux algorithm.
 

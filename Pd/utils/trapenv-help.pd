@@ -1,0 +1,54 @@
+#N canvas 0 22 434 560 10;
+#X floatatom 86 382 5 0 0 0 - - -;
+#X text 122 380 change fade-out \, hold and fade-in times at once.
+;
+#X obj 71 460 *~;
+#X obj 13 502 output~;
+#X obj 35 427 osc~;
+#X obj 35 203 random 20;
+#X obj 35 224 + 60;
+#X obj 35 182 metro 500;
+#X obj 35 162 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X text 31 99 usage: trapenv envelope-time-in-ms;
+#X obj 35 245 mtof;
+#X text 30 114 inlet 1 control parameter (frecuency \, buffer position)
+;
+#X text 41 324 only passes through after an initial;
+#X text 41 339 delay equivalent to fading out by;
+#X text 41 310 a control signal on the left inlet;
+#X text 94 422 right outlet provides the ramp signal;
+#X text 94 437 to multiply by the audio source.;
+#X text 30 129 inlet 2 ramp signal.;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-vis 1400 float 0;
+#X coords 0 1 1399 -1 100 70 1 0 0;
+#X restore 201 470 graph;
+#X obj 35 269 t f b;
+#X obj 75 270 s \$0-disp;
+#X obj 102 499 r \$0-disp;
+#X obj 94 523 tabwrite~ \$0-vis;
+#X obj 35 404 trapenv 5;
+#X obj 35 291 pipe 10;
+#X text 41 354 the specified amount.;
+#X text 29 9 [trapenv] is a trapezoidal envelope generator \, meant
+to supress clicks when jumping between discontinuous reading points
+in a buffer. Its main ingredient is a [vline~] which ramps down \,
+waits and ramps up again by the amount of miliseconds specified in
+the argument or dynamically via the second inlet.;
+#X connect 0 0 23 1;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 2 0 22 0;
+#X connect 4 0 2 0;
+#X connect 5 0 6 0;
+#X connect 6 0 10 0;
+#X connect 7 0 5 0;
+#X connect 8 0 7 0;
+#X connect 10 0 19 0;
+#X connect 19 0 24 0;
+#X connect 19 1 20 0;
+#X connect 21 0 22 0;
+#X connect 23 0 4 0;
+#X connect 23 1 2 1;
+#X connect 24 0 23 0;

@@ -1,4 +1,4 @@
-#N canvas 1052 399 731 483 10;
+#N canvas 498 22 731 483 10;
 #X msg 169 -200 disconnect;
 #X msg 77 -179 recover -1;
 #X obj 169 49 outlet~;
