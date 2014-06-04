@@ -75,12 +75,12 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     superFluxP->output("peaks") >> essout->input("signal");
     
     // MFCC
-//    spectrum->output("spectrum") >> mfccF->input("spectrum");
-//    mfccF->output("bands") >> DEVNULL;
+    spectrum->output("spectrum") >> mfccF->input("spectrum");
+    mfccF->output("bands") >> DEVNULL;
     
     
     // centroid
-//    spectrum->output("spectrum") >> centroidF->input("array");
+    spectrum->output("spectrum") >> centroidF->input("array");
     
     
     //Audio out
@@ -88,8 +88,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
    
     
     //2 Pool
-//    connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
-//    connectSingleValue(mfccF->output("mfcc"),poolin,"inst.mfcc");
+   connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
+    connectSingleValue(mfccF->output("mfcc"),poolin,"inst.mfcc");
 
     //connectSingleValue(triF->output("bands"),poolin,"inst.tri");
 
