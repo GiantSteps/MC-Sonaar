@@ -1,0 +1,10 @@
+#N canvas 0 22 358 176 10;
+#X obj 117 99 addslash;
+#X obj 117 122 PRINT;
+#X text 4 9 [addslash] prepends a forward slash to an incoming symbol
+to comply with the OSC standard message format.;
+#X msg 117 53 data 1 2 3 4 5;
+#X msg 125 76 differentData 2;
+#X connect 0 0 1 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
