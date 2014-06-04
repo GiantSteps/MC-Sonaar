@@ -29,7 +29,7 @@
 #X obj -90 -221 print STATION;
 #X obj -129 -243 radioin;
 #X obj -70 -104 hsl 100 15 0 1 0 1 empty init_volume empty -2 -8 0
-10 -262144 -1 -1 4950 1;
+10 -262144 -1 -1 7300 1;
 #X obj -33 9 line~;
 #X obj -73 9 line~;
 #X obj 21 41 *~;
@@ -141,7 +141,6 @@ last onset-list reported and the query time.;
 #X connect 37 0 30 0;
 #X connect 39 0 93 0;
 #X connect 42 0 41 0;
-#X connect 43 0 49 0;
 #X connect 44 0 27 0;
 #X connect 49 0 63 0;
 #X connect 50 0 49 0;

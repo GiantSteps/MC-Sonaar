@@ -1,4 +1,4 @@
-#N canvas 634 22 1002 567 10;
+#N canvas 74 22 1017 567 10;
 #X declare -path ../essentiaRT~ -path ../utils;
 #X obj 250 -120 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -30,7 +30,7 @@
 #X obj -77 -257 print STATION;
 #X obj -116 -279 radioin;
 #X obj -57 -150 hsl 100 15 0 1 0 1 empty init_volume empty -2 -8 0
-10 -262144 -1 -1 4950 1;
+10 -262144 -1 -1 9900 1;
 #X obj -20 -37 line~;
 #X obj -60 -37 line~;
 #X obj 34 -5 *~;
