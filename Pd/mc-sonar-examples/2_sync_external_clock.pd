@@ -1,27 +1,27 @@
-#N canvas 668 72 1079 612 10;
+#N canvas 422 22 1079 612 10;
 #X declare -path ../essentiaRT~ -path ../utils -path ../ibt_pd;
-#X obj 267 -134 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 270 -134 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj -65 78 output~;
-#X obj 288 -263 route list;
-#X obj 288 -242 route onset_strength;
-#X obj 288 -156 sel 1;
-#X floatatom 303 -199 5 0 0 0 - init_threshold -;
-#X obj 288 -178 > 1;
+#X obj 291 -263 route list;
+#X obj 291 -242 route onset_strength;
+#X obj 291 -156 sel 1;
+#X floatatom 306 -199 5 0 0 0 - init_threshold -;
+#X obj 291 -178 > 1;
 #X obj 36 -104 catch~ slices;
 #X text -130 -462 ...assuming externals are in parent folder...;
 #X text -133 -318 AUDIO INPUT;
 #X text -133 -310 =====================;
 #X text 247 -355 ONSET DETECTION;
 #X text 247 -347 =====================;
-#X floatatom 297 -220 5 0 0 0 - - -;
-#X text 334 -221 onset strength;
+#X floatatom 300 -220 5 0 0 0 - - -;
+#X text 337 -221 onset strength;
 #X obj 247 -478 loadbang;
-#X obj 288 -285 spigot 1;
+#X obj 291 -285 spigot 1;
 #X obj 343 -305 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1
 1 1;
 #X text 364 -307 output onsets;
-#X floatatom 363 -154 5 0 0 0 - init_filterevents -;
+#X floatatom 366 -154 5 0 0 0 - init_filterevents -;
 #X text -133 -144 =====================;
 #X text -133 -152 AUDIO OUTPUT;
 #X msg -129 -267 station \$1;
@@ -29,7 +29,7 @@
 #X obj -90 -221 print STATION;
 #X obj -129 -243 radioin;
 #X obj -70 -104 hsl 100 15 0 1 0 1 empty init_volume empty -2 -8 0
-10 -262144 -1 -1 7300 1;
+10 -262144 -1 -1 4950 1;
 #X obj -33 9 line~;
 #X obj -73 9 line~;
 #X obj 21 41 *~;
@@ -46,7 +46,7 @@
 #X text -133 -420 =====================;
 #X obj 38 -199 s buffer_size;
 #X floatatom 38 -219 5 0 0 0 - init_buffer_size -;
-#X obj 267 -114 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 270 -114 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X msg -33 -13 \$1 20;
 #X obj -121 -199 delwrite~ \$0-deline 10000;
@@ -99,17 +99,17 @@ that by using an extra timer to measure the elapsed time between the
 last onset-list reported and the query time.;
 #X obj 614 -327 packel 1;
 #X text -91 -289 pick a radio station (0-7);
-#X obj 296 -27 print ONSET-TIMES;
-#X obj 288 -4 s onset_times;
-#X obj 296 -48 spigot 0;
-#X obj 341 -68 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 299 -27 print ONSET-TIMES;
+#X obj 291 -4 s onset_times;
+#X obj 299 -48 spigot 0;
+#X obj 344 -68 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X msg 294 -111 reset;
-#X floatatom 369 -110 5 0 0 0 - init_buffer_size -;
+#X msg 297 -111 reset;
+#X floatatom 372 -110 5 0 0 0 - init_buffer_size -;
 #X obj 251 -307 essentiaRT~ 12;
-#X obj 288 -89 list_iot 10000;
+#X obj 291 -89 list_iot 10000;
 #X obj 665 6 trapenv 5;
-#X obj 288 -134 filtevent 500;
+#X obj 291 -134 filtevent 500;
 #X connect 2 0 3 0;
 #X connect 3 0 6 0;
 #X connect 3 0 13 0;

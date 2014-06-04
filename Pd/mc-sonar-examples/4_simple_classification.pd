@@ -19,7 +19,7 @@
 #X obj -281 285 print STATION;
 #X obj -320 226 radioin;
 #X obj -103 169 hsl 100 15 0 1 0 1 empty init_volume empty -2 -8 0
-10 -262144 -1 -1 9900 1;
+10 -262144 -1 -1 4950 1;
 #X obj -66 275 line~;
 #X obj -106 275 line~;
 #X obj -40 299 *~;
