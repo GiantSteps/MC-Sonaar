@@ -78,7 +78,7 @@ delay to selected onset;
 #X text -101 -58 pick a radio station (0-7);
 #X floatatom 358 253 5 0 0 0 - - -;
 #X obj 377 168 spigot 0;
-#X obj 422 150 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 422 150 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj -131 32 delwrite~ \$0-deline 10000;
 #X msg 287 105 reset;
