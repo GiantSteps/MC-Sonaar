@@ -42,14 +42,14 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
     w = factory.create("Windowing","Normalize",false);
     
         // Core
-    loudness = factory.create("Energy");
+    loudness = factory.create("Loudness");
     
     spectrum = factory.create("Spectrum"); 
 
     flatness  = factory.create("Flatness");
+
+    yin = factory.create("PitchYinFFT");
     
-    Nsdf = factory.create("Nsdf");
-    spec2 = factory.create("Spectrum");
     cent = factory.create("Centroid");
     
         // Aggregation
@@ -60,33 +60,36 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
  
     
     // Connect
-    
     gen->output("signal") >> fc->input("signal");
     fc->output("frame") >> w->input("frame");
-    
     w->output("frame") >> spectrum->input("frame");
     
-        // pitchiness
+    
+    // pitchiness
     spectrum->output("spectrum") >> flatness->input("array");
 
-//    fc->output("frame") >> Nsdf->input("array");
-//    Nsdf->output("nsdf") >> spec2->input("frame");
-//    spec2->output("spectrum") >> cent->input("array");
-//    cent->output("centroid") >> PC(pool,"nsdf");
+    
+    //loudness
+    fc->output("frame") >> loudness->input("signal");
     
     
-    
-    
-    flatness->output("flatness") >> PC(pool,"pitched");
-    loudness->output("energy") >> PC(pool,"loudness");
+    // f0 yin
+    spectrum->output("spectrum") >> yin->input("spectrum");//,"maxFrequency",8000);
 
     
     
     
+    //Connect SFX 2 Pool
+    flatness->output("flatness") >> PC(pool,"pitched");
+    loudness->output("loudness") >> PC(pool,"loudness");
+    yin->output("pitch") >> PC(pool,"pitch");
+    yin->output("pitchConfidence") >> PC(pool,"pitchConfidence");
     
     
     
     
+    
+    //Connect Aggregator
     poolAggr->input("input").set(pool);
     poolAggr->output("output").set(aggrPool);
     

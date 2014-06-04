@@ -44,8 +44,9 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     spectrum = factory.create("Spectrum");
     triF = factory.create("Triangularbands","Log",true);
     
-    superFluxF = factory.create("SuperFluxNovelty","Online",true);
+    superFluxF = factory.create("SuperFluxNovelty","Online",true,"binWidth",3,"frameWidth",2);
     superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",50);
+    
     
     
     centroidF = factory.create("Centroid");
@@ -55,16 +56,16 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     
     
-    gen = factory.create("RingBufferInput","bufferSize",frameSize*2,"blockSize",hopSize);
+    gen = factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
     
     // buffer for getting the onset back
-    essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",hopSize,"blockSize",(int)1);
+    essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
     // Audio Rate output, ATM , SuperFlux Novelty function
-    DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",hopSize,"blockSize",(int)1);
+    DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
     
     // cutting, overlapping
     gen->output("signal") >> fc->input("signal");
-    fc->output("frame") >> w->input("frame");
+    fc->output("frame")  >>  w->input("frame");
     w->output("frame") >> spectrum->input("frame");
     
     // SuperFlux
@@ -74,12 +75,12 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     superFluxP->output("peaks") >> essout->input("signal");
     
     // MFCC
-    spectrum->output("spectrum") >> mfccF->input("spectrum");
-    mfccF->output("bands") >> DEVNULL;
+//    spectrum->output("spectrum") >> mfccF->input("spectrum");
+//    mfccF->output("bands") >> DEVNULL;
     
     
     // centroid
-    spectrum->output("spectrum") >> centroidF->input("array");
+//    spectrum->output("spectrum") >> centroidF->input("array");
     
     
     //Audio out
@@ -87,8 +88,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
    
     
     //2 Pool
-    connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
-    connectSingleValue(mfccF->output("mfcc"),poolin,"inst.mfcc");
+//    connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
+//    connectSingleValue(mfccF->output("mfcc"),poolin,"inst.mfcc");
 
     //connectSingleValue(triF->output("bands"),poolin,"inst.tri");
 

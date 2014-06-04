@@ -49,8 +49,15 @@ private:
     /// ESSENTIA
     /// algos
     essentia::streaming::Algorithm *w,*spectrum,  * fc;
+    
+    
     essentia::streaming::Algorithm *loudness,*flatness;
-    essentia::streaming::Algorithm *Nsdf,*cent,*spec2;
+    
+    essentia::streaming::Algorithm *cent;
+    
+    essentia::streaming::Algorithm *yin;
+    
+
     essentia::standard::Algorithm *poolAggr;
     //// IO
     essentia::streaming::RingBufferInput* gen;
