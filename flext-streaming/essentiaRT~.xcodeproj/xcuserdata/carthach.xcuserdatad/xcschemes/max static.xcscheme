@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E9974E52077083C700206F68"
-               BuildableName = "pd_essentia~.mxo"
+               BuildableName = "essentiaRT~.mxo"
                BlueprintName = "max static"
-               ReferencedContainer = "container:pd_essentia~.xcodeproj">
+               ReferencedContainer = "container:essentiaRT~.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Deployment"
+      buildConfiguration = "Development"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">

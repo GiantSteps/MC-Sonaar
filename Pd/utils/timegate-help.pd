@@ -1,0 +1,31 @@
+#N canvas 603 436 378 332 10;
+#X floatatom 133 222 5 0 0 0 - - -;
+#X floatatom 208 169 5 0 0 0 - - -;
+#X obj 133 120 metro 200;
+#X obj 133 144 random 100;
+#X floatatom 146 166 5 0 0 0 - - -;
+#X obj 133 99 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 184 98 5 0 0 0 - - -;
+#X obj 187 238 timer;
+#X obj 187 215 t b b;
+#X floatatom 187 260 5 0 0 0 - - -;
+#X text 225 261 elapsed time;
+#X obj 117 303 speedlim;
+#X text 13 302 related objects:;
+#X obj 133 192 timegate 1000;
+#X text 6 7 [timegate] is a timed gate that stops outputing its incoming
+data after an initial input for the specified time \, after which the
+gate opens again. This object does not have any memory and will ignore
+any event that comes in while the gate is closed.;
+#X connect 1 0 13 1;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 0 13 0;
+#X connect 5 0 2 0;
+#X connect 6 0 2 1;
+#X connect 7 0 9 0;
+#X connect 8 0 7 0;
+#X connect 8 1 7 1;
+#X connect 13 0 0 0;
+#X connect 13 0 8 0;

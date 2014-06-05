@@ -1,4 +1,4 @@
-#N canvas 322 386 359 482 10;
+#N canvas 1469 22 345 486 10;
 #X obj 39 1 inlet;
 #X obj 48 160 timer;
 #X obj 48 182 list prepend;
@@ -16,9 +16,9 @@
 #X obj 162 69 sel reset;
 #X obj 162 45 symbol;
 #X obj 64 109 bang;
-#X obj 178 430 route bang;
+#X obj 178 433 route bang;
 #X obj 39 22 route bang float list;
-#X obj 235 451 outlet;
+#X obj 235 455 outlet;
 #X connect 0 0 18 0;
 #X connect 1 0 2 0;
 #X connect 2 0 4 0;
@@ -44,6 +44,7 @@
 #X connect 15 0 14 0;
 #X connect 16 0 11 0;
 #X connect 17 1 19 0;
+#X connect 18 0 11 0;
 #X connect 18 1 16 0;
 #X connect 18 2 16 0;
 #X connect 18 3 15 0;

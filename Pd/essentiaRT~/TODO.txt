@@ -1,9 +1,0 @@
-
-Possible To-Do’s (at least subject to discussion)
-————————————————————————————————————
- 
-- It would be nice to be able to change the threshold of the super flux algorithm with a method/message like “threshold $1”.
-
-- And give the possibility to change the size of the higher-level feature extraction window, even to average the features over a full inter-onset time.
-
-- The list objects (2 and 3) provide different outputs on each parameter they output. I think it would be a nice feature if the object spells a single list per object per onset. Furthermore, if we could avoid the ‘list’ header in outlets 2 and 3, it will be even easier to access the different parameters.
