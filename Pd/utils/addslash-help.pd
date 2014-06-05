@@ -1,10 +1,11 @@
-#N canvas 0 22 358 176 10;
-#X obj 117 99 addslash;
-#X obj 117 122 PRINT;
+#N canvas 0 22 396 227 10;
+#X obj 117 119 addslash;
+#X obj 117 142 PRINT;
+#X msg 117 73 data 1 2 3 4 5;
+#X msg 125 96 differentData 2;
 #X text 4 9 [addslash] prepends a forward slash to an incoming symbol
-to comply with the OSC standard message format.;
-#X msg 117 53 data 1 2 3 4 5;
-#X msg 125 76 differentData 2;
+to comply with the OSC standard message format. <http://opensoundcontrol.org/introduction-osc>
+;
 #X connect 0 0 1 0;
+#X connect 2 0 0 0;
 #X connect 3 0 0 0;
-#X connect 4 0 0 0;
