@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>6DB6A951-6307-4133-B532-02D47C8D915D</string>
+	<string>91F33B43-52D4-4153-8C37-AA355E9E533E</string>
 	<key>IDESourceControlProjectName</key>
 	<string>essentiaRT~</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>721B8FF2-ED85-4A20-BD5E-8EB89CA7720D</key>
-		<string>ssh://github.com/GiantSteps/MC-Sonaar.git</string>
+		<key>2A2FBF69-BAB8-41A2-A1E3-9A21077310F5</key>
+		<string>https://github.com/GiantSteps/MC-Sonaar</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>flext-streaming/essentiaRT~.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>721B8FF2-ED85-4A20-BD5E-8EB89CA7720D</key>
+		<key>2A2FBF69-BAB8-41A2-A1E3-9A21077310F5</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/GiantSteps/MC-Sonaar.git</string>
+	<string>https://github.com/GiantSteps/MC-Sonaar</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>721B8FF2-ED85-4A20-BD5E-8EB89CA7720D</string>
+	<string>2A2FBF69-BAB8-41A2-A1E3-9A21077310F5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>721B8FF2-ED85-4A20-BD5E-8EB89CA7720D</string>
+			<string>2A2FBF69-BAB8-41A2-A1E3-9A21077310F5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MC-Sonaar</string>
 		</dict>
