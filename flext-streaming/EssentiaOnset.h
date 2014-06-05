@@ -44,12 +44,13 @@ public:
     
     /// ESSENTIA
     /// algos
-    essentia::streaming::Algorithm *w,*spectrum,*triF,*superFluxF,*superFluxP, * fc,*centroidF,*mfccF;
+    essentia::streaming::Algorithm *w,*spectrum,*triF,*superFluxF,*superFluxP, * fc,*centroidF,*mfccF,*pspectrum;
     
     //// IO
     streaming::Algorithm* gen;
     streaming::RingBufferOutput* essout;
     streaming::RingBufferOutput* DBGOUT;
+    streaming::VectorOutput< vector<Real> > * probe;
     
     
     Pool* pool;
@@ -58,7 +59,7 @@ public:
     scheduler::Network *network;
     int sampleRate, frameSize, hopSize;
     
-    
+    vector<Real> strength;
     
 
 

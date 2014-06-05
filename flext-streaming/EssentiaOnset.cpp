@@ -25,6 +25,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     this->hopSize = hS;
     this->pool = &poolin;
     
+    strength.resize(2);
     
     AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
     
@@ -42,6 +43,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     w = factory.create("Windowing","type","hann","Normalize",false,"zeroPhase",false);
     
     spectrum = factory.create("Spectrum");
+    pspectrum = factory.create("PowerSpectrum");
     triF = factory.create("Triangularbands","Log",true);
     
     superFluxF = factory.create("SuperFluxNovelty","Online",true,"binWidth",3,"frameWidth",2);
@@ -63,11 +65,13 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     // Audio Rate output, ATM , SuperFlux Novelty function
     DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
     
+    probe = new streaming::VectorOutput< vector<Real> >();
+    
     // cutting, overlapping
     gen->output("signal") >> fc->input("signal");
     fc->output("frame")  >>  w->input("frame");
     w->output("frame") >> spectrum->input("frame");
-    
+    //w->output("frame") >> pspectrum->input("signal");
     // SuperFlux
     spectrum->output("spectrum") >> triF->input("spectrum");
     triF->output("bands")>>superFluxF->input("bands");
@@ -83,9 +87,10 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     spectrum->output("spectrum") >> centroidF->input("array");
     
     
-    //Audio out
+    //Audio out & DBG
     superFluxF->output("Differences")  >>  DBGOUT->input("signal");
-   
+    //triF->output("bands") >> probe->input("data");
+    //gen->output("signal")  >>  DBGOUT->input("signal");
     
     //2 Pool
    connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
@@ -106,21 +111,35 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     ((essentia::streaming::RingBufferInput*)gen)->add(&audioFrameIn[0],audioFrameIn.size());
     gen->process();
     
+    vector < vector <Real> > pr;
+    probe->setVector(&pr);
+    
     network->runStack();
     
     output.resize(audioFrameIn.size());
-    int retrievedSize = DBGOUT->get(&output[0], 1);
+    int retrievedSize = DBGOUT->get(&output[0], output.size());
     Real audioout = retrievedSize>0?output[retrievedSize-1] : 0;
-    
+    if(audioout>0.1){
+        int s = 0;
+    }
 
     
     
-    retrievedSize = essout->get(&output[0], 1);
-    Real val = retrievedSize>0?output[retrievedSize-1] : 0;
 
-    for (int i =0; i< output.size() ; i++){
+
+    for (int i =retrievedSize; i< output.size() ; i++){
         output[i]=audioout;
     }
+//    if(pr.size()>0){
+//    for (int i =0; i< output.size() ; i++){
+//        output[i]=pr[0][i];
+//    }}
+    
+    
+    retrievedSize = essout->get(&strength[0],1);
+    Real val = retrievedSize>0?strength[retrievedSize-1] : 0;
+
+
     
     return val;
         

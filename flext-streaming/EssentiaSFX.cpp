@@ -18,7 +18,7 @@ EssentiaSFX::EssentiaSFX(){
     
 }
 
-void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
+void EssentiaSFX::setup(int fS,int hS,int sR){
     this->sampleRate = sR;
     this->frameSize = fS;
     this->hopSize = hS;
@@ -29,7 +29,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
      AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
     standard::AlgorithmFactory& stfactory = standard::AlgorithmFactory::instance();
         // Input
-    gen = (essentia::streaming::RingBufferInput*)factory.create("RingBufferInput","bufferSize",frameSize*10,"blockSize",hopSize);
+    gen = (essentia::streaming::RingBufferInput*)factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
 
     
     fc = factory.create("FrameCutter",
@@ -37,7 +37,9 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
                         "hopSize",hopSize,
                         "startFromZero" , true,
                         "validFrameThresholdRatio", 1,
-                        "lastFrameToEndOfFile",true);
+                        "lastFrameToEndOfFile",true,
+                        "silentFrames","drop"
+                        );
     
     w = factory.create("Windowing","Normalize",false);
     
@@ -51,6 +53,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
     yin = factory.create("PitchYinFFT");
     
     cent = factory.create("Centroid");
+    mfcc = factory.create("MFCC");
     
         // Aggregation
     const char* statsToCompute[] = {"mean", "var"};
@@ -77,14 +80,18 @@ void EssentiaSFX::setup(int fS,int hS,int sR,Pool* poolout){
     spectrum->output("spectrum") >> yin->input("spectrum");//,"maxFrequency",8000);
 
     
+    //mfcc
+    spectrum->output("spectrum") >> mfcc->input("spectrum");
+    mfcc->output("bands")>>DEVNULL;
+    
     
     
     //Connect SFX 2 Pool
-    flatness->output("flatness") >> PC(pool,"pitched");
+    flatness->output("flatness") >> PC(pool,"noisyness");
     loudness->output("loudness") >> PC(pool,"loudness");
     yin->output("pitch") >> PC(pool,"pitch");
     yin->output("pitchConfidence") >> PC(pool,"pitchConfidence");
-    
+    mfcc->output("mfcc") >> PC(pool,"mfcc");
     
     
     
@@ -135,12 +142,9 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
 }
 
 void EssentiaSFX::aggregate(){
-    
+    aggrPool.clear();
     poolAggr->compute();
-//    vector<string> f = aggrPool.descriptorNames();
-//    for ( vector<string>::iterator it=f.begin();it != f.end();++it){
-//        outPool->set(*it, aggrPool.value<Real>(*it));
-//    }
+
     
     
 }

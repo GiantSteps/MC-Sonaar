@@ -51,11 +51,11 @@ essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
     // Declare Essentia Components
     essentia::init();
     
-    if(argc==1) onset_thresh = Helper::getReal(argv[0]);
+    if(argc==1) onset_thresh = flext::GetAFloat(argv[0]);
     
     onsetDetection.setup(frameSize, hopSize, sampleRate,pool,onset_thresh);
     
-    SFX.setup(frameSize, hopSize, sampleRate, &pool);
+    SFX.setup(frameSize, hopSize, sampleRate);
 
     isSFX = false;
 
@@ -78,7 +78,7 @@ void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsi
     while(n--) {
         //Fill Essentia vector every hopsize , buffering is handled inside streaming algorithms
         audioBuffer[essentiaBufferCounter] = *(in++);
-        // trick to get onset at signal rate on outlet1
+        // trick to get onset or novelty function at signal rate on outlet1
         *(out++) = audioBufferOut[essentiaBufferCounter];
         essentiaBufferCounter++;
 
@@ -152,7 +152,7 @@ void essentiaRT::m_settings(int argc, const t_atom *argv)
        string curset =  GetString(argv[0]);
     
     if(curset=="onset_threshold"){
-        pM.add("threshold",Helper::getReal(argv[1]));
+        pM.add("threshold",GetAFloat(argv[1]));
         onsetDetection.superFluxP->setParameters(pM);
 
     }

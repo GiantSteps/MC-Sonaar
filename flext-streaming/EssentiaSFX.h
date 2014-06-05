@@ -37,7 +37,7 @@ public:
     ~EssentiaSFX();
     
     
-    void setup(int frameS,int hopS,int sR,Pool* poolout);
+    void setup(int frameS,int hopS,int sR);
     
     void compute(vector<Real>& audioFrameIn);
     
@@ -56,9 +56,10 @@ private:
     essentia::streaming::Algorithm *cent;
     
     essentia::streaming::Algorithm *yin;
-    
+    essentia::streaming::Algorithm *mfcc;
 
     essentia::standard::Algorithm *poolAggr;
+    
     //// IO
     essentia::streaming::RingBufferInput* gen;
 

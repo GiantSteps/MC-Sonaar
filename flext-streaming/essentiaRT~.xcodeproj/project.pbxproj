@@ -50,7 +50,7 @@
 		077FA32D191B9FF500D05B19 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /Users/mhermant/Documents/Work/Dev/Pd_externals/externals;
+			dstPath = "${PROJECT_DIR}";
 			dstSubfolderSpec = 0;
 			files = (
 				077FA32E191B9FF900D05B19 /* essentiaRT~.pd_darwin in CopyFiles */,
@@ -320,7 +320,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PD)/src",
+					"$(PD)/include",
 					"$(MY_INCLUDE)/flext",
 				);
 				INSTALL_PATH = "$(PD)/extra";
@@ -376,7 +376,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PD)/src",
+					"$(PD)/include",
 					"$(MY_INCLUDE)/flext",
 				);
 				INSTALL_PATH = "$(PD)/extra";
@@ -431,7 +431,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PD)/src",
+					"$(PD)/include",
 					"$(MY_INCLUDE)/flext",
 				);
 				INSTALL_PATH = "$(PD)/extra";

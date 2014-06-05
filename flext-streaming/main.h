@@ -82,8 +82,8 @@ namespace Helper {
     }
     
     Real getReal(t_atom a){
-        if(flext::CanbeInt(a)) return flext::GetInt(a);
-        else flext::GetFloat(a);
+
+       return  ;
     }
 
 };
