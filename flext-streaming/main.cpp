@@ -177,13 +177,13 @@ void essentiaRT::m_sfxAggr(void *){
 std::map<string, vector<Real> > essentiaRT::getFeatures(Pool p)
 {
  
-        std::map<string, vector<vector<Real> > >  vectorsIn =     p.getVectorRealPool();
+        std::map<string, vector<Real > >  vectorsIn =     p.getRealPool();
     std::map<string, vector<Real> > vectorsOut;
     
-    for(std::map<string, vector<vector<Real> > >::iterator iter = vectorsIn.begin(); iter != vectorsIn.end(); ++iter)
+    for(std::map<string, vector<Real > >::iterator iter = vectorsIn.begin(); iter != vectorsIn.end(); ++iter)
     {
         string k =  iter->first;
-        vector<Real> v = (iter->second)[0];
+        vector<Real> v = (iter->second);
         
         vectorsOut[k] = v;
     }

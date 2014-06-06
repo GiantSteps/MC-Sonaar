@@ -49,8 +49,8 @@
 #X floatatom 85 249 5 0 0 0 - - -;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array obs 13 float 3;
-#A 0 -588.042 135.05 40.3767 16.1456 -28.3211 -8.5679 -7.52705 16.4401
--7.00447 -0.842089 -14.1725 3.01344 3.92701;
+#A 0 -1069.49 33.8953 -73.1152 -83.6365 13.7569 89.9341 47.9051 -52.604
+-80.095 -4.77832 70.1357 50.5391 -29.6458;
 #X coords 0 1 13 -1 200 140 1 0 0;
 #X restore 169 71 graph;
 #X obj 106 217 change;
@@ -86,10 +86,10 @@
 #X connect 4 1 3 0;
 #X restore 272 281 pd onsetInfo;
 #X obj 32 257 spigot;
-#X obj 61 232 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 61 232 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 85 69 spigot;
-#X obj 114 44 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 114 44 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 88 21 r \$0-onset;
 #X obj 162 348 s \$0-onset;
