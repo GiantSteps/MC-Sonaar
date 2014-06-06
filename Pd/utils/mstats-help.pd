@@ -2,7 +2,7 @@
 #X obj 42 206 mstats 10;
 #X obj 42 126 random 1000;
 #X obj 42 83 metro 500;
-#X obj 42 63 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+#X obj 42 63 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
 ;
 #X floatatom 93 229 5 0 0 0 - - -;
 #X floatatom 76 251 5 0 0 0 - - -;
