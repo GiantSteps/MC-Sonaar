@@ -50,13 +50,13 @@ calculation.;
 #X text 488 186 onset strength;
 #X obj 453 239 r high-level;
 #X obj 714 110 print +lowLevel;
-#X obj 776 334 print +highLevel;
+#X obj 780 334 print +highLevel;
 #X floatatom 534 473 7 0 0 1 pitch.mean(Hz) - -;
 #X floatatom 575 452 7 0 0 1 pitch.variance - -;
-#X floatatom 615 428 7 0 0 1 pitchConfidence.mean - -;
-#X floatatom 655 406 7 0 0 1 pitchConfidence.variance - -;
-#X floatatom 695 383 7 0 0 1 loudness.mean - -;
-#X floatatom 735 360 7 0 0 1 loudness.variance - -;
+#X floatatom 616 428 7 0 0 1 pitchConfidence.mean - -;
+#X floatatom 657 406 7 0 0 1 pitchConfidence.variance - -;
+#X floatatom 698 383 7 0 0 1 loudness.mean - -;
+#X floatatom 739 360 7 0 0 1 loudness.variance - -;
 #X text 450 -18 outlet2: list of low-level features at control rate.
 ;
 #X text 31 403 The second outlet reports instantaneous information
@@ -69,7 +69,7 @@ a larger window is used to estimate some higher level features on the
 event \, listed on outlet3. The window size over which these parameters
 are calculated can be set dynamically with the message "delayMode."
 A delayMode time of 0 takes the full chunk between onset reports.;
-#X obj 453 284 route noisyness.mean noisyness.var pitch.mean pitch.var
+#X obj 453 284 route noisiness.mean noisiness.var pitch.mean pitch.var
 pitchConfidence.mean pitchConfidence.var loudness.mean loudness.var
 ;
 #X connect 3 0 38 0;
