@@ -44,6 +44,7 @@ public:
     
     float compute(vector<Real>& audioFrameIn, vector<Real>& output);
     
+    void preprocessPool();
     
 //private:
     

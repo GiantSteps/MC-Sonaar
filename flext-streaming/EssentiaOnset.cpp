@@ -95,8 +95,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     //gen->output("signal")  >>  DBGOUT->input("signal");
     
     //2 Pool
-   connectSingleValue(centroidF->output("centroid"),poolin,"inst.centroid");
-    connectSingleValue(mfccF->output("mfcc"),poolin,"inst.mfcc");
+   connectSingleValue(centroidF->output("centroid"),poolin,"i.centroid");
+    connectSingleValue(mfccF->output("mfcc"),poolin,"i.mfcc");
 
     //connectSingleValue(triF->output("bands"),poolin,"inst.tri");
 
@@ -113,17 +113,12 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     ((essentia::streaming::RingBufferInput*)gen)->add(&audioFrameIn[0],audioFrameIn.size());
     gen->process();
     
-//    vector < vector <Real> > pr;
-//    probe->setVector(&pr);
-//    
+
     network->runStack();
     
     output.resize(audioFrameIn.size());
     int retrievedSize = DBGOUT->get(&output[0], output.size());
     Real audioout = retrievedSize>0?output[retrievedSize-1]*NOVELTY_MULT : 0;
-//    if(audioout>0.1){
-//        int s = 0;
-//    }
 
     
     
@@ -132,10 +127,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     for (int i =retrievedSize; i< output.size() ; i++){
         output[i]=audioout;
     }
-//    if(pr.size()>0){
-//    for (int i =0; i< output.size() ; i++){
-//        output[i]=pr[0][i];
-//    }}
+
     
     
     retrievedSize = essout->get(&strength[0],1);
@@ -147,4 +139,10 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
         
 
 
+}
+
+void EssentiaOnset::preprocessPool(){
+    
+    pool->set("i.centroid",pool->value<Real>("i.centroid")*sampleRate/2);
+    
 }

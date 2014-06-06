@@ -48,7 +48,7 @@ private:
     
     /// ESSENTIA
     /// algos
-    essentia::streaming::Algorithm *w,*spectrum,  * fc;
+    essentia::streaming::Algorithm *w,*spectrum,  * fc, *env;
     
     
     essentia::streaming::Algorithm *loudness,*flatness;
@@ -57,6 +57,7 @@ private:
     
     essentia::streaming::Algorithm *yin;
     essentia::streaming::Algorithm *mfcc;
+    essentia::streaming::Algorithm *TCent;
 
     essentia::standard::Algorithm *poolAggr;
     

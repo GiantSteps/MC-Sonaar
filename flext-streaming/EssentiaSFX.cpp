@@ -41,10 +41,12 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
                         "silentFrames","drop"
                         );
     
-    w = factory.create("Windowing","Normalize",false);
+    w = factory.create("Windowing","Normalize",true);
+    env = factory.create("Envelope");
+    
     
         // Core
-    loudness = factory.create("Loudness");
+    loudness = factory.create("InstantPower");
     
     spectrum = factory.create("Spectrum"); 
 
@@ -53,6 +55,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     yin = factory.create("PitchYinFFT");
     
     cent = factory.create("Centroid");
+    TCent = factory.create("TCToTotal");
     mfcc = factory.create("MFCC");
     
         // Aggregation
@@ -66,6 +69,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     gen->output("signal") >> fc->input("signal");
     fc->output("frame") >> w->input("frame");
     w->output("frame") >> spectrum->input("frame");
+    gen->output("signal") >> env->input("signal");
     
     
     // pitchiness
@@ -73,7 +77,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
 
     
     //loudness
-    fc->output("frame") >> loudness->input("signal");
+    fc->output("frame") >> loudness->input("array");
     
     
     // f0 yin
@@ -85,14 +89,22 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     mfcc->output("bands")>>DEVNULL;
     
     
+    // centroid
+    spectrum->output("spectrum") >> cent->input("array");
+    
+    
+    //Temporal Centroid
+    env->output("signal") >> TCent->input("envelope");
     
     //Connect SFX 2 Pool
     flatness->output("flatness") >> PC(pool,"noisiness");
-    loudness->output("loudness") >> PC(pool,"loudness");
-    yin->output("pitch") >> PC(pool,"pitch");
-    yin->output("pitchConfidence") >> PC(pool,"pitchConfidence");
+    loudness->output("power") >> PC(pool,"loudness");
+    yin->output("pitch") >> PC(pool,"f0");
+    yin->output("pitchConfidence") >> PC(pool,"f0Confidence");
     mfcc->output("mfcc") >> PC(pool,"mfcc");
+    cent->output("centroid") >> PC(pool,"centroid");
     
+    TCent->output("TCToTotal") >> PC(aggrPool,"tempCentroid");
     
     
     
@@ -142,15 +154,22 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
 }
 
 void EssentiaSFX::aggregate(){
+    
+    
+    //Real tmpC = aggrPool.value<Real>("tempCentroid");
     aggrPool.clear();
-    preprocessPool();
+    
     poolAggr->compute();
-
     
+    if(aggrPool.getRealPool().size()>0 && aggrPool.value<Real>("loudness.mean")>0){
     
+    network->runStack(true);
+    network->reset();
+    }
 }
 
 
 void EssentiaSFX::preprocessPool(){
+
     
 }

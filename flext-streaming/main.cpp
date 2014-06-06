@@ -91,7 +91,7 @@ void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsi
         Real onset = onsetDetection.compute(audioBuffer, audioBufferOut);
         if(onset>0){
             vector<Real> tst(1,onset) ;
-            pool.set("onset_strength",tst);
+            pool.set("i.strength",tst);
             onsetCB();
         }
         if(isSFX)SFX.compute(audioBuffer);
@@ -117,11 +117,12 @@ void essentiaRT::onsetCB(){
             SFXTimer.Delay(delayMode/1000.);
         
     }
+    onsetDetection.preprocessPool();
     //output onsetStrength first
     std::map<string, vector<Real> > features = getFeatures(pool);
-    std::map<string, vector<Real>  >::iterator st = features.find("onset_strength");
+    std::map<string, vector<Real>  >::iterator st = features.find("i.strength");
     AtomList listOut(2);
-    SetString(listOut[0],"onset_strength");
+    SetString(listOut[0],"i.strength");
     SetFloat(listOut[1],(st->second)[0]);
     ToOutList(1, listOut);
     features.erase(st);
@@ -166,6 +167,7 @@ void essentiaRT::my_bang() {
 }
 
 void essentiaRT::m_sfxAggr(void *){
+
     SFX.aggregate();
     outputListOfFeatures(getFeatures(SFX.aggrPool),2);
     isSFX = false;
