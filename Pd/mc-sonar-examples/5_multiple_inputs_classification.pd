@@ -1,12 +1,7 @@
 #N canvas 22 23 976 740 10;
 #X declare -path ../essentiaRT~ -path ../utils -path ../ibt_pd;
-#X obj -224 -279 catch~ slices;
+#X obj -224 -259 catch~ slices;
 #X text -203 -429 ...assuming externals are in parent folder...;
-#X text -204 -363 This example attempts some simple classification
-on the detected onsets. It stores the onset strenghts in a list synched
-with the onset times \, so we can tweak the playback with the classifier
-values. In this example \, only the strongest onset of the list is
-played-back.;
 #X obj -203 -408 declare -path ../essentiaRT~ -path ../utils -path
 ../ibt_pd;
 #N canvas 71 507 692 360 inputs 0;
@@ -64,25 +59,25 @@ played-back.;
 #X obj 25 241 line~;
 #X obj 10 264 *~;
 #X obj 24 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 5090 1;
+-1 -1 990 1;
 #X obj 25 193 *;
 #X msg 25 218 \$1 20;
 #X obj 92 241 line~;
 #X obj 77 264 *~;
 #X obj 54 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 5890 1;
+-1 -1 990 1;
 #X obj 92 193 *;
 #X msg 92 218 \$1 20;
 #X obj 152 241 line~;
 #X obj 137 264 *~;
 #X obj 86 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 5690 1;
+-1 -1 990 1;
 #X obj 152 193 *;
 #X msg 152 218 \$1 20;
 #X obj 212 241 line~;
 #X obj 197 264 *~;
 #X obj 116 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 6290 1;
+-1 -1 990 1;
 #X obj 212 193 *;
 #X msg 212 218 \$1 20;
 #X obj 196 29 r~ input4;
@@ -132,12 +127,12 @@ played-back.;
 #X connect 31 0 3 0;
 #X coords 0 -1 1 1 120 130 1 20 50;
 #X restore -337 -417 pd direct_outs;
-#X obj -310 -205 cnv 15 160 50 empty empty empty 20 12 0 14 -261234
+#X obj -310 -185 cnv 15 160 50 empty empty empty 20 12 0 14 -261234
 -66577 0;
-#X obj -305 -200 output~;
-#X obj -337 -256 xfade~;
-#X text -237 -197 (1) DSP on;
-#X text -232 -180 & Volume Up;
+#X obj -305 -180 output~;
+#X obj -337 -236 xfade~;
+#X text -237 -177 (1) DSP on;
+#X text -232 -160 & Volume Up;
 #X text -206 -377 =========================;
 #X obj 166 -115 timer;
 #X obj 258 47 +;
@@ -176,7 +171,7 @@ played-back.;
 #X obj 248 -308 cnv 15 320 30 empty empty empty 20 12 0 14 -204786
 -66577 0;
 #X obj 252 -299 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X text 270 -307 trigger slices according to length of events (0);
 #X text 270 -293 or to tempo of one of the sources (1);
 #X obj 231 -442 cnv 15 340 22 empty empty empty 20 12 0 14 -204786
@@ -376,68 +371,74 @@ played-back.;
 #X obj 320 -81 t f b f;
 #X floatatom 455 -87 5 0 0 0 - - -;
 #X floatatom 461 -2 5 0 0 0 - - -;
-#X connect 0 0 8 1;
-#X connect 5 0 8 0;
-#X connect 8 0 7 0;
-#X connect 8 0 7 1;
-#X connect 8 1 7 1;
-#X connect 8 1 7 0;
-#X connect 12 0 13 0;
-#X connect 13 0 22 0;
-#X connect 14 1 15 0;
-#X connect 14 1 21 0;
-#X connect 15 0 13 1;
-#X connect 16 0 14 0;
-#X connect 17 0 12 0;
-#X connect 17 1 16 1;
-#X connect 18 0 37 0;
+#X text -204 -363 This example attempts some simple classification
+of detected onsets on multiple inlets. It stores the noisiness mean
+values averaged over the full chunk length and the source id number
+in lists synched with the onset times \, so we can arrange the playback
+with the classifier values. In this example \, only the strongest onset
+of the list is played-back.;
+#X connect 0 0 7 1;
+#X connect 4 0 7 0;
+#X connect 7 0 6 0;
+#X connect 7 0 6 1;
+#X connect 7 1 6 1;
+#X connect 7 1 6 0;
+#X connect 11 0 12 0;
+#X connect 12 0 21 0;
+#X connect 13 1 14 0;
+#X connect 13 1 20 0;
+#X connect 14 0 12 1;
+#X connect 15 0 13 0;
+#X connect 16 0 11 0;
+#X connect 16 1 15 1;
+#X connect 17 0 36 0;
+#X connect 19 0 17 0;
 #X connect 20 0 18 0;
-#X connect 21 0 19 0;
-#X connect 22 0 26 0;
-#X connect 22 0 28 0;
-#X connect 22 0 39 0;
-#X connect 22 0 40 0;
-#X connect 22 1 24 0;
-#X connect 24 0 29 0;
-#X connect 24 1 30 0;
-#X connect 24 2 25 0;
-#X connect 24 3 27 0;
-#X connect 25 0 23 0;
-#X connect 26 0 25 1;
-#X connect 27 0 23 0;
-#X connect 28 0 27 1;
-#X connect 29 0 23 0;
-#X connect 30 0 23 0;
-#X connect 31 0 36 0;
-#X connect 31 1 33 0;
-#X connect 34 0 31 0;
-#X connect 35 0 34 0;
-#X connect 36 0 38 0;
-#X connect 37 0 38 0;
-#X connect 38 0 41 0;
-#X connect 38 0 63 0;
+#X connect 21 0 25 0;
+#X connect 21 0 27 0;
+#X connect 21 0 38 0;
+#X connect 21 0 39 0;
+#X connect 21 1 23 0;
+#X connect 23 0 28 0;
+#X connect 23 1 29 0;
+#X connect 23 2 24 0;
+#X connect 23 3 26 0;
+#X connect 24 0 22 0;
+#X connect 25 0 24 1;
+#X connect 26 0 22 0;
+#X connect 27 0 26 1;
+#X connect 28 0 22 0;
+#X connect 29 0 22 0;
+#X connect 30 0 35 0;
+#X connect 30 1 32 0;
+#X connect 33 0 30 0;
+#X connect 34 0 33 0;
+#X connect 35 0 37 0;
+#X connect 36 0 37 0;
+#X connect 37 0 40 0;
+#X connect 37 0 62 0;
+#X connect 38 0 28 1;
 #X connect 39 0 29 1;
-#X connect 40 0 30 1;
-#X connect 42 0 17 0;
-#X connect 43 0 44 0;
-#X connect 46 0 38 1;
-#X connect 46 0 43 0;
-#X connect 50 0 35 0;
-#X connect 54 1 62 0;
-#X connect 55 0 24 0;
-#X connect 55 0 66 0;
-#X connect 56 0 55 1;
-#X connect 57 0 55 0;
-#X connect 58 0 59 1;
-#X connect 59 0 54 0;
-#X connect 60 0 61 1;
-#X connect 61 0 57 1;
-#X connect 62 0 64 0;
-#X connect 62 0 65 0;
-#X connect 63 0 12 1;
-#X connect 63 1 16 0;
-#X connect 63 2 59 0;
-#X connect 63 3 61 0;
-#X connect 64 0 14 1;
-#X connect 64 1 57 0;
-#X connect 64 2 56 0;
+#X connect 41 0 16 0;
+#X connect 42 0 43 0;
+#X connect 45 0 37 1;
+#X connect 45 0 42 0;
+#X connect 49 0 34 0;
+#X connect 53 1 61 0;
+#X connect 54 0 23 0;
+#X connect 54 0 65 0;
+#X connect 55 0 54 1;
+#X connect 56 0 54 0;
+#X connect 57 0 58 1;
+#X connect 58 0 53 0;
+#X connect 59 0 60 1;
+#X connect 60 0 56 1;
+#X connect 61 0 63 0;
+#X connect 61 0 64 0;
+#X connect 62 0 11 1;
+#X connect 62 1 15 0;
+#X connect 62 2 58 0;
+#X connect 62 3 60 0;
+#X connect 63 0 13 1;
+#X connect 63 1 56 0;
+#X connect 63 2 55 0;

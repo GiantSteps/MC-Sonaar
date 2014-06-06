@@ -60,7 +60,7 @@
 #X obj 25 241 line~;
 #X obj 10 264 *~;
 #X obj 24 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 7090 1;
+-1 -1 990 1;
 #X obj 25 193 *;
 #X msg 25 218 \$1 20;
 #X obj 92 241 line~;
@@ -78,7 +78,7 @@
 #X obj 212 241 line~;
 #X obj 197 264 *~;
 #X obj 116 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 890 1;
+-1 -1 990 1;
 #X obj 212 193 *;
 #X msg 212 218 \$1 20;
 #X obj 196 29 r~ input4;
@@ -236,7 +236,7 @@ way we can later switch between the different sources.;
 #X obj 282 -313 cnv 15 320 30 empty empty empty 20 12 0 14 -204786
 -66577 0;
 #X obj 286 -304 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X text 304 -312 trigger slices according to length of events (0);
 #X text 304 -298 or to tempo of one of the sources (1);
 #X obj 265 -447 cnv 15 340 22 empty empty empty 20 12 0 14 -204786
