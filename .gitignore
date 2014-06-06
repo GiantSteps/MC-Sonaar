@@ -14,3 +14,7 @@ xcuserdata/
 *.moved-aside
 DerivedData
 *.xcuserstate
+
+flext-external/.DS_Store
+
+flext-streaming/.DS_Store
