@@ -49,7 +49,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     triF = factory.create("Triangularbands","Log",true);
     
     superFluxF = factory.create("SuperFluxNovelty","Online",true,"binWidth",3,"frameWidth",2);
-    superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",50);
+    superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold/NOVELTY_MULT,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",50);
     
 
     
@@ -120,7 +120,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     
     output.resize(audioFrameIn.size());
     int retrievedSize = DBGOUT->get(&output[0], output.size());
-    Real audioout = retrievedSize>0?output[retrievedSize-1] : 0;
+    Real audioout = retrievedSize>0?output[retrievedSize-1]*NOVELTY_MULT : 0;
 //    if(audioout>0.1){
 //        int s = 0;
 //    }
@@ -139,7 +139,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     
     
     retrievedSize = essout->get(&strength[0],1);
-    Real val = retrievedSize>0?strength[retrievedSize-1] : 0;
+    Real val = retrievedSize>0?strength[retrievedSize-1]*NOVELTY_MULT : 0;
 
 
     

@@ -19,14 +19,14 @@
 -1 -1;
 #X obj 193 329 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#N canvas 1131 722 450 300 synth 1;
+#N canvas 1131 722 450 300 synth 0;
 #X obj 59 16 inlet;
 #X obj 263 176 vline~;
 #X obj 148 203 *~;
 #X obj 143 147 osc~ 440;
 #X obj 175 257 outlet~;
 #X msg 260 124 \$1 10 \, 0 2 20;
-#X obj 211 71 * 100;
+#X obj 211 71 / 10;
 #X connect 0 0 6 0;
 #X connect 1 0 2 1;
 #X connect 2 0 4 0;
@@ -49,8 +49,8 @@
 #X floatatom 85 249 5 0 0 0 - - -;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array obs 13 float 3;
-#A 0 -760.103 269.599 -19.1785 9.1296 32.9063 -2.82906 -10.8217 9.76222
-23.1919 3.89579 -0.188145 -11.6274 -20.6755;
+#A 0 -588.042 135.05 40.3767 16.1456 -28.3211 -8.5679 -7.52705 16.4401
+-7.00447 -0.842089 -14.1725 3.01344 3.92701;
 #X coords 0 1 13 -1 200 140 1 0 0;
 #X restore 169 71 graph;
 #X obj 106 217 change;
@@ -86,14 +86,14 @@
 #X connect 4 1 3 0;
 #X restore 272 281 pd onsetInfo;
 #X obj 32 257 spigot;
-#X obj 61 232 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 61 232 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 85 69 spigot;
 #X obj 114 44 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 88 21 r \$0-onset;
 #X obj 162 348 s \$0-onset;
-#X obj 92 442 scope~ 130 130 256 3 128 0 0.01 0 0 0 0 102 255 51 135
+#X obj 92 442 scope~ 130 130 256 3 128 0 11 0 0 0 0 102 255 51 135
 135 135 0;
 #X obj 427 337 vline~;
 #X msg 387 301 stop;
@@ -111,7 +111,7 @@
 #X msg 139 415 range 0 \$1;
 #X floatatom 82 385 5 0 0 0 - - -;
 #X msg 423 274 1 100;
-#X obj 184 245 essentiaRT~ 0.0075;
+#X obj 185 245 essentiaRT~ 5;
 #X connect 2 0 15 0;
 #X connect 2 0 15 1;
 #X connect 2 1 7 0;

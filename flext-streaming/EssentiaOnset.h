@@ -23,6 +23,11 @@
 #include <essentia/streaming/algorithms/poolstorage.h>
 #include <essentia/scheduler/network.h>
 
+
+// multiply novelty function and threshold for easier parametriation, the true computation is Not Multiplied, only inputs and outputs
+#define NOVELTY_MULT 1000.
+
+
 using namespace std;
 using namespace essentia;
 using namespace streaming;
