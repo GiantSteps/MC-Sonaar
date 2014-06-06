@@ -87,7 +87,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
     
     //Connect SFX 2 Pool
-    flatness->output("flatness") >> PC(pool,"noisyness");
+    flatness->output("flatness") >> PC(pool,"noisiness");
     loudness->output("loudness") >> PC(pool,"loudness");
     yin->output("pitch") >> PC(pool,"pitch");
     yin->output("pitchConfidence") >> PC(pool,"pitchConfidence");
