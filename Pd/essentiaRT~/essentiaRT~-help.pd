@@ -1,112 +1,134 @@
-#N canvas 489 116 976 666 10;
+#N canvas 392 33 940 851 10;
 #X declare -path ../utils;
-#X text 449 -98 [essentiaRT~];
-#X text 449 -58 inlet: audio signal;
-#X text 449 5 outlet3: list of higher-level features. These values
-are estimated over a bigger window once an onset is detected:;
-#X obj 453 69 route list;
-#X obj 627 127 spigot 0;
-#X obj 672 109 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X floatatom 453 186 5 0 0 0 - - -;
-#X obj 453 206 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 123 26 route list;
+#X floatatom 190 91 5 0 0 0 - - -;
+#X obj 190 111 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 453 262 route list;
-#X floatatom 453 518 7 0 0 1 noisiness.mean - -;
-#X floatatom 493 497 7 0 0 1 noisiness.variance - -;
-#X msg -5 15 stop;
-#X msg -12 -7 bang;
-#X obj -13 -55 soundfiler;
-#X obj -13 -103 loadbang;
-#X obj -12 38 tabplay~ sample;
-#X msg -13 -79 read -resize ./onsets.wav sample;
-#X obj -4 70 output~;
-#X text 21 -8 play sample;
-#X obj -13 -33 table sample 44100;
-#X obj 72 244 timer;
-#X floatatom 72 265 5 0 0 0 - - -;
-#X obj 72 224 bang;
-#X obj 103 224 bang;
-#X text 110 258 delay between onset detection and high level features
+#X obj 123 222 route list;
+#X msg -340 217 stop;
+#X msg -301 218 bang;
+#X obj 229 -33 soundfiler;
+#X obj 229 -81 loadbang;
+#X obj -340 241 tabplay~ sample;
+#X obj -332 268 output~;
+#X obj -256 487 timer;
+#X floatatom -256 508 5 0 0 0 - - -;
+#X obj -256 467 bang;
+#X obj -225 467 bang;
+#X obj -340 436 essentiaRT~ 5;
+#X obj 286 -81 declare -path ../utils;
+#X msg -319 412 delayMode 0;
+#X text -246 412 inter-onset calculation;
+#X msg -326 388 delayMode \$1;
+#X text -242 389 window-size in ms.;
+#X floatatom -326 367 5 0 0 0 - - -;
+#X floatatom 257 70 7 0 0 0 - - -;
+#X floatatom 170 543 7 0 0 1 noisiness.mean - -;
+#X floatatom 194 522 7 0 0 1 noisiness.variance - -;
+#X floatatom 218 498 7 0 0 1 f0.mean - -;
+#X floatatom 243 476 7 0 0 1 f0.variance - -;
+#X floatatom 267 453 7 0 0 1 f0Confidence.mean - -;
+#X floatatom 291 430 7 0 0 1 f0Confidence.variance - -;
+#X text 225 91 instantaneous onset strength;
+#X obj -303 686 s instantaneous;
+#X obj -265 597 s averaged;
+#X obj 123 6 r instantaneous;
+#X text 303 70 instantaneous spectral centroid (Hz.);
+#X obj 123 199 r averaged;
+#X obj 123 135 prepend set;
+#X msg 123 157 -582.469 66.6043 39.2483 48.6574 1.26899 10.3458 -5.81166
+-0.387955 -10.3574 -8.09757 2.91494 -2.0541 -13.1684;
+#X text 198 134 mfcc's;
+#X floatatom 315 403 7 0 0 1 loudness.mean - -;
+#X floatatom 340 379 7 0 0 1 loudness.variance - -;
+#X floatatom 364 357 7 0 0 1 centroid.mean - -;
+#X floatatom 388 334 7 0 0 1 centroid.variance - -;
+#X floatatom 412 311 7 0 0 1 loudness.variance - -;
+#X msg 122 651 -893.573 8.67852 23.44 41.0727 8.5562 12.3554 -4.71429
+-4.48668 -7.95521 -9.60669 -8.17496 -6.87165 -10.0772;
+#X obj 146 568 prepend set;
+#X msg 146 590 41195.3 84.8184 182.548 657.113 22.1773 44.2837 64.5558
+53.0202 84.1029 92.1425 71.8989 57.4413 102.175;
+#X obj 122 629 prepend set;
+#X text 196 628 mfcc's mean values;
+#X text 223 568 mfcc's variance values;
+#X obj 122 245 route mfcc.mean mfcc.var noisiness.mean noisiness.var
+f0.mean f0.var f0Confidence.mean f0Confidence.var loudness.mean loudness.var
+centroid.mean centroid.var tempCentroid;
+#X obj 123 46 route i.mfcc i.strength i.centroid;
+#X msg 229 -57 read -resize ./testSound.wav sample;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array sample 154350 float 2;
+#X coords 0 1 154350 -1 100 70 1 0 0;
+#X restore 121 -83 graph;
+#X text -355 14 - creation argument: threshold level to report features.
+;
+#X text -355 34 - inlet: audio signal;
+#X text -355 54 - outlet 1: onset detector novelty function at audio
+rate (used internally for onset detection \, using a given threshold).
+;
+#X text -354 100 - outlet 2: list of instantaneous features.;
+#X text -355 120 - outlet 3: list of averaged features. These values
+are estimated over a frame-size specified by the user with the method
+"delayMode".;
+#X text -355 -94 EssentiaRT~ is a real-time subset of Essentia (MTG's
+open-source C++ library for audio analysis and audio-based music information
+retrieval) implemented as an external for Pd and Max/MSP. As such \,
+it does not yet include all of Essentia’s algorithms \, but a number
+of features to slice and provide on-the-fly descriptors for classification
+of audio in real-time.;
+#X text -218 501 delay between onset detection and averaged feature
 calculation.;
-#X text 449 -78 arg: threshold level for the Super Flux algorithm.
-;
-#X obj -12 193 essentiaRT~ 5;
-#X text 449 -38 outlet1: onset strenght value at audio rate (constant).
-;
-#X obj 44 -103 declare -path ../utils;
-#X msg 9 169 delayMode 0;
-#X text 82 170 inter-onset calculation;
-#X msg 2 145 delayMode \$1;
-#X text 86 146 window-size in ms.;
-#X floatatom 2 124 5 0 0 0 - - -;
-#X obj 63 374 s high-level;
-#X obj 25 488 s low-level;
-#X obj 453 49 r low-level;
-#X obj 627 147 print inst.mfcc;
-#X obj 453 89 route onset_strength inst.centroid inst.mfcc;
-#X floatatom 540 167 5 0 0 0 - - -;
-#X text 576 167 instantaneous spectral centroid;
-#X text 488 186 onset strength;
-#X obj 453 239 r high-level;
-#X obj 714 110 print +lowLevel;
-#X obj 780 334 print +highLevel;
-#X floatatom 534 473 7 0 0 1 pitch.mean(Hz) - -;
-#X floatatom 575 452 7 0 0 1 pitch.variance - -;
-#X floatatom 616 428 7 0 0 1 pitchConfidence.mean - -;
-#X floatatom 657 406 7 0 0 1 pitchConfidence.variance - -;
-#X floatatom 698 383 7 0 0 1 loudness.mean - -;
-#X floatatom 739 360 7 0 0 1 loudness.variance - -;
-#X text 450 -18 outlet2: list of low-level features at control rate.
-;
-#X text 31 403 The second outlet reports instantaneous information
-on the onset detection (calculated on a fixed window of 2048 points).
-The low-level features provided are the onset strength \, the instantaneous
-spectral centroid (0-1) \, and the instantaneous mfcc (mel frecuency
-cepstrum coefficients).;
-#X text 69 290 once an onset is detected (on the second outlet) \,
-a larger window is used to estimate some higher level features on the
-event \, listed on outlet3. The window size over which these parameters
-are calculated can be set dynamically with the message "delayMode."
-A delayMode time of 0 takes the full chunk between onset reports.;
-#X obj 453 284 route noisiness.mean noisiness.var pitch.mean pitch.var
-pitchConfidence.mean pitchConfidence.var loudness.mean loudness.var
-;
-#X connect 3 0 38 0;
-#X connect 4 0 37 0;
-#X connect 5 0 4 1;
-#X connect 6 0 7 0;
-#X connect 8 0 54 0;
-#X connect 11 0 15 0;
-#X connect 12 0 15 0;
-#X connect 14 0 16 0;
-#X connect 15 0 17 0;
-#X connect 15 0 17 1;
-#X connect 15 0 26 0;
-#X connect 15 1 12 0;
-#X connect 16 0 13 0;
-#X connect 20 0 21 0;
-#X connect 22 0 20 0;
-#X connect 23 0 20 1;
-#X connect 26 1 22 0;
-#X connect 26 1 35 0;
-#X connect 26 2 23 0;
-#X connect 26 2 34 0;
-#X connect 29 0 26 0;
-#X connect 31 0 26 0;
-#X connect 33 0 31 0;
-#X connect 36 0 3 0;
-#X connect 38 0 6 0;
-#X connect 38 1 39 0;
-#X connect 38 2 4 0;
-#X connect 38 3 43 0;
-#X connect 42 0 8 0;
-#X connect 54 0 9 0;
-#X connect 54 1 10 0;
-#X connect 54 2 45 0;
-#X connect 54 3 46 0;
-#X connect 54 4 47 0;
-#X connect 54 5 48 0;
-#X connect 54 6 49 0;
-#X connect 54 7 50 0;
-#X connect 54 8 44 0;
+#X text -259 533 once an onset is detected \, a larger window is used
+to calculate some features on the event \, listed on outlet3. The window
+size over which these parameters are calculated can be set dynamically
+with the message "delayMode.";
+#X text -297 621 The 2nd outlet reports instantaneous information over
+the detected onsets (on a fixed window of 2048 points). The features
+provided are the onset strength \, the instantaneous spectral centroid
+and the instantaneous MFCC's.;
+#X text -287 342 "delayMode" sets the time over which the averaged
+descriptors are calcutated. A time of 0 takes the full chunk between
+onset reports.;
+#X connect 0 0 49 0;
+#X connect 1 0 2 0;
+#X connect 3 0 48 0;
+#X connect 4 0 8 0;
+#X connect 5 0 8 0;
+#X connect 7 0 50 0;
+#X connect 8 0 9 0;
+#X connect 8 0 9 1;
+#X connect 8 0 14 0;
+#X connect 8 1 5 0;
+#X connect 10 0 11 0;
+#X connect 12 0 10 0;
+#X connect 13 0 10 1;
+#X connect 14 1 12 0;
+#X connect 14 1 29 0;
+#X connect 14 2 13 0;
+#X connect 14 2 30 0;
+#X connect 16 0 14 0;
+#X connect 18 0 14 0;
+#X connect 20 0 18 0;
+#X connect 31 0 0 0;
+#X connect 33 0 3 0;
+#X connect 34 0 35 0;
+#X connect 43 0 44 0;
+#X connect 45 0 42 0;
+#X connect 48 0 45 0;
+#X connect 48 1 43 0;
+#X connect 48 2 22 0;
+#X connect 48 3 23 0;
+#X connect 48 4 24 0;
+#X connect 48 5 25 0;
+#X connect 48 6 26 0;
+#X connect 48 7 27 0;
+#X connect 48 8 37 0;
+#X connect 48 9 38 0;
+#X connect 48 10 39 0;
+#X connect 48 11 40 0;
+#X connect 48 12 41 0;
+#X connect 49 0 34 0;
+#X connect 49 1 1 0;
+#X connect 49 2 21 0;
+#X connect 50 0 6 0;
