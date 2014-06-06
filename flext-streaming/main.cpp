@@ -55,7 +55,7 @@ essentiaRT::essentiaRT (int argc,const t_atom *argv): onset_thresh(1.25)
     
     onsetDetection.setup(frameSize, hopSize, sampleRate,pool,onset_thresh);
     
-    SFX.setup(frameSize, hopSize, sampleRate);
+    SFX.setup(frameSize, 512, sampleRate);
 
     isSFX = false;
 

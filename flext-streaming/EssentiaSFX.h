@@ -25,6 +25,8 @@
 #include <essentia/streaming/algorithms/poolstorage.h>
 #include <essentia/scheduler/network.h>
 
+#define CROP_LAST_FRAME 6
+
 using namespace std;
 using namespace essentia;
 using namespace streaming;

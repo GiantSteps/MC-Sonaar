@@ -124,7 +124,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     
 
 
-    for (int i =retrievedSize; i< output.size() ; i++){
+    for (int i =retrievedSize-1; i< output.size() ; i++){
         output[i]=audioout;
     }
 

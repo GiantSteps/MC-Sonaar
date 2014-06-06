@@ -104,6 +104,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     mfcc->output("mfcc") >> PC(pool,"mfcc");
     cent->output("centroid") >> PC(pool,"centroid");
     
+    // accumulator algo are directly linked to aggrPool (computes only at the end)
     TCent->output("TCToTotal") >> PC(aggrPool,"tempCentroid");
     
     
@@ -155,21 +156,70 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
 
 void EssentiaSFX::aggregate(){
     
-    
-    //Real tmpC = aggrPool.value<Real>("tempCentroid");
+    if(pool.getRealPool().size()>0){
+    preprocessPool();
     aggrPool.clear();
-    
     poolAggr->compute();
-    
-    if(aggrPool.getRealPool().size()>0 && aggrPool.value<Real>("loudness.mean")>0){
-    
-    network->runStack(true);
-    network->reset();
+        
+        //rescaling values afterward
+       aggrPool.set("centroid.mean",aggrPool.value<Real>("centroid.mean")*sampleRate/2);
+       aggrPool.set("centroid.var",aggrPool.value<Real>("centroid.var")*sampleRate*sampleRate/4);
+        
     }
+    
+    // avoid first onset and empty onsets
+    if(aggrPool.getRealPool().size()>0 && aggrPool.value<Real>("loudness.mean")>0){
+        try {
+            // call should stop for accumulator algorythms
+            network->runStack(true);
+            // reset Algos and set shouldstop=false
+            network->reset();
+        } catch (EssentiaException) {
+            
+        }
+
+
+    }
+    
 }
 
 
+
+
 void EssentiaSFX::preprocessPool(){
+    
+    //
+    
+    //  Nasty hack :  crop to avoid next transient influence, assuming that the onset callback appears after few frames of the transeient
+    std::map<string, vector<Real > >  vectorsIn =     pool.getRealPool();
+
+    
+    for(std::map<string, vector<Real > >::iterator iter = vectorsIn.begin(); iter != vectorsIn.end(); ++iter)
+    {
+        
+        int finalSize = iter->second.size()-CROP_LAST_FRAME;
+        finalSize = std::max(finalSize,1);
+        string k =  iter->first;
+        iter->second.resize(finalSize);
+        pool.remove(k);
+        for (int i =0 ; i < iter->second.size();i++){pool.add(k, iter->second[i]);};
+        
+    }
+    
+    std::map<string, vector<vector<Real> > >  vectorsIn2 =     pool.getVectorRealPool();
+    
+    
+    for(std::map<string, vector<vector<Real> > >::iterator iter = vectorsIn2.begin(); iter != vectorsIn2.end(); ++iter)
+    {
+        int finalSize = iter->second.size()-CROP_LAST_FRAME;
+        finalSize = std::max(finalSize,1);
+        string k =  iter->first;
+        iter->second.resize(finalSize);
+        pool.remove(k);
+        for (int i =0 ; i < iter->second.size();i++){pool.add(k, iter->second[i]);};
+        
+    }
+
 
     
 }
