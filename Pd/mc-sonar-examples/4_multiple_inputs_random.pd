@@ -1,4 +1,4 @@
-#N canvas 771 22 956 747 10;
+#N canvas 504 183 956 747 10;
 #X declare -path ../essentiaRT~ -path ../utils -path ../ibt_pd;
 #X obj -224 -307 catch~ slices;
 #X text -203 -457 ...assuming externals are in parent folder...;
@@ -60,25 +60,25 @@
 #X obj 25 241 line~;
 #X obj 10 264 *~;
 #X obj 24 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 990 1;
+-1 -1 6300 1;
 #X obj 25 193 *;
 #X msg 25 218 \$1 20;
 #X obj 92 241 line~;
 #X obj 77 264 *~;
 #X obj 54 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 990 1;
+-1 -1 0 1;
 #X obj 92 193 *;
 #X msg 92 218 \$1 20;
 #X obj 152 241 line~;
 #X obj 137 264 *~;
 #X obj 86 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 990 1;
+-1 -1 0 1;
 #X obj 152 193 *;
 #X msg 152 218 \$1 20;
 #X obj 212 241 line~;
 #X obj 197 264 *~;
 #X obj 116 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 990 1;
+-1 -1 0 1;
 #X obj 212 193 *;
 #X msg 212 218 \$1 20;
 #X obj 196 29 r~ input4;

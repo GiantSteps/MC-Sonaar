@@ -1,0 +1,27 @@
+
+===================================== essentiaRT~ ==================================
+
+Windows
+=======
+PD:-
+Copy the all the dlls in the dependencies/win32 folder to either
+
+- C:\Windows\System32
+- The same folder that the essentiaRT~ resides in
+
+Linux
+=====
+PD:-
+
+1) Install Dependencies 
+You need to install the dependencies of Essentia (you don't actually need to build/install Essentia itself). Do this on Debian with:-
+
+sudo apt-get install build-essential libyaml-dev libfftw3-dev libavcodec-dev libavformat-dev python-dev libsamplerate0-dev libtag1-dev
+
+2) Use the appropriate external (Only for 32-bit Linux)
+If you're on 64-bit you don't have to do anything. If you're on 32-bit, rename "essentiaRT~.pd_linux32" to "essentiaRT~.pd_linux"
+
+Mac
+===
+
+

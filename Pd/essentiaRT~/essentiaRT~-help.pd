@@ -1,4 +1,4 @@
-#N canvas 495 22 934 676 10;
+#N canvas 489 116 976 666 10;
 #X declare -path ../utils;
 #X text 449 -98 [essentiaRT~];
 #X text 449 -58 inlet: audio signal;
@@ -12,8 +12,8 @@ are estimated over a bigger window once an onset is detected:;
 #X obj 453 206 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 453 262 route list;
-#X floatatom 453 518 7 0 0 1 pitched.mean - -;
-#X floatatom 493 497 7 0 0 1 pitched.variance - -;
+#X floatatom 453 518 7 0 0 1 noisiness.mean - -;
+#X floatatom 493 497 7 0 0 1 noisiness.variance - -;
 #X msg -5 15 stop;
 #X msg -12 -7 bang;
 #X obj -13 -55 soundfiler;

@@ -83,7 +83,7 @@ namespace Helper {
     
     Real getReal(t_atom a){
 
-       return  ;
+       return 0.0;
     }
 
 };
