@@ -143,8 +143,14 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
 
 void EssentiaSFX::aggregate(){
     aggrPool.clear();
+    preprocessPool();
     poolAggr->compute();
 
     
+    
+}
+
+
+void EssentiaSFX::preprocessPool(){
     
 }

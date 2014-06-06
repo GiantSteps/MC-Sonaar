@@ -25,6 +25,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     this->hopSize = hS;
     this->pool = &poolin;
     
+    
     strength.resize(2);
     
     AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
@@ -40,7 +41,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
 
     
-    w = factory.create("Windowing","type","hann","Normalize",false,"zeroPhase",false);
+    w = factory.create("Windowing","type","hann","Normalize",true,"zeroPhase",true
+                       );
     
     spectrum = factory.create("Spectrum");
     pspectrum = factory.create("PowerSpectrum");
@@ -49,7 +51,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     superFluxF = factory.create("SuperFluxNovelty","Online",true,"binWidth",3,"frameWidth",2);
     superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",50);
     
-    
+
     
     centroidF = factory.create("Centroid");
     
@@ -111,17 +113,17 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     ((essentia::streaming::RingBufferInput*)gen)->add(&audioFrameIn[0],audioFrameIn.size());
     gen->process();
     
-    vector < vector <Real> > pr;
-    probe->setVector(&pr);
-    
+//    vector < vector <Real> > pr;
+//    probe->setVector(&pr);
+//    
     network->runStack();
     
     output.resize(audioFrameIn.size());
     int retrievedSize = DBGOUT->get(&output[0], output.size());
     Real audioout = retrievedSize>0?output[retrievedSize-1] : 0;
-    if(audioout>0.1){
-        int s = 0;
-    }
+//    if(audioout>0.1){
+//        int s = 0;
+//    }
 
     
     

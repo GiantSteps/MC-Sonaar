@@ -67,11 +67,14 @@ private:
     
     
     
+    
     scheduler::Network *network;
     int sampleRate, frameSize, hopSize;
     
     Pool pool;//,*outPool;
     
+    //Pool
+    void preprocessPool();
     
     
 };
