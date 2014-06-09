@@ -1,4 +1,4 @@
-#N canvas 24 22 566 824 10;
+#N canvas 588 22 566 824 10;
 #X declare -path ../bin -path ../utils;
 #X obj 10 760 cnv 15 160 50 empty empty empty 20 12 0 14 -261234 -66577
 0;
@@ -72,11 +72,7 @@ audio slices!;
 #X connect 0 0 2 0;
 #X connect 2 0 1 0;
 #X restore -6 689 pd init;
-#X text 116 579 we add a few extra miliseconds equivalent to the hop
-size of the analysis (256 points) to compensate for the onset detector
-estimation time.;
 #X obj 5 185 delwrite~ deline 24000;
-#X obj 65 593 + 5.8;
 #X text -1 25 This example shows how to use [essentiaRT~] to report
 strong onset positions (beats) and store them as a list of time intervals
 for later retrieval. In this example \, we set the threshold of essentiaRT~
@@ -86,6 +82,10 @@ onsets to trigger past events from the incoming audio.;
 to detect different types onsets. Thresholds above 30 usually report
 only strong positions with percussive attacks \, such as kick and snare.
 ;
+#X text 116 579 we subtract a few extra miliseconds equivalent to the
+hop size of the analysis (256 points) to compensate for the onset detector
+estimation time.;
+#X obj 65 593 - 5.8;
 #X connect 3 0 28 0;
 #X connect 4 0 10 1;
 #X connect 4 0 37 0;
@@ -97,7 +97,7 @@ only strong positions with percussive attacks \, such as kick and snare.
 #X connect 9 0 23 1;
 #X connect 10 1 11 0;
 #X connect 11 0 13 0;
-#X connect 11 0 52 0;
+#X connect 11 0 54 0;
 #X connect 14 0 22 0;
 #X connect 15 0 14 1;
 #X connect 16 0 41 0;
@@ -112,7 +112,7 @@ only strong positions with percussive attacks \, such as kick and snare.
 #X connect 30 1 3 0;
 #X connect 31 0 30 0;
 #X connect 31 0 23 0;
-#X connect 31 0 51 0;
+#X connect 31 0 50 0;
 #X connect 32 0 31 0;
 #X connect 33 0 31 0;
 #X connect 34 0 33 0;
@@ -120,4 +120,4 @@ only strong positions with percussive attacks \, such as kick and snare.
 #X connect 38 1 9 1;
 #X connect 41 0 14 0;
 #X connect 41 0 6 0;
-#X connect 52 0 38 0;
+#X connect 54 0 38 0;
