@@ -1,0 +1,123 @@
+#N canvas 24 22 566 824 10;
+#X declare -path ../bin -path ../utils;
+#X obj 10 760 cnv 15 160 50 empty empty empty 20 12 0 14 -261234 -66577
+0;
+#X obj -17 118 cnv 15 110 18 empty empty empty 20 12 0 14 -204786 -66577
+0;
+#X obj 18 765 output~;
+#X obj 37 293 route list;
+#X obj 56 484 random;
+#X obj 89 443 length;
+#X obj 37 426 t l b l;
+#X floatatom 44 336 5 0 0 0 - - -;
+#X floatatom 97 463 5 0 0 0 - - -;
+#X obj 101 689 *~;
+#X obj 37 512 list split;
+#X obj 65 534 sum;
+#X text 147 501 at every onset \, pick a random onset in buffer (0
+= oldest);
+#X floatatom 73 554 7 0 0 0 - - -;
+#X obj 324 420 spigot 0;
+#X obj 369 401 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 43 381 reset;
+#X text 130 402 stores elapsed time between detections;
+#X text 120 546 add together all the time differences to compute time
+delay to selected onset.;
+#X text -1 4 1_onset_detector;
+#X text -3 12 =================;
+#X obj 87 667 delread~ deline;
+#X obj 324 440 print LIST-IOT;
+#X obj -13 710 xfade~;
+#X text 86 768 (1) DSP on;
+#X floatatom 118 383 5 0 0 0 - - -;
+#X text 155 383 <- change memory size (ms);
+#X text 91 785 & volume up;
+#X obj 37 315 route i.strength;
+#X obj 37 358 timegate 30;
+#X obj -3 271 essentiaRT~ 50;
+#X obj -13 161 tabplay2~ sample;
+#X obj -13 119 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 7 140 loop \$1;
+#X obj 7 119 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
+#X text 26 118 (2) play!;
+#X text 110 357 <- filters out very close onsets (under 30 ms.);
+#X floatatom 109 501 5 0 0 0 - - -;
+#X obj 65 631 trapenv 2;
+#X obj 14 403 bng 20 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 143 308 Among the many features reported \, We take the onset
+strenght and use that to trigger onsets.;
+#X obj 37 403 list_iot 24000;
+#X text 130 626 (fades the edges to avoid clipping when jumping between
+different positions in the buffer.);
+#X obj 91 161 cnv 15 300 18 empty empty empty 20 12 0 14 -204800 -66577
+0;
+#X text 93 161 Audio: Bonobo - The North Borders (2013) - Cirrus;
+#X text 148 185 First \, we store incoming audio in a buffer for later
+use.;
+#X text 186 660 Last \, we read from the buffer to retrieve previous
+audio slices!;
+#X text 132 464 total number of onsets in buffer;
+#X text 388 400 (show);
+#N canvas 1408 73 383 143 init 0;
+#X obj -31 39 loadbang;
+#X obj -31 81 soundfiler;
+#X msg -31 60 read -resize ./Bonobo-TheNorthBorders-Cirrus.wav sample
+;
+#X obj -31 103 table sample 4410;
+#X obj -32 17 declare -path ../bin -path ../utils;
+#X connect 0 0 2 0;
+#X connect 2 0 1 0;
+#X restore -6 689 pd init;
+#X text 116 579 we add a few extra miliseconds equivalent to the hop
+size of the analysis (256 points) to compensate for the onset detector
+estimation time.;
+#X obj 5 185 delwrite~ deline 24000;
+#X obj 65 593 + 5.8;
+#X text -1 25 This example shows how to use [essentiaRT~] to report
+strong onset positions (beats) and store them as a list of time intervals
+for later retrieval. In this example \, we set the threshold of essentiaRT~
+to 50 to detect only very strong onsets (beats) \, and use the same
+onsets to trigger past events from the incoming audio.;
+#X text 4 210 The threshold level in [essentiaRT~] is the key element
+to detect different types onsets. Thresholds above 30 usually report
+only strong positions with percussive attacks \, such as kick and snare.
+;
+#X connect 3 0 28 0;
+#X connect 4 0 10 1;
+#X connect 4 0 37 0;
+#X connect 5 0 8 0;
+#X connect 5 0 4 1;
+#X connect 6 0 10 0;
+#X connect 6 1 4 0;
+#X connect 6 2 5 0;
+#X connect 9 0 23 1;
+#X connect 10 1 11 0;
+#X connect 11 0 13 0;
+#X connect 11 0 52 0;
+#X connect 14 0 22 0;
+#X connect 15 0 14 1;
+#X connect 16 0 41 0;
+#X connect 21 0 9 0;
+#X connect 23 0 2 0;
+#X connect 23 1 2 1;
+#X connect 25 0 41 1;
+#X connect 28 0 7 0;
+#X connect 28 0 29 0;
+#X connect 29 0 39 0;
+#X connect 29 0 41 0;
+#X connect 30 1 3 0;
+#X connect 31 0 30 0;
+#X connect 31 0 23 0;
+#X connect 31 0 51 0;
+#X connect 32 0 31 0;
+#X connect 33 0 31 0;
+#X connect 34 0 33 0;
+#X connect 38 0 21 0;
+#X connect 38 1 9 1;
+#X connect 41 0 14 0;
+#X connect 41 0 6 0;
+#X connect 52 0 38 0;
