@@ -32,3 +32,7 @@ Mac
 ===
 
 
+
+EssentiaRT~ was developed by Martin Hermant, Cárthach Ó'Nuanáin and Ángel Faraldo within the Music Technology Group.
+
+The related research was carried out in the frame of the GiantSteps project which is partly funded by the  European Commission (Seventh Framework Programme for research, technological development and demonstration under grant agreement no 610591) and the TECNIO network promoted by ACC1Ó agency by the Catalan Government.
