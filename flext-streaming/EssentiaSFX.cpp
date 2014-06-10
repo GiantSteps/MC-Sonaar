@@ -24,8 +24,9 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     this->hopSize = hS;
     //this->outPool = poolout;
     
-    
+    ///////////
     // Instanciate
+    ///////////
      AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
     standard::AlgorithmFactory& stfactory = standard::AlgorithmFactory::instance();
         // Input
@@ -47,13 +48,9 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
         // Core
     loudness = factory.create("InstantPower");
-    
-    spectrum = factory.create("Spectrum"); 
-
+    spectrum = factory.create("Spectrum");
     flatness  = factory.create("Flatness");
-
     yin = factory.create("PitchYinFFT");
-    
     cent = factory.create("Centroid");
     TCent = factory.create("TCToTotal");
     mfcc = factory.create("MFCC");
@@ -64,15 +61,16 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
     
  
-    
+    /////////////
     // Connect
+    /////////////
     gen->output("signal") >> fc->input("signal");
     fc->output("frame") >> w->input("frame");
     w->output("frame") >> spectrum->input("frame");
     gen->output("signal") >> env->input("signal");
     
     
-    // pitchiness
+    // noisiness
     spectrum->output("spectrum") >> flatness->input("array");
 
     
@@ -132,17 +130,6 @@ void EssentiaSFX::clear(){
     pool.clear();
     
     
-    // Hack to clean previous buffers
-//    disconnect(fc->output("frame"),w->input("frame"));
-//    fc->output("frame") >> DEVNULL;
-//    network->init();
-//    //network->update();
-//    network->runStack();
-//    
-//    disconnect(fc->output("frame"),DEVNULL);
-//    fc->output("frame") >> w->input("frame");
-//    network->init();
-    
 }
 void EssentiaSFX::compute(vector<Real>& audioFrameIn){
     gen->add(&audioFrameIn[0],audioFrameIn.size());
@@ -176,6 +163,7 @@ void EssentiaSFX::aggregate(){
             network->reset();
         } catch (EssentiaException) {
             
+            
         }
 
 
@@ -188,9 +176,7 @@ void EssentiaSFX::aggregate(){
 
 void EssentiaSFX::preprocessPool(){
     
-    //
-    
-    //  Nasty hack :  crop to avoid next transient influence, assuming that the onset callback appears after few frames of the transeient
+    // crop to avoid next transient influence, assuming that the onset callback appears after few frames of the transeient
     std::map<string, vector<Real > >  vectorsIn =     pool.getRealPool();
 
     
@@ -201,6 +187,7 @@ void EssentiaSFX::preprocessPool(){
         finalSize = std::max(finalSize,1);
         string k =  iter->first;
         iter->second.resize(finalSize);
+        //  Nasty hack :
         pool.remove(k);
         for (int i =0 ; i < iter->second.size();i++){pool.add(k, iter->second[i]);};
         
@@ -215,6 +202,7 @@ void EssentiaSFX::preprocessPool(){
         finalSize = std::max(finalSize,1);
         string k =  iter->first;
         iter->second.resize(finalSize);
+        //  Nasty hack :
         pool.remove(k);
         for (int i =0 ; i < iter->second.size();i++){pool.add(k, iter->second[i]);};
         
