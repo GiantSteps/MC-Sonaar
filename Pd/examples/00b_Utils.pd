@@ -1,4 +1,4 @@
-#N canvas 1009 177 582 609 10;
+#N canvas 307 22 782 752 10;
 #X declare -path ../utils;
 #X obj 7 12 declare -path ../utils;
 #X obj 12 301 addslash;
@@ -32,3 +32,14 @@ inputs.;
 on them to access the help file for each object.;
 #X obj 12 469 folderplay~;
 #X text 320 518 plays randomly audio files from a folder;
+#X obj 13 628 radioRcv;
+#X obj 10 669 radioPicker;
+#X text 14 605 -----;
+#X text 13 594 local Network audio streaming;
+#X text 116 699 radiopicker : receive audio from radioRcv and provide
+simple mixer \, either gui controlled or with a 4 item list in its
+first inlet for linear control of volume (0..1);
+#X text 117 621 radioRcv : instance that receive 8 channel radio from
+local streaming \, bang for reconnect \, numBox indicate status. provide
+audio via send~ msg named : nl nr or nm \, with n channel number[1..4]
+\, l left \, r right \, m mono.;
