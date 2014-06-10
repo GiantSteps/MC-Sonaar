@@ -275,7 +275,7 @@
 		E9A5BC8B0A33819900AD9F03 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_X86_VECTOR_INSTRUCTIONS = sse3;
 				COPY_PHASE_STRIP = NO;
@@ -296,37 +296,25 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PD)/include",
-					"$(MY_INCLUDE)/flext",
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/mhermant/Documents/Work/Dev/Essentia-FAT",
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MY_INCLUDE = /usr/local/include;
 				OTHER_LDFLAGS = (
 					"-lflext-pd_sd",
 					"-undefined",
 					dynamic_lookup,
-					"-lavcodec",
-					"-lavformat",
-					"-lavutil",
-					"-lswresample",
-					"-ltag",
-					"-lfftw3f",
-					"-lsamplerate",
-					"-lyaml",
 					"-lessentia",
-					"-lz",
+					"-lfftw3f",
+					"-lyaml",
 					"-read_only_relocs",
 					suppress,
 				);
 				PRODUCT_NAME = "essentiaRT~";
 				SDKROOT = macosx10.9;
-				VALID_ARCHS = i386;
+				VALID_ARCHS = "i386 x86_64";
 				ZERO_LINK = YES;
 			};
 			name = Development;
@@ -334,7 +322,7 @@
 		E9A5BC8C0A33819900AD9F03 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_X86_VECTOR_INSTRUCTIONS = sse3;
 				COPY_PHASE_STRIP = NO;
@@ -355,31 +343,25 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PD)/include",
-					"$(MY_INCLUDE)/flext",
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/mhermant/Documents/Work/Dev/Essentia-FAT",
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MY_INCLUDE = /usr/local/include;
 				OTHER_LDFLAGS = (
 					"-lflext-pd_s",
 					"-undefined",
 					dynamic_lookup,
-					"-lfftw3f",
 					"-lessentia",
-					"-lz",
+					"-lfftw3f",
+					"-lyaml",
 					"-read_only_relocs",
 					suppress,
-					"-lyaml",
 				);
 				PRODUCT_NAME = "essentiaRT~";
 				SDKROOT = macosx10.9;
-				VALID_ARCHS = i386;
+				VALID_ARCHS = "i386 x86_64";
 				ZERO_LINK = NO;
 			};
 			name = Deployment;
@@ -387,7 +369,7 @@
 		E9A5BC8D0A33819900AD9F03 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_X86_VECTOR_INSTRUCTIONS = sse3;
 				COPY_PHASE_STRIP = NO;
@@ -406,21 +388,16 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PD)/include",
-					"$(MY_INCLUDE)/flext",
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/mhermant/Documents/Work/Dev/Essentia-FAT",
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MY_INCLUDE = /usr/local/include;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
 				SDKROOT = macosx10.9;
-				VALID_ARCHS = i386;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Default;
 		};
@@ -446,33 +423,19 @@
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
 					"$(maxsdk)/msp-includes",
-					"$(MY_INCLUDE)/flext",
-					"$(MY_INCLUDE)",
-					"/Users/carthach/Downloads/fftw-3.3.4/BUILD/include",
 				);
 				INFOPLIST_FILE = "";
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
-				LIBRARY_SEARCH_PATHS = (
-					"$(FLEXTLIB)",
-					"/Users/carthach/Dev/git/Essentia-Libraries/FAT",
-					"$(PROJECT_DIR)",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				OTHER_LDFLAGS = (
 					"-lflext-max_sd",
-					"-lavcodec",
-					"-lavformat",
-					"-lavutil",
-					"-lswresample",
-					"-ltag",
-					"-lfftw3f",
-					"-lsamplerate",
-					"-lyaml",
 					"-lessentia",
+					"-lfftw3f",
+					"-lyaml",
 					"-read_only_relocs",
 					suppress,
-					"-lz",
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
@@ -485,7 +448,6 @@
 				);
 				WRAPPER_EXTENSION = mxo;
 				ZERO_LINK = YES;
-				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Development;
 		};
@@ -509,33 +471,19 @@
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
 					"$(maxsdk)/msp-includes",
-					"$(MY_INCLUDE)/flext",
-					"$(MY_INCLUDE)",
-					"/Users/carthach/Downloads/fftw-3.3.4/BUILD/include",
 				);
 				INFOPLIST_FILE = "";
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
-				LIBRARY_SEARCH_PATHS = (
-					"$(FLEXTLIB)",
-					"/Users/carthach/Dev/git/Essentia-Libraries/FAT",
-					"$(PROJECT_DIR)",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				OTHER_LDFLAGS = (
 					"-lflext-max_s",
-					"-lavcodec",
-					"-lavformat",
-					"-lavutil",
-					"-lswresample",
-					"-ltag",
-					"-lfftw3f",
-					"-lsamplerate",
-					"-lyaml",
 					"-lessentia",
+					"-lfftw3f",
+					"-lyaml",
 					"-read_only_relocs",
 					suppress,
-					"-lz",
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
@@ -548,7 +496,6 @@
 				);
 				WRAPPER_EXTENSION = mxo;
 				ZERO_LINK = NO;
-				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Deployment;
 		};
@@ -568,17 +515,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
 					"$(maxsdk)/msp-includes",
-					"$(MY_INCLUDE)/flext",
-					"$(MY_INCLUDE)",
-					"/Users/carthach/Downloads/fftw-3.3.4/BUILD/include",
 				);
 				INFOPLIST_FILE = "";
 				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
-				LIBRARY_SEARCH_PATHS = (
-					"$(FLEXTLIB)",
-					"/Users/carthach/Dev/git/Essentia-Libraries/FAT",
-					"$(PROJECT_DIR)",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -592,7 +532,6 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = mxo;
-				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Default;
 		};
@@ -601,7 +540,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
-				FLEXTLIB = /usr/local/lib;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -611,17 +549,16 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					/usr/local/include,
+					/usr/local/include/flext,
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(MY_INCLUDE)/flext",
-					"$(MY_INCLUDE)",
 				);
-				LIBRARY_SEARCH_PATHS = "$(FLEXTLIB)";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MY_INCLUDE = /usr/local/include;
 				OTHER_LDFLAGS = "";
 				PD = "/Applications/Pd-extended.app/Contents/Resources";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				VALID_ARCHS = i386;
 				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
@@ -632,7 +569,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
-				FLEXTLIB = /usr/local/lib;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -644,17 +580,16 @@
 				GCC_STRICT_ALIASING = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					/usr/local/include,
+					/usr/local/include/flext,
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(MY_INCLUDE)/flext",
-					"$(MY_INCLUDE)",
 				);
-				LIBRARY_SEARCH_PATHS = "$(FLEXTLIB)";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MY_INCLUDE = /usr/local/include;
 				OTHER_LDFLAGS = "";
 				PD = "/Applications/Pd-extended.app/Contents/Resources";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				VALID_ARCHS = i386;
 				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
@@ -665,19 +600,17 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LIBRARY = "libstdc++";
-				FLEXTLIB = /usr/local/lib;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					/usr/local/include,
+					/usr/local/include/flext,
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(MY_INCLUDE)/flext",
-					"$(MY_INCLUDE)",
 				);
-				LIBRARY_SEARCH_PATHS = "$(FLEXTLIB)";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MY_INCLUDE = /usr/local/include;
 				OTHER_LDFLAGS = "";
 				PD = "/Applications/Pd-extended.app/Contents/Resources";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				VALID_ARCHS = i386;
 				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
