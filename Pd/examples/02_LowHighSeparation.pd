@@ -1,0 +1,199 @@
+#N canvas 535 22 791 607 10;
+#X declare -path ../bin -path ../utils;
+#X obj 242 -250 cnv 15 400 30 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 26 -31 spigot 0;
+#X obj 71 -51 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg -56 -70 reset;
+#X obj -113 69 cnv 15 160 50 empty empty empty 20 12 0 14 -261234 -66577
+0;
+#X obj -105 76 output~;
+#X text -37 79 (1) DSP on;
+#X obj 26 -10 print LIST-IOT;
+#X obj -62 -10 s iots;
+#X obj 249 -246 timer;
+#X obj 318 -105 +;
+#X obj 334 -174 random;
+#X obj 367 -195 length;
+#X obj 350 -13 *~;
+#X obj 315 -148 list split;
+#X obj 343 -126 sum;
+#X obj 315 -270 list;
+#X obj 309 -298 t b l;
+#X obj 261 -297 t b b;
+#X obj 315 -212 t l b l;
+#X obj 318 -37 delread~ deline;
+#X obj 309 -318 r iots;
+#X obj 258 -391 cnv 15 270 45 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X floatatom 275 -367 5 0 0 1 - - -;
+#X text 312 -368 (b) or set tempo manually;
+#X text 285 -248 <<--- in either case we need an extra timer to measure
+the;
+#X text 323 -237 elapsed time between onset report and query.;
+#X text -33 96 & Volume up;
+#X msg 261 -388 auto;
+#X obj 267 -319 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -129 -294 cnv 15 110 18 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -125 -251 tabplay2~ sample;
+#X obj -125 -293 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X msg -105 -272 loop \$1;
+#X obj -105 -293 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X text -86 -294 (2) play!;
+#X obj -129 -321 cnv 15 360 18 empty empty empty 20 12 0 14 -204800
+-66577 0;
+#N canvas 1302 254 391 188 init 0;
+#X obj -31 39 loadbang;
+#X obj -32 108 soundfiler;
+#X obj -32 130 table sample 4410;
+#X obj -32 17 declare -path ../bin -path ../utils;
+#X msg -32 60 read -resize ./soundfiles/Plastikman-Closer-Headcase.wav
+sample \; sample normalize;
+#X connect 0 0 4 0;
+#X connect 4 0 1 0;
+#X restore -118 -10 pd init;
+#X obj 318 -60 trapenv 2;
+#X obj -125 17 balance~;
+#X obj 318 -83 - 5.8;
+#X text -101 -321 Audio: Plastikman - Closer (2003) - Headcase;
+#X text 292 -389 (a) accomodate mashup to original time;
+#X text -127 -481 2 low/high separation;
+#X text -129 -469 ======================;
+#X text -26 -113 LOW = slice up audio!;
+#X text 38 -160 HIGH = tempo alignment;
+#X obj -100 -229 delwrite~ deline 30000;
+#X obj -105 -205 essentiaRT~ 2.5;
+#X floatatom 7 -136 7 0 0 0 - - -;
+#X obj 14 -159 bng 20 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -50 -117 bng 20 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom -55 -94 7 0 0 0 - - -;
+#N canvas 1144 246 489 373 switch 0;
+#X obj 202 -461 inlet;
+#X obj 171 -253 metro 1000;
+#X obj 228 -306 /;
+#X msg 228 -327 60000 \$1;
+#X obj 217 -140 outlet;
+#X obj 352 -391 tosymbol;
+#X obj 303 -318 once;
+#X obj 324 -343 t b s;
+#X obj 69 -229 prepend 1;
+#X obj 171 -229 prepend 2;
+#X msg 303 -275 2;
+#X obj 217 -164 route;
+#X obj 171 -327 loadbang;
+#X msg 351 -281 1;
+#X obj 202 -439 route bang float;
+#X obj 352 -311 select auto;
+#X obj 69 -377 r tempo;
+#X connect 0 0 14 0;
+#X connect 1 0 9 0;
+#X connect 2 0 1 1;
+#X connect 3 0 2 0;
+#X connect 5 0 7 0;
+#X connect 6 0 10 0;
+#X connect 7 0 6 1;
+#X connect 7 1 15 0;
+#X connect 8 0 11 0;
+#X connect 9 0 11 0;
+#X connect 10 0 11 1;
+#X connect 11 0 4 0;
+#X connect 12 0 1 0;
+#X connect 13 0 11 1;
+#X connect 14 0 12 0;
+#X connect 14 1 3 0;
+#X connect 14 1 6 0;
+#X connect 14 2 5 0;
+#X connect 15 0 13 0;
+#X connect 16 0 8 0;
+#X restore 261 -341 pd switch;
+#X text 55 -136 Hz.;
+#X text -6 -95 Hz.;
+#X obj -62 -48 list_iot 30000;
+#N canvas 369 439 543 267 filtering 0;
+#X obj -37 -319 inlet;
+#X obj -37 -297 route list;
+#X obj 31 -222 outlet;
+#X obj -37 -274 route i.centroid;
+#X obj -37 -154 moses 450;
+#X obj -37 -107 outlet;
+#X obj -37 -249 moses 2200;
+#X obj -37 -131 timegate 300;
+#X obj 20 -195 s tempo;
+#X text 87 -250 In this example we take the instantaneous spectral
+centroid of the input signal and we separate it in three different
+bands. Sounds with a SC higher than 2200 Hz. will go through the right
+inlet and will be used to drive the sliced audio. Sounds with a SC
+lower than 450 Hz (pretty low sounds) will be used to report slice
+points and stored in a list for later use. We use a timegate to filter
+out onsets that are very close to each other (less than 300 ms).;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 3 0 6 0;
+#X connect 4 0 7 0;
+#X connect 6 0 4 0;
+#X connect 6 1 2 0;
+#X connect 6 1 8 0;
+#X connect 7 0 5 0;
+#X restore -62 -185 pd filtering;
+#X text -128 -457 This example shows how we can easily separate reported
+onsets into different streams and carry on different tasks. We have
+chosen a much lower threshold in essentiaRT~ because the selected audio
+has a much wider dynamic range than the previous example. Then we have
+taken the instantaneous spectral centroid of the signal \, to pick
+the highest and lowest sounds from the audio (see subpatch "filtering").
+The bass sounds serve as "slice points" while the high sounds are used
+to keep the fragmented audio somehow in synch with the original.;
+#X text 259 -459 We also show how to use an independent clock to play
+the slices in the buffer back. An important ingredient for that is
+an extra timer to measure the elapsed time between the last onset-list
+reported and the query time.;
+#X connect 1 0 7 0;
+#X connect 2 0 1 1;
+#X connect 3 0 56 0;
+#X connect 9 0 10 0;
+#X connect 10 0 40 0;
+#X connect 11 0 14 1;
+#X connect 12 0 11 1;
+#X connect 13 0 39 1;
+#X connect 14 1 15 0;
+#X connect 15 0 10 1;
+#X connect 16 0 19 0;
+#X connect 17 0 9 0;
+#X connect 17 1 16 1;
+#X connect 18 0 9 1;
+#X connect 18 1 16 0;
+#X connect 19 0 14 0;
+#X connect 19 1 11 0;
+#X connect 19 2 12 0;
+#X connect 20 0 13 0;
+#X connect 21 0 17 0;
+#X connect 23 0 53 0;
+#X connect 28 0 53 0;
+#X connect 31 0 39 0;
+#X connect 31 0 47 0;
+#X connect 31 0 48 0;
+#X connect 32 0 31 0;
+#X connect 33 0 31 0;
+#X connect 34 0 33 0;
+#X connect 38 0 20 0;
+#X connect 38 1 13 1;
+#X connect 39 0 5 0;
+#X connect 39 1 5 1;
+#X connect 40 0 38 0;
+#X connect 48 1 57 0;
+#X connect 53 0 29 0;
+#X connect 53 0 18 0;
+#X connect 56 0 1 0;
+#X connect 56 0 8 0;
+#X connect 57 0 51 0;
+#X connect 57 0 52 0;
+#X connect 57 0 56 0;
+#X connect 57 1 50 0;
+#X connect 57 1 49 0;
