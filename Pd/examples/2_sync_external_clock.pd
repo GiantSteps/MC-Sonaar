@@ -115,15 +115,22 @@ the;
 #X text -87 -294 (2) play!;
 #X obj -130 -319 cnv 15 360 18 empty empty empty 20 12 0 14 -204800
 -66577 0;
-#N canvas 1302 254 383 143 init 0;
+#N canvas 1302 254 426 341 init 1;
 #X obj -31 39 loadbang;
 #X obj -31 101 soundfiler;
 #X obj -31 123 table sample 4410;
-#X msg -31 60 read -resize ./KidKoala-12bitBlues-2bitBlues.wav sample
-\; sample normalize;
 #X obj -32 17 declare -path ../bin -path ../utils;
-#X connect 0 0 3 0;
-#X connect 3 0 1 0;
+#X msg -11 193 read -resize ./Bonobo-TheNorthBorders-Cirrus.wav sample1
+\, read -resize ./KidKoala-12bitBlues-2bitBlues.wav sample2 \, read
+-resize ./OrenAmbarchi-AudienceOfOne-Salt.wav sample3 \, read -resize
+./Matmos-QuasiObjects-Latex.wav sample4 \; sample1 normalize \; sample2
+normalize \; sample3 normalize \; sample4 normalize;
+#X msg -31 142 read -resize ./KidKoala-12bitBlues-2bitBlues.wav sample
+\; sample normalize;
+#X msg -32 60 read -resize ./Plastikman-Closer-Headcase.wav sample
+\; sample normalize;
+#X connect 0 0 6 0;
+#X connect 6 0 1 0;
 #X restore -119 53 pd init;
 #X obj -57 -158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -134,10 +141,9 @@ the;
 #X obj 27 -159 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj -66 -114 list_iot 14000;
-#X obj -106 -203 essentiaRT~ 30;
 #X obj -101 -229 delwrite~ deline 14000;
 #X text 47 -160 bars (tempo alignment);
-#N canvas 113 469 577 280 pre-filtering 0;
+#N canvas 113 469 577 280 pre-filtering 1;
 #X obj -37 -319 inlet;
 #X obj -37 -297 route list;
 #X floatatom 8 -130 5 0 0 0 - - -;
@@ -155,6 +161,7 @@ the test-song \, so we use this periodic signal to drive the mashup.
 #X text 52 -157 as a way of filtering the input in some way \, we ask
 the algorithm to report onsets that have a strenght of 50 of more \,
 and by doing so \, we obtain slides of different sizes.;
+#X floatatom 108 -96 5 0 0 0 - - -;
 #X connect 0 0 1 0;
 #X connect 1 0 5 0;
 #X connect 2 0 8 0;
@@ -178,14 +185,16 @@ estimation produced by the object to align the slices with the original.
 chunk and playing accordingly.;
 #X obj -126 74 balance~;
 #X obj 357 -68 - 5.8;
+#X obj -106 -203 essentiaRT~ 2;
+#X obj 38 -138 print;
 #X connect 2 0 8 0;
 #X connect 3 0 2 1;
 #X connect 4 0 60 0;
 #X connect 11 0 12 0;
-#X connect 12 0 70 0;
+#X connect 12 0 69 0;
 #X connect 13 0 16 1;
 #X connect 14 0 13 1;
-#X connect 15 0 69 1;
+#X connect 15 0 68 1;
 #X connect 16 1 17 0;
 #X connect 16 1 26 0;
 #X connect 17 0 12 1;
@@ -207,8 +216,8 @@ chunk and playing accordingly.;
 #X connect 43 0 42 0;
 #X connect 44 0 42 0;
 #X connect 48 0 61 0;
-#X connect 48 0 62 0;
-#X connect 48 0 69 0;
+#X connect 48 0 68 0;
+#X connect 48 0 70 0;
 #X connect 49 0 48 0;
 #X connect 50 0 48 0;
 #X connect 51 0 50 0;
@@ -217,10 +226,11 @@ chunk and playing accordingly.;
 #X connect 57 1 15 1;
 #X connect 60 0 2 0;
 #X connect 60 0 9 0;
-#X connect 61 1 64 0;
-#X connect 64 0 55 0;
-#X connect 64 0 60 0;
-#X connect 64 1 59 0;
-#X connect 69 0 6 0;
-#X connect 69 1 6 1;
-#X connect 70 0 57 0;
+#X connect 63 0 55 0;
+#X connect 63 0 60 0;
+#X connect 63 1 59 0;
+#X connect 63 1 71 0;
+#X connect 68 0 6 0;
+#X connect 68 1 6 1;
+#X connect 69 0 57 0;
+#X connect 70 1 63 0;
