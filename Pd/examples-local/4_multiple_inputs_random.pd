@@ -1,4 +1,4 @@
-#N canvas 504 183 956 747 10;
+#N canvas 577 22 956 747 10;
 #X declare -path ../bin -path ../utils -path ../ibt_pd;
 #X obj -224 -307 catch~ slices;
 #X text -203 -457 ...assuming externals are in parent folder...;
@@ -58,7 +58,7 @@
 #X obj 25 241 line~;
 #X obj 10 264 *~;
 #X obj 24 73 vsl 15 100 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 3290 1;
+-1 -1 990 1;
 #X obj 25 193 *;
 #X msg 25 218 \$1 20;
 #X obj 92 241 line~;
