@@ -1,38 +1,54 @@
 
-===================================== essentiaRT~ ==================================
+===========
+essentiaRT~
+===========
 
-Windows
-=======
+essentiaRT~ is provided as a binary file compiled for Linux, Mac OSX, and Windows. Additionally, it comes with a collection of abstractions designed to make interaction with the object easier. A number of help files and use examples complete the package.
 
-PD:
+EssentiaRT~ is offered free of charge for non-commercial use only.
 
-Copy the all the dlls in the dependencies/win32 folder to either
-
-- C:\Windows\System32
-- The same folder that the essentiaRT~ resides in
+Plug-in authored by Martin Hermant, Cárthach Ó'Nuanáin and Ángel Faraldo.
 
 
+===================
+System Requirements
+===================
 
-Linux
-=====
+A computer with Pd-extended (version 0.42.5 or newer).
 
-PD:
+Currently, this external is will NOT work on intel core2duo processors.
 
-1) Install Dependencies 
-You need to install the dependencies of Essentia (you don't actually need to build/install Essentia itself). Do this on Debian with:
+
+============
+Installation
+============
+
+Linux:
+—————
+
+1) Install Dependencies. You need to install the dependencies of Essentia (you don't actually need to build/install Essentia itself). Do this on Debian with: ​
 
 sudo apt-get install build-essential libyaml-dev libfftw3-dev libavcodec-dev libavformat-dev python-dev libsamplerate0-dev libtag1-dev
 
-2) Use the appropriate external (Only for 32-bit Linux)
-If you're on 64-bit you don't have to do anything. If you're on 32-bit, rename "essentiaRT~.pd_linux32" to "essentiaRT~.pd_linux"
+2) Use the appropriate external (Only for 32-bit Linux).
+
+​​If you're on 64-bit you don't have to do anything.
+If you're on 32-bit, rename "essentiaRT~.pd_linux32" to "essentiaRT~.pd_linux"
 
 
+OSX:
+———
 
-Mac
-===
+Drop the "Pd" folder with the binaries, the examples and the utils in the Pd route. (i.e. ~/Library/Pd)
+
+ 
+Windows:
+———————
+
+Copy the all the dlls in the "/dependencies/win32" folder to one of the following:
+
+C:\Windows\System32
+The same folder that the essentiaRT~ resides in.
 
 
-
-EssentiaRT~ was developed by Martin Hermant, Cárthach Ó'Nuanáin and Ángel Faraldo within the Music Technology Group.
-
-The related research was carried out in the frame of the GiantSteps project which is partly funded by the  European Commission (Seventh Framework Programme for research, technological development and demonstration under grant agreement no 610591) and the TECNIO network promoted by ACC1Ó agency by the Catalan Government.
+© Copyright 2014 Music Technology Group, Universitat Pompeu Fabra. All Rights Reserved.

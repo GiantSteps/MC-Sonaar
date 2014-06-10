@@ -14,7 +14,7 @@
 #X obj 181 264 outlet~;
 #X obj 42 264 outlet~;
 #X obj 60 67 hsl 100 15 0 1 0 1 \$0-bla \$0-no empty -2 -8 0 10 -262144
--1 -1 4950 1;
+-1 -1 0 1;
 #X msg 57 29 0.5;
 #X obj 57 9 loadbang;
 #X text 69 66 a;

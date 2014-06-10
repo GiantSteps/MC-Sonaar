@@ -1,0 +1,10 @@
+#N canvas 219 409 245 170 10;
+#X obj 37 51 osc~ 440;
+#X obj 150 51 osc~ 880;
+#X obj 79 132 dac~;
+#X obj 37 75 balance~;
+#X text 6 10 [balance~] control for stereo signals.;
+#X connect 0 0 3 0;
+#X connect 1 0 3 1;
+#X connect 3 0 2 0;
+#X connect 3 1 2 1;
