@@ -99,13 +99,17 @@ OSX:
 
 Add the essentiaRT~ folder to the Pd path (in Pd > Preferences) or copy the folder with the binaries, the examples and the utils where Pd can find it (typically to ~/Library/Pd or to the /extra folder inside Pd (Pd-Extended > Show Package Contents > Contents/Resources/extra).
 
+The dependencies (fftw and libtag) should be contained within the external, but if there are any issues you can install them via
+
+brew install fftw --universal
+brew install libyaml --universal
+
 Windows:
 =======
 
-Copy the all the dlls in the "/dependencies/win32" folder to one of the following locations:
+Copy the all the dlls in the "/dependencies/win32" folder to 
 
-- C:\Windows\System32
-- The same folder that the essentiaRT~ resides in.
+C:\Windows\System32
 
 
 Acknowlegdements
