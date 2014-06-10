@@ -26,8 +26,7 @@ SRCS=main.cpp EssentiaOnset.cpp EssentiaSFX.cpp
 HDRS=main.h EssentiaOnset.h EssentiaSFX.h
 
 #*nix
-#LIBS=-lessentia -lavcodec -lavformat -lavutil -lfftw3f -lsamplerate -lyaml -ltag
 
 #Windows
-LIBS=-lessentia -lavcodec -lavformat -lavutil -lfftw3f -lsamplerate -lyaml
+LIBS=-lessentia -lfftw3f -lyaml
 
