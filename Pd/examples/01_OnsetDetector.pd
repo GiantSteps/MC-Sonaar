@@ -30,7 +30,7 @@
 #X obj 51 375 timegate 30;
 #X obj 11 288 essentiaRT~ 50;
 #X obj 1 178 tabplay2~ sample;
-#X obj 1 136 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+#X obj 1 136 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
 ;
 #X msg 21 157 loop \$1;
 #X obj 21 136 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1
@@ -53,13 +53,13 @@ audio slices!;
 #X text 402 417 (show);
 #N canvas 1408 73 383 143 init 0;
 #X obj -31 39 loadbang;
-#X obj -31 81 soundfiler;
-#X msg -31 60 read -resize ./Bonobo-TheNorthBorders-Cirrus.wav sample
-;
-#X obj -31 103 table sample 4410;
+#X obj -31 98 soundfiler;
+#X obj -31 120 table sample 4410;
 #X obj -32 17 declare -path ../bin -path ../utils;
-#X connect 0 0 2 0;
-#X connect 2 0 1 0;
+#X msg -31 60 read -resize ./soundfiles/Bonobo-TheNorthBorders-Cirrus.wav
+sample;
+#X connect 0 0 4 0;
+#X connect 4 0 1 0;
 #X restore 8 706 pd init;
 #X obj 19 202 delwrite~ deline 24000;
 #X text -1 25 This example shows how to use [essentiaRT~] to report
