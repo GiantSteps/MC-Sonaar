@@ -68,13 +68,13 @@
 #X connect 31 0 29 0;
 #X connect 32 0 8 0;
 #X restore 211 194 pd xfade;
-#X obj 108 121 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 105 122 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 126 121 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 125 122 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 144 122 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 145 122 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 161 122 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 165 122 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #N canvas 517 329 584 300 xfader 0;
 #X obj 164 163 pack 0 0 0 0;
@@ -133,14 +133,14 @@
 #X connect 21 0 4 0;
 #X restore 101 66 pd xfader;
 #X obj 104 104 hsl 78 15 0 5 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 3600 1;
-#X obj 105 143 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
 -1 -1 0 1;
-#X obj 125 142 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 3113 1;
-#X obj 147 144 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 1587 1;
-#X obj 170 147 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+#X obj 105 144 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 125 144 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 145 144 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 165 144 vsl 15 48 0 1 0 0 empty empty empty 0 -9 0 10 -262144
 -1 -1 0 1;
 #X obj 320 98 unpack 0 0 0 0;
 #X obj 317 55 pack 0 0 0 0;

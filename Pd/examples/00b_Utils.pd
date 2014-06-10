@@ -1,21 +1,21 @@
-#N canvas 307 22 782 752 10;
+#N canvas 307 22 955 545 10;
 #X declare -path ../utils;
 #X obj 7 12 declare -path ../utils;
-#X obj 12 301 addslash;
-#X obj 12 361 trapenv;
+#X obj 482 242 addslash;
+#X obj 12 301 trapenv;
 #X obj 12 121 timegate;
-#X obj 12 391 tabplay2~;
+#X obj 12 331 tabplay2~;
 #X obj 12 151 mstats;
 #X obj 12 211 list_value;
 #X obj 12 181 list_iot;
 #X obj 12 241 euclidist;
-#X obj 12 418 balance~;
+#X obj 12 358 balance~;
 #X text 13 91 EssentiaRT~ management;
 #X text 12 101 ----------------------;
-#X text 12 270 Open Sound Control;
-#X text 11 281 ------------------;
-#X text 12 330 Misc.;
-#X text 11 341 -----;
+#X text 482 211 Open Sound Control;
+#X text 481 222 ------------------;
+#X text 12 270 Misc.;
+#X text 11 281 -----;
 #X text 73 121 stops outputing data for the specified time.;
 #X text 62 151 outputs simple statistics about the last n events.;
 #X text 72 181 keeps track of the elapsed times between consecutive
@@ -23,23 +23,23 @@ inputs.;
 #X text 82 211 stores incoming values into a circular list.;
 #X text 82 241 euclidean distance between two lists of equal length.
 ;
-#X text 72 301 prepends a forward slash to an incoming symbol.;
-#X text 66 361 trapezoidal envelope generator.;
-#X text 76 391 alternative to pd native's [tabplay~];
-#X text 136 429 balance control for stereo signals.;
+#X text 542 242 prepends a forward slash to an incoming symbol.;
+#X text 66 301 trapezoidal envelope generator.;
+#X text 76 331 alternative to pd native's [tabplay~];
+#X text 136 369 balance control for stereo signals.;
 #X text 8 35 In order to facilitate interaction with [essentiaRT~]
 \, we provide a number of abstractions \, listed below. Right-click
 on them to access the help file for each object.;
-#X obj 12 469 folderplay~;
-#X text 320 518 plays randomly audio files from a folder;
-#X obj 13 628 radioRcv;
-#X obj 10 669 radioPicker;
-#X text 14 605 -----;
-#X text 13 594 local Network audio streaming;
-#X text 116 699 radiopicker : receive audio from radioRcv and provide
+#X obj 12 409 folderplay~;
+#X text 320 458 plays randomly audio files from a folder;
+#X obj 483 45 radioRcv;
+#X obj 480 86 radioPicker;
+#X text 483 11 local Network audio streaming;
+#X text 579 116 radiopicker : receive audio from radioRcv and provide
 simple mixer \, either gui controlled or with a 4 item list in its
 first inlet for linear control of volume (0..1);
-#X text 117 621 radioRcv : instance that receive 8 channel radio from
+#X text 580 38 radioRcv : instance that receive 8 channel radio from
 local streaming \, bang for reconnect \, numBox indicate status. provide
 audio via send~ msg named : nl nr or nm \, with n channel number[1..4]
 \, l left \, r right \, m mono.;
+#X text 484 22 -----------------------------;
