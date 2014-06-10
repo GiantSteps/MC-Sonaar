@@ -40,7 +40,7 @@ the;
 -66577 0;
 #X obj -125 -251 tabplay2~ sample;
 #X obj -125 -293 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X msg -105 -272 loop \$1;
 #X obj -105 -293 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1
 1 1;
