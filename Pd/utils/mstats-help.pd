@@ -1,4 +1,4 @@
-#N canvas 686 290 343 344 10;
+#N canvas 713 206 343 344 10;
 #X obj 42 206 mstats 10;
 #X obj 42 126 random 1000;
 #X obj 42 83 metro 500;

@@ -1,0 +1,9 @@
+#N canvas 589 218 395 299 10;
+#X obj 156 233 output~;
+#X text 19 9 [folderplay~] searchs a specified folder uncompressed
+audio files (.wav or .aif) \, which can play randomly and continuously
+back. It useful for testing purposes \, or in case live input is not
+an option.;
+#X obj 39 88 folderplay~;
+#X connect 2 0 0 0;
+#X connect 2 1 0 1;
