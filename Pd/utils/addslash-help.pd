@@ -1,4 +1,4 @@
-#N canvas 0 22 396 227 10;
+#N canvas 0 22 360 227 10;
 #X obj 117 119 addslash;
 #X obj 117 142 PRINT;
 #X msg 117 73 data 1 2 3 4 5;

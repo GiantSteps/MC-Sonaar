@@ -1,0 +1,202 @@
+#N canvas 628 126 804 692 10;
+#X declare -path ../bin -path ../utils -path ../ibt_pd;
+#X obj 210 -174 cnv 15 400 30 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj -72 -98 route list;
+#X text 257 -444 ...assuming externals are in parent folder...;
+#X floatatom -63 -55 5 0 0 0 - - -;
+#X text -26 -56 onset strength;
+#X msg -122 -289 station \$1;
+#X obj -83 -243 print STATION;
+#X obj -122 -265 radioin;
+#X text -129 -473 =====================;
+#X obj -93 -9 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj -25 45 spigot 0;
+#X obj 20 25 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+;
+#X msg -65 -6 reset;
+#X obj -112 -121 essentiaRT~ 12;
+#X obj -71 16 list_iot 10000;
+#X obj -110 146 cnv 15 160 50 empty empty empty 20 12 0 14 -261234
+-66577 0;
+#X obj -102 153 output~;
+#X obj -122 94 xfade~;
+#X text -34 156 (1) DSP on;
+#X obj -25 66 print LIST-IOT;
+#X obj -84 -221 delwrite~ deline 10000;
+#X obj -128 -313 cnv 15 250 20 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X floatatom -122 -311 5 0 7 0 - - -;
+#X obj -71 65 s iots;
+#X obj -102 -194 ibt_pd;
+#X text -59 -195 <- bpm estimation;
+#X floatatom -69 -171 5 0 0 1 b.p.m. - -;
+#X obj -69 -149 s detectedTempo;
+#X obj 300 -345 cnv 15 250 50 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj 217 -170 timer;
+#X obj 286 -10 +;
+#X obj 302 -98 random;
+#X obj 335 -119 length;
+#X obj 316 59 *~;
+#X obj 283 -72 list split;
+#X obj 311 -31 sum;
+#X obj 283 -196 list;
+#X obj 277 -224 t b l;
+#X obj 229 -223 t b b;
+#X obj 283 -136 t l b l;
+#X obj 286 12 trapenv 5;
+#X obj 286 35 delread~ deline;
+#X obj 277 -243 r iots;
+#X obj 351 -73 cnv 15 300 100 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 356 6 s newEvent;
+#X obj 356 -36 list split 1;
+#X floatatom 362 -14 7 0 0 0 - - -;
+#X text 413 -14 length of current chunk;
+#X text 437 -36 (elapsed time from previous onset);
+#X text 353 -72 we use this method to calculate the duration;
+#X text 353 -58 of the currently selected slice;
+#X obj 226 -391 cnv 15 270 45 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X text 349 -315 then jump to a random location.;
+#X floatatom 273 -368 5 0 0 1 - - -;
+#X text 349 -328 slices for their full duration \,;
+#X text -127 -461 This example shows different possibilities of using
+an independent clock (such as metro) to playback the slices in the
+buffer. The active ingredient for that is an extra timer to measure
+the elapsed time between the last onset-list reported and the query
+time.;
+#X text -127 -392 We present three different methods: (a) using a tempo
+detector to estimate the tempo of the original track and aligning the
+playback with it. (b) setting the tempo manually \, or (c) measuring
+the lenght of the chunk and playing accordingly.;
+#X text 260 -390 (a) accomodate mashup to original tempo;
+#X text 310 -369 (b) or set tempo manually;
+#X text 344 -342 (c) alternatively \, you can play;
+#X text 253 -172 <<--- in either case we need an extra timer to measure
+the;
+#X text 291 -161 elapsed time between onset report and query.;
+#X text -30 173 & Volume up;
+#N canvas 1144 246 457 407 timer 0;
+#X obj 76 -376 r detectedTempo;
+#X obj 182 -461 inlet;
+#X obj 91 -253 metro 1000;
+#X obj 194 -272 delay;
+#X obj 194 -297 r newEvent;
+#X obj 148 -306 /;
+#X msg 148 -327 60000 \$1;
+#X obj 76 -333 /;
+#X msg 76 -355 60000 \$1;
+#X obj 9 -256 metro 500;
+#X obj 197 -140 outlet;
+#X obj 332 -351 tosymbol;
+#X obj 283 -278 once;
+#X obj 304 -303 t b s;
+#X obj 9 -230 prepend 1;
+#X obj 91 -229 prepend 2;
+#X msg 283 -253 2;
+#X obj 187 -248 prepend 3;
+#X obj 197 -164 route;
+#X obj 9 -358 loadbang;
+#X obj 331 -271 select auto chunk;
+#X msg 331 -241 1;
+#X msg 371 -241 3;
+#X obj 182 -439 route bang float;
+#X connect 0 0 8 0;
+#X connect 1 0 23 0;
+#X connect 2 0 15 0;
+#X connect 3 0 17 0;
+#X connect 4 0 3 0;
+#X connect 5 0 2 1;
+#X connect 6 0 5 0;
+#X connect 7 0 9 1;
+#X connect 8 0 7 0;
+#X connect 9 0 14 0;
+#X connect 11 0 13 0;
+#X connect 12 0 16 0;
+#X connect 13 0 12 1;
+#X connect 13 1 20 0;
+#X connect 14 0 18 0;
+#X connect 15 0 18 0;
+#X connect 16 0 18 1;
+#X connect 17 0 18 0;
+#X connect 18 0 10 0;
+#X connect 19 0 9 0;
+#X connect 19 0 2 0;
+#X connect 19 0 17 0;
+#X connect 20 0 21 0;
+#X connect 20 1 22 0;
+#X connect 21 0 18 1;
+#X connect 22 0 18 1;
+#X connect 23 0 19 0;
+#X connect 23 1 6 0;
+#X connect 23 1 12 0;
+#X connect 23 2 11 0;
+#X restore 229 -267 pd timer;
+#X text -84 -312 (2) pick a radio station (0-7);
+#X msg 305 -343 chunk;
+#X msg 229 -389 auto;
+#X obj 235 -245 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 282 -289 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 305 -292 sync phase;
+#X obj -72 -29 timegate 300;
+#X text -127 -481 2_sync_external_clock;
+#X obj 258 -427 declare -path ../bin -path ../utils -path ../ibt_pd
+;
+#X obj -72 -77 route i.strength;
+#X connect 1 0 73 0;
+#X connect 5 0 7 0;
+#X connect 7 0 13 0;
+#X connect 7 0 17 0;
+#X connect 7 0 20 0;
+#X connect 7 0 24 0;
+#X connect 7 2 6 0;
+#X connect 10 0 19 0;
+#X connect 11 0 10 1;
+#X connect 12 0 14 0;
+#X connect 13 1 1 0;
+#X connect 14 0 10 0;
+#X connect 14 0 23 0;
+#X connect 17 0 16 0;
+#X connect 17 0 16 1;
+#X connect 17 1 16 1;
+#X connect 17 1 16 0;
+#X connect 22 0 5 0;
+#X connect 24 1 26 0;
+#X connect 26 0 27 0;
+#X connect 29 0 30 0;
+#X connect 30 0 40 0;
+#X connect 31 0 34 1;
+#X connect 32 0 31 1;
+#X connect 33 0 17 1;
+#X connect 34 1 35 0;
+#X connect 34 1 45 0;
+#X connect 35 0 30 1;
+#X connect 36 0 39 0;
+#X connect 37 0 29 0;
+#X connect 37 1 36 1;
+#X connect 38 0 29 1;
+#X connect 38 1 36 0;
+#X connect 39 0 34 0;
+#X connect 39 1 31 0;
+#X connect 39 2 32 0;
+#X connect 40 0 41 0;
+#X connect 40 1 33 1;
+#X connect 41 0 33 0;
+#X connect 42 0 37 0;
+#X connect 45 0 44 0;
+#X connect 45 0 46 0;
+#X connect 53 0 63 0;
+#X connect 63 0 67 0;
+#X connect 63 0 38 0;
+#X connect 65 0 63 0;
+#X connect 66 0 63 0;
+#X connect 68 0 63 0;
+#X connect 70 0 9 0;
+#X connect 70 0 14 0;
+#X connect 73 0 3 0;
+#X connect 73 0 70 0;

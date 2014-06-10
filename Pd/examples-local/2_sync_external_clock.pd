@@ -1,0 +1,226 @@
+#N canvas 651 22 880 669 10;
+#X declare -path ../bin -path ../utils;
+#X obj 281 -254 cnv 15 400 30 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X text -129 -473 =====================;
+#X obj 22 -97 spigot 0;
+#X obj 67 -117 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg -60 -136 reset;
+#X obj -114 126 cnv 15 160 50 empty empty empty 20 12 0 14 -261234
+-66577 0;
+#X obj -106 133 output~;
+#X obj -126 74 xfade~;
+#X text -38 136 (1) DSP on;
+#X obj 22 -76 print LIST-IOT;
+#X obj -66 -65 s iots;
+#X obj 371 -425 cnv 15 250 50 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj 288 -250 timer;
+#X obj 357 -90 +;
+#X obj 373 -178 random;
+#X obj 406 -199 length;
+#X obj 387 2 *~;
+#X obj 354 -152 list split;
+#X obj 382 -111 sum;
+#X obj 354 -276 list;
+#X obj 348 -304 t b l;
+#X obj 300 -303 t b b;
+#X obj 354 -216 t l b l;
+#X obj 357 -22 delread~ deline;
+#X obj 348 -323 r iots;
+#X obj 422 -153 cnv 15 300 100 empty empty empty 20 12 0 14 -261682
+-66577 0;
+#X obj 427 -74 s newEvent;
+#X obj 427 -116 list split 1;
+#X floatatom 433 -94 7 0 0 0 - - -;
+#X text 484 -94 length of current chunk;
+#X text 508 -116 (elapsed time from previous onset);
+#X text 424 -152 we use this method to calculate the duration;
+#X text 424 -138 of the currently selected slice;
+#X obj 297 -471 cnv 15 270 45 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X text 420 -395 then jump to a random location.;
+#X floatatom 344 -448 5 0 0 1 - - -;
+#X text 420 -408 slices for their full duration \,;
+#X text 331 -470 (a) accomodate mashup to original tempo;
+#X text 381 -449 (b) or set tempo manually;
+#X text 415 -422 (c) alternatively \, you can play;
+#X text 324 -252 <<--- in either case we need an extra timer to measure
+the;
+#X text 362 -241 elapsed time between onset report and query.;
+#X text -34 153 & Volume up;
+#N canvas 1144 246 489 373 timer 0;
+#X obj 9 -252 r detectedTempo;
+#X obj 202 -461 inlet;
+#X obj 111 -253 metro 1000;
+#X obj 214 -272 delay;
+#X obj 214 -303 r newEvent;
+#X obj 168 -306 /;
+#X msg 168 -327 60000 \$1;
+#X obj 217 -140 outlet;
+#X obj 352 -391 tosymbol;
+#X obj 303 -318 once;
+#X obj 324 -343 t b s;
+#X obj 9 -229 prepend 1;
+#X obj 111 -229 prepend 2;
+#X msg 303 -275 2;
+#X obj 207 -248 prepend 3;
+#X obj 217 -164 route;
+#X obj 111 -327 loadbang;
+#X obj 351 -311 select auto chunk;
+#X msg 351 -281 1;
+#X msg 400 -281 3;
+#X obj 202 -439 route bang float;
+#X connect 0 0 11 0;
+#X connect 1 0 20 0;
+#X connect 2 0 12 0;
+#X connect 3 0 14 0;
+#X connect 4 0 3 0;
+#X connect 5 0 2 1;
+#X connect 6 0 5 0;
+#X connect 8 0 10 0;
+#X connect 9 0 13 0;
+#X connect 10 0 9 1;
+#X connect 10 1 17 0;
+#X connect 11 0 15 0;
+#X connect 12 0 15 0;
+#X connect 13 0 15 1;
+#X connect 14 0 15 0;
+#X connect 15 0 7 0;
+#X connect 16 0 2 0;
+#X connect 16 0 14 0;
+#X connect 17 0 18 0;
+#X connect 17 1 19 0;
+#X connect 17 1 3 0;
+#X connect 18 0 15 1;
+#X connect 19 0 15 1;
+#X connect 20 0 16 0;
+#X connect 20 1 6 0;
+#X connect 20 1 9 0;
+#X connect 20 2 8 0;
+#X restore 300 -347 pd timer;
+#X msg 376 -423 chunk;
+#X msg 300 -469 auto;
+#X obj 306 -325 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text -127 -481 2_sync_external_clock;
+#X obj -130 -294 cnv 15 110 18 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -126 -251 tabplay2~ sample;
+#X obj -126 -293 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X msg -106 -272 loop \$1;
+#X obj -106 -293 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text -87 -294 (2) play!;
+#X obj -130 -319 cnv 15 360 18 empty empty empty 20 12 0 14 -204800
+-66577 0;
+#N canvas 1302 254 383 143 init 0;
+#X obj -31 39 loadbang;
+#X obj -31 101 soundfiler;
+#X obj -31 123 table sample 4410;
+#X msg -31 60 read -resize ./KidKoala-12bitBlues-2bitBlues.wav sample
+\; sample normalize;
+#X obj -32 17 declare -path ../bin -path ../utils;
+#X connect 0 0 3 0;
+#X connect 3 0 1 0;
+#X restore -119 53 pd init;
+#X obj -57 -158 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 371 -367 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 357 -45 trapenv 2;
+#X text 392 -368 sync phase if desired!;
+#X obj 27 -159 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -66 -114 list_iot 14000;
+#X obj -106 -203 essentiaRT~ 30;
+#X obj -101 -229 delwrite~ deline 14000;
+#X text 47 -160 bars (tempo alignment);
+#N canvas 113 469 577 280 pre-filtering 0;
+#X obj -37 -319 inlet;
+#X obj -37 -297 route list;
+#X floatatom 8 -130 5 0 0 0 - - -;
+#X obj 42 -204 s detectedTempo;
+#X obj 8 -84 outlet;
+#X obj -37 -274 route i.strength i.centroid;
+#X obj 49 -227 outlet;
+#X obj 42 -249 moses 1500;
+#X obj 8 -108 timegate 30;
+#X obj -37 -153 moses 50;
+#X text 143 -248 we report the onsets with a spectral centroid lower
+than 1500 Hz. In this example \, this coincides with the upbeat of
+the test-song \, so we use this periodic signal to drive the mashup.
+;
+#X text 52 -157 as a way of filtering the input in some way \, we ask
+the algorithm to report onsets that have a strenght of 50 of more \,
+and by doing so \, we obtain slides of different sizes.;
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 8 0;
+#X connect 5 0 9 0;
+#X connect 5 1 7 0;
+#X connect 7 0 6 0;
+#X connect 7 0 3 0;
+#X connect 8 0 4 0;
+#X connect 9 1 2 0;
+#X restore -66 -182 pd pre-filtering;
+#X text -112 -319 Audio: Kid Koala - 12-bit Blues (2012) - 2-bit Blues
+;
+#X text -35 -160 onsets;
+#X obj 357 -68 - 11.6;
+#X text -127 -461 This example shows different possibilities of using
+an independent clock to playback the slices in the buffer. An important
+ingredient for that is an extra timer to measure the elapsed time between
+the last onset-list reported and the query time.;
+#X text -127 -392 We present three different methods: (a) using a tempo
+estimation produced by the object to align the slices with the original.
+(b) setting the tempo manually \, or (c) measuring the lenght of the
+chunk and playing accordingly.;
+#X connect 2 0 9 0;
+#X connect 3 0 2 1;
+#X connect 4 0 61 0;
+#X connect 7 0 6 0;
+#X connect 7 1 6 1;
+#X connect 12 0 13 0;
+#X connect 13 0 68 0;
+#X connect 14 0 17 1;
+#X connect 15 0 14 1;
+#X connect 16 0 7 1;
+#X connect 17 1 18 0;
+#X connect 17 1 27 0;
+#X connect 18 0 13 1;
+#X connect 19 0 22 0;
+#X connect 20 0 12 0;
+#X connect 20 1 19 1;
+#X connect 21 0 12 1;
+#X connect 21 1 19 0;
+#X connect 22 0 17 0;
+#X connect 22 1 14 0;
+#X connect 22 2 15 0;
+#X connect 23 0 16 0;
+#X connect 24 0 20 0;
+#X connect 27 0 26 0;
+#X connect 27 0 28 0;
+#X connect 35 0 43 0;
+#X connect 43 0 46 0;
+#X connect 43 0 21 0;
+#X connect 44 0 43 0;
+#X connect 45 0 43 0;
+#X connect 49 0 7 0;
+#X connect 49 0 62 0;
+#X connect 49 0 63 0;
+#X connect 50 0 49 0;
+#X connect 51 0 49 0;
+#X connect 52 0 51 0;
+#X connect 57 0 43 0;
+#X connect 58 0 23 0;
+#X connect 58 1 16 1;
+#X connect 61 0 2 0;
+#X connect 61 0 10 0;
+#X connect 62 1 65 0;
+#X connect 65 0 56 0;
+#X connect 65 0 61 0;
+#X connect 65 1 60 0;
+#X connect 68 0 58 0;
