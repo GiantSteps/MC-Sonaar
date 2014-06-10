@@ -2,14 +2,13 @@
 essentiaRT~
 ===========
 
-
 Created By:
 ----------- 
 Martin Hermant, Carthach O’Nuanain and Ángel Faraldo.
 Music Technology Group
 Universitat Pompeu Fabra
 Barcelona, Spain
-http://,tg.upf.edu
+http://mtg.upf.edu
 
 
 Description

@@ -1,0 +1,64 @@
+#N canvas 717 121 382 512 10;
+#X declare -lib mrpeach;
+#X declare -path ../bin -path ../utils;
+#X obj -144 -12 cnv 15 250 20 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -181 100 udpsend;
+#X text -218 -271 ...assuming externals are in parent folder...;
+#X obj -181 34 packOSC;
+#X obj -217 -225 import mrpeach;
+#X text -125 -227 provides improved OSC management;
+#X obj -181 -37 prepend send;
+#X msg -77 44 connect localhost 5555;
+#X floatatom -181 124 1 0 0 0 - - -;
+#X obj -136 -9 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj -121 -79 addslash;
+#X obj -181 -79 addslash;
+#N canvas 322 187 151 169 test-signal 0;
+#X obj -49 48 osc~;
+#X obj -49 -17 random 20;
+#X obj -49 26 mtof;
+#X obj -49 -68 loadbang;
+#X obj -49 4 + 50;
+#X obj -49 70 outlet~;
+#X obj -49 -38 metro 500;
+#X msg 18 -42 \; pd dsp 1;
+#X connect 0 0 5 0;
+#X connect 1 0 4 0;
+#X connect 2 0 0 0;
+#X connect 3 0 6 0;
+#X connect 3 0 7 0;
+#X connect 4 0 2 0;
+#X connect 6 0 1 0;
+#X restore -218 -131 pd test-signal;
+#X msg -76 68 disconnect;
+#X text -61 -80 OSC formatting;
+#X obj -213 180 unpackOSC;
+#X obj -213 155 udpreceive 5555;
+#X obj -213 203 PRINT;
+#X text -218 -198 This patch illustrates how to send [essentiaRT~]
+analysis via OSC. The analysis data could be used by any external application
+or device supporting Open Sound Control. <http://opensoundcontrol.org/introduction-osc>.
+;
+#X obj -181 10 spigot 0;
+#X obj -218 -107 essentiaRT~ 5;
+#X obj -217 -250 declare -path ../bin -path ../utils;
+#X text -117 -11 (2) open the gate to send data;
+#X obj -77 20 cnv 15 200 20 empty empty empty 20 12 0 14 -204786 -66577
+0;
+#X text -72 22 (1) connect to address and port;
+#X connect 1 0 8 0;
+#X connect 3 0 1 0;
+#X connect 6 0 19 0;
+#X connect 7 0 1 0;
+#X connect 9 0 19 1;
+#X connect 10 0 6 0;
+#X connect 11 0 6 0;
+#X connect 12 0 20 0;
+#X connect 13 0 1 0;
+#X connect 15 0 17 0;
+#X connect 16 0 15 0;
+#X connect 19 0 3 0;
+#X connect 20 1 11 0;
+#X connect 20 2 10 0;
