@@ -97,7 +97,7 @@ If you're on 32-bit, rename "essentiaRT~.pd_linux32" to "essentiaRT~.pd_linux"
 OSX:
 ===
 
-Drop the "Pd" folder with the binaries, the examples and the utils in the Pd route. (i.e. ~/Library/Pd)
+Add the essentiaRT~ folder to the Pd path (in Pd > Preferences) or copy the folder with the binaries, the examples and the utils where Pd can find it (typically to ~/Library/Pd or to the /extra folder inside Pd (Pd-Extended > Show Package Contents > Contents/Resources/extra).
 
 Windows:
 =======
