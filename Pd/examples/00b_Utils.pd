@@ -32,14 +32,18 @@ inputs.;
 on them to access the help file for each object.;
 #X obj 12 409 folderplay~;
 #X text 320 458 plays randomly audio files from a folder;
-#X obj 483 45 radioRcv;
-#X obj 480 86 radioPicker;
-#X text 483 11 local Network audio streaming;
+#X text 485 -1 local Network audio streaming;
+#X text 486 10 -----------------------------;
+#X text 483 21 sonar provided radios : ambient \, hard \, expe \, bouncy
+;
+#X text 578 37 radioRcv : instance that receive radio from local streaming
+\, bang for reconnect \, numBox indicate status. an argument message
+specify radio to listen to. one can listen with r~ object formatted
+[name]r \, [name]l \, [name]m \, resp. left right and mono channel
+;
+#X obj 478 100 radiopicker;
+#X obj 483 45 radioRcv ambient;
 #X text 579 116 radiopicker : receive audio from radioRcv and provide
 simple mixer \, either gui controlled or with a 4 item list in its
-first inlet for linear control of volume (0..1);
-#X text 580 38 radioRcv : instance that receive 8 channel radio from
-local streaming \, bang for reconnect \, numBox indicate status. provide
-audio via send~ msg named : nl nr or nm \, with n channel number[1..4]
-\, l left \, r right \, m mono.;
-#X text 484 22 -----------------------------;
+first inlet for linear control of volume (0..1) \, the default values
+are adapted for sonar radio s~ object;
