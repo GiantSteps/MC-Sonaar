@@ -22,8 +22,6 @@ essentiaRT~ is provided as a binary file compiled for Linux, Mac OSX, and Window
 
 EssentiaRT~ is offered free of charge for non-commercial use only.
 
-Plug-in authored by Martin Hermant, Cárthach Ó'Nuanáin and Ángel Faraldo.
-
 
 References
 ----------
@@ -79,6 +77,7 @@ Mac OS X (10.7 or newer), A recent version of Debian/Ubuntu, Microsoft Windows (
 Software:
 Pd-extended (version 0.42.5 or newer) or Max (Version 5 or newer).
 
+On Mac and Windows please make sure you use 32-bit versions of Pd and Max.
 
 Installation
 ------------
@@ -107,10 +106,10 @@ brew install libyaml --universal
 Windows:
 =======
 
-Copy the all the dlls in the "/dependencies/win32" folder to 
+For Pd - just run the examples from the folder, that should be it!
 
-C:\Windows\System32
-
+For Windows 32-bit - drop the 4 dlls from the dependencies folder into C:\Windows\System32
+For Windows 64-bit - drop the 4 dlls from the dependencies folder into C:\Windows\SysWOW64
 
 Acknowledgements
 -----------------
