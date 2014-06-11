@@ -1,4 +1,4 @@
-#N canvas 0 22 552 358 10;
+#N canvas 0 22 672 347 10;
 #X floatatom 151 102 5 0 0 0 - - -;
 #X msg 279 130 disconnect;
 #X msg 275 109 connect giantStream.local puredata.ogg 8100;

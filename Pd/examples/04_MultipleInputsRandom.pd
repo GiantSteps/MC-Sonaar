@@ -186,7 +186,7 @@ way we can later switch between the different sources.;
 #X obj -329 -281 cnv 15 320 30 empty empty empty 20 12 0 14 -204786
 -66577 0;
 #X obj -325 -272 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-0 1;
+1 1;
 #X text -307 -280 trigger slices according to length of events (0)
 ;
 #X text -211 -96 random voice allocation;
@@ -222,7 +222,7 @@ sample4 \; sample1 normalize \; sample2 normalize \; sample3 normalize
 #X obj -782 -326 cnv 15 110 18 empty empty empty 20 12 0 14 -204786
 -66577 0;
 #X obj -776 -325 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-0 1;
+1 1;
 #X obj -725 -325 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1
 1 1;
 #X text -706 -326 loop;
