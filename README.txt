@@ -112,7 +112,7 @@ Copy the all the dlls in the "/dependencies/win32" folder to
 C:\Windows\System32
 
 
-Acknowlegdements
+Acknowledgements
 -----------------
 
 EssentiaRT~ is built upon the work of Sebastian Böck (SuperFlux), Dmitry Bogdanov (Essentia) and the Pd and Pd-extended community. 
