@@ -20,3 +20,5 @@ flext-external/.DS_Store
 flext-streaming/.DS_Store
 
 Pd/examples/00b_ListOfUtilities.pd
+
+Pd/examples/00b_ListOfUtils.pd
