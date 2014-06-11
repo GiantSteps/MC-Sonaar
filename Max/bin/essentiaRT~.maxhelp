@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 51.0, 44.0, 1393.0, 982.0 ],
+		"rect" : [ 21.0, 44.0, 1393.0, 982.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -140,7 +140,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 309.0, 126.0, 297.0, 74.0 ],
+					"patching_rect" : [ 309.0, 126.0, 299.0, 74.0 ],
 					"text" : "- creation argument: threshold level to report features. It will typically be in the range 10 and 50, depending on the source. With a higher threshold, the object will only report very clear attacks, such as those produced by percussive instruments."
 				}
 
@@ -973,7 +973,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 3,
-					"outlettype" : [ "signal", "list", "list" ],
+					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 16.0, 604.0, 121.0, 20.0 ],
 					"text" : "essentiaRT~ 5"
 				}
@@ -1636,11 +1636,7 @@
 			"obj-18" : [ "live.gain~", "live.gain~", 0 ]
 		}
 ,
-		"dependency_cache" : [ 			{
-				"name" : "essentiaRT~.mxo",
-				"type" : "iLaX"
-			}
- ]
+		"dependency_cache" : [  ]
 	}
 
 }
