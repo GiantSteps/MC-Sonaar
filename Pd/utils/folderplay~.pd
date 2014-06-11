@@ -1,4 +1,4 @@
-#N canvas 694 114 956 786 10;
+#N canvas 961 132 956 786 10;
 #X obj 15 32 bng 15 250 50 0 \$0-playNext \$0-none empty 9 24 0 14
 -262144 -1 -1;
 #X obj 105 32 bng 15 250 50 0 \$0-reset \$0-none empty 9 24 1 12 -262144
@@ -84,16 +84,15 @@
 #X obj 464 188 s \$0-init;
 #X msg 464 168 1;
 #X obj 433 93 t b b;
-#X obj 455 47 r \$0-reset;
+#X obj 433 71 r \$0-reset;
 #X msg 567 288 symbol *.aif \, symbol *.aiff \, symbol *.wav;
 #X msg 554 675 symbol nothing;
-#X obj 357 55 inlet;
+#X obj 364 60 inlet;
 #X obj 346 131 tosymbol;
 #X obj 364 83 t a b;
 #X obj 385 208 makefilename %s/*.aif;
 #X obj 365 229 makefilename %s/*.aiff;
 #X obj 346 249 makefilename %s/*.wav;
-#X obj 544 371 PRINT;
 #X obj 544 125 prepend symbol;
 #X obj 346 279 prepend symbol;
 #X connect 12 0 30 0;
@@ -186,9 +185,8 @@
 #X connect 85 0 77 0;
 #X connect 86 0 85 0;
 #X connect 86 1 79 0;
-#X connect 87 0 92 0;
-#X connect 88 0 92 0;
-#X connect 89 0 90 0;
-#X connect 89 0 92 0;
-#X connect 92 0 12 0;
+#X connect 87 0 91 0;
+#X connect 88 0 91 0;
+#X connect 89 0 91 0;
+#X connect 91 0 12 0;
 #X coords 0 -1 1 1 260 120 1 10 10;

@@ -18,3 +18,5 @@ DerivedData
 flext-external/.DS_Store
 
 flext-streaming/.DS_Store
+
+Pd/examples/00b_ListOfUtilities.pd
