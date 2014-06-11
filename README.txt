@@ -111,8 +111,7 @@ Windows:
 
 For Pd - just run the examples from the folder, that should be it!
 
-For Windows 32-bit - drop the 4 dlls from the dependencies folder into C:\Windows\System32
-For Windows 64-bit - drop the 4 dlls from the dependencies folder into C:\Windows\SysWOW64
+For Windows - drop the 4 dll dependencies from win32 into C:\Program Files (x86)\Cycling '74\Max 6.1\support (Replacing Max 6.1 with the appropriate version number).
 
 Acknowledgements
 -----------------
