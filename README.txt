@@ -79,6 +79,9 @@ Pd-extended (version 0.42.5 or newer) or Max (Version 5 or newer).
 
 On Mac and Windows please make sure you use 32-bit versions of Pd and Max.
 
+Please note: examples are only provided for Pd and not Max (save for a help file). Please consult the Pd patches and adopt them for your own
+needs in Max.
+
 Installation
 ------------
 
