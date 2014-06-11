@@ -1,4 +1,4 @@
-#N canvas 298 22 890 873 10;
+#N canvas 103 70 890 873 10;
 #X declare -lib mrpeach;
 #X declare -path ../bin -path ../utils;
 #X obj -123 98 cnv 15 110 18 empty empty empty 20 12 0 14 -204786 -66577
@@ -62,7 +62,6 @@ with synctimes;
 0;
 #X obj 362 790 output~;
 #X obj 392 763 *~;
-#X obj 392 680 delread~ deline;
 #X text 430 793 (1) DSP on;
 #X text 435 808 & volume up;
 #X obj 339 132 addslash;
@@ -111,7 +110,7 @@ with synctimes;
 #X text 422 573 add elapsed time since last onset to the sum of iot
 ;
 #X obj 437 332 PRINT;
-#N canvas 690 22 825 844 fakeApp 0;
+#N canvas 900 22 825 844 fakeApp 1;
 #X obj 224 169 metro 200;
 #X obj 224 146 loadbang;
 #X text 220 78 the only limitation is to call UID that appends in the
@@ -119,19 +118,19 @@ range of bufferlength (here 24s);
 #X obj 221 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
 -1 -1 7;
 #X obj 236 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
--1 -1 2;
-#X obj 251 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
 -1 -1 6;
+#X obj 251 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
+-1 -1 5;
 #X obj 266 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
 -1 -1 4;
 #X obj 281 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
--1 -1 1;
-#X obj 296 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
 -1 -1 3;
+#X obj 296 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
+-1 -1 2;
 #X obj 311 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
--1 -1 6;
+-1 -1 1;
 #X obj 326 282 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
--1 -1 4;
+-1 -1 0;
 #X obj -31 193 sort;
 #X obj -65 98 list split 1;
 #X obj -31 143 list split 50;
@@ -145,7 +144,7 @@ range of bufferlength (here 24s);
 #X obj -51 599 packel;
 #X obj -51 578 l;
 #X obj 222 261 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -261234
--4160 -1 3;
+-4160 -1 0;
 #X obj -21 722 PRINT;
 #X obj 231 236 route 0 1 2 3 4 5 6 7;
 #X obj -51 620 list prepend /play;
@@ -198,7 +197,11 @@ OSC.;
 #X obj 348 300 cnv 15 110 18 empty empty empty 20 12 0 14 -204786 -66577
 0;
 #X text 353 300 PLAY HERE!;
+#X obj 352 187 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 438 211 s;
 #X connect 0 0 18 0;
+#X connect 0 0 70 0;
 #X connect 1 0 0 0;
 #X connect 3 0 19 0;
 #X connect 4 0 19 0;
@@ -293,6 +296,7 @@ OSC.;
 app;
 #X text 329 11 send indexed features: /name index value;
 #X text -124 629 open this to test the program (and make sound!);
+#X obj 393 680 delread~ deline;
 #X connect 1 0 7 0;
 #X connect 2 0 16 0;
 #X connect 3 0 16 0;
@@ -315,55 +319,55 @@ app;
 #X connect 30 0 7 0;
 #X connect 31 0 26 0;
 #X connect 31 1 14 0;
-#X connect 32 0 77 0;
+#X connect 32 0 76 0;
 #X connect 33 1 6 0;
 #X connect 33 1 20 0;
 #X connect 33 2 18 0;
 #X connect 41 0 40 1;
 #X connect 41 0 40 0;
-#X connect 42 0 41 0;
-#X connect 45 0 51 0;
-#X connect 46 0 48 0;
-#X connect 46 1 49 0;
-#X connect 47 0 49 1;
-#X connect 48 0 45 0;
-#X connect 49 0 48 1;
-#X connect 50 0 46 0;
+#X connect 44 0 50 0;
+#X connect 45 0 47 0;
+#X connect 45 1 48 0;
+#X connect 46 0 48 1;
+#X connect 47 0 44 0;
+#X connect 48 0 47 1;
+#X connect 49 0 45 0;
+#X connect 50 0 51 0;
 #X connect 51 0 52 0;
-#X connect 52 0 53 0;
-#X connect 52 0 72 0;
-#X connect 54 0 76 0;
-#X connect 55 0 82 0;
-#X connect 56 0 55 1;
-#X connect 57 1 61 0;
-#X connect 58 0 56 1;
-#X connect 59 0 60 1;
-#X connect 60 0 57 0;
-#X connect 60 0 66 0;
-#X connect 61 0 62 0;
-#X connect 61 0 69 0;
-#X connect 63 0 65 1;
-#X connect 63 0 85 0;
-#X connect 64 0 63 0;
-#X connect 65 0 67 0;
-#X connect 66 0 32 0;
-#X connect 67 0 80 0;
-#X connect 69 0 65 0;
-#X connect 69 1 63 1;
+#X connect 51 0 71 0;
+#X connect 53 0 75 0;
+#X connect 54 0 81 0;
+#X connect 55 0 54 1;
+#X connect 56 1 60 0;
+#X connect 57 0 55 1;
+#X connect 58 0 59 1;
+#X connect 59 0 56 0;
+#X connect 59 0 65 0;
+#X connect 60 0 61 0;
+#X connect 60 0 68 0;
+#X connect 62 0 64 1;
+#X connect 62 0 84 0;
+#X connect 63 0 62 0;
+#X connect 64 0 66 0;
+#X connect 65 0 32 0;
+#X connect 66 0 79 0;
+#X connect 68 0 64 0;
+#X connect 68 1 62 1;
+#X connect 69 0 77 0;
+#X connect 69 1 91 0;
 #X connect 70 0 78 0;
-#X connect 70 1 42 0;
-#X connect 71 0 79 0;
-#X connect 73 0 74 0;
-#X connect 74 0 72 0;
+#X connect 72 0 73 0;
+#X connect 73 0 71 0;
+#X connect 74 0 53 0;
+#X connect 74 0 86 0;
 #X connect 75 0 54 0;
-#X connect 75 0 87 0;
-#X connect 76 0 55 0;
-#X connect 76 1 56 0;
-#X connect 77 0 71 0;
-#X connect 78 0 71 0;
-#X connect 79 0 41 1;
-#X connect 80 0 70 0;
-#X connect 80 1 79 1;
-#X connect 82 0 60 0;
-#X connect 82 1 57 1;
-#X connect 82 2 66 1;
+#X connect 75 1 55 0;
+#X connect 76 0 70 0;
+#X connect 77 0 70 0;
+#X connect 78 0 41 1;
+#X connect 79 0 69 0;
+#X connect 79 1 78 1;
+#X connect 81 0 59 0;
+#X connect 81 1 56 1;
+#X connect 81 2 65 1;
+#X connect 91 0 41 0;

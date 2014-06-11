@@ -1,9 +1,20 @@
-#N canvas 589 218 395 299 10;
-#X obj 156 233 output~;
+#N canvas 1182 184 500 493 10;
+#X obj 166 353 output~;
 #X text 19 9 [folderplay~] searchs a specified folder uncompressed
 audio files (.wav or .aif) \, which can play randomly and continuously
 back. It useful for testing purposes \, or in case live input is not
 an option.;
-#X obj 39 88 folderplay~;
+#X obj 49 208 folderplay~;
+#X text 19 78 folderplay~ will search by default on the folder where
+it is located. Send messages with different paths if you want to change
+the playback folder.;
+#X msg 60 158 /full/route/to/your/folder;
+#X msg 76 179 C://full/path/to/your/folder;
+#X text 228 156 linux / OSX;
+#X text 253 178 win;
+#X msg 49 137 /Users/angelfaraldo/Desktop/SonarArtists;
 #X connect 2 0 0 0;
 #X connect 2 1 0 1;
+#X connect 4 0 2 0;
+#X connect 5 0 2 0;
+#X connect 8 0 2 0;
