@@ -62,9 +62,6 @@ centroid.mean centroid.var tempCentroid;
 #X coords 0 1 154350 -1 100 70 1;
 #X restore 127 -72 graph;
 #X text -332 85 - inlet: audio signal;
-#X text -332 105 - outlet 1: onset detector novelty function at audio
-rate (used internally for onset detection \, using a given threshold).
-;
 #X text -331 151 - outlet 2: list of instantaneous features.;
 #X text -332 171 - outlet 3: list of averaged features. These values
 are estimated over a frame-size specified by the user with the method
@@ -88,10 +85,14 @@ and the instantaneous MFCC's.;
 #X text -274 333 "delayMode" sets the time over which the averaged
 descriptors are calcutated. A time of 0 considers the full chunk between
 onset reports.;
-#X text -332 15 - creation argument: threshold level to report features.
-It will typically be in the range 10 and 50 \, depending on the source.
-With a higher threshold \, the object will only report very clear attacks
-\, such as those produced by percussive instruments.;
+#X text -332 15 - creation argument: threshold level (dB scale) to
+catch onsets and report features. It will typically be in the range
+10 and 50 \, depending on the source. With a higher threshold \, the
+object will only report very clear attacks \, such as those produced
+by percussive instruments.;
+#X text -332 105 - outlet 1: onset detector novelty function at audio
+rate (used internally for onset detection \, could be monitored to
+set a precise threshold).;
 #X connect 0 0 49 0;
 #X connect 1 0 2 0;
 #X connect 3 0 48 0;
