@@ -7,84 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0703FA0B191921E900B7841E /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9974E53077083C700206F68 /* essentiaRT~.mxo */; };
-		075C17181924B06E00491DAB /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 075C17171924B06E00491DAB /* main.h */; };
-		076B5E0E192126F300949237 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 073A718D1920E28700F23449 /* libiconv.dylib */; };
-		076B5E0F192126F500949237 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 073A718E1920E28700F23449 /* libbz2.dylib */; };
-		076B5E111921286C00949237 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 076B5E101921286C00949237 /* libstdc++.6.0.9.dylib */; };
-		077FA32E191B9FF900D05B19 /* essentiaRT~.pd_darwin in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* essentiaRT~.pd_darwin */; };
-		07A1FE211917C53A00687664 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A1FE1F1917C53A00687664 /* MaxAPI.framework */; };
-		07A1FE221917C53A00687664 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A1FE201917C53A00687664 /* MaxAudioAPI.framework */; };
-		6F0650221934A46500D735CA /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F0650201934A46500D735CA /* EssentiaOnset.cpp */; };
-		6F0650231934A46500D735CA /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F0650201934A46500D735CA /* EssentiaOnset.cpp */; };
-		6F0650241934A46500D735CA /* EssentiaOnset.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0650211934A46500D735CA /* EssentiaOnset.h */; };
-		6F15FD401934FBFC00A11C2E /* EssentiaSFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F15FD3E1934FBFC00A11C2E /* EssentiaSFX.cpp */; };
-		6F15FD411934FBFC00A11C2E /* EssentiaSFX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F15FD3F1934FBFC00A11C2E /* EssentiaSFX.h */; };
-		6F53B3B51947261B00CB69B0 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F53B3B41947261B00CB69B0 /* libiconv.dylib */; };
-		6F53B3B71947263400CB69B0 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F53B3B61947263400CB69B0 /* libbz2.dylib */; };
-		6F62F602193E363100B4D485 /* essentiaRT~.pd_darwin in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* essentiaRT~.pd_darwin */; };
-		E98573570D9E52D300682171 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E98573560D9E52D300682171 /* main.cpp */; };
-		E98573580D9E52D300682171 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E98573560D9E52D300682171 /* main.cpp */; };
+		07491CEF1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
+		07491CF41A1E64FA0087E350 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
+		07491CF61A1E68FC0087E350 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CF51A1E68FC0087E350 /* MaxAPI.framework */; };
+		07491CF81A1E69030087E350 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CF71A1E69030087E350 /* MaxAudioAPI.framework */; };
+		07A865C01A1E3862008354B9 /* essentiaRT~.pd_darwin in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* essentiaRT~.pd_darwin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		07A865DD1A1E4544008354B9 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
+		07A865DE1A1E4544008354B9 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
+		07A865DF1A1E4544008354B9 /* EssentiaSFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D61A1E4544008354B9 /* EssentiaSFX.cpp */; };
+		07A865E01A1E4544008354B9 /* EssentiaSFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D61A1E4544008354B9 /* EssentiaSFX.cpp */; };
+		07A865E11A1E4544008354B9 /* HelperFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D71A1E4544008354B9 /* HelperFunctions.cpp */; };
+		07A865E21A1E4544008354B9 /* HelperFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D71A1E4544008354B9 /* HelperFunctions.cpp */; };
+		07A865E31A1E4544008354B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
+		07A865E41A1E4544008354B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
+		07A865E51A1E4544008354B9 /* EssentiaOnset.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865D91A1E4544008354B9 /* EssentiaOnset.h */; };
+		07A865E61A1E4544008354B9 /* EssentiaSFX.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DA1A1E4544008354B9 /* EssentiaSFX.h */; };
+		07A865E71A1E4544008354B9 /* HelperFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DB1A1E4544008354B9 /* HelperFunctions.h */; };
+		07A865E81A1E4544008354B9 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
+		E99A3B770D35508600E692EF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99A3B760D35508600E692EF /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0703FA0C191921F600B7841E /* CopyFiles */ = {
+		07A865BF1A1E3860008354B9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Users/carthach/Dev/Pd/User_Libraries;
+			dstPath = /Users/carthach/Dev/Pd/User_Libraries;
 			dstSubfolderSpec = 0;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		077FA32D191B9FF500D05B19 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "${PROJECT_DIR}";
-			dstSubfolderSpec = 0;
-			files = (
-				077FA32E191B9FF900D05B19 /* essentiaRT~.pd_darwin in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6F62F601193E35EA00B4D485 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "${PROJECT_DIR}/../Pd/essentiaRT~";
-			dstSubfolderSpec = 0;
-			files = (
-				6F62F602193E363100B4D485 /* essentiaRT~.pd_darwin in CopyFiles */,
+				07A865C01A1E3862008354B9 /* essentiaRT~.pd_darwin in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E9974EC207708C9300206F68 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "/Applications/Max 6.1/Cycling '74/msp-externals";
+			buildActionMask = 8;
+			dstPath = "/Library/Application Support/Cycling '74/init";
 			dstSubfolderSpec = 0;
 			files = (
-				0703FA0B191921E900B7841E /* essentiaRT~.mxo in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		073A718D1920E28700F23449 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		073A718E1920E28700F23449 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
-		075C17171924B06E00491DAB /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
-		076B5E101921286C00949237 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
-		07A1FE1F1917C53A00687664 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = /Library/Frameworks/MaxAPI.framework; sourceTree = "<absolute>"; };
-		07A1FE201917C53A00687664 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = /Library/Frameworks/MaxAudioAPI.framework; sourceTree = "<absolute>"; };
-		6F0650201934A46500D735CA /* EssentiaOnset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EssentiaOnset.cpp; sourceTree = "<group>"; };
-		6F0650211934A46500D735CA /* EssentiaOnset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaOnset.h; sourceTree = "<group>"; };
-		6F15FD3E1934FBFC00A11C2E /* EssentiaSFX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EssentiaSFX.cpp; sourceTree = "<group>"; };
-		6F15FD3F1934FBFC00A11C2E /* EssentiaSFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaSFX.h; sourceTree = "<group>"; };
-		6F53B3B41947261B00CB69B0 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libiconv.dylib; sourceTree = SYSTEM_DEVELOPER_DIR; };
-		6F53B3B61947263400CB69B0 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libbz2.dylib; sourceTree = SYSTEM_DEVELOPER_DIR; };
+		07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		07491CF51A1E68FC0087E350 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../../../git/max5-sdk/c74support/max-includes/MaxAPI.framework"; sourceTree = "<group>"; };
+		07491CF71A1E69030087E350 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../git/max5-sdk/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EssentiaOnset.cpp; sourceTree = "<group>"; };
+		07A865D61A1E4544008354B9 /* EssentiaSFX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EssentiaSFX.cpp; sourceTree = "<group>"; };
+		07A865D71A1E4544008354B9 /* HelperFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperFunctions.cpp; sourceTree = "<group>"; };
+		07A865D81A1E4544008354B9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		07A865D91A1E4544008354B9 /* EssentiaOnset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaOnset.h; sourceTree = "<group>"; };
+		07A865DA1A1E4544008354B9 /* EssentiaSFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaSFX.h; sourceTree = "<group>"; };
+		07A865DB1A1E4544008354B9 /* HelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunctions.h; sourceTree = "<group>"; };
+		07A865DC1A1E4544008354B9 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* essentiaRT~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "essentiaRT~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E98573560D9E52D300682171 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E9974E53077083C700206F68 /* essentiaRT~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "essentiaRT~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E99A3B760D35508600E692EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E99A3C6B0D35525C00E692EF /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,8 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F53B3B71947263400CB69B0 /* libbz2.dylib in Frameworks */,
-				6F53B3B51947261B00CB69B0 /* libiconv.dylib in Frameworks */,
+				07491CEF1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,11 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				076B5E111921286C00949237 /* libstdc++.6.0.9.dylib in Frameworks */,
-				07A1FE211917C53A00687664 /* MaxAPI.framework in Frameworks */,
-				07A1FE221917C53A00687664 /* MaxAudioAPI.framework in Frameworks */,
-				076B5E0F192126F500949237 /* libbz2.dylib in Frameworks */,
-				076B5E0E192126F300949237 /* libiconv.dylib in Frameworks */,
+				07491CF81A1E69030087E350 /* MaxAudioAPI.framework in Frameworks */,
+				07491CF61A1E68FC0087E350 /* MaxAPI.framework in Frameworks */,
+				07491CF41A1E64FA0087E350 /* libstdc++.6.0.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,9 +101,6 @@
 		0867D691FE84028FC02AAC07 /* xsample */ = {
 			isa = PBXGroup;
 			children = (
-				6F53B3B61947263400CB69B0 /* libbz2.dylib */,
-				6F53B3B41947261B00CB69B0 /* libiconv.dylib */,
-				076B5E101921286C00949237 /* libstdc++.6.0.9.dylib */,
 				E99A3C6B0D35525C00E692EF /* readme.txt */,
 				08FB77ACFE841707C02AAC07 /* Source */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
@@ -139,10 +112,9 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				073A718D1920E28700F23449 /* libiconv.dylib */,
-				073A718E1920E28700F23449 /* libbz2.dylib */,
-				07A1FE1F1917C53A00687664 /* MaxAPI.framework */,
-				07A1FE201917C53A00687664 /* MaxAudioAPI.framework */,
+				07491CF71A1E69030087E350 /* MaxAudioAPI.framework */,
+				07491CF51A1E68FC0087E350 /* MaxAPI.framework */,
+				07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -150,12 +122,15 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E98573560D9E52D300682171 /* main.cpp */,
-				075C17171924B06E00491DAB /* main.h */,
-				6F0650201934A46500D735CA /* EssentiaOnset.cpp */,
-				6F0650211934A46500D735CA /* EssentiaOnset.h */,
-				6F15FD3E1934FBFC00A11C2E /* EssentiaSFX.cpp */,
-				6F15FD3F1934FBFC00A11C2E /* EssentiaSFX.h */,
+				07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */,
+				07A865D61A1E4544008354B9 /* EssentiaSFX.cpp */,
+				07A865D71A1E4544008354B9 /* HelperFunctions.cpp */,
+				07A865D81A1E4544008354B9 /* main.cpp */,
+				07A865D91A1E4544008354B9 /* EssentiaOnset.h */,
+				07A865DA1A1E4544008354B9 /* EssentiaSFX.h */,
+				07A865DB1A1E4544008354B9 /* HelperFunctions.h */,
+				07A865DC1A1E4544008354B9 /* main.h */,
+				E99A3B760D35508600E692EF /* Info.plist */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -167,9 +142,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F15FD411934FBFC00A11C2E /* EssentiaSFX.h in Headers */,
-				075C17181924B06E00491DAB /* main.h in Headers */,
-				6F0650241934A46500D735CA /* EssentiaOnset.h in Headers */,
+				07A865E71A1E4544008354B9 /* HelperFunctions.h in Headers */,
+				07A865E81A1E4544008354B9 /* main.h in Headers */,
+				07A865E61A1E4544008354B9 /* EssentiaSFX.h in Headers */,
+				07A865E51A1E4544008354B9 /* EssentiaOnset.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,9 +159,7 @@
 				D2AAC09905546B4700DB518D /* Headers */,
 				D2AAC09B05546B4700DB518D /* Frameworks */,
 				D2AAC09A05546B4700DB518D /* Sources */,
-				0703FA0C191921F600B7841E /* CopyFiles */,
-				077FA32D191B9FF500D05B19 /* CopyFiles */,
-				6F62F601193E35EA00B4D485 /* CopyFiles */,
+				07A865BF1A1E3860008354B9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -244,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99A3B770D35508600E692EF /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,9 +229,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F15FD401934FBFC00A11C2E /* EssentiaSFX.cpp in Sources */,
-				E98573570D9E52D300682171 /* main.cpp in Sources */,
-				6F0650221934A46500D735CA /* EssentiaOnset.cpp in Sources */,
+				07A865DD1A1E4544008354B9 /* EssentiaOnset.cpp in Sources */,
+				07A865DF1A1E4544008354B9 /* EssentiaSFX.cpp in Sources */,
+				07A865E31A1E4544008354B9 /* main.cpp in Sources */,
+				07A865E11A1E4544008354B9 /* HelperFunctions.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,8 +240,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98573580D9E52D300682171 /* main.cpp in Sources */,
-				6F0650231934A46500D735CA /* EssentiaOnset.cpp in Sources */,
+				07A865DE1A1E4544008354B9 /* EssentiaOnset.cpp in Sources */,
+				07A865E01A1E4544008354B9 /* EssentiaSFX.cpp in Sources */,
+				07A865E41A1E4544008354B9 /* main.cpp in Sources */,
+				07A865E21A1E4544008354B9 /* HelperFunctions.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,45 +254,38 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_X86_VECTOR_INSTRUCTIONS = sse3;
+				CLANG_CXX_LIBRARY = "compiler-default";
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_EXTENSION = pd_darwin;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_LIBRARY_DIR)/Frameworks/Accelerate.framework/Versions/A/Frameworks",
-				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=2",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PD)/include",
+					/usr/local/include,
+					/usr/local/include/flext,
+					"/Applications/Pd-extended.app/Contents/Resources/src",
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib",
+				);
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
-					"-lflext-pd_sd",
 					"-undefined",
 					dynamic_lookup,
-					"-lessentia",
+					"-lessentia_rt",
 					"-lfftw3f",
-					"-lyaml",
-					"-read_only_relocs",
-					suppress,
+					"-lflext-pd_sd",
 				);
 				PRODUCT_NAME = "essentiaRT~";
-				SDKROOT = macosx10.9;
-				VALID_ARCHS = "i386 x86_64";
 				ZERO_LINK = YES;
 			};
 			name = Development;
@@ -323,45 +294,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_X86_VECTOR_INSTRUCTIONS = sse3;
-				COPY_PHASE_STRIP = NO;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_EXTENSION = pd_darwin;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_LIBRARY_DIR)/Frameworks/Accelerate.framework/Versions/A/Frameworks",
-				);
-				GCC_ENABLE_SSE3_EXTENSIONS = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=2",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PD)/include",
+					/usr/local/include,
+					/usr/local/include/flext,
+					"/Applications/Pd-extended.app/Contents/Resources/src",
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib",
+				);
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = (
-					"-lflext-pd_s",
 					"-undefined",
 					dynamic_lookup,
-					"-lessentia",
+					"-lessentia_rt",
 					"-lfftw3f",
-					"-lyaml",
-					"-read_only_relocs",
-					suppress,
+					"-lflext-pd_s",
 				);
 				PRODUCT_NAME = "essentiaRT~";
-				SDKROOT = macosx10.9;
-				VALID_ARCHS = "i386 x86_64";
 				ZERO_LINK = NO;
 			};
 			name = Deployment;
@@ -370,49 +332,47 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_X86_VECTOR_INSTRUCTIONS = sse3;
-				COPY_PHASE_STRIP = NO;
+				CLANG_CXX_LIBRARY = "compiler-default";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_EXTENSION = pd_darwin;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_LIBRARY_DIR)/Frameworks/Accelerate.framework/Versions/A/Frameworks",
-				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "FLEXT_SYS=2";
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PD)/include",
+					/usr/local/include,
+					/usr/local/include/flext,
+					"/Applications/Pd-extended.app/Contents/Resources/src",
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib",
+				);
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_bundle;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "essentiaRT~";
-				SDKROOT = macosx10.9;
-				VALID_ARCHS = "i386 x86_64";
+				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+					"-lessentia_rt",
+					"-lfftw3f",
+					"-lflext-pd_s",
+				);
+				PRODUCT_NAME = xsample;
 			};
 			name = Default;
 		};
 		E9A5BC8F0A33819900AD9F03 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SYSTEM_LIBRARY_DIR)/Frameworks/Accelerate.framework/Versions/A/Frameworks",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"/Users/carthach/Dev/git/max5-sdk/c74support/max-includes",
+					"/Users/carthach/Dev/git/max5-sdk/c74support/msp-includes",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -423,19 +383,18 @@
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
 					"$(maxsdk)/msp-includes",
+					/usr/local/include,
+					/usr/local/include/flext,
 				);
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				LIBRARY_STYLE = DYNAMIC;
 				OTHER_LDFLAGS = (
 					"-lflext-max_sd",
-					"-lessentia",
+					"-lessentia_rt",
 					"-lfftw3f",
-					"-lyaml",
-					"-read_only_relocs",
-					suppress,
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
@@ -448,20 +407,19 @@
 				);
 				WRAPPER_EXTENSION = mxo;
 				ZERO_LINK = YES;
+				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Development;
 		};
 		E9A5BC900A33819900AD9F03 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SYSTEM_LIBRARY_DIR)/Frameworks/Accelerate.framework/Versions/A/Frameworks",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"/Users/carthach/Dev/git/max5-sdk/c74support/max-includes",
+					"/Users/carthach/Dev/git/max5-sdk/c74support/msp-includes",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -471,19 +429,18 @@
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
 					"$(maxsdk)/msp-includes",
+					/usr/local/include,
+					/usr/local/include/flext,
 				);
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				LIBRARY_STYLE = DYNAMIC;
 				OTHER_LDFLAGS = (
 					"-lflext-max_s",
-					"-lessentia",
+					"-lessentia_rt",
 					"-lfftw3f",
-					"-lyaml",
-					"-read_only_relocs",
-					suppress,
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
@@ -496,34 +453,34 @@
 				);
 				WRAPPER_EXTENSION = mxo;
 				ZERO_LINK = NO;
+				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Deployment;
 		};
 		E9A5BC910A33819900AD9F03 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SYSTEM_LIBRARY_DIR)/Frameworks/Accelerate.framework/Versions/A/Frameworks",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"/Users/carthach/Dev/git/max5-sdk/c74support/max-includes",
+					"/Users/carthach/Dev/git/max5-sdk/c74support/msp-includes",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "FLEXT_SYS=1";
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
 					"$(maxsdk)/msp-includes",
+					/usr/local/include,
+					/usr/local/include/flext,
 				);
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = "source/xsample-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				LIBRARY_STYLE = DYNAMIC;
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = "essentiaRT~";
+				PRODUCT_NAME = xsample;
 				SECTORDER_FLAGS = "";
 				VALID_ARCHS = i386;
 				WARNING_CFLAGS = (
@@ -532,14 +489,13 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = mxo;
+				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Default;
 		};
 		E9A5BC930A33819900AD9F03 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LIBRARY = "libstdc++";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -547,72 +503,31 @@
 					_DEBUG,
 					FLEXT_USESIMD,
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/include,
-					/usr/local/include/flext,
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				PD = "/Applications/Pd-extended.app/Contents/Resources";
+				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
-				SDKROOT = macosx;
-				VALID_ARCHS = i386;
-				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Development;
 		};
 		E9A5BC940A33819900AD9F03 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LIBRARY = "libstdc++";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					FLEXT_USESIMD,
 				);
 				GCC_STRICT_ALIASING = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/include,
-					/usr/local/include/flext,
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				PD = "/Applications/Pd-extended.app/Contents/Resources";
+				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
-				SDKROOT = macosx;
-				VALID_ARCHS = i386;
-				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
 			};
 			name = Deployment;
 		};
 		E9A5BC950A33819900AD9F03 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LIBRARY = "libstdc++";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/include,
-					/usr/local/include/flext,
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_LDFLAGS = "";
-				PD = "/Applications/Pd-extended.app/Contents/Resources";
-				SDKROOT = macosx;
-				VALID_ARCHS = i386;
-				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
+				MACOSX_DEPLOYMENT_TARGET = "";
 			};
 			name = Default;
 		};

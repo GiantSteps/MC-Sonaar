@@ -28,5 +28,5 @@ HDRS=main.h EssentiaOnset.h EssentiaSFX.h
 #*nix
 
 #Windows
-LIBS=-lessentia -lfftw3f -lyaml
+LIBS=-lessentia_rt -lfftw3f
 
