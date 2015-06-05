@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>36C8CB69-BB45-4FE8-A1FF-6C8685DE31FB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>essentiaRT~Back</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>16BB7317-4217-4DA9-B3AB-9026C993F0BC</key>
+		<string>ssh://github.com/GiantSteps/MC-Sonaar.git</string>
+		<key>19B3B297-076F-4F60-9201-A5577160D9BC</key>
+		<string>ssh://github.com/GiantSteps/essentia.git</string>
+		<key>1DE5FBB6-3964-4ABD-BB53-88CD7D035C33</key>
+		<string>ssh://github.com/MartinHN/essentiaX.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>essentiaRT~Back/essentiaRT~Back.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>16BB7317-4217-4DA9-B3AB-9026C993F0BC</key>
+		<string>../../..</string>
+		<key>19B3B297-076F-4F60-9201-A5577160D9BC</key>
+		<string>../../../../../Essentia</string>
+		<key>1DE5FBB6-3964-4ABD-BB53-88CD7D035C33</key>
+		<string>../../../../../essentiaX</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/GiantSteps/MC-Sonaar.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>16BB7317-4217-4DA9-B3AB-9026C993F0BC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>19B3B297-076F-4F60-9201-A5577160D9BC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Essentia</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1DE5FBB6-3964-4ABD-BB53-88CD7D035C33</string>
+			<key>IDESourceControlWCCName</key>
+			<string>essentiaX</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>16BB7317-4217-4DA9-B3AB-9026C993F0BC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MC-Sonaar</string>
+		</dict>
+	</array>
+</dict>
+</plist>

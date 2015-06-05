@@ -42,7 +42,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
                         "silentFrames","drop"
                         );
     
-    w = factory.create("Windowing","Normalize",true);
+    w = factory.create("Windowing");
     env = factory.create("Envelope");
     
     
@@ -117,7 +117,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
     
     network = new scheduler::Network(gen);
-    network->init();
+    network->run();
     
 }
 
@@ -135,7 +135,7 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
     gen->add(&audioFrameIn[0],audioFrameIn.size());
     gen->process();
     
-    network->runStack();
+//    network->runStack();
     
 
     
@@ -157,8 +157,9 @@ void EssentiaSFX::aggregate(){
     // avoid first onset and empty onsets
     if(aggrPool.getRealPool().size()>0 && aggrPool.value<Real>("loudness.mean")>0){
         try {
+            
             // call should stop for accumulator algorythms
-            network->runStack(true);
+            network->run();
             // reset Algos and set shouldstop=false
             network->reset();
         } catch (EssentiaException) {

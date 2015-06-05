@@ -41,15 +41,15 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
 
     
-    w = factory.create("Windowing","type","hann","Normalize",true,"zeroPhase",true
+    w = factory.create("Windowing","type","hann","zeroPhase",true
                        );
     
     spectrum = factory.create("Spectrum");
     pspectrum = factory.create("PowerSpectrum");
-    triF = factory.create("Triangularbands","Log",true);
+    triF = factory.create("TriangularBands","log",true);
     
-    superFluxF = factory.create("SuperFluxNovelty","Online",true,"binWidth",3,"frameWidth",2);
-    superFluxP= factory.create("SuperFluxPeaks","rawmode" , true,"threshold" ,threshold/NOVELTY_MULT,"startFromZero",false,"frameRate", sampleRate*1.0/hopSize,"combine",50);
+    superFluxF = factory.create("SuperFluxNovelty","binWidth",3,"frameWidth",2);
+    superFluxP= factory.create("SuperFluxPeaks","threshold" ,threshold/NOVELTY_MULT,"frameRate", sampleRate*1.0/hopSize,"combine",50);
     
 
     
@@ -60,12 +60,19 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     
     
-    gen = factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
+    gen = new essentia::streaming::RingBufferInput();
+    
+    gen->_bufferSize = hopSize*2;
+//    ((Algorithm*)gen)->configure("bufferSize",hopSize*2);//,"blockSize",hopSize);
     
     // buffer for getting the onset back
-    essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
+//    essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
+    essout = new essentia::streaming::RingBufferOutput();
+    essout->_bufferSize = 2;
     // Audio Rate output, ATM , SuperFlux Novelty function
-    DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
+//    DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
+    DBGOUT = new essentia::streaming::RingBufferOutput();
+    DBGOUT->_bufferSize = 2;
     
     probe = new streaming::VectorOutput< vector<Real> >();
     
@@ -104,8 +111,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     
     network = new scheduler::Network(gen);
-    network->init();
-
+//    network->init();
+network->run();
 }
 
 
@@ -114,10 +121,11 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     gen->process();
     
 
-    network->runStack();
+    
     
     output.resize(audioFrameIn.size());
     int retrievedSize = DBGOUT->get(&output[0], output.size());
+    
     Real audioout = retrievedSize>0?output[retrievedSize-1]*NOVELTY_MULT : 0;
 
     

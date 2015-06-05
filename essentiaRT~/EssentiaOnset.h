@@ -53,7 +53,7 @@ public:
     essentia::streaming::Algorithm *w,*spectrum,*triF,*superFluxF,*superFluxP, * fc,*centroidF,*mfccF,*pspectrum;
     
     //// IO
-    streaming::Algorithm* gen;
+    essentia::streaming::RingBufferInput* gen;
     streaming::RingBufferOutput* essout;
     streaming::RingBufferOutput* DBGOUT;
     streaming::VectorOutput< vector<Real> > * probe;
