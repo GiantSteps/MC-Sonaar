@@ -32,17 +32,23 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <functional>
 using std::vector;
 
+#include "essentia/essentia.h"
 #include <essentia/algorithmfactory.h>
 #include <essentia/essentiamath.h>
 #include <essentia/pool.h>
 #include <essentia/streaming/algorithms/poolstorage.h>
 #include <essentia/debugging.h>
 
+
+#include "helper.h"
+
 using namespace std;
 using namespace essentia;
 using namespace essentia::standard;
+using namespace Helper;
 
 
 
@@ -52,52 +58,19 @@ using namespace essentia::standard;
 #error You need at least flext version 0.4.0
 #endif
 
-//stop aggregating after 10s if sfx are set on ioi (delMode = 0)
-#define MAX_SFX_TIME 10
 
-namespace Helper {
 
-    flext::AtomList floatVectorToList(const std::vector<float>& floatVector) {
-        flext::AtomList listOut(floatVector.size());
-        
-        for(int i=0; i<floatVector.size(); i++) {
-            t_atom value;
-            flext::SetFloat(value, floatVector[i]);
-            
-            listOut[i] = value;
-        }
-        return listOut;
-    }
-
-    flext::AtomList stringVectorToList(const std::vector<std::string>& stringVector) {
-        flext::AtomList listOut(stringVector.size());
-        
-        for(int i=0; i<stringVector.size(); i++) {
-            t_atom value;
-            flext::SetString(value, stringVector[i].c_str());
-            
-            listOut[i] = value;
-        }
-        return listOut;
-    }
-    
-    Real getReal(t_atom a){
-
-       return 0.0;
-    }
-
-};
 
 
 class essentiaRT2 : public flext_dsp
 {
 public:
     FLEXT_HEADER_S(essentiaRT2, flext_dsp, setup)
-
+    
     essentiaRT2(int argc,const t_atom *argv);
     ~essentiaRT2();
-//// Flext
-    void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);    
+    //// Flext
+    void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);
     void my_bang();
     void parseArgs(int argc,const t_atom *argv);
     void buildAlgo();
@@ -105,58 +78,49 @@ public:
     ///// Essentia Config
     //void outputListOfFeatures(const std::map<string, vector<Real> >& features);
     int sampleRate ;
-    int frameSize ;
-    int hopSize;
     
-    typedef struct{
-
-        int fR=1024;
-        int hop=1024;
-        string name="HPCP";
-        double outRate=0;
-        map<string,string> paramsS;
-        map<string,float> paramsF;
-
-        
-    }algo;
-    algo curAlgo;
+    int fR;
+    int hop;
+    string name="HPCP";
+    double outRate;
+    map<string,string> paramsS;
+    map<string,float> paramsF;
+ 
+    bool compute();
     
-
+    
     
 protected:
-
+    
     //Essentia algo
-    essentia::streaming::Algorithm* myAlgo;
-    essentia::streaming::Algorithm* FC;
-
+    essentia::standard::Algorithm* myAlgo;
+    
+    vector<ioStruct> outputStruct;
+    vector < vector < Real> > inputVectors;
     
     ///essentia Environement
-    int essentiaBufferCounter;
-    vector<Real> audioBuffer,audioBufferOut;
-    std::map<string, vector<Real> > getFeatures(Pool p);
-    void outputListOfFeatures(const std::map<string, vector<Real> >& features,int outlet = 1);
     
-    
-    Pool pool;
-
+    int audioBufferCounter;
+    vector<Real> audioBuffer;
     
     
     flext::Timer OutTimer;
     void outputIt(void *);
-
+    
 private:
     static void setup(t_classid c);
-
+    
     FLEXT_CALLBACK(my_bang)
     FLEXT_CALLBACK_T(outputIt)
-
-    int blockCount = 0;
-    int blockCountMax = 1;
+    
+    static bool inited ;
     
     
-
     
-
+    
+    
+    
+    
 };
 FLEXT_NEW_DSP_V("essentiaRT2~", essentiaRT2)
 #endif

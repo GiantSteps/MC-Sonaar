@@ -1,0 +1,6 @@
+#N canvas 568 45 450 300 10;
+#X obj 176 -28 slider 127 0 15;
+#X obj 82 -15 slider 127 0 15;
+#X obj 90 140 essentiaRT2 MovingAverage size 400;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;

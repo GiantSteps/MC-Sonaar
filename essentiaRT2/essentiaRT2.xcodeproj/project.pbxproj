@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07491CEF1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
+		07491CF41A1E64FA0087E350 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
+		07491CFB1A1E70540087E350 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9974E53077083C700206F68 /* essentiaRT~.mxo */; };
+		07491CFE1A1E71050087E350 /* essentiaRT2.pd_darwin in Copy Files */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* essentiaRT2.pd_darwin */; };
+		07491D001A1E72330087E350 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CFF1A1E72330087E350 /* MaxAPI.framework */; };
+		07491D021A1E723B0087E350 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491D011A1E723B0087E350 /* MaxAudioAPI.framework */; };
+		07A865E31A1E4544008354B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
+		07A865E41A1E4544008354B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
+		07A865E81A1E4544008354B9 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
+		6FB4308A1B27539E006BAA24 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6FA5A4A11B21F0AD002C23E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6FD0EB0E197E7B070093FFB6;
+			remoteInfo = essentiaX;
+		};
+		6FA5A4A31B21F0AD002C23E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6FA5A49B1B21EFAF002C23E4;
+			remoteInfo = essentiaRT;
+		};
+		6FDC781E1B21F0DB008F6A99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FA5A2AC1B21EFAF002C23E4;
+			remoteInfo = essentiaRT;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		07A865BF1A1E3860008354B9 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = $SRCROOT;
+			dstSubfolderSpec = 0;
+			files = (
+				07491CFE1A1E71050087E350 /* essentiaRT2.pd_darwin in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9974EC207708C9300206F68 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = $SRCROOT/../Max/bin;
+			dstSubfolderSpec = 0;
+			files = (
+				07491CFB1A1E70540087E350 /* essentiaRT~.mxo in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		07491CFF1A1E72330087E350 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = /Library/Frameworks/MaxAPI.framework; sourceTree = "<absolute>"; };
+		07491D011A1E723B0087E350 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = /Library/Frameworks/MaxAudioAPI.framework; sourceTree = "<absolute>"; };
+		07A865D81A1E4544008354B9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		07A865DC1A1E4544008354B9 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = essentiaX.xcodeproj; path = ../../../essentiaX/essentiaX.xcodeproj; sourceTree = "<group>"; };
+		D2AAC09D05546B4700DB518D /* essentiaRT2.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = essentiaRT2.pd_darwin; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9974E53077083C700206F68 /* essentiaRT~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "essentiaRT~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E99A3B760D35508600E692EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC09B05546B4700DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07491CEF1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib in Frameworks */,
+				6FB4308A1B27539E006BAA24 /* libessentiaRT.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9974E51077083C700206F68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07491D021A1E723B0087E350 /* MaxAudioAPI.framework in Frameworks */,
+				07491D001A1E72330087E350 /* MaxAPI.framework in Frameworks */,
+				07491CF41A1E64FA0087E350 /* libstdc++.6.0.9.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DDFF38A45A11DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC09D05546B4700DB518D /* essentiaRT2.pd_darwin */,
+				E9974E53077083C700206F68 /* essentiaRT~.mxo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* xsample */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77ACFE841707C02AAC07 /* Source */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DDFF38A45A11DB9C8B /* Products */,
+			);
+			name = xsample;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */,
+				07491D011A1E723B0087E350 /* MaxAudioAPI.framework */,
+				07491CFF1A1E72330087E350 /* MaxAPI.framework */,
+				07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		08FB77ACFE841707C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				07A865D81A1E4544008354B9 /* main.cpp */,
+				07A865DC1A1E4544008354B9 /* main.h */,
+				E99A3B760D35508600E692EF /* Info.plist */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		6FA5A49D1B21F0AD002C23E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6FA5A4A21B21F0AD002C23E4 /* libessentiaX.a */,
+				6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC09905546B4700DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07A865E81A1E4544008354B9 /* main.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC09C05546B4700DB518D /* pd static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9A5BC8A0A33819900AD9F03 /* Build configuration list for PBXNativeTarget "pd static" */;
+			buildPhases = (
+				D2AAC09905546B4700DB518D /* Headers */,
+				D2AAC09B05546B4700DB518D /* Frameworks */,
+				D2AAC09A05546B4700DB518D /* Sources */,
+				07A865BF1A1E3860008354B9 /* Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6FDC781F1B21F0DB008F6A99 /* PBXTargetDependency */,
+			);
+			name = "pd static";
+			productName = xsample;
+			productReference = D2AAC09D05546B4700DB518D /* essentiaRT2.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		E9974E52077083C700206F68 /* max static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9A5BC8E0A33819900AD9F03 /* Build configuration list for PBXNativeTarget "max static" */;
+			buildPhases = (
+				E9974E4F077083C700206F68 /* Resources */,
+				E9974E50077083C700206F68 /* Sources */,
+				E9974E51077083C700206F68 /* Frameworks */,
+				E9974EC207708C9300206F68 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "max static";
+			productName = "Max xsample static";
+			productReference = E9974E53077083C700206F68 /* essentiaRT~.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = E9A5BC920A33819900AD9F03 /* Build configuration list for PBXProject "essentiaRT2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* xsample */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6FA5A49D1B21F0AD002C23E4 /* Products */;
+					ProjectRef = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				D2AAC09C05546B4700DB518D /* pd static */,
+				E9974E52077083C700206F68 /* max static */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6FA5A4A21B21F0AD002C23E4 /* libessentiaX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libessentiaX.a;
+			remoteRef = 6FA5A4A11B21F0AD002C23E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libessentiaRT.a;
+			remoteRef = 6FA5A4A31B21F0AD002C23E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E9974E4F077083C700206F68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC09A05546B4700DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07A865E31A1E4544008354B9 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9974E50077083C700206F68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07A865E41A1E4544008354B9 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6FDC781F1B21F0DB008F6A99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = essentiaRT;
+			targetProxy = 6FDC781E1B21F0DB008F6A99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E9A5BC8B0A33819900AD9F03 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"FLEXT_SYS=2",
+				);
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/include/flext,
+					$pd_include,
+				);
+				INSTALL_PATH = "$(PD)/extra";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib",
+				);
+				LIBRARY_STYLE = BUNDLE;
+				MACH_O_TYPE = mh_dylib;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+					"-lflext-pd_sd",
+				);
+				PRODUCT_NAME = essentiaRT2;
+				VALID_ARCHS = i386;
+				ZERO_LINK = YES;
+				pd_include = "/Applications/Pd-extended.app/Contents/Resources/src";
+			};
+			name = Development;
+		};
+		E9A5BC8C0A33819900AD9F03 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"FLEXT_SYS=2",
+				);
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/include/flext,
+					$pd_include,
+				);
+				INSTALL_PATH = "$(PD)/extra";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib",
+				);
+				LIBRARY_STYLE = BUNDLE;
+				MACH_O_TYPE = mh_dylib;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+					"-lflext-pd_s",
+				);
+				PRODUCT_NAME = essentiaRT2;
+				VALID_ARCHS = i386;
+				ZERO_LINK = NO;
+				pd_include = "/Applications/Pd-extended.app/Contents/Resources/src";
+			};
+			name = Deployment;
+		};
+		E9A5BC8F0A33819900AD9F03 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$maxsdk/max-includes",
+					"$maxsdk/msp-includes",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"FLEXT_SYS=1",
+				);
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(maxsdk)/max-includes",
+					"$(maxsdk)/msp-includes",
+					/usr/local/include,
+					/usr/local/include/flext,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_STYLE = DYNAMIC;
+				OTHER_LDFLAGS = (
+					"-lflext-max_sd",
+					"-lessentia_rt",
+					"-lfftw3f",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "essentiaRT~";
+				SECTORDER_FLAGS = "";
+				VALID_ARCHS = i386;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = mxo;
+				ZERO_LINK = YES;
+				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
+			};
+			name = Development;
+		};
+		E9A5BC900A33819900AD9F03 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$maxsdk/max-includes",
+					"$maxsdk/msp-includes",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"FLEXT_SYS=1",
+				);
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(maxsdk)/max-includes",
+					"$(maxsdk)/msp-includes",
+					/usr/local/include,
+					/usr/local/include/flext,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_STYLE = DYNAMIC;
+				OTHER_LDFLAGS = (
+					"-lflext-max_s",
+					"-lessentia_rt",
+					"-lfftw3f",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "essentiaRT~";
+				SECTORDER_FLAGS = "";
+				VALID_ARCHS = i386;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = mxo;
+				ZERO_LINK = NO;
+				maxsdk = "/Users/carthach/Dev/git/max5-sdk/c74support";
+			};
+			name = Deployment;
+		};
+		E9A5BC930A33819900AD9F03 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_DEBUG,
+					FLEXT_USESIMD,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				MACOSX_DEPLOYMENT_TARGET = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				VALID_ARCHS = i386;
+			};
+			name = Development;
+		};
+		E9A5BC940A33819900AD9F03 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					FLEXT_USESIMD,
+				);
+				GCC_STRICT_ALIASING = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				MACOSX_DEPLOYMENT_TARGET = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				VALID_ARCHS = i386;
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E9A5BC8A0A33819900AD9F03 /* Build configuration list for PBXNativeTarget "pd static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A5BC8B0A33819900AD9F03 /* Development */,
+				E9A5BC8C0A33819900AD9F03 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		E9A5BC8E0A33819900AD9F03 /* Build configuration list for PBXNativeTarget "max static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A5BC8F0A33819900AD9F03 /* Development */,
+				E9A5BC900A33819900AD9F03 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		E9A5BC920A33819900AD9F03 /* Build configuration list for PBXProject "essentiaRT2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A5BC930A33819900AD9F03 /* Development */,
+				E9A5BC940A33819900AD9F03 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

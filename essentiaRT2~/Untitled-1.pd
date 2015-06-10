@@ -1,2 +1,14 @@
-#N canvas 568 45 450 300 10;
-#X obj 187 140 essentiaRT2~ 2 3 HPCP minFrequency 200;
+#N canvas 788 53 936 322 10;
+#X obj 113 226 print;
+#X obj 187 140 essentiaRT2~ 1024 512 PitchYinFFT;
+#X msg 68 2 open ../Pd/examples/soundfiles/Bonobo-TheNorthBorders-Cirrus.wav
+;
+#X obj 292 215 dac~;
+#X obj 233 57 readsf~ 1 1e+06;
+#X msg 331 38 start;
+#X msg 382 36 stop;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 4 0 3 0;
+#X connect 5 0 4 0;
+#X connect 6 0 4 0;
