@@ -44,7 +44,7 @@ essentiaRT2::essentiaRT2 (int argc,const t_atom *argv)
     audioBuffer = vector<Real> (fR,0.0);
 #endif
     
-
+    
     
 }
 
@@ -70,11 +70,14 @@ void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
             //Fill Essentia vector every hopsize
             audioBuffer[audioBufferCounter] = *(in++);
             
-            if(audioBufferCounter%(hop) == 0){
-                int splitingPoint = (audioBufferCounter+1)%fR;
-                int splitToEnd = fR - splitingPoint;
-                memcpy(&inputVectors[i][0], &audioBuffer[splitingPoint], splitToEnd*sizeof(Real));
-                memcpy(&inputVectors[i][splitToEnd], &audioBuffer[0], splitingPoint*sizeof(Real));
+            audioBufferCounter++;
+            audioBufferCounter%=(fR);
+            if((audioBufferCounter)%(hop) == 0 ){
+                int splitToEnd = fR - audioBufferCounter ;
+                
+                memcpy(&inputVectors[i][0], &audioBuffer[audioBufferCounter], splitToEnd*sizeof(Real));
+                memcpy(&inputVectors[i][splitToEnd], &audioBuffer[0], audioBufferCounter*sizeof(Real));
+                
                 if(i==0){
                     compute();
                     if(outRate==-1){
@@ -82,11 +85,15 @@ void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
                     }
                 }
             }
-            audioBufferCounter++;
-            audioBufferCounter%=(fR);
+            
+            
             
         }
+        
+        
     }
+    
+    
     
     
 }
@@ -108,20 +115,11 @@ bool essentiaRT2::CbMethodResort(int inlet, const t_symbol *s, int argc, const t
         inputStruct[inlet].getNextVectorValue(argc);
         inputStruct[inlet].getVectorValue() = Helper::listToVector(argc,argv);
         myAlgo->input(inputStruct[inlet].name).set(inputStruct[inlet].getVectorValue());
-
+        
     }
     
     if(inlet == 0){
-        for(int i = 0 ; i < outputStruct.size() ; i++){
-            if(outputStruct[i].type == ioStruct::VECTOR){
-                myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextVectorValue());
-            }
-            else{
-                myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextRealValue());
-            }
-        }
-        
-        myAlgo->compute();
+        compute();
         if(outRate<=0)
             outputIt(NULL);
     }
@@ -137,11 +135,14 @@ void essentiaRT2::my_bang() {
 }
 
 void essentiaRT2::outputIt(void *){
-    int i = outputStruct.size()-1;
-    for(auto out:outputStruct){
+    
+    for(int i = outputStruct.size()-1;i>=0 ; i--){
         if(outputStruct[i].isUpdated()){
-            if(out.type==Helper::ioStruct::VECTOR ){
+            if(outputStruct[i].type==Helper::ioStruct::VECTOR ){
                 ToOutList(i,Helper::floatVectorToList(outputStruct[i].aggregateVector()));
+            }
+            else if (outputStruct[i].type == ioStruct::STRING){
+                ToOutString(i, outputStruct[i].aggregateString().c_str());
             }
             else{
                 ToOutFloat(i, outputStruct[i].aggregateReal());
@@ -153,7 +154,7 @@ void essentiaRT2::outputIt(void *){
             post("not Updated");
             post(outputStruct[i].name.c_str());
         }
-        i--;
+     
     }
     
 };
@@ -171,7 +172,9 @@ void essentiaRT2::buildAlgo(){
         if (in.first == "spectrum" ){
             isSpectrum = true;
             fR/=2;
-            
+            fR++;
+            hop/=2;
+            hop++;
         }
     }
 #endif
@@ -189,7 +192,7 @@ void essentiaRT2::buildAlgo(){
     if (std::find(paramNames.begin(), paramNames.end(), "frameSize") != paramNames.end()){
         myAlgo->configure("frameSize",fR);
     }
-
+    
     for(auto a:paramsS){
         myAlgo->configure(a.first,a.second);
     }
@@ -204,8 +207,8 @@ void essentiaRT2::buildAlgo(){
 #else
     inputStruct.resize(myAlgo->inputs().size());
 #endif
-
-
+    
+    
     for(auto in:myAlgo->inputs()){
         post(in.first.c_str());
         post(nameOfType(in.second->typeInfo()).c_str());
@@ -239,6 +242,8 @@ void essentiaRT2::buildAlgo(){
             AddInList(in.first.c_str());
 #endif
         }
+        
+
         inIdx++;
     }
     post(" ");
@@ -255,15 +260,26 @@ void essentiaRT2::buildAlgo(){
             out.second->set(outputStruct[outI].getNextVectorValue());
         }
         else if(out.second->typeInfo() ==typeid( essentia::Real)){
-            outputStruct[outI] = ioStruct(out.first,ioStruct::VECTOR);
+            outputStruct[outI] = ioStruct(out.first,ioStruct::REAL);
             AddOutFloat(out.first.c_str());
             out.second->set(outputStruct[outI].getNextRealValue());
         }
-        else{
+        else if( out.second->typeInfo() ==typeid(string )){
+
+            outputStruct[outI] = ioStruct(out.first,ioStruct::STRING);
+            AddOutSymbol(out.first.c_str());
+            out.second->set(outputStruct[outI].getNextStringValue());
+        
+        }
+        else {
             outputStruct[outI] = ioStruct(out.first,ioStruct::MATRIX);
             AddOutFloat(out.first.c_str());
             post("cant parse outlet of type : " );post( essentia::nameOfType(out.second->typeInfo()).c_str());
         }
+        
+            
+            
+
         post(out.first.c_str());
         outI++;
         
@@ -282,14 +298,19 @@ bool essentiaRT2::compute(){
     for(int i = 0 ; i < outputStruct.size() ; i++){
         
         if(outputStruct[i].type==ioStruct::VECTOR)
-            {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextVectorValue());}
+        {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextVectorValue());}
         
         else if (outputStruct[i].type==ioStruct::REAL)
-            {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextRealValue());}
-        
+        {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextRealValue());}
+        else if (outputStruct[i].type==ioStruct::STRING)
+        {
+            myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextStringValue());
+        }
         // dumb operation for allowing essentia using algos with matrices (not outputed in pd)
         else if (outputStruct[i].type==ioStruct::MATRIX)
-            {myAlgo->output(outputStruct[i].name).set(outputStruct[i].vectorValues);}
+        {myAlgo->output(outputStruct[i].name).set(outputStruct[i].vectorValues);
+            post(("matrix not supported undefined behavior on outlet : "+std::to_string(i)).c_str());
+        }
     }
     myAlgo->compute();
 }
@@ -336,8 +357,21 @@ void essentiaRT2::parseArgs(int argc, const t_atom *argv){
             else{ curName = GetAString(argv[argIdx]);}
         }
         else{
-            if(IsString(argv[argIdx])){paramsS[curName] = GetString(argv[argIdx]);}
-            else if(IsFloat(argv[argIdx])){paramsF[curName] = GetFloat(argv[argIdx]);}
+            // specific arguments
+            if(curName[0] == '_'){
+                if(curName == "_aggr"){
+                    string arg = GetAString(argv[argIdx]);
+                    std::transform(arg.begin(), arg.end(), arg.begin(), ::tolower);
+                    ioStruct::AggrType type = arg == "median"?ioStruct::AggrType::MEDIAN:ioStruct::AggrType::MEAN;
+                    for (auto  t:outputStruct){
+                        t.aggrType = type;
+                    }
+                }
+            }
+            else{
+                if(IsString(argv[argIdx])){paramsS[curName] = GetString(argv[argIdx]);}
+                else if(IsFloat(argv[argIdx])){paramsF[curName] = GetFloat(argv[argIdx]);}
+            }
         }
         argIdx++;
         
