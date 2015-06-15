@@ -4,13 +4,75 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            symbolName = "malloc_error_break"
-            moduleName = "">
+            filePath = "helper.h"
+            timestampString = "455819732.008952"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819436.575143"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "607">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819436.575256"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "619">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819436.57535"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "607">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819436.57544"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "619">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -19,14 +81,42 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EssentiaOnset.cpp"
-            timestampString = "455209362.841846"
+            filePath = "helper.h"
+            timestampString = "455819732.008952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "EssentiaOnset::setup(int fS,int hS,int sR,Pool&amp; poolin,Real threshold)"
-            landmarkType = "5">
+            startingLineNumber = "137"
+            endingLineNumber = "137">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819436.571128"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "672">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819436.571281"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "672">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -35,14 +125,42 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631967.807754"
+            filePath = "helper.h"
+            timestampString = "455819732.008952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "essentiaRT2::buildAlgo()"
-            landmarkType = "5">
+            startingLineNumber = "132"
+            endingLineNumber = "132">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819494.249713"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "577">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819494.249852"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "577">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -51,14 +169,42 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631967.807754"
+            filePath = "helper.h"
+            timestampString = "455819732.008952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "essentiaRT2::buildAlgo()"
-            landmarkType = "5">
+            startingLineNumber = "114"
+            endingLineNumber = "114">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::getNextVectorValue()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819522.818969"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "35">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::getNextVectorValue()"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819522.819113"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "35">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -67,60 +213,42 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631967.807754"
+            filePath = "helper.h"
+            timestampString = "455819732.008952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "essentiaRT2::buildAlgo()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631730.763842"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631730.763842"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631967.807754"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "essentiaRT2::my_bang()"
-            landmarkType = "5">
+            startingLineNumber = "122"
+            endingLineNumber = "122">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819540.923526"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "42">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Helper::ioStruct::aggregateVector()"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/helper.h"
+                  timestampString = "455819540.923669"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "42">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -129,88 +257,42 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Essentia/src/essentia/algorithmfactory.h"
-            timestampString = "455564826.04085"
+            filePath = "main.cpp"
+            timestampString = "456064249.535162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "init()"
-            landmarkType = "7">
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "essentiaRT2::parseArgs(int argc, const t_atom *argv)"
+            landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "essentia::EssentiaFactory&lt;essentia::standard::Algorithm&gt;::init()"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
                   moduleName = "essentiaRT2~.pd_darwin"
-                  urlString = "file:///Users/mhermant/Documents/Work/Dev/Essentia/src/essentia/algorithmfactory.h"
-                  timestampString = "455631858.468335"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.182241"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "31">
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "251">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "essentia::EssentiaFactory&lt;essentia::streaming::Algorithm&gt;::init()"
-                  moduleName = "essentiaRT2~.pd_darwin"
-                  urlString = "file:///Users/mhermant/Documents/Work/Dev/Essentia/src/essentia/algorithmfactory.h"
-                  timestampString = "455631858.468529"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.182384"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "31">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Essentia/src/essentia/algorithmfactory.h"
-            timestampString = "455564826.04085"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "init()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "essentia::EssentiaFactory&lt;essentia::standard::Algorithm&gt;::init()"
-                  moduleName = "essentiaRT2~.pd_darwin"
-                  urlString = "file:///Users/mhermant/Documents/Work/Dev/Essentia/src/essentia/algorithmfactory.h"
-                  timestampString = "455565025.586987"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "168">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "essentia::EssentiaFactory&lt;essentia::streaming::Algorithm&gt;::init()"
-                  moduleName = "essentiaRT2~.pd_darwin"
-                  urlString = "file:///Users/mhermant/Documents/Work/Dev/Essentia/src/essentia/algorithmfactory.h"
-                  timestampString = "455565025.587124"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "168">
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "251">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -221,42 +303,88 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../Essentia/src/essentia/algorithmfactory.h"
-            timestampString = "455564826.04085"
+            filePath = "main.cpp"
+            timestampString = "456064249.535162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "shutdown()"
-            landmarkType = "7">
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "essentiaRT2::parseArgs(int argc, const t_atom *argv)"
+            landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "essentia::EssentiaFactory&lt;essentia::standard::Algorithm&gt;::shutdown()"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
                   moduleName = "essentiaRT2~.pd_darwin"
-                  urlString = "file:///Users/mhermant/Documents/Work/Dev/Essentia/src/essentia/algorithmfactory.h"
-                  timestampString = "455631858.481276"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.182903"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
-                  offsetFromSymbolStart = "205">
+                  startingLineNumber = "298"
+                  endingLineNumber = "298"
+                  offsetFromSymbolStart = "296">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "essentia::EssentiaFactory&lt;essentia::streaming::Algorithm&gt;::shutdown()"
-                  moduleName = "essentiaRT2~.pd_darwin"
-                  urlString = "file:///Users/mhermant/Documents/Work/Dev/Essentia/src/essentia/algorithmfactory.h"
-                  timestampString = "455631858.481512"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.183022"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
-                  offsetFromSymbolStart = "205">
+                  startingLineNumber = "298"
+                  endingLineNumber = "298"
+                  offsetFromSymbolStart = "296">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "main.cpp"
+            timestampString = "456064249.535162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "essentiaRT2::parseArgs(int argc, const t_atom *argv)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.183463"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "289"
+                  endingLineNumber = "289"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.183579"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "289"
+                  endingLineNumber = "289"
+                  offsetFromSymbolStart = "88">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -268,77 +396,103 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.cpp"
-            timestampString = "455631730.763842"
+            timestampString = "456064249.535162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "essentiaRT2::CbMethodResort(int inlet, const t_symbol *s, int argc, const t_atom *argv)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to std::__1::basic_ostringstream&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;::~basic_ostringstream()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.177291"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to std::__1::basic_ostringstream&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;::~basic_ostringstream()"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.177462"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "essentiaRT2::CbMethodResort(int, _symbol const*, int, _atom const*)"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058468.177602"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "1599">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.cpp"
-            timestampString = "455631967.807754"
+            timestampString = "456064249.535162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "essentiaRT2::parseArgs(int argc, const t_atom *argv)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631967.807754"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "essentiaRT2::buildAlgo()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631730.763842"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "455631967.807754"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)"
-            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
+                  moduleName = "essentiaRT2~.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058489.37909"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "315"
+                  endingLineNumber = "315"
+                  offsetFromSymbolStart = "525">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "essentiaRT2::parseArgs(int, _atom const*)"
+                  moduleName = "essentiaRT2.pd_darwin"
+                  urlString = "file:///Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT2~/main.cpp"
+                  timestampString = "456058489.37923"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "315"
+                  endingLineNumber = "315"
+                  offsetFromSymbolStart = "525">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

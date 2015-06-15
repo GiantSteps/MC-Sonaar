@@ -6,8 +6,7 @@
 //
 //
 
-#ifndef essentiaRT2__main_h
-#define essentiaRT2__main_h
+#pragma once
 
 
 /*
@@ -70,7 +69,12 @@ public:
     essentiaRT2(int argc,const t_atom *argv);
     ~essentiaRT2();
     //// Flext
+#ifdef FLEXT_TILDE
     void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);
+#else
+    bool CbMethodResort(int inlet, const t_symbol *s, int argc, const t_atom *argv);
+        
+#endif
     void my_bang();
     void parseArgs(int argc,const t_atom *argv);
     void buildAlgo();
@@ -88,20 +92,27 @@ public:
  
     bool compute();
     
+
     
     
 protected:
     
     //Essentia algo
     essentia::standard::Algorithm* myAlgo;
-    
     vector<ioStruct> outputStruct;
-    vector < vector < Real> > inputVectors;
     
+#ifdef FLEXT_TILDE
+    vector < vector < Real> > inputVectors;
     ///essentia Environement
     
     int audioBufferCounter;
     vector<Real> audioBuffer;
+    bool isSpectrum;
+#else
+    vector < ioStruct > inputStruct;
+#endif
+    
+
     
     
     flext::Timer OutTimer;
@@ -122,5 +133,9 @@ private:
     
     
 };
+
+#ifdef FLEXT_TILDE
 FLEXT_NEW_DSP_V("essentiaRT2~", essentiaRT2)
+#else
+FLEXT_NEW_V("essentiaRT2", essentiaRT2)
 #endif

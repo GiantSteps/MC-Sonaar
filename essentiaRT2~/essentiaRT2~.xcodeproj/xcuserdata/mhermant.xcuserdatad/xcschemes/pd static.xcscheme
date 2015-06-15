@@ -14,8 +14,22 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2AAC09C05546B4700DB518D"
+               BlueprintIdentifier = "6F981C091B29829600876601"
                BuildableName = "essentiaRT2~.pd_darwin"
+               BlueprintName = "pd static_tilde"
+               ReferencedContainer = "container:essentiaRT2~.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D2AAC09C05546B4700DB518D"
+               BuildableName = "essentiaRT2.pd_darwin"
                BlueprintName = "pd static"
                ReferencedContainer = "container:essentiaRT2~.xcodeproj">
             </BuildableReference>
@@ -49,8 +63,11 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Deployment"
+      buildConfiguration = "Development"
       debugDocumentVersioning = "YES">
+      <PathRunnable
+         FilePath = "/Applications/Pd-extended.app/Contents/Resources/bin/pd">
+      </PathRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Development">

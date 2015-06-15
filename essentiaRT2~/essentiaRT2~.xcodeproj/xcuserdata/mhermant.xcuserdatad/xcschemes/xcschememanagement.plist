@@ -7,6 +7,11 @@
 		<key>max static.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>pd static tilde.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
 		<key>pd static.xcscheme</key>
@@ -17,6 +22,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6F981BF61B29805700876601</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6F981C091B29829600876601</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D2AAC09C05546B4700DB518D</key>
 		<dict>
 			<key>primary</key>
