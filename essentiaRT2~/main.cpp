@@ -2,8 +2,7 @@
 #include "essentia/essentia.h"
 
 
-bool essentiaRT2::inited = false;
-
+bool essentiaRT2::debug = false;
 
 void parseArgs(int argc,const t_atom *argv);
 
@@ -13,7 +12,7 @@ void parseArgs(int argc,const t_atom *argv);
 void essentiaRT2::setup(t_classid c)
 {
     essentia::init();
-    post("setup");
+    log("setup");
     
 }
 
@@ -25,15 +24,15 @@ essentiaRT2::essentiaRT2 (int argc,const t_atom *argv)
     FLEXT_ADDBANG(0,my_bang);
     FLEXT_ADDTIMER(OutTimer,outputIt);
     
-    post("creating");
+    log("creating");
     /////// PARAMS //////////////
     sampleRate = Samplerate();
-    fR=Blocksize();
-    hop=Blocksize();
+    frameSize=Blocksize();
+    hopSize=Blocksize();
     
     
     outRate = -1;
-    
+    aggrSize = 0;
     
     
     parseArgs(argc,argv);
@@ -41,7 +40,7 @@ essentiaRT2::essentiaRT2 (int argc,const t_atom *argv)
     
 #ifdef FLEXT_TILDE
     audioBufferCounter = 0;
-    audioBuffer = vector<Real> (fR,0.0);
+    audioBuffer = vector<Real> (frameSize,0.0);
 #endif
     
     
@@ -67,13 +66,13 @@ void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
         const t_sample *in = insigs[i];
         n = my_n;
         while(n--) {
-            //Fill Essentia vector every hopsize
+            //Fill Essentia vector every hopSizesize
             audioBuffer[audioBufferCounter] = *(in++);
             
             audioBufferCounter++;
-            audioBufferCounter%=(fR);
-            if((audioBufferCounter)%(hop) == 0 ){
-                int splitToEnd = fR - audioBufferCounter ;
+            audioBufferCounter%=(frameSize);
+            if((audioBufferCounter)%(hopSize) == 0 ){
+                int splitToEnd = frameSize - audioBufferCounter ;
                 
                 memcpy(&inputVectors[i][0], &audioBuffer[audioBufferCounter], splitToEnd*sizeof(Real));
                 memcpy(&inputVectors[i][splitToEnd], &audioBuffer[0], audioBufferCounter*sizeof(Real));
@@ -102,8 +101,7 @@ bool essentiaRT2::CbMethodResort(int inlet, const t_symbol *s, int argc, const t
     
     if(inputStruct[inlet].type == ioStruct::REAL){
         if(argc>1){
-            post("too much element on inlet");
-            post(std::to_string(inlet).c_str());
+            err("too much element on inlet  : "+std::to_string(inlet));
         }
         else{
             inputStruct[inlet].getNextRealValue() = GetAFloat(argv[0]);
@@ -112,8 +110,8 @@ bool essentiaRT2::CbMethodResort(int inlet, const t_symbol *s, int argc, const t
     }
     else if(inputStruct[inlet].type == ioStruct::VECTOR ){
         
-        inputStruct[inlet].getNextVectorValue(argc);
-        inputStruct[inlet].getVectorValue() = Helper::listToVector(argc,argv);
+        inputStruct[inlet].getNextVectorValue(argc) = Helper::listToVector(argc,argv);
+        
         myAlgo->input(inputStruct[inlet].name).set(inputStruct[inlet].getVectorValue());
         
     }
@@ -137,7 +135,9 @@ void essentiaRT2::my_bang() {
 void essentiaRT2::outputIt(void *){
     
     for(int i = outputStruct.size()-1;i>=0 ; i--){
-        if(outputStruct[i].isUpdated()){
+        if(!outputStruct[i].isUpdated()){
+            log("not Updated : " + outputStruct[i].name);
+        }
             if(outputStruct[i].type==Helper::ioStruct::VECTOR ){
                 ToOutList(i,Helper::floatVectorToList(outputStruct[i].aggregateVector()));
             }
@@ -149,12 +149,9 @@ void essentiaRT2::outputIt(void *){
                 
             }
             outputStruct[i].resetCounter();
-        }
-        else{
-            post("not Updated");
-            post(outputStruct[i].name.c_str());
-        }
-     
+
+        
+    
     }
     
 };
@@ -165,32 +162,32 @@ void essentiaRT2::outputIt(void *){
 void essentiaRT2::buildAlgo(){
     
     myAlgo = essentia::standard::AlgorithmFactory::create(name);
-    post("building Algo");
+    log("building Algo : " + name);
 #ifdef FLEXT_TILDE
     isSpectrum = false;
     for(auto in:myAlgo->inputs()){
         if (in.first == "spectrum" ){
             isSpectrum = true;
-            fR/=2;
-            fR++;
-            hop/=2;
-            hop++;
+            frameSize/=2;
+            frameSize++;
+            hopSize/=2;
+            hopSize++;
         }
     }
 #endif
     vector<string> paramNames = myAlgo->defaultParameters().keys();
     
-    if (std::find(paramNames.begin(), paramNames.end(), "frameRate") != paramNames.end()){
-        myAlgo->configure("frameRate",sampleRate*1.0/hop);
+    if (std::find(paramNames.begin(), paramNames.end(), "frameSizeameRate") != paramNames.end()){
+        myAlgo->configure("frameSizeameRate",sampleRate*1.0/hopSize);
     }
     if (std::find(paramNames.begin(), paramNames.end(), "sampleRate") != paramNames.end()){
         myAlgo->configure("sampleRate",sampleRate);
     }
-    if (std::find(paramNames.begin(), paramNames.end(), "hopSize") != paramNames.end()){
-        myAlgo->configure("hopSize",hop);
+    if (std::find(paramNames.begin(), paramNames.end(), "hopSizeSize") != paramNames.end()){
+        myAlgo->configure("hopSizeSize",hopSize);
     }
-    if (std::find(paramNames.begin(), paramNames.end(), "frameSize") != paramNames.end()){
-        myAlgo->configure("frameSize",fR);
+    if (std::find(paramNames.begin(), paramNames.end(), "frameSizeameSize") != paramNames.end()){
+        myAlgo->configure("frameSizeameSize",frameSize);
     }
     
     for(auto a:paramsS){
@@ -199,8 +196,8 @@ void essentiaRT2::buildAlgo(){
     for(auto a:paramsF){
         myAlgo->configure(a.first,a.second);
     }
-    post(" ");
-    post("inputs:");
+
+    log("inputs:");
     int inIdx = 0;
 #ifdef FLEXT_TILDE
     inputVectors.resize(myAlgo->inputs().size());
@@ -208,14 +205,14 @@ void essentiaRT2::buildAlgo(){
     inputStruct.resize(myAlgo->inputs().size());
 #endif
     
+
     
     for(auto in:myAlgo->inputs()){
-        post(in.first.c_str());
-        post(nameOfType(in.second->typeInfo()).c_str());
+        log("   " +in.first +" : "+ nameOfType(in.second->typeInfo()));
         if(in.second->typeInfo() ==typeid( std::vector<essentia::Real>)){
             
 #ifdef FLEXT_TILDE
-            inputVectors[inIdx]  = vector<Real>(fR,0);
+            inputVectors[inIdx]  = vector<Real>(frameSize,0);
             AddInSignal(in.first.c_str());
             in.second->set(inputVectors[inIdx]);
 #else
@@ -226,16 +223,14 @@ void essentiaRT2::buildAlgo(){
         else if(in.second->typeInfo() ==typeid(essentia::Real)){
             
 #ifdef FLEXT_TILDE
-            error("Real input notAllowed in tilde mode ignoring input : ");
-            error(in.first.c_str());
-            error("use essentiaRT2 object");
+            err("Real input notAllowed in tilde mode ignoring input : " + in.first + " , use essentiaRT2 object");
 #else
             inputStruct[inIdx] = ioStruct(in.first,ioStruct::REAL);
             AddInFloat(in.first.c_str());
 #endif
         }
         else if( in.second->typeInfo() ==typeid(std::vector< std::vector< essentia::Real> > )){
-            post("matrix not supported");
+            err("matrix not supported");
             
 #ifndef FLEXT_TILDE
             inputStruct[inIdx] = ioStruct(in.first,ioStruct::MATRIX);
@@ -246,41 +241,45 @@ void essentiaRT2::buildAlgo(){
 
         inIdx++;
     }
-    post(" ");
-    post("outputs:");
+
+    log("outputs:");
     outputStruct.resize(myAlgo->outputs().size());
     int outI = 0;
+#ifdef FLEXT_TILDE
+    aggrSize = outRate>0? outRate  *  sampleRate*1.0/hopSize + 10 : 1;
+#else
+    if(aggrSize==0)aggrSize = 1;
+#endif
+    
     for(auto out:myAlgo->outputs()){
-        
-        
-        post(nameOfType(out.second->typeInfo()).c_str());
+        log("   "+out.first +"  : " + nameOfType(out.second->typeInfo()));
         if(out.second->typeInfo() ==typeid( std::vector<essentia::Real>)){
-            outputStruct[outI] = ioStruct(out.first,ioStruct::VECTOR);
+            outputStruct[outI] = ioStruct(out.first,ioStruct::VECTOR,aggrSize);
             AddOutList(out.first.c_str());
             out.second->set(outputStruct[outI].getNextVectorValue());
         }
         else if(out.second->typeInfo() ==typeid( essentia::Real)){
-            outputStruct[outI] = ioStruct(out.first,ioStruct::REAL);
+            outputStruct[outI] = ioStruct(out.first,ioStruct::REAL,aggrSize);
             AddOutFloat(out.first.c_str());
             out.second->set(outputStruct[outI].getNextRealValue());
         }
         else if( out.second->typeInfo() ==typeid(string )){
 
-            outputStruct[outI] = ioStruct(out.first,ioStruct::STRING);
+            outputStruct[outI] = ioStruct(out.first,ioStruct::STRING,aggrSize);
             AddOutSymbol(out.first.c_str());
             out.second->set(outputStruct[outI].getNextStringValue());
         
         }
         else {
-            outputStruct[outI] = ioStruct(out.first,ioStruct::MATRIX);
+            outputStruct[outI] = ioStruct(out.first,ioStruct::MATRIX,aggrSize);
             AddOutFloat(out.first.c_str());
-            post("cant parse outlet of type : " );post( essentia::nameOfType(out.second->typeInfo()).c_str());
+            log("cant parse outlet of type : " + essentia::nameOfType(out.second->typeInfo()));
         }
         
             
             
 
-        post(out.first.c_str());
+        
         outI++;
         
     }
@@ -298,36 +297,36 @@ bool essentiaRT2::compute(){
     for(int i = 0 ; i < outputStruct.size() ; i++){
         
         if(outputStruct[i].type==ioStruct::VECTOR)
-        {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextVectorValue());}
+            {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextVectorValue());}
         
         else if (outputStruct[i].type==ioStruct::REAL)
-        {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextRealValue());}
+            {myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextRealValue());}
         else if (outputStruct[i].type==ioStruct::STRING)
-        {
+            {
             myAlgo->output(outputStruct[i].name).set(outputStruct[i].getNextStringValue());
-        }
+            }
         // dumb operation for allowing essentia using algos with matrices (not outputed in pd)
         else if (outputStruct[i].type==ioStruct::MATRIX)
-        {myAlgo->output(outputStruct[i].name).set(outputStruct[i].vectorValues);
-            post(("matrix not supported undefined behavior on outlet : "+std::to_string(i)).c_str());
-        }
+            {myAlgo->output(outputStruct[i].name).set(outputStruct[i].vectorValues);
+            log("matrix not supported undefined behavior on outlet : "+std::to_string(i));
+            }
     }
     myAlgo->compute();
 }
 
 
 void essentiaRT2::parseArgs(int argc, const t_atom *argv){
-    if(argc == 0){post ( "no argument provided" );return;}
+    if(argc == 0){err ( "no argument provided" );return;}
     int argIdx = 0;
     
     while (argIdx < argc &&IsFloat(argv[argIdx]) && !IsString(argv[argIdx])) {
         
         switch (argIdx) {
             case 0:
-                fR = GetFloat(argv[argIdx]);
+                frameSize = GetFloat(argv[argIdx]);
                 break;
             case 1:
-                hop = GetFloat(argv[argIdx]);
+                hopSize = GetFloat(argv[argIdx]);
                 
             default:
                 break;
@@ -336,7 +335,7 @@ void essentiaRT2::parseArgs(int argc, const t_atom *argv){
         
     }
     if(!IsString(argv[argIdx])){
-        post("no valid name found");
+        err("no valid name found");
     }
     else{
         name = GetString(argv[argIdx]);
@@ -353,7 +352,7 @@ void essentiaRT2::parseArgs(int argc, const t_atom *argv){
     string curName = "";
     while(argIdx < argc){
         if((argIdx - beginMsg)%2==0){
-            if(!IsString(argv[argIdx])){post("no valid parameter : [name value] list");}
+            if(!IsString(argv[argIdx])){err("no valid parameter : [name value] list");}
             else{ curName = GetAString(argv[argIdx]);}
         }
         else{
@@ -366,6 +365,9 @@ void essentiaRT2::parseArgs(int argc, const t_atom *argv){
                     for (auto  t:outputStruct){
                         t.aggrType = type;
                     }
+                }
+                if(curName == "_aggrS"){
+                    aggrSize = GetAInt(argv[argIdx]);
                 }
             }
             else{

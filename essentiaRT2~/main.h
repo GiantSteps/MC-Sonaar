@@ -83,8 +83,8 @@ public:
     //void outputListOfFeatures(const std::map<string, vector<Real> >& features);
     int sampleRate ;
     
-    int fR;
-    int hop;
+    int frameSize;
+    int hopSize;
     string name="HPCP";
     double outRate;
     map<string,string> paramsS;
@@ -112,7 +112,7 @@ protected:
     vector < ioStruct > inputStruct;
 #endif
     
-
+    int aggrSize;
     
     
     flext::Timer OutTimer;
@@ -123,12 +123,15 @@ private:
     
     FLEXT_CALLBACK(my_bang)
     FLEXT_CALLBACK_T(outputIt)
-    
-    static bool inited ;
-    
-    
+
+    FLEXT_ATTRVAR_B(debug)
     
     
+    static void log(const string & s){if(!debug)post(s.c_str());}
+    static void err(const string & s){error(s.c_str());}
+   
+    
+    static bool debug ;
     
     
     
