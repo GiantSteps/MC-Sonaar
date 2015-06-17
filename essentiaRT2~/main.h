@@ -86,7 +86,7 @@ public:
     int frameSize;
     int hopSize;
     string name="HPCP";
-    double outRate;
+    int outSize,outHopSize;
     map<string,string> paramsS;
     map<string,float> paramsF;
  
@@ -112,19 +112,24 @@ protected:
     vector < ioStruct > inputStruct;
 #endif
     
-    int aggrSize;
+
     
     
     flext::Timer OutTimer;
     void outputIt(void *);
+    void getAlgoDescription();
+    void getAllAlgos();
     
 private:
     static void setup(t_classid c);
     
     FLEXT_CALLBACK(my_bang)
-    FLEXT_CALLBACK_T(outputIt)
-
+    FLEXT_CALLBACK(getAlgoDescription);
+    FLEXT_CALLBACK(getAllAlgos);
     FLEXT_ATTRVAR_B(debug)
+
+    
+    
     
     
     static void log(const string & s){if(!debug)post(s.c_str());}
@@ -132,7 +137,31 @@ private:
    
     
     static bool debug ;
+    bool hasInput = false;
     
+    
+    static short circularShift;
+    char circularPos;
+    bool findCircularPos(short current){
+        
+        if(rotl(circularPos) == current ){
+            if(!stableShift) iteration++;
+            return true;
+        }
+        // lost , we search sync
+        else{
+            for(int i =0 ; i < 16 ; i++){
+                if(rotl(i)==current){
+                    circularPos = i;
+                    break;
+                }
+            }
+            return false;
+        }
+    };
+    bool stableShift;
+    uint iteration=0;
+    short rotl(int shift) {return (circularShift << shift) | (circularShift >> (sizeof(circularShift) * CHAR_BIT - shift)); };
     
     
 };
