@@ -16,39 +16,41 @@
 		07A865E31A1E4544008354B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
 		07A865E41A1E4544008354B9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
 		07A865E81A1E4544008354B9 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
+		3F3BD9511B32D60400309B20 /* helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F3BD9501B32D60400309B20 /* helper.h */; };
+		3F3BD9521B32D60400309B20 /* helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F3BD9501B32D60400309B20 /* helper.h */; };
+		3FD986CA1B3338A4005BD69A /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */; };
+		3FD986CB1B3338A8005BD69A /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */; };
 		6F981C0D1B29829600876601 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
 		6F981C0F1B29829600876601 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
-		6F981C101B29829600876601 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
 		6F981C121B29829600876601 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
 		6F981C1A1B29833D00876601 /* essentiaRT2~.pd_darwin in Copy Files */ = {isa = PBXBuildFile; fileRef = 6F981C191B29829600876601 /* essentiaRT2~.pd_darwin */; };
-		6FB4308A1B27539E006BAA24 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6F981C0B1B29829600876601 /* PBXContainerItemProxy */ = {
+		3F3BD94C1B32D4D900309B20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6FA5A2AC1B21EFAF002C23E4;
-			remoteInfo = essentiaRT;
-		};
-		6FA5A4A11B21F0AD002C23E4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6FD0EB0E197E7B070093FFB6;
 			remoteInfo = essentiaX;
 		};
-		6FA5A4A31B21F0AD002C23E4 /* PBXContainerItemProxy */ = {
+		3F3BD94E1B32D4D900309B20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6FA5A49B1B21EFAF002C23E4;
 			remoteInfo = essentiaRT;
 		};
-		6FDC781E1B21F0DB008F6A99 /* PBXContainerItemProxy */ = {
+		3FD986C41B32FEF0005BD69A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FA5A2AC1B21EFAF002C23E4;
+			remoteInfo = essentiaRT;
+		};
+		3FD986C81B32FEF5005BD69A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6FA5A2AC1B21EFAF002C23E4;
 			remoteInfo = essentiaRT;
@@ -96,9 +98,9 @@
 		07491D011A1E723B0087E350 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = /Library/Frameworks/MaxAudioAPI.framework; sourceTree = "<absolute>"; };
 		07A865D81A1E4544008354B9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		07A865DC1A1E4544008354B9 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = essentiaX.xcodeproj; path = ../../essentiaX/essentiaX.xcodeproj; sourceTree = "<group>"; };
+		3F3BD9501B32D60400309B20 /* helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helper.h; sourceTree = "<group>"; };
 		6F981C191B29829600876601 /* essentiaRT2~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "essentiaRT2~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = essentiaX.xcodeproj; path = ../../../essentiaX/essentiaX.xcodeproj; sourceTree = "<group>"; };
-		6FB0881F1B284D1A00FAA832 /* helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = helper.h; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* essentiaRT2.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = essentiaRT2.pd_darwin; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9974E53077083C700206F68 /* essentiaRT~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "essentiaRT~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99A3B760D35508600E692EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,7 +112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F981C0F1B29829600876601 /* libstdc++.6.0.9.dylib in Frameworks */,
-				6F981C101B29829600876601 /* libessentiaRT.a in Frameworks */,
+				3FD986CB1B3338A8005BD69A /* libessentiaRT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07491CEF1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib in Frameworks */,
-				6FB4308A1B27539E006BAA24 /* libessentiaRT.a in Frameworks */,
+				3FD986CA1B3338A4005BD69A /* libessentiaRT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +161,7 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */,
+				3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */,
 				07491D011A1E723B0087E350 /* MaxAudioAPI.framework */,
 				07491CFF1A1E72330087E350 /* MaxAPI.framework */,
 				07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */,
@@ -172,17 +174,17 @@
 			children = (
 				07A865D81A1E4544008354B9 /* main.cpp */,
 				07A865DC1A1E4544008354B9 /* main.h */,
-				6FB0881F1B284D1A00FAA832 /* helper.h */,
+				3F3BD9501B32D60400309B20 /* helper.h */,
 				E99A3B760D35508600E692EF /* Info.plist */,
 			);
 			name = Source;
 			sourceTree = "<group>";
 		};
-		6FA5A49D1B21F0AD002C23E4 /* Products */ = {
+		3F3BD9481B32D4D900309B20 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6FA5A4A21B21F0AD002C23E4 /* libessentiaX.a */,
-				6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */,
+				3F3BD94D1B32D4D900309B20 /* libessentiaX.a */,
+				3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,6 +196,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3BD9511B32D60400309B20 /* helper.h in Headers */,
 				6F981C0D1B29829600876601 /* main.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +205,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3BD9521B32D60400309B20 /* helper.h in Headers */,
 				07A865E81A1E4544008354B9 /* main.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,7 +225,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6F981C0A1B29829600876601 /* PBXTargetDependency */,
+				3FD986C91B32FEF5005BD69A /* PBXTargetDependency */,
 			);
 			name = "pd static_tilde";
 			productName = xsample;
@@ -240,7 +244,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6FDC781F1B21F0DB008F6A99 /* PBXTargetDependency */,
+				3FD986C51B32FEF0005BD69A /* PBXTargetDependency */,
 			);
 			name = "pd static";
 			productName = xsample;
@@ -285,8 +289,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 6FA5A49D1B21F0AD002C23E4 /* Products */;
-					ProjectRef = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+					ProductGroup = 3F3BD9481B32D4D900309B20 /* Products */;
+					ProjectRef = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -299,18 +303,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6FA5A4A21B21F0AD002C23E4 /* libessentiaX.a */ = {
+		3F3BD94D1B32D4D900309B20 /* libessentiaX.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libessentiaX.a;
-			remoteRef = 6FA5A4A11B21F0AD002C23E4 /* PBXContainerItemProxy */;
+			remoteRef = 3F3BD94C1B32D4D900309B20 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */ = {
+		3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libessentiaRT.a;
-			remoteRef = 6FA5A4A31B21F0AD002C23E4 /* PBXContainerItemProxy */;
+			remoteRef = 3F3BD94E1B32D4D900309B20 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -353,15 +357,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6F981C0A1B29829600876601 /* PBXTargetDependency */ = {
+		3FD986C51B32FEF0005BD69A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = essentiaRT;
-			targetProxy = 6F981C0B1B29829600876601 /* PBXContainerItemProxy */;
+			targetProxy = 3FD986C41B32FEF0005BD69A /* PBXContainerItemProxy */;
 		};
-		6FDC781F1B21F0DB008F6A99 /* PBXTargetDependency */ = {
+		3FD986C91B32FEF5005BD69A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = essentiaRT;
-			targetProxy = 6FDC781E1B21F0DB008F6A99 /* PBXContainerItemProxy */;
+			targetProxy = 3FD986C81B32FEF5005BD69A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -637,6 +641,7 @@
 					"FLEXT_ATTRIBUTES=1",
 				);
 				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/../../Essentia/src/,
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
@@ -661,6 +666,7 @@
 				);
 				GCC_STRICT_ALIASING = YES;
 				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/../../Essentia/src/,
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);

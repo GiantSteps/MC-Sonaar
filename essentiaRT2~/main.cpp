@@ -1,5 +1,6 @@
 #include "main.h"
 #include "essentia/essentia.h"
+using namespace Helper;
 
 
 bool essentiaRT2::debug = false;
@@ -22,13 +23,13 @@ essentiaRT2::essentiaRT2 (int argc,const t_atom *argv)
     // Flext
     
     FLEXT_ADDBANG(0,my_bang);
-    FLEXT_ADDTIMER(OutTimer,outputIt);
+
     
     log("creating");
     /////// PARAMS //////////////
     sampleRate = Samplerate();
     frameSize=Blocksize();
-    hopSize=Blocksize();
+    hopSize=frameSize;
     
     
     outRate = -1;
@@ -78,9 +79,15 @@ void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
                 memcpy(&inputVectors[i][splitToEnd], &audioBuffer[0], audioBufferCounter*sizeof(Real));
                 
                 if(i==0){
+                    bool isEmpty = true;
+                    for(int k = 0 ; k < frameSize ; k++){
+                        if(inputVectors[i][k]!=0)isEmpty = false;
+                    }
+                    if(!isEmpty){
                     compute();
                     if(outRate==-1){
                         outputIt(NULL);
+                    }
                     }
                 }
             }
@@ -110,7 +117,7 @@ bool essentiaRT2::CbMethodResort(int inlet, const t_symbol *s, int argc, const t
     }
     else if(inputStruct[inlet].type == ioStruct::VECTOR ){
         
-        inputStruct[inlet].getNextVectorValue(argc) = Helper::listToVector(argc,argv);
+        inputStruct[inlet].setAtomNextVectorValue(argc,argv);
         
         myAlgo->input(inputStruct[inlet].name).set(inputStruct[inlet].getVectorValue());
         
@@ -118,7 +125,7 @@ bool essentiaRT2::CbMethodResort(int inlet, const t_symbol *s, int argc, const t
     
     if(inlet == 0){
         compute();
-        if(outRate<=0)
+        if( inputStruct[0].hasReachedHop(outHopSize));
             outputIt(NULL);
     }
     
@@ -148,7 +155,7 @@ void essentiaRT2::outputIt(void *){
                 ToOutFloat(i, outputStruct[i].aggregateReal());
                 
             }
-            outputStruct[i].resetCounter();
+            outputStruct[i].reset(outHopSize);
 
         
     
@@ -175,7 +182,8 @@ void essentiaRT2::buildAlgo(){
         }
     }
 #endif
-    vector<string> paramNames = myAlgo->defaultParameters().keys();
+    
+    paramNames = myAlgo->defaultParameters().keys();
     
     if (std::find(paramNames.begin(), paramNames.end(), "frameSizeameRate") != paramNames.end()){
         myAlgo->configure("frameSizeameRate",sampleRate*1.0/hopSize);
@@ -284,10 +292,7 @@ void essentiaRT2::buildAlgo(){
         
     }
     
-    
-    if(outRate>0){
-        OutTimer.Periodic(outRate);
-    }
+
     
 }
 
@@ -312,6 +317,11 @@ bool essentiaRT2::compute(){
             }
     }
     myAlgo->compute();
+    for(auto a:outputStruct){
+        if(a.type == ioStruct::VECTOR){
+            a.curVecSize = a.vectorValues.size();
+        }
+    }
 }
 
 
@@ -343,10 +353,14 @@ void essentiaRT2::parseArgs(int argc, const t_atom *argv){
     }
     
     if(IsFloat(argv[argIdx])){
-        outRate =GetFloat(argv[argIdx])/1000.0;
+        aggrSize =GetFloat(argv[argIdx]);
         argIdx++;
     }
-    
+    outHopSize = aggrSize;
+    if(IsFloat(argv[argIdx])){
+        outHopSize=GetFloat(argv[argIdx]);
+        argIdx++;
+    }
     
     int beginMsg = argIdx;
     string curName = "";
@@ -361,14 +375,12 @@ void essentiaRT2::parseArgs(int argc, const t_atom *argv){
                 if(curName == "_aggr"){
                     string arg = GetAString(argv[argIdx]);
                     std::transform(arg.begin(), arg.end(), arg.begin(), ::tolower);
-                    ioStruct::AggrType type = arg == "median"?ioStruct::AggrType::MEDIAN:ioStruct::AggrType::MEAN;
+                    ioStruct::AGGRTYPE type = arg == "median"?ioStruct::AGGRTYPE::MEDIAN:ioStruct::AGGRTYPE::MEAN;
                     for (auto  t:outputStruct){
                         t.aggrType = type;
                     }
                 }
-                if(curName == "_aggrS"){
-                    aggrSize = GetAInt(argv[argIdx]);
-                }
+
             }
             else{
                 if(IsString(argv[argIdx])){paramsS[curName] = GetString(argv[argIdx]);}

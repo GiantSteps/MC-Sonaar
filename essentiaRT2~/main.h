@@ -111,11 +111,11 @@ protected:
 #else
     vector < ioStruct > inputStruct;
 #endif
-    
+    vector<string> paramNames;
     int aggrSize;
+    int outHopSize;
     
-    
-    flext::Timer OutTimer;
+
     void outputIt(void *);
     
 private:
