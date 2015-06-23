@@ -63,6 +63,11 @@ void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
         // be sure to synchronize ringbuffer
         audioBufferCounter = 0;
     }
+    if(hasAudioOut && n!=frameSize){
+        frameSize = n;
+        audioBuffer.resize(frameSize);
+        audioBufferCounter = 0;
+    }
     for(int i = inputVectors.size()-1 ; i >=0  ; i--){
         const t_sample *in = insigs[i];
         n = my_n;
@@ -139,14 +144,24 @@ void essentiaRT2::my_bang() {
     outputIt(NULL);
 }
 
-void essentiaRT2::outputIt(void *){
+void essentiaRT2::outputIt(void * ){
     
     for(int i = outputStruct.size()-1;i>=0 ; i--){
         if(!outputStruct[i].isUpdated()){
             log("not Updated : " + outputStruct[i].name);
         }
             if(outputStruct[i].type==Helper::ioStruct::VECTOR ){
+#ifdef FLEXT_TILDE
+                if(hasAudioOut){
+                    memcpy( OutSig(i),&outputStruct[i].aggregateVector()[0], outputStruct[i].curVecSize*sizeof(float));
+                }
+                else{
                 ToOutList(i,Helper::floatVectorToList(outputStruct[i].aggregateVector()));
+                }
+#else
+                ToOutList(i,Helper::floatVectorToList(outputStruct[i].aggregateVector()));
+#endif
+                
             }
             else if (outputStruct[i].type == ioStruct::STRING){
                 ToOutString(i, outputStruct[i].aggregateString().c_str());
@@ -185,17 +200,17 @@ void essentiaRT2::buildAlgo(){
     
     paramNames = myAlgo->defaultParameters().keys();
     
-    if (std::find(paramNames.begin(), paramNames.end(), "frameSizeameRate") != paramNames.end()){
-        myAlgo->configure("frameSizeameRate",sampleRate*1.0/hopSize);
+    if (std::find(paramNames.begin(), paramNames.end(), "frameRate") != paramNames.end()){
+        myAlgo->configure("frameRate",sampleRate*1.0/hopSize);
     }
     if (std::find(paramNames.begin(), paramNames.end(), "sampleRate") != paramNames.end()){
         myAlgo->configure("sampleRate",sampleRate);
     }
-    if (std::find(paramNames.begin(), paramNames.end(), "hopSizeSize") != paramNames.end()){
-        myAlgo->configure("hopSizeSize",hopSize);
+    if (std::find(paramNames.begin(), paramNames.end(), "hopSize") != paramNames.end()){
+        myAlgo->configure("hopSize",hopSize);
     }
-    if (std::find(paramNames.begin(), paramNames.end(), "frameSizeameSize") != paramNames.end()){
-        myAlgo->configure("frameSizeameSize",frameSize);
+    if (std::find(paramNames.begin(), paramNames.end(), "frameSize") != paramNames.end()){
+        myAlgo->configure("frameSize",frameSize);
     }
     
     for(auto a:paramsS){
@@ -263,12 +278,32 @@ void essentiaRT2::buildAlgo(){
         log("   "+out.first +"  : " + nameOfType(out.second->typeInfo()));
         if(out.second->typeInfo() ==typeid( std::vector<essentia::Real>)){
             outputStruct[outI] = ioStruct(out.first,ioStruct::VECTOR,aggrSize);
+#ifdef FLEXT_TILDE
+            if(hasAudioOut){
+                AddOutSignal();
+            }
+            else{
+                AddOutList(out.first.c_str());
+            }
+#else
             AddOutList(out.first.c_str());
+#endif
+            
             out.second->set(outputStruct[outI].getNextVectorValue());
         }
         else if(out.second->typeInfo() ==typeid( essentia::Real)){
             outputStruct[outI] = ioStruct(out.first,ioStruct::REAL,aggrSize);
+            
+#ifdef FLEXT_TILDE
+            if(hasAudioOut){
+                AddOutSignal();
+            }
+            else{
+                AddOutFloat(out.first.c_str());
+            }
+#else
             AddOutFloat(out.first.c_str());
+#endif
             out.second->set(outputStruct[outI].getNextRealValue());
         }
         else if( out.second->typeInfo() ==typeid(string )){
@@ -328,9 +363,13 @@ bool essentiaRT2::compute(){
 void essentiaRT2::parseArgs(int argc, const t_atom *argv){
     if(argc == 0){err ( "no argument provided" );return;}
     int argIdx = 0;
-    
+#ifdef FLEXT_TILDE
+    hasAudioOut = true;
+#endif
     while (argIdx < argc &&IsFloat(argv[argIdx]) && !IsString(argv[argIdx])) {
-        
+#ifdef FLEXT_TILDE
+        hasAudioOut = false;
+#endif
         switch (argIdx) {
             case 0:
                 frameSize = GetFloat(argv[argIdx]);
@@ -351,10 +390,11 @@ void essentiaRT2::parseArgs(int argc, const t_atom *argv){
         name = GetString(argv[argIdx]);
         argIdx++;
     }
-    
+
     if(IsFloat(argv[argIdx])){
         aggrSize =GetFloat(argv[argIdx]);
         argIdx++;
+
     }
     outHopSize = aggrSize;
     if(IsFloat(argv[argIdx])){

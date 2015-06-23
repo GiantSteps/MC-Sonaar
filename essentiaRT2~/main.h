@@ -108,6 +108,7 @@ protected:
     int audioBufferCounter;
     vector<Real> audioBuffer;
     bool isSpectrum;
+    bool hasAudioOut;
 #else
     vector < ioStruct > inputStruct;
 #endif
@@ -116,7 +117,7 @@ protected:
     int outHopSize;
     
 
-    void outputIt(void *);
+    void outputIt(void * t);
     
 private:
     static void setup(t_classid c);

@@ -16,7 +16,7 @@ namespace Helper{
     
     flext::AtomList  floatVectorToList(vector<Real> const & v){
         flext::AtomList res(v.size());
-
+        
         for(int i = 0 ; i < v.size() ; i++){
             flext::SetFloat(res[i], v[i]);
             
@@ -26,7 +26,8 @@ namespace Helper{
         return res;
     }
     
-
+    
+    
     
     
     typedef struct ioStruct{
@@ -59,12 +60,12 @@ namespace Helper{
         }
         ioStruct(string _name,TYPE Typ ,int num = 1):name(_name),type(Typ){
             init(num);
-                        aggrType = MEAN;
-
+            aggrType = MEAN;
+            
         }
         void init(int num){
             aggrSize = num;
-                        curVecSize = 1;
+            curVecSize = 1;
             switch(type){
                 case REAL:
                     realValues.resize(num);
@@ -87,8 +88,8 @@ namespace Helper{
             inited = false;
             totalCount = 0;
             
-
-
+            
+            
         }
         
         
@@ -116,10 +117,13 @@ namespace Helper{
             totalCount++;
             if(s!= curVecSize){
                 isConsistent = false;
-//                post(("no cons : nextV :"+name).c_str());
-                for(auto & v:vectorValues){
-                    v.resize(s);
-                }
+                curVecSize = s;
+                vectorValues[countIdx].resize(curVecSize);
+                
+                //                post(("no cons : nextV :"+name).c_str());
+//                for(auto & v:vectorValues){
+//                    v.resize(s);
+//                }
             }
             return vectorValues[countIdx];
         }
@@ -139,16 +143,17 @@ namespace Helper{
         
         vector<Real> aggregateVector(){
             inited|= totalCount == aggrSize;
-            isConsistent = true;
-            for(int i = 0 ; i <aggrSize ; i++){
-                if(vectorValues[i].size()!=curVecSize){
-//                                    post(("no cons : aggr :"+name).c_str());
-                    isConsistent = false;
-                    curVecSize = vectorValues[i].size();
-                    break;
+            if(isConsistent){
+                for(int i = 0 ; i <aggrSize ; i++){
+                    if(vectorValues[i].size()!=curVecSize){
+                        //                                    post(("no cons : aggr :"+name).c_str());
+                        isConsistent = false;
+                        curVecSize = vectorValues[i].size();
+                        break;
+                    }
                 }
             }
-
+            
             if(!isConsistent){
                 int maxIdx = beginIdx;
                 int maxSize = vectorValues[beginIdx].size();
@@ -159,6 +164,7 @@ namespace Helper{
                         maxIdx = curI;
                     }
                 }
+                curVecSize = maxSize;
                 return vectorValues[maxIdx];
             }
             vectorRes.resize(curVecSize);
@@ -170,8 +176,8 @@ namespace Helper{
                         if(initV){
                             for(int i = 0 ; i< curVecSize ; i++){
                                 vectorRes[i]=vectorValues[j][i];
-                                initV = false;
                             }
+                            initV = false;
                         }
                         else{
                             for(int i = 0 ; i< curVecSize ; i++){
@@ -179,7 +185,7 @@ namespace Helper{
                             }
                         }
                     }
-                
+                    
                     for(auto & i:vectorRes){
                         i/=aggrSize;
                     }
@@ -212,7 +218,7 @@ namespace Helper{
             
         }
         Real aggregateReal(){
-                    inited|= totalCount == aggrSize;
+            inited|= totalCount == aggrSize;
             switch(aggrType){
                 case MEAN:
                     return mean(realValues);
@@ -227,14 +233,14 @@ namespace Helper{
                     else{
                         return tmpSort[aggrSize/2];
                     }
-                     break;
+                    break;
                 }
             }
             return 0;
         }
         
         string aggregateString(){
-                    inited|= totalCount == aggrSize;
+            inited|= totalCount == aggrSize;
             map<string , int> histo;
             for(auto & s:stringValues){
                 if(histo.count(s)){
@@ -261,25 +267,42 @@ namespace Helper{
             beginIdx +=hop!=0?hop:1;
             beginIdx%=aggrSize;
             totalCount =0;
+            isConsistent = true;
         }
         bool isUpdated(){return totalCount!=0;};
         
         void setAtomNextVectorValue(int argc,const t_atom * argv){
             countIdx++;
             countIdx%=aggrSize;
-
-                curVecSize = argc;
-                for(auto & a:vectorValues){
-                    a.resize(curVecSize);
-                }
             
+            isConsistent = argc == curVecSize;
             
+            curVecSize = argc;
+            if(!isConsistent){
+                vectorValues[countIdx].resize(curVecSize);
+            }
             for(int i = 0 ; i < argc ; i++){
                 vectorValues[countIdx][i] = flext::GetAFloat(argv[i]);
             }
         }
         
-
+        
+        void setNextDspvectorValue(t_sample * dspv,int maxN=0){
+            countIdx++;
+            countIdx%=aggrSize;
+            
+            isConsistent = dspv[0] == curVecSize;
+            curVecSize = dspv[0];
+            if(!isConsistent){
+                vectorValues[countIdx].resize(curVecSize);
+            }
+            
+            
+            memccpy(&vectorValues[countIdx][0], dspv + 1,curVecSize, sizeof(float));
+            
+        }
+        
+        
         
     }ioStruct;
 }
