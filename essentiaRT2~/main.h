@@ -90,7 +90,7 @@ public:
     map<string,string> paramsS;
     map<string,float> paramsF;
  
-    bool compute();
+    bool computeIt();
     
 
     
@@ -107,7 +107,7 @@ protected:
     
     int audioBufferCounter;
     vector<Real> audioBuffer;
-    bool isSpectrum;
+    bool inputIsSpectrum;
     bool hasAudioOut;
 #else
     vector < ioStruct > inputStruct;
@@ -125,7 +125,7 @@ private:
     FLEXT_CALLBACK(my_bang)
     FLEXT_CALLBACK_T(outputIt)
 
-    FLEXT_ATTRVAR_B(debug)
+//    FLEXT_ATTRVAR_B(debug)
     
     
     static void log(const string & s){if(!debug)post(s.c_str());}

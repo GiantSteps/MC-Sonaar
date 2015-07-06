@@ -58,7 +58,7 @@ namespace Helper{
         ioStruct(){
             init(1);
         }
-        ioStruct(string _name,TYPE Typ ,int num = 1):name(_name),type(Typ){
+        ioStruct(const string &  _name,TYPE Typ ,int num = 1):name(_name),type(Typ){
             init(num);
             aggrType = MEAN;
             
@@ -305,5 +305,21 @@ namespace Helper{
         
         
     }ioStruct;
+    
+    
+    class vectorCheck{
+        
+        public :
+        
+        
+        short state;
+        
+        
+//        bool checkVector
+        
+        
+        
+        
+    };
 }
 #endif

@@ -57,22 +57,37 @@ essentiaRT2::~essentiaRT2()
 void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)
 {
     int my_n = n;
-    if(isSpectrum){
+    
+    // if input is Spectrum from Pd
+    // we split in half length according to essentia's spectrum format
+//    
+    if(inputIsSpectrum){
         my_n/=2;
         my_n++;
         // be sure to synchronize ringbuffer
         audioBufferCounter = 0;
     }
+    
+    // if we are in audio  out mode (tilde without framesize specified)
+    // we use Pd block size
+    
     if(hasAudioOut && n!=frameSize){
         frameSize = n;
+        hopSize = frameSize;
         audioBuffer.resize(frameSize);
         audioBufferCounter = 0;
+        for(int j =0 ; j <inputVectors.size() ; j++){
+            inputVectors[j].resize(frameSize);
+        }
     }
+    
+    // function that works for audioOut or control out
+    // TODO: may need optimization by splitting for each case
     for(int i = inputVectors.size()-1 ; i >=0  ; i--){
         const t_sample *in = insigs[i];
         n = my_n;
         while(n--) {
-            //Fill Essentia vector every hopSizesize
+            //Fill Essentia vector every hopSize
             audioBuffer[audioBufferCounter] = *(in++);
             
             audioBufferCounter++;
@@ -83,13 +98,16 @@ void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
                 memcpy(&inputVectors[i][0], &audioBuffer[audioBufferCounter], splitToEnd*sizeof(Real));
                 memcpy(&inputVectors[i][splitToEnd], &audioBuffer[0], audioBufferCounter*sizeof(Real));
                 
+                
+                // check if it has internal vector format
+                
                 if(i==0){
                     bool isEmpty = true;
                     for(int k = 0 ; k < frameSize ; k++){
                         if(inputVectors[i][k]!=0)isEmpty = false;
                     }
                     if(!isEmpty){
-                    compute();
+                    computeIt();
                     if(outRate==-1){
                         outputIt(NULL);
                     }
@@ -101,11 +119,11 @@ void essentiaRT2::m_signal(int n, t_sample *const *insigs, t_sample *const *outs
             
         }
         
-        
+    
     }
     
     
-    
+
     
 }
 #else
@@ -129,7 +147,7 @@ bool essentiaRT2::CbMethodResort(int inlet, const t_symbol *s, int argc, const t
     }
     
     if(inlet == 0){
-        compute();
+        computeIt();
         if( inputStruct[0].hasReachedHop(outHopSize));
             outputIt(NULL);
     }
@@ -153,6 +171,8 @@ void essentiaRT2::outputIt(void * ){
             if(outputStruct[i].type==Helper::ioStruct::VECTOR ){
 #ifdef FLEXT_TILDE
                 if(hasAudioOut){
+//                    cout << Blocksize() << endl;
+                    memset(OutSig(i),0, Blocksize()*sizeof(float));
                     memcpy( OutSig(i),&outputStruct[i].aggregateVector()[0], outputStruct[i].curVecSize*sizeof(float));
                 }
                 else{
@@ -186,10 +206,10 @@ void essentiaRT2::buildAlgo(){
     myAlgo = essentia::standard::AlgorithmFactory::create(name);
     log("building Algo : " + name);
 #ifdef FLEXT_TILDE
-    isSpectrum = false;
+    inputIsSpectrum = false;
     for(auto in:myAlgo->inputs()){
         if (in.first == "spectrum" ){
-            isSpectrum = true;
+            inputIsSpectrum = true;
             frameSize/=2;
             frameSize++;
             hopSize/=2;
@@ -332,7 +352,7 @@ void essentiaRT2::buildAlgo(){
 }
 
 
-bool essentiaRT2::compute(){
+bool essentiaRT2::computeIt(){
     
     for(int i = 0 ; i < outputStruct.size() ; i++){
         
