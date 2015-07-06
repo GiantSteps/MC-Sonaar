@@ -18,8 +18,8 @@
 		07A865E81A1E4544008354B9 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
 		3F3BD9511B32D60400309B20 /* helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F3BD9501B32D60400309B20 /* helper.h */; };
 		3F3BD9521B32D60400309B20 /* helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F3BD9501B32D60400309B20 /* helper.h */; };
-		3FD986CA1B3338A4005BD69A /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */; };
-		3FD986CB1B3338A8005BD69A /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */; };
+		6F22FC5A1B3958A400717D56 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22FC571B39587900717D56 /* libessentiaRT.a */; };
+		6F22FC5D1B3958B100717D56 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22FC571B39587900717D56 /* libessentiaRT.a */; };
 		6F981C0D1B29829600876601 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
 		6F981C0F1B29829600876601 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
 		6F981C121B29829600876601 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
@@ -27,30 +27,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3F3BD94C1B32D4D900309B20 /* PBXContainerItemProxy */ = {
+		6F22FC541B39587900717D56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
+			containerPortal = 6F22FC4F1B39587900717D56 /* essentiaX.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6FD0EB0E197E7B070093FFB6;
 			remoteInfo = essentiaX;
 		};
-		3F3BD94E1B32D4D900309B20 /* PBXContainerItemProxy */ = {
+		6F22FC561B39587900717D56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
+			containerPortal = 6F22FC4F1B39587900717D56 /* essentiaX.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6FA5A49B1B21EFAF002C23E4;
 			remoteInfo = essentiaRT;
 		};
-		3FD986C41B32FEF0005BD69A /* PBXContainerItemProxy */ = {
+		6F22FC581B39589B00717D56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
+			containerPortal = 6F22FC4F1B39587900717D56 /* essentiaX.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6FA5A2AC1B21EFAF002C23E4;
 			remoteInfo = essentiaRT;
 		};
-		3FD986C81B32FEF5005BD69A /* PBXContainerItemProxy */ = {
+		6F22FC5B1B3958AD00717D56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
+			containerPortal = 6F22FC4F1B39587900717D56 /* essentiaX.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6FA5A2AC1B21EFAF002C23E4;
 			remoteInfo = essentiaRT;
@@ -98,8 +98,8 @@
 		07491D011A1E723B0087E350 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = /Library/Frameworks/MaxAudioAPI.framework; sourceTree = "<absolute>"; };
 		07A865D81A1E4544008354B9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		07A865DC1A1E4544008354B9 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
-		3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = essentiaX.xcodeproj; path = ../../essentiaX/essentiaX.xcodeproj; sourceTree = "<group>"; };
 		3F3BD9501B32D60400309B20 /* helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helper.h; sourceTree = "<group>"; };
+		6F22FC4F1B39587900717D56 /* essentiaX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = essentiaX.xcodeproj; path = ../../../essentiaX/essentiaX.xcodeproj; sourceTree = "<group>"; };
 		6F981C191B29829600876601 /* essentiaRT2~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "essentiaRT2~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC09D05546B4700DB518D /* essentiaRT2.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = essentiaRT2.pd_darwin; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9974E53077083C700206F68 /* essentiaRT~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "essentiaRT~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,8 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F22FC5A1B3958A400717D56 /* libessentiaRT.a in Frameworks */,
 				6F981C0F1B29829600876601 /* libstdc++.6.0.9.dylib in Frameworks */,
-				3FD986CB1B3338A8005BD69A /* libessentiaRT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +120,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F22FC5D1B3958B100717D56 /* libessentiaRT.a in Frameworks */,
 				07491CEF1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib in Frameworks */,
-				3FD986CA1B3338A4005BD69A /* libessentiaRT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +161,7 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */,
+				6F22FC4F1B39587900717D56 /* essentiaX.xcodeproj */,
 				07491D011A1E723B0087E350 /* MaxAudioAPI.framework */,
 				07491CFF1A1E72330087E350 /* MaxAPI.framework */,
 				07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */,
@@ -180,11 +180,11 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		3F3BD9481B32D4D900309B20 /* Products */ = {
+		6F22FC501B39587900717D56 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F3BD94D1B32D4D900309B20 /* libessentiaX.a */,
-				3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */,
+				6F22FC551B39587900717D56 /* libessentiaX.a */,
+				6F22FC571B39587900717D56 /* libessentiaRT.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3FD986C91B32FEF5005BD69A /* PBXTargetDependency */,
+				6F22FC591B39589B00717D56 /* PBXTargetDependency */,
 			);
 			name = "pd static_tilde";
 			productName = xsample;
@@ -244,7 +244,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3FD986C51B32FEF0005BD69A /* PBXTargetDependency */,
+				6F22FC5C1B3958AD00717D56 /* PBXTargetDependency */,
 			);
 			name = "pd static";
 			productName = xsample;
@@ -289,8 +289,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3F3BD9481B32D4D900309B20 /* Products */;
-					ProjectRef = 3F3BD9471B32D4D900309B20 /* essentiaX.xcodeproj */;
+					ProductGroup = 6F22FC501B39587900717D56 /* Products */;
+					ProjectRef = 6F22FC4F1B39587900717D56 /* essentiaX.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -303,18 +303,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3F3BD94D1B32D4D900309B20 /* libessentiaX.a */ = {
+		6F22FC551B39587900717D56 /* libessentiaX.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libessentiaX.a;
-			remoteRef = 3F3BD94C1B32D4D900309B20 /* PBXContainerItemProxy */;
+			remoteRef = 6F22FC541B39587900717D56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3F3BD94F1B32D4D900309B20 /* libessentiaRT.a */ = {
+		6F22FC571B39587900717D56 /* libessentiaRT.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libessentiaRT.a;
-			remoteRef = 3F3BD94E1B32D4D900309B20 /* PBXContainerItemProxy */;
+			remoteRef = 6F22FC561B39587900717D56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -357,15 +357,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3FD986C51B32FEF0005BD69A /* PBXTargetDependency */ = {
+		6F22FC591B39589B00717D56 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = essentiaRT;
-			targetProxy = 3FD986C41B32FEF0005BD69A /* PBXContainerItemProxy */;
+			targetProxy = 6F22FC581B39589B00717D56 /* PBXContainerItemProxy */;
 		};
-		3FD986C91B32FEF5005BD69A /* PBXTargetDependency */ = {
+		6F22FC5C1B3958AD00717D56 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = essentiaRT;
-			targetProxy = 3FD986C81B32FEF5005BD69A /* PBXContainerItemProxy */;
+			targetProxy = 6F22FC5B1B3958AD00717D56 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
