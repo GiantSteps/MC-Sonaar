@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>99D13CAA-47D4-4364-A5E2-62008A046745</string>
+	<string>06C0B422-D1CA-46C6-B598-5227F4BA473F</string>
 	<key>IDESourceControlProjectName</key>
 	<string>essentiaRT2~</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,6 +14,8 @@
 		<string>ssh://github.com/MartinHN/essentiaX.git</string>
 		<key>3510C636-475C-4347-A658-37591C6A92CD</key>
 		<string>ssh://github.com/GiantSteps/MC-Sonaar.git</string>
+		<key>919AB215-1FC2-4484-B1FD-FF34107D3BB0</key>
+		<string>ssh://github.com/MartinHN/flext.git</string>
 		<key>D16B1BAC-05F6-4CD5-912F-0E8ADEBD3EB3</key>
 		<string>ssh://github.com/GiantSteps/essentia.git</string>
 	</dict>
@@ -25,6 +27,8 @@
 		<string>../../../../../essentiaX</string>
 		<key>3510C636-475C-4347-A658-37591C6A92CD</key>
 		<string>../../..</string>
+		<key>919AB215-1FC2-4484-B1FD-FF34107D3BB0</key>
+		<string>../../../../../flext</string>
 		<key>D16B1BAC-05F6-4CD5-912F-0E8ADEBD3EB3</key>
 		<string>../../../../../Essentia</string>
 	</dict>
@@ -51,6 +55,14 @@
 			<string>3320E50F-76EF-445D-A56E-524F89274FC3</string>
 			<key>IDESourceControlWCCName</key>
 			<string>essentiaX</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>919AB215-1FC2-4484-B1FD-FF34107D3BB0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>flext</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

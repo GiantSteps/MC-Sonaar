@@ -521,14 +521,10 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					$inherited,
-					/usr/local/include,
 					$pd_include,
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = "";
@@ -563,14 +559,10 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					$inherited,
-					/usr/local/include,
 					$pd_include,
 				);
 				INSTALL_PATH = "$(PD)/extra";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib";
 				LIBRARY_STYLE = BUNDLE;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = "";

@@ -10,7 +10,7 @@
 #define __essentiaRT___EssentiaSFX__
 
 #include <iostream>
-
+#include <thread>
 
 
 
@@ -35,7 +35,7 @@ class EssentiaSFX {
     
 public:
     
-    EssentiaSFX();
+    EssentiaSFX(int frameS,int hopS,int sR);
     ~EssentiaSFX();
     
     
@@ -71,13 +71,14 @@ private:
     
     
     
-    scheduler::Network *network;
+    scheduler::Network *network = NULL;
     int sampleRate, frameSize, hopSize;
     
     Pool pool;//,*outPool;
     
     //Pool
     void preprocessPool();
+
     
     
 };

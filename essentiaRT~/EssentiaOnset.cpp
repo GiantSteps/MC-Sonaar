@@ -11,21 +11,27 @@
 
 
 EssentiaOnset::~EssentiaOnset(){
-    delete network;
     
+
+    if(network!=NULL){
+    delete network;
+    }
 }
-EssentiaOnset::EssentiaOnset(){
+EssentiaOnset::EssentiaOnset(int frameS,int hopS,int sR,Pool& poolin,Real threshold){
+    setup(frameS, hopS, sR, poolin, threshold);
 
 }
 
 void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
 
+
     this->sampleRate = sR;
-    this->frameSize = fS;
+    this->frameSize = FRAMESIZE;
     this->hopSize = hS;
     this->pool = &poolin;
     
-    
+    combineMs = 150;
+    lastOnsetTime = 0;
     strength.resize(2);
     
     AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
@@ -41,38 +47,35 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
 
     
-    w = factory.create("Windowing","type","hann","zeroPhase",true
+    w = factory.create("Windowing","type","hann"
                        );
     
     spectrum = factory.create("Spectrum");
     pspectrum = factory.create("PowerSpectrum");
-    triF = factory.create("TriangularBands","log",true);
+    triF = factory.create("TriangularBands","log",false);
     
-    superFluxF = factory.create("SuperFluxNovelty","binWidth",3,"frameWidth",2);
-    superFluxP= factory.create("SuperFluxPeaks","threshold" ,threshold/NOVELTY_MULT,"frameRate", sampleRate*1.0/hopSize,"combine",50);
-    
+    superFluxF = factory.create("SuperFluxNovelty","binWidth",8,"frameWidth",2);
+    superFluxP= factory.create("SuperFluxPeaks","ratioThreshold" , threshold,"threshold" ,0.5//,threshold/NOVELTY_MULT
+                               ,"pre_max",30,"pre_avg",200,"frameRate", sampleRate*1.0/hopSize,"combine",combineMs);
+    superFluxP->input(0).setAcquireSize(1);
+    superFluxP->input(0).setReleaseSize(1);
 
     
     centroidF = factory.create("Centroid");
     
-    mfccF = factory.create("MFCC","inputSize",frameSize/2);
+    mfccF = factory.create("MFCC","inputSize",frameSize/2 + 1);
 
     
     
-    
-    gen = new essentia::streaming::RingBufferInput();
-    
-    gen->_bufferSize = hopSize*2;
-//    ((Algorithm*)gen)->configure("bufferSize",hopSize*2);//,"blockSize",hopSize);
-    
-    // buffer for getting the onset back
-//    essout = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
-    essout = new essentia::streaming::RingBufferOutput();
-    essout->_bufferSize = 2;
-    // Audio Rate output, ATM , SuperFlux Novelty function
-//    DBGOUT = (streaming::RingBufferOutput*)factory.create("RingBufferOutput","bufferSize",2,"blockSize",(int)1);
-    DBGOUT = new essentia::streaming::RingBufferOutput();
-    DBGOUT->_bufferSize = 2;
+    gen = new RingBufferInput();
+    gen->_bufferSize = frameSize;
+    gen->output(0).setAcquireSize(frameSize);
+    gen->output(0).setReleaseSize(frameSize);
+    gen->configure();
+
+    essout = new essentia::streaming::VectorOutput<vector<Real> >();
+    essout->setVector(&strength);
+
     
     probe = new streaming::VectorOutput< vector<Real> >();
     
@@ -85,7 +88,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     spectrum->output("spectrum") >> triF->input("spectrum");
     triF->output("bands")>>superFluxF->input("bands");
     superFluxF->output("Differences")  >>superFluxP->input("novelty");
-    superFluxP->output("peaks") >> essout->input("signal");
+    superFluxP->output("peaks") >> essout->input("data");
     
     // MFCC
     spectrum->output("spectrum") >> mfccF->input("spectrum");
@@ -97,9 +100,9 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     
     //Audio out & DBG
-    superFluxF->output("Differences")  >>  DBGOUT->input("signal");
+//    superFluxF->output("Differences")  >>  //DBGOUT->input("signal");
     //triF->output("bands") >> probe->input("data");
-    //gen->output("signal")  >>  DBGOUT->input("signal");
+    //gen->output("signal")  >>  //DBGOUT->input("signal");
     
     //2 Pool
    connectSingleValue(centroidF->output("centroid"),poolin,"i.centroid");
@@ -110,36 +113,47 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     
     
-    network = new scheduler::Network(gen);
-//    network->init();
-network->run();
+    network = new scheduler::Network(gen,true);
+    network->initStack();
+
+//    essentia::setDebugLevel(essentia::EExecution);
 }
 
 
 float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
-    ((essentia::streaming::RingBufferInput*)gen)->add(&audioFrameIn[0],audioFrameIn.size());
+
+    essout->setVector(&strength);
+
+    if(audioFrameIn.size()!=gen->_bufferSize){
+        gen->_bufferSize = audioFrameIn.size();
+        gen->output(0).setAcquireSize(gen->_bufferSize);
+        gen->output(0).setReleaseSize(gen->_bufferSize);
+        gen->configure();
+    }
+    
+    gen->add(&audioFrameIn[0], audioFrameIn.size());
+
     gen->process();
     
-
     
     
-    output.resize(audioFrameIn.size());
-    int retrievedSize = DBGOUT->get(&output[0], output.size());
-    
-    Real audioout = retrievedSize>0?output[retrievedSize-1]*NOVELTY_MULT : 0;
-
-    
-    
+    network->runStack(false);
+    dynamic_cast<AccumulatorAlgorithm * >(superFluxP)->finalProduce();
+    network->runStack(false);
 
 
-    for (int i =retrievedSize-1; i< output.size() ; i++){
-        output[i]=audioout;
+    int val =0;
+    long long curMs = duration_cast< milliseconds >(system_clock::now().time_since_epoch()).count();
+
+    if(curMs - lastOnsetTime>combineMs){
+       val = strength.size()>0?strength[0].size()>0?1:0:0;
+        if(val>0){
+         lastOnsetTime = curMs;
+
+        }
     }
 
-    
-    
-    retrievedSize = essout->get(&strength[0],1);
-    Real val = retrievedSize>0?strength[retrievedSize-1]*NOVELTY_MULT : 0;
+    strength.clear();
 
 
     

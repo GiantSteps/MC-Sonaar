@@ -12,10 +12,12 @@
 
 
 EssentiaSFX::~EssentiaSFX(){
+    if(network!=NULL){
     delete network;
+    }
 }
-EssentiaSFX::EssentiaSFX(){
-    
+EssentiaSFX::EssentiaSFX(int frameS,int hopS,int sR){
+    setup(frameS, hopS, sR);
 }
 
 void EssentiaSFX::setup(int fS,int hS,int sR){
@@ -30,8 +32,11 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
      AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
     standard::AlgorithmFactory& stfactory = standard::AlgorithmFactory::instance();
         // Input
-    gen = (essentia::streaming::RingBufferInput*)factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
-
+    gen = new essentia::streaming::RingBufferInput();//factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
+    gen->_bufferSize = hopSize;
+    gen->output(0).setReleaseSize(gen->_bufferSize);
+    gen->output(0).setAcquireSize(gen->_bufferSize);
+    gen->configure();
     
     fc = factory.create("FrameCutter",
                         "frameSize",frameSize,
@@ -39,7 +44,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
                         "startFromZero" , true,
                         "validFrameThresholdRatio", 1,
                         "lastFrameToEndOfFile",true,
-                        "silentFrames","drop"
+                        "silentFrames","keep"
                         );
     
     w = factory.create("Windowing");
@@ -117,8 +122,8 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
     
     network = new scheduler::Network(gen);
-    network->run();
-    
+    network->initStack();
+ 
 }
 
 
@@ -132,10 +137,16 @@ void EssentiaSFX::clear(){
     
 }
 void EssentiaSFX::compute(vector<Real>& audioFrameIn){
+    if(audioFrameIn.size()!=gen->_bufferSize){
+        gen->_bufferSize = audioFrameIn.size();
+        gen->output(0).setAcquireSize(gen->_bufferSize);
+        gen->output(0).setReleaseSize(gen->_bufferSize);
+        gen->configure();
+    }
     gen->add(&audioFrameIn[0],audioFrameIn.size());
     gen->process();
-    
-//    network->runStack();
+
+    network->runStack(false);
     
 
     
@@ -158,8 +169,8 @@ void EssentiaSFX::aggregate(){
     if(aggrPool.getRealPool().size()>0 && aggrPool.value<Real>("loudness.mean")>0){
         try {
             
-            // call should stop for accumulator algorythms
-            network->run();
+            // call should stop for accumulator algorithms
+            network->runStack(true);
             // reset Algos and set shouldstop=false
             network->reset();
         } catch (EssentiaException) {

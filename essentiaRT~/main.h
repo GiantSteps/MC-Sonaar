@@ -115,10 +115,10 @@ protected:
 
     
     //Essentia core
-    EssentiaOnset onsetDetection;
+    EssentiaOnset *  onsetDetection;
     Real onset_thresh;
     
-    EssentiaSFX SFX;
+    EssentiaSFX *  SFX;
 
     int delayMode = 0;
     
