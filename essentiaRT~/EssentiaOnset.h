@@ -76,7 +76,7 @@ public:
     vector<vector<Real> > strength;
 
     float combineMs;
-    long long lastOnsetTime;
+    unsigned int frameCount;
 
 
 };

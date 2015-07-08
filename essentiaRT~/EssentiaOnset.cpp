@@ -31,7 +31,6 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     this->pool = &poolin;
     
     combineMs = 150;
-    lastOnsetTime = 0;
     strength.resize(2);
     
     AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
@@ -113,10 +112,10 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     
     
     
-    network = new scheduler::Network(gen,true);
+    network = new scheduler::Network(gen);
     network->initStack();
 
-//    essentia::setDebugLevel(essentia::EExecution);
+//    essentia::setDebugLevel(essentia::EExecution | essentia::EScheduler);
 }
 
 
@@ -143,12 +142,12 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
 
 
     int val =0;
-    long long curMs = duration_cast< milliseconds >(system_clock::now().time_since_epoch()).count();
+    frameCount+= gen->_bufferSize;
 
-    if(curMs - lastOnsetTime>combineMs){
+    if(frameCount*1000.0>combineMs*sampleRate){
        val = strength.size()>0?strength[0].size()>0?1:0:0;
         if(val>0){
-         lastOnsetTime = curMs;
+            frameCount = 0;
 
         }
     }

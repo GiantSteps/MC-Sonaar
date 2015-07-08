@@ -6,8 +6,9 @@ void essentiaRT::setup(t_classid c)
     FLEXT_CADDMETHOD_(c, 0, "features", m_features);
     FLEXT_CADDMETHOD_(c, 0, "settings", m_settings);
     FLEXT_CADDMETHOD_(c,0,"delayMode",m_delayMode);
-    
-    
+    FLEXT_CADDMETHOD_(c,0,"threshold",m_threshold);
+    essentia::init();
+    cout <<"arch : " << 8* sizeof(t_sample) << endl;
     //essentia::setDebugLevel(essentia::EAll);
 
 }
@@ -34,14 +35,6 @@ onset_thresh(1.25)
     FLEXT_ADDBANG(0,my_bang);
     FLEXT_ADDTIMER(SFXTimer, m_sfxAggr);
 
-    
-    /////// PARAMS //////////////
-//     sampleRate = Samplerate();
-//     frameSize = 2048;
-//     hopSize = 256;
-
-    blockCountMax = (int)(hopSize/Blocksize());
-
 
     audioBuffer = vector<Real> (frameSize,0);
     audioBufferOut= vector<Real> (frameSize,0);
@@ -52,11 +45,12 @@ onset_thresh(1.25)
 
     if(argc==1) onset_thresh = flext::GetAFloat(argv[0]);
     
-    essentia::init();
+    
     onsetDetection = new EssentiaOnset(frameSize, hopSize, sampleRate,pool,onset_thresh);
     SFX = new EssentiaSFX(frameSize,512,sampleRate);
 
     isSFX = false;
+    isAggregating = false;
 
 
     
@@ -66,39 +60,33 @@ onset_thresh(1.25)
 
 essentiaRT::~essentiaRT()
 {
+    cout << SFX <<"."<< onsetDetection << endl;
     delete SFX;
     delete onsetDetection;
-    essentia::shutdown();
     
 }
 
-void essentiaRT::m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)
+void essentiaRT::CbSignal()//m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)
 {
-    const t_sample *in = insigs[0];
-    t_sample *out = outsigs[0];
-    while(n--) {
-        //Fill Essentia vector every hopsize , buffering is handled inside streaming algorithms
-        audioBuffer[essentiaBufferCounter] = *(in++);
-        // trick to get onset or novelty function at signal rate on outlet1
-        *(out++) = audioBufferOut[essentiaBufferCounter];
-        essentiaBufferCounter++;
+    int n = Blocksize();
+    
+    const t_sample *in = InSig()[0];//insigs[0];
+    
+    audioBuffer.resize(n);
+    memcpy(&audioBuffer[0], in, n*sizeof(t_sample));
 
-    essentiaBufferCounter=essentiaBufferCounter%frameSize;
-
-    }
-    blockCount=0;
+    
     Real onset = onsetDetection->compute(audioBuffer, audioBufferOut);
     if(onset>0){
         vector<Real> tst(1,onset) ;
         pool.set("i.strength",tst);
         onsetCB();
     }
-    if(isSFX)SFX->compute(audioBuffer);
+    if(isSFX && !isAggregating){
+     SFX->compute(audioBuffer);
+    }
     
-    
-//    blockCount++;
-    
-    
+    cout << audioBuffer << endl;
 
 }
 
@@ -106,14 +94,23 @@ void essentiaRT::onsetCB(){
     //trigger sfx
     //ioi mode: output last,clear,then retrigger sfx
     if(delayMode ==0 ){
-        m_sfxAggr(NULL);
-        SFX->clear();
+        try{
+            // careful with that : aggregate time should be inferior than 2 consecutive callbacks for non blocking audio thread
+            if(aggrThread.joinable()){
+            aggrThread.join();
+            }
+            aggrThread.~thread();
+        aggrThread = thread(&essentiaRT::m_sfxAggr,this,nullptr);
+        }
+        catch(exception const& e){
+            std::cout << e.what() << std::endl;
+        }
         SFXTimer.Delay(MAX_SFX_TIME);
         isSFX=true;
         
     }
     // delay mode clear, trigger sfx and start timer
-    else if(!isSFX){
+    else if(!isAggregating){
             SFX->clear();
             isSFX=true;
             SFXTimer.Delay(delayMode/1000.);
@@ -168,11 +165,12 @@ void essentiaRT::my_bang() {
     outputListOfFeatures(features);
 }
 
-void essentiaRT::m_sfxAggr(void *){
-
+void essentiaRT::m_sfxAggr(void * i ){
+    isAggregating = true;
     SFX->aggregate();
     outputListOfFeatures(getFeatures(SFX->aggrPool),2);
-    isSFX = false;
+    SFX->clear();
+    isAggregating = false;
     
     
 }
@@ -251,7 +249,12 @@ void essentiaRT::m_delayMode(int del){
     
     
 }
+
+
+void essentiaRT::m_threshold(float thresh){
+    onsetDetection->superFluxP->configure("threshold",thresh);
     
+}
 
 
 

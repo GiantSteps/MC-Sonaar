@@ -44,7 +44,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
                         "startFromZero" , true,
                         "validFrameThresholdRatio", 1,
                         "lastFrameToEndOfFile",true,
-                        "silentFrames","keep"
+                        "silentFrames","drop"
                         );
     
     w = factory.create("Windowing");
@@ -201,7 +201,7 @@ void EssentiaSFX::preprocessPool(){
         iter->second.resize(finalSize);
         //  Nasty hack :
         pool.remove(k);
-        for (int i =0 ; i < iter->second.size();i++){pool.add(k, iter->second[i]);};
+        for (int i =0 ; i < finalSize;i++){pool.add(k, iter->second[i]);};
         
     }
     
@@ -216,7 +216,7 @@ void EssentiaSFX::preprocessPool(){
         iter->second.resize(finalSize);
         //  Nasty hack :
         pool.remove(k);
-        for (int i =0 ; i < iter->second.size();i++){pool.add(k, iter->second[i]);};
+        for (int i =0 ; i < finalSize;i++){pool.add(k, iter->second[i]);};
         
     }
 

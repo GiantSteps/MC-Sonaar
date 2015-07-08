@@ -52,8 +52,8 @@ using namespace essentia::standard;
 #error You need at least flext version 0.4.0
 #endif
 
-//stop aggregating after 10s if sfx are set on ioi (delMode = 0)
-#define MAX_SFX_TIME 10
+//stop aggregating after 6s if sfx are set on ioi (delMode = 0)
+#define MAX_SFX_TIME 6
 
 namespace Helper {
 
@@ -97,7 +97,7 @@ public:
     essentiaRT(int argc,const t_atom *argv);
     ~essentiaRT();
 //// Flext
-    void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);    
+    void CbSignal();//void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);
     void my_bang();
 
     
@@ -141,10 +141,11 @@ protected:
     void m_settings(int argc, const t_atom *argv);
     void m_sfxAggr(void *);
     void m_delayMode(int del);
+    void m_threshold(float thresh);
     
     
     flext::Timer SFXTimer;
-    bool isSFX;
+    bool isSFX,isAggregating;
 
 private:
     static void setup(t_classid c);
@@ -155,11 +156,11 @@ private:
     FLEXT_CALLBACK(my_bang)
     FLEXT_CALLBACK_T(m_sfxAggr);
     FLEXT_CALLBACK_I(m_delayMode);
+    FLEXT_CALLBACK_F(m_threshold);
 
     
     
-    int blockCount = 0;
-    int blockCountMax = 1;
+    std::thread aggrThread;
     
 
 };

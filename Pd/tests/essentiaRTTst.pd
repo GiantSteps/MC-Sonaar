@@ -1,0 +1,102 @@
+#N canvas 542 22 577 839 10;
+#X declare -path ../bin -path ../utils;
+#X obj 24 754 cnv 15 160 50 empty empty empty 20 12 0 14 -261234 -66577
+0;
+#X obj -3 135 cnv 15 110 18 empty empty empty 20 12 0 14 -204786 -66577
+0;
+#X obj 32 759 output~;
+#X obj 114 683 *~;
+#X text -3 12 =================;
+#X text 100 762 (1) DSP on;
+#X text 105 779 & volume up;
+#X obj 1 178 tabplay2~ sample;
+#X obj 1 136 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
+#X msg 21 157 loop \$1;
+#X obj 21 136 tgl 15 1 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X text 40 135 (2) play!;
+#X text 144 620 (fades the edges to avoid clipping when jumping between
+different positions in the buffer.);
+#X obj -3 111 cnv 15 360 18 empty empty empty 20 12 0 14 -204800 -66577
+0;
+#X text 22 112 Audio: Bonobo - The North Borders (2013) - Cirrus;
+#X text 200 654 Last \, we read from the buffer to retrieve previous
+audio slices!;
+#N canvas 691 59 963 184 init 1;
+#X obj -31 39 loadbang;
+#X obj -31 98 soundfiler;
+#X obj -31 120 table sample 4410;
+#X obj -32 17 declare -path ../bin -path ../utils;
+#X msg 278 89 read -resize ../examples/soundfiles/Bonobo-TheNorthBorders-Cirrus.wav
+sample;
+#X msg 212 10 read -resize ~/Desktop/snaretst.wav sample;
+#X connect 0 0 5 0;
+#X connect 4 0 1 0;
+#X connect 5 0 1 0;
+#X restore 8 683 pd init;
+#X obj 19 202 delwrite~ deline 24000;
+#X text -1 25 This example shows how to use [essentiaRT~] to report
+strong onset positions (beats) and store them as a list of time intervals
+for later retrieval. In this example \, we set the threshold of essentiaRT~
+to 50 to detect only very strong onsets (beats) \, and use the same
+onsets to trigger past events from the incoming audio.;
+#X text 162 202 First \, store incoming audio in a buffer for later
+use.;
+#X text 18 227 The threshold level in [essentiaRT~] is the key element
+to detect different types of onsets. Thresholds above 30 usually report
+only strong positions with percussive attacks \, such as kick and snare.
+;
+#X obj 1 704 balance~;
+#X text -1 4 1 Onset detector;
+#X obj 35 435 t b f;
+#X obj 39 369 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 102 661 cycle~ 400;
+#N canvas 941 455 450 300 env 0;
+#X obj 17 17 inlet;
+#X obj 128 180 outlet~;
+#X obj 128 127 vline~;
+#X obj 128 157 *~;
+#X obj 17 95 pipe \$1;
+#X obj 17 179 outlet;
+#X obj 17 39 t f b;
+#X obj 193 13 inlet;
+#X obj 128 73 delay \$1;
+#X obj 128 95 pack 0 \$1;
+#X obj 69 96 pack 1 1;
+#X connect 0 0 6 0;
+#X connect 2 0 3 1;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 6 0 4 0;
+#X connect 6 1 8 0;
+#X connect 6 1 10 0;
+#X connect 7 0 4 1;
+#X connect 7 0 8 1;
+#X connect 7 0 9 1;
+#X connect 8 0 9 0;
+#X connect 9 0 2 0;
+#X connect 10 0 2 0;
+#X restore 41 485 pd env;
+#X msg 38 400 20;
+#X obj 12 288 essentiaRT~ 4;
+#X connect 3 0 21 1;
+#X connect 7 0 17 0;
+#X connect 7 0 21 0;
+#X connect 7 0 28 0;
+#X connect 8 0 7 0;
+#X connect 9 0 7 0;
+#X connect 10 0 9 0;
+#X connect 21 0 2 0;
+#X connect 21 0 2 1;
+#X connect 21 1 2 1;
+#X connect 21 1 2 0;
+#X connect 23 0 26 0;
+#X connect 23 1 26 1;
+#X connect 24 0 27 0;
+#X connect 25 0 3 0;
+#X connect 26 1 3 1;
+#X connect 27 0 23 0;
+#X connect 28 1 24 0;
