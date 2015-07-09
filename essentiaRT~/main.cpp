@@ -7,6 +7,7 @@ void essentiaRT::setup(t_classid c)
     FLEXT_CADDMETHOD_(c, 0, "settings", m_settings);
     FLEXT_CADDMETHOD_(c,0,"delayMode",m_delayMode);
     FLEXT_CADDMETHOD_(c,0,"threshold",m_threshold);
+    FLEXT_CADDMETHOD_(c,0,"rthreshold",m_rthreshold);
     essentia::init();
     cout <<"arch : " << 8* sizeof(t_sample) << endl;
     //essentia::setDebugLevel(essentia::EAll);
@@ -60,7 +61,7 @@ onset_thresh(1.25)
 
 essentiaRT::~essentiaRT()
 {
-    cout << SFX <<"."<< onsetDetection << endl;
+
     delete SFX;
     delete onsetDetection;
     
@@ -73,9 +74,27 @@ void essentiaRT::CbSignal()//m_signal(int n, t_sample *const *insigs, t_sample *
     const t_sample *in = InSig()[0];//insigs[0];
     
     audioBuffer.resize(n);
-    memcpy(&audioBuffer[0], in, n*sizeof(t_sample));
 
     
+    memcpy(&audioBuffer[0], in, n*sizeof(t_sample));
+
+    compute();
+
+//    cout << audioBuffer << endl;
+
+}
+
+void essentiaRT::CbSignal64(){
+    int n = Blocksize();
+    audioBuffer.resize(n);
+    while(n--){
+        audioBuffer[n] = InSig()[0][n];
+    }
+    compute();
+}
+
+
+void essentiaRT::compute(){
     Real onset = onsetDetection->compute(audioBuffer, audioBufferOut);
     if(onset>0){
         vector<Real> tst(1,onset) ;
@@ -83,11 +102,9 @@ void essentiaRT::CbSignal()//m_signal(int n, t_sample *const *insigs, t_sample *
         onsetCB();
     }
     if(isSFX && !isAggregating){
-     SFX->compute(audioBuffer);
+        SFX->compute(audioBuffer);
     }
     
-    cout << audioBuffer << endl;
-
 }
 
 void essentiaRT::onsetCB(){
@@ -252,11 +269,15 @@ void essentiaRT::m_delayMode(int del){
 
 
 void essentiaRT::m_threshold(float thresh){
-    onsetDetection->superFluxP->configure("threshold",thresh);
+    onsetDetection->superFluxP->configure("threshold",thresh*1.0/NOVELTY_MULT);
     
 }
 
 
+void essentiaRT::m_rthreshold(float thresh){
+    onsetDetection->superFluxP->configure("ratioThreshold",thresh);
+    
+}
 
 
 

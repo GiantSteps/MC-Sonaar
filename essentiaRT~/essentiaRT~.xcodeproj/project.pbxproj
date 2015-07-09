@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		07491CEF1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
 		07491CF41A1E64FA0087E350 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
-		07491CFB1A1E70540087E350 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9974E53077083C700206F68 /* essentiaRT~.mxo */; };
 		07491CFE1A1E71050087E350 /* essentiaRT~.pd_darwin in Copy Files */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* essentiaRT~.pd_darwin */; };
 		07A865DD1A1E4544008354B9 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
 		07A865DE1A1E4544008354B9 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
@@ -20,37 +19,44 @@
 		07A865E51A1E4544008354B9 /* EssentiaOnset.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865D91A1E4544008354B9 /* EssentiaOnset.h */; };
 		07A865E61A1E4544008354B9 /* EssentiaSFX.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DA1A1E4544008354B9 /* EssentiaSFX.h */; };
 		07A865E81A1E4544008354B9 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
+		6F004B5C1B4DA2A300B246E0 /* libessentiaRT64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F37520E1B4D0AF90089C554 /* libessentiaRT64.a */; };
+		6F004B5D1B4DA2AC00B246E0 /* libflext-max_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE6580D1B4ACEAA00741735 /* libflext-max_sd.a */; };
+		6F1AE8B81B4E876C002A2721 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F37520A1B4D0AF90089C554 /* essentiaRT~.mxo */; };
+		6F1AE8BE1B4E8772002A2721 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F3753F91B4D30960089C554 /* essentiaRT~.mxo */; };
+		6F1AE8BF1B4E8776002A2721 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9974E53077083C700206F68 /* essentiaRT~.mxo */; };
 		6F26F7C51B4C4FED0074B3D9 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
-		6F26F7CB1B4C523F0074B3D9 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F26F7CA1B4C523F0074B3D9 /* MaxAPI.framework */; };
-		6F26F7CD1B4C524A0074B3D9 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F26F7CC1B4C524A0074B3D9 /* MaxAudioAPI.framework */; };
 		6F3751FA1B4D0AF90089C554 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99A3B760D35508600E692EF /* Info.plist */; };
 		6F3751FC1B4D0AF90089C554 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
 		6F3751FD1B4D0AF90089C554 /* EssentiaSFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D61A1E4544008354B9 /* EssentiaSFX.cpp */; };
 		6F3751FE1B4D0AF90089C554 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
 		6F3752041B4D0AF90089C554 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
-		6F3752111B4D0FAC0089C554 /* libessentiaRT64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F37520E1B4D0AF90089C554 /* libessentiaRT64.a */; };
-		6F37521F1B4D24E60089C554 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3752191B4D24A70089C554 /* MaxAPI.framework */; };
-		6F3752201B4D24E80089C554 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3752121B4D24390089C554 /* MaxAudioAPI.framework */; };
-		6F3752211B4D2CFF0089C554 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F37520A1B4D0AF90089C554 /* essentiaRT~.mxo */; };
 		6F3753E91B4D30960089C554 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99A3B760D35508600E692EF /* Info.plist */; };
 		6F3753EB1B4D30960089C554 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
 		6F3753EC1B4D30960089C554 /* EssentiaSFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D61A1E4544008354B9 /* EssentiaSFX.cpp */; };
 		6F3753ED1B4D30960089C554 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D81A1E4544008354B9 /* main.cpp */; };
-		6F3753F01B4D30960089C554 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3752191B4D24A70089C554 /* MaxAPI.framework */; };
-		6F3753F11B4D30960089C554 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3752121B4D24390089C554 /* MaxAudioAPI.framework */; };
 		6F3753F21B4D30960089C554 /* libflext-max_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE6580D1B4ACEAA00741735 /* libflext-max_sd.a */; };
 		6F3753F31B4D30960089C554 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
 		6F3753FB1B4D30A80089C554 /* libessentiaRTFAT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3753E21B4D2FAA0089C554 /* libessentiaRTFAT.a */; };
-		6F3753FC1B4D30B60089C554 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F26F7CC1B4C524A0074B3D9 /* MaxAudioAPI.framework */; };
-		6F3753FD1B4D30B80089C554 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F26F7CA1B4C523F0074B3D9 /* MaxAPI.framework */; };
 		6F390AA01B4D80EC002C42A6 /* libflext-max_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE6580D1B4ACEAA00741735 /* libflext-max_sd.a */; };
-		6F390AA11B4D80F2002C42A6 /* libflext-max_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE6580D1B4ACEAA00741735 /* libflext-max_sd.a */; };
-		6F390AA41B4D8CEF002C42A6 /* essentiaRT~.mxo in Resources */ = {isa = PBXBuildFile; fileRef = 6F3753F91B4D30960089C554 /* essentiaRT~.mxo */; };
 		6FE657FC1B4ACE8300741735 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
 		6FE6581C1B4AD19F00741735 /* libflext-pd_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE658071B4ACEAA00741735 /* libflext-pd_sd.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6F004B5E1B4DA2B800B246E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F3750351B4D0AA20089C554;
+			remoteInfo = essentiaRT64;
+		};
+		6F004B601B4DA2B800B246E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FE657FD1B4ACEAA00741735 /* flext.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E997498C07705CC400206F68;
+			remoteInfo = "Max static single";
+		};
 		6F26F7BA1B4C4FD80074B3D9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
@@ -59,13 +65,6 @@
 			remoteInfo = essentiaRT;
 		};
 		6F26F7C21B4C4FDD0074B3D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FE657FD1B4ACEAA00741735 /* flext.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E997498C07705CC400206F68;
-			remoteInfo = "Max static single";
-		};
-		6F3751F61B4D0AF90089C554 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6FE657FD1B4ACEAA00741735 /* flext.xcodeproj */;
 			proxyType = 1;
@@ -99,13 +98,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6F3752221B4D2DEB0089C554;
 			remoteInfo = essentiaRTFAT;
-		};
-		6F390AA21B4D8690002C42A6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6F3750351B4D0AA20089C554;
-			remoteInfo = essentiaRT64;
 		};
 		6FA5A4A11B21F0AD002C23E4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -197,7 +189,7 @@
 			dstPath = $SRCROOT/../Max/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				6F3752211B4D2CFF0089C554 /* essentiaRT~.mxo in CopyFiles */,
+				6F1AE8B81B4E876C002A2721 /* essentiaRT~.mxo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +199,7 @@
 			dstPath = $SRCROOT/../Max/bin;
 			dstSubfolderSpec = 0;
 			files = (
+				6F1AE8BE1B4E8772002A2721 /* essentiaRT~.mxo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +209,7 @@
 			dstPath = $SRCROOT/../Max/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				07491CFB1A1E70540087E350 /* essentiaRT~.mxo in CopyFiles */,
+				6F1AE8BF1B4E8776002A2721 /* essentiaRT~.mxo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,12 +223,8 @@
 		07A865D91A1E4544008354B9 /* EssentiaOnset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaOnset.h; sourceTree = "<group>"; };
 		07A865DA1A1E4544008354B9 /* EssentiaSFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EssentiaSFX.h; sourceTree = "<group>"; };
 		07A865DC1A1E4544008354B9 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
-		6F26F7CA1B4C523F0074B3D9 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../../MaxSDK-6.1.4/c74support/max-includes/MaxAPI.framework"; sourceTree = "<group>"; };
-		6F26F7CC1B4C524A0074B3D9 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		6F37520A1B4D0AF90089C554 /* essentiaRT~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "essentiaRT~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F37520B1B4D0AF90089C554 /* max static copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "max static copy-Info.plist"; path = "/Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT~/max static copy-Info.plist"; sourceTree = "<absolute>"; };
-		6F3752121B4D24390089C554 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../MaxSDK-6.1.4/c74support/msp-includes/x64/MaxAudioAPI.framework"; sourceTree = "<group>"; };
-		6F3752191B4D24A70089C554 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../../MaxSDK-6.1.4/c74support/max-includes/x64/MaxAPI.framework"; sourceTree = "<group>"; };
 		6F3753F91B4D30960089C554 /* essentiaRT~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "essentiaRT~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3753FA1B4D30960089C554 /* max static64 copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "max static64 copy-Info.plist"; path = "/Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT~/max static64 copy-Info.plist"; sourceTree = "<absolute>"; };
 		6F3754151B4D49470089C554 /* max staticFAT copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "max staticFAT copy-Info.plist"; path = "/Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/essentiaRT~/max staticFAT copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -252,10 +241,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F390AA11B4D80F2002C42A6 /* libflext-max_sd.a in Frameworks */,
-				6F3752111B4D0FAC0089C554 /* libessentiaRT64.a in Frameworks */,
-				6F37521F1B4D24E60089C554 /* MaxAPI.framework in Frameworks */,
-				6F3752201B4D24E80089C554 /* MaxAudioAPI.framework in Frameworks */,
+				6F004B5D1B4DA2AC00B246E0 /* libflext-max_sd.a in Frameworks */,
+				6F004B5C1B4DA2A300B246E0 /* libessentiaRT64.a in Frameworks */,
 				6F3752041B4D0AF90089C554 /* libstdc++.6.0.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,10 +253,6 @@
 			files = (
 				6F3753F21B4D30960089C554 /* libflext-max_sd.a in Frameworks */,
 				6F3753FB1B4D30A80089C554 /* libessentiaRTFAT.a in Frameworks */,
-				6F3753F01B4D30960089C554 /* MaxAPI.framework in Frameworks */,
-				6F3753FC1B4D30B60089C554 /* MaxAudioAPI.framework in Frameworks */,
-				6F3753FD1B4D30B80089C554 /* MaxAPI.framework in Frameworks */,
-				6F3753F11B4D30960089C554 /* MaxAudioAPI.framework in Frameworks */,
 				6F3753F31B4D30960089C554 /* libstdc++.6.0.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,8 +273,6 @@
 			files = (
 				6F390AA01B4D80EC002C42A6 /* libflext-max_sd.a in Frameworks */,
 				6F26F7C51B4C4FED0074B3D9 /* libessentiaRT.a in Frameworks */,
-				6F26F7CB1B4C523F0074B3D9 /* MaxAPI.framework in Frameworks */,
-				6F26F7CD1B4C524A0074B3D9 /* MaxAudioAPI.framework in Frameworks */,
 				07491CF41A1E64FA0087E350 /* libstdc++.6.0.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,10 +309,7 @@
 			children = (
 				6F37541D1B4D68E70089C554 /* Accelerate.framework */,
 				6FA5A49C1B21F0AD002C23E4 /* essentiaX.xcodeproj */,
-				6F26F7CA1B4C523F0074B3D9 /* MaxAPI.framework */,
-				6F26F7CC1B4C524A0074B3D9 /* MaxAudioAPI.framework */,
 				07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */,
-				6F3752141B4D24500089C554 /* 64 */,
 				6FE657FD1B4ACEAA00741735 /* flext.xcodeproj */,
 			);
 			name = "External Frameworks and Libraries";
@@ -349,15 +327,6 @@
 				E99A3B760D35508600E692EF /* Info.plist */,
 			);
 			name = Source;
-			sourceTree = "<group>";
-		};
-		6F3752141B4D24500089C554 /* 64 */ = {
-			isa = PBXGroup;
-			children = (
-				6F3752191B4D24A70089C554 /* MaxAPI.framework */,
-				6F3752121B4D24390089C554 /* MaxAudioAPI.framework */,
-			);
-			name = 64;
 			sourceTree = "<group>";
 		};
 		6FA5A49D1B21F0AD002C23E4 /* Products */ = {
@@ -412,8 +381,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				6F390AA31B4D8690002C42A6 /* PBXTargetDependency */,
-				6F3751F51B4D0AF90089C554 /* PBXTargetDependency */,
+				6F004B5F1B4DA2B800B246E0 /* PBXTargetDependency */,
+				6F004B611B4DA2B800B246E0 /* PBXTargetDependency */,
 			);
 			name = "max static64";
 			productName = "Max xsample static";
@@ -605,7 +574,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F3753E91B4D30960089C554 /* Info.plist in Resources */,
-				6F390AA41B4D8CEF002C42A6 /* essentiaRT~.mxo in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +630,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6F004B5F1B4DA2B800B246E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = essentiaRT64;
+			targetProxy = 6F004B5E1B4DA2B800B246E0 /* PBXContainerItemProxy */;
+		};
+		6F004B611B4DA2B800B246E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Max static single";
+			targetProxy = 6F004B601B4DA2B800B246E0 /* PBXContainerItemProxy */;
+		};
 		6F26F7BB1B4C4FD80074B3D9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = essentiaRT;
@@ -672,11 +650,6 @@
 			name = "Max static single";
 			targetProxy = 6F26F7C21B4C4FDD0074B3D9 /* PBXContainerItemProxy */;
 		};
-		6F3751F51B4D0AF90089C554 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Max static single";
-			targetProxy = 6F3751F61B4D0AF90089C554 /* PBXContainerItemProxy */;
-		};
 		6F3753E61B4D30960089C554 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Max static single";
@@ -686,11 +659,6 @@
 			isa = PBXTargetDependency;
 			name = essentiaRTFAT;
 			targetProxy = 6F3754181B4D4AC70089C554 /* PBXContainerItemProxy */;
-		};
-		6F390AA31B4D8690002C42A6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = essentiaRT64;
-			targetProxy = 6F390AA21B4D8690002C42A6 /* PBXContainerItemProxy */;
 		};
 		6FDC781F1B21F0DB008F6A99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -721,10 +689,11 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=1",
+					"MSP64=1",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=x86_64]" = (
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=i386]" = (
 					"$(inherited)",
-					"FLEXT_SYS=1",
+					"MSP64=0",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GENERATE_PKGINFO_FILE = YES;
@@ -739,7 +708,12 @@
 				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					MaxAudioAPI,
+					"-framework",
+					MaxAPI,
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
 				SECTORDER_FLAGS = "";
@@ -769,6 +743,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=1",
+					FLEXT_USE_CMEM,
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GENERATE_PKGINFO_FILE = YES;
@@ -783,7 +758,12 @@
 				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					MaxAudioAPI,
+					"-framework",
+					MaxAPI,
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
 				SECTORDER_FLAGS = "";
@@ -815,10 +795,12 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=1",
+					"MSP64=1",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=i386]" = "MSP64=0";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=x86_64]" = "MSP64=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=i386]" = (
+					"$(inherited)",
+					"MSP64=0",
+				);
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
@@ -831,7 +813,12 @@
 				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					MaxAudioAPI,
+					"-framework",
+					MaxAPI,
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
 				SECTORDER_FLAGS = "";
@@ -862,9 +849,6 @@
 					"$(inherited)",
 					"FLEXT_SYS=1",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=i386]" = "MSP64=0";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=x86_64]" = "MSP64=1";
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
@@ -877,7 +861,12 @@
 				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					MaxAudioAPI,
+					"-framework",
+					MaxAPI,
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
 				SECTORDER_FLAGS = "";
@@ -1068,6 +1057,7 @@
 					_DEBUG,
 					FLEXT_USESIMD,
 					FLEXT_USE_CMEM,
+					"DEBUGGING_ENABLED=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1076,7 +1066,7 @@
 					$PROJECT_DIR/../../../flext/source/,
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PRODUCT_NAME = "essentiaRT~";
 			};
 			name = Debug;
 		};
@@ -1092,6 +1082,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					FLEXT_USESIMD,
+					"DEBUGGING_ENABLED=0",
 				);
 				GCC_STRICT_ALIASING = YES;
 				HEADER_SEARCH_PATHS = (

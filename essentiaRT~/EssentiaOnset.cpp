@@ -12,9 +12,9 @@
 
 EssentiaOnset::~EssentiaOnset(){
     
-
     if(network!=NULL){
-    delete network;
+        network->clear();
+        delete network;
     }
 }
 EssentiaOnset::EssentiaOnset(int frameS,int hopS,int sR,Pool& poolin,Real threshold){

@@ -12,8 +12,10 @@
 
 
 EssentiaSFX::~EssentiaSFX(){
+
     if(network!=NULL){
-    delete network;
+    network->clear();
+        delete network;
     }
 }
 EssentiaSFX::EssentiaSFX(int frameS,int hopS,int sR){

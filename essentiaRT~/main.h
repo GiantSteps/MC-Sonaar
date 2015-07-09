@@ -98,6 +98,7 @@ public:
     ~essentiaRT();
 //// Flext
     void CbSignal();//void m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs);
+    void CbSignal64();
     void my_bang();
 
     
@@ -132,7 +133,7 @@ protected:
     
     
     Pool pool;
-    
+    void compute();
     
     
     // getfeatures (why virtual?)
@@ -142,6 +143,7 @@ protected:
     void m_sfxAggr(void *);
     void m_delayMode(int del);
     void m_threshold(float thresh);
+    void m_rthreshold(float thresh);
     
     
     flext::Timer SFXTimer;
@@ -157,6 +159,7 @@ private:
     FLEXT_CALLBACK_T(m_sfxAggr);
     FLEXT_CALLBACK_I(m_delayMode);
     FLEXT_CALLBACK_F(m_threshold);
+    FLEXT_CALLBACK_F(m_rthreshold);
 
     
     
