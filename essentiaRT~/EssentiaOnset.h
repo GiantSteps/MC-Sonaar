@@ -40,12 +40,11 @@ using namespace streaming;
 class EssentiaOnset {
     
 public:
-
-    EssentiaOnset(int frameS,int hopS,int sR,Pool& poolin,Real threshold);
+    EssentiaOnset(){};
+    EssentiaOnset(int frameS,int hopS,int sR,Real threshold);
     ~EssentiaOnset();
     
-    
-    void setup(int frameS,int hopS,int sR,Pool& poolin,Real threshold);
+    void setup(int frameS,int hopS,int sR,Real threshold);
     
     float compute(vector<Real>& audioFrameIn, vector<Real>& output);
     
@@ -63,11 +62,11 @@ public:
     streaming::VectorOutput<vector<Real> >* essout;
     RingBufferInput * gen;
 //    RingBufferOutput * essout;
-    streaming::RingBufferOutput* DBGOUT;
-    streaming::VectorOutput< vector<Real> > * probe;
+//    streaming::RingBufferOutput* DBGOUT;
+//    streaming::VectorOutput< vector<Real> > * probe;
     
     
-    Pool* pool;
+    Pool pool;
     
     
     scheduler::Network *network=NULL;

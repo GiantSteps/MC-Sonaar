@@ -17,18 +17,18 @@ EssentiaOnset::~EssentiaOnset(){
         delete network;
     }
 }
-EssentiaOnset::EssentiaOnset(int frameS,int hopS,int sR,Pool& poolin,Real threshold){
-    setup(frameS, hopS, sR, poolin, threshold);
+EssentiaOnset::EssentiaOnset(int frameS,int hopS,int sR,Real threshold){
+    setup(frameS, hopS, sR,  threshold);
 
 }
 
-void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
+void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
 
 
     this->sampleRate = sR;
     this->frameSize = FRAMESIZE;
     this->hopSize = hS;
-    this->pool = &poolin;
+    
     
     combineMs = 150;
     strength.resize(2);
@@ -76,7 +76,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     essout->setVector(&strength);
 
     
-    probe = new streaming::VectorOutput< vector<Real> >();
+//    probe = new streaming::VectorOutput< vector<Real> >();
     
     // cutting, overlapping
     gen->output("signal") >> fc->input("signal");
@@ -104,8 +104,8 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Pool& poolin,Real threshold){
     //gen->output("signal")  >>  //DBGOUT->input("signal");
     
     //2 Pool
-   connectSingleValue(centroidF->output("centroid"),poolin,"i.centroid");
-    connectSingleValue(mfccF->output("mfcc"),poolin,"i.mfcc");
+   connectSingleValue(centroidF->output("centroid"),pool,"i.centroid");
+    connectSingleValue(mfccF->output("mfcc"),pool,"i.mfcc");
 
     //connectSingleValue(triF->output("bands"),poolin,"inst.tri");
 
@@ -124,6 +124,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     essout->setVector(&strength);
 
     if(audioFrameIn.size()!=gen->_bufferSize){
+        cout << "resizing" <<audioFrameIn.size() << endl;
         gen->_bufferSize = audioFrameIn.size();
         gen->output(0).setAcquireSize(gen->_bufferSize);
         gen->output(0).setReleaseSize(gen->_bufferSize);
@@ -164,6 +165,6 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
 
 void EssentiaOnset::preprocessPool(){
     
-    pool->set("i.centroid",pool->value<Real>("i.centroid")*sampleRate/2);
+    pool.set("i.centroid",pool.value<Real>("i.centroid")*sampleRate/2);
     
 }

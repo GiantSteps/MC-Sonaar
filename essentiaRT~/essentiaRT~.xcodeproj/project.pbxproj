@@ -745,6 +745,14 @@
 					"FLEXT_SYS=1",
 					FLEXT_USE_CMEM,
 				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=i386]" = (
+					"$(inherited)",
+					"MSP64=0",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=x86_64]" = (
+					"$(inherited)",
+					"MSP64=1",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (

@@ -17,6 +17,8 @@ EssentiaSFX::~EssentiaSFX(){
     network->clear();
         delete network;
     }
+    
+
 }
 EssentiaSFX::EssentiaSFX(int frameS,int hopS,int sR){
     setup(frameS, hopS, sR);
@@ -35,7 +37,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     standard::AlgorithmFactory& stfactory = standard::AlgorithmFactory::instance();
         // Input
     gen = new essentia::streaming::RingBufferInput();//factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
-    gen->_bufferSize = hopSize;
+    gen->_bufferSize = 2*hopSize;
     gen->output(0).setReleaseSize(gen->_bufferSize);
     gen->output(0).setAcquireSize(gen->_bufferSize);
     gen->configure();
@@ -102,12 +104,12 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     env->output("signal") >> TCent->input("envelope");
     
     //Connect SFX 2 Pool
-    flatness->output("flatness") >> PC(pool,"noisiness");
-    loudness->output("power") >> PC(pool,"loudness");
-    yin->output("pitch") >> PC(pool,"f0");
-    yin->output("pitchConfidence") >> PC(pool,"f0Confidence");
-    mfcc->output("mfcc") >> PC(pool,"mfcc");
-    cent->output("centroid") >> PC(pool,"centroid");
+    flatness->output("flatness") >> PC(sfxPool,"noisiness");
+    loudness->output("power") >> PC(sfxPool,"loudness");
+    yin->output("pitch") >> PC(sfxPool,"f0");
+    yin->output("pitchConfidence") >> PC(sfxPool,"f0Confidence");
+    mfcc->output("mfcc") >> PC(sfxPool,"mfcc");
+    cent->output("centroid") >> PC(sfxPool,"centroid");
     
     // accumulator algo are directly linked to aggrPool (computes only at the end)
     TCent->output("TCToTotal") >> PC(aggrPool,"tempCentroid");
@@ -115,7 +117,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
     
     //Connect Aggregator
-    poolAggr->input("input").set(pool);
+    poolAggr->input("input").set(sfxPool);
     poolAggr->output("output").set(aggrPool);
     
 
@@ -134,13 +136,13 @@ void EssentiaSFX::clear(){
     
     fc->reset();
     gen->reset();
-    pool.clear();
+    sfxPool.clear();
     
     
 }
 void EssentiaSFX::compute(vector<Real>& audioFrameIn){
     if(audioFrameIn.size()!=gen->_bufferSize){
-        gen->_bufferSize = audioFrameIn.size();
+        gen->_bufferSize = 2*audioFrameIn.size();
         gen->output(0).setAcquireSize(gen->_bufferSize);
         gen->output(0).setReleaseSize(gen->_bufferSize);
         gen->configure();
@@ -156,8 +158,7 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
 
 void EssentiaSFX::aggregate(){
     
-    if(pool.getRealPool().size()>0){
-    preprocessPool();
+
     aggrPool.clear();
     poolAggr->compute();
         
@@ -165,20 +166,14 @@ void EssentiaSFX::aggregate(){
        aggrPool.set("centroid.mean",aggrPool.value<Real>("centroid.mean")*sampleRate/2);
        aggrPool.set("centroid.var",aggrPool.value<Real>("centroid.var")*sampleRate*sampleRate/4);
         
-    }
+    
     
     // avoid first onset and empty onsets
     if(aggrPool.getRealPool().size()>0 && aggrPool.value<Real>("loudness.mean")>0){
-        try {
-            
             // call should stop for accumulator algorithms
             network->runStack(true);
             // reset Algos and set shouldstop=false
             network->reset();
-        } catch (EssentiaException) {
-            
-            
-        }
 
 
     }
@@ -191,7 +186,7 @@ void EssentiaSFX::aggregate(){
 void EssentiaSFX::preprocessPool(){
     
     // crop to avoid next transient influence, assuming that the onset callback appears after few frames of the transeient
-    std::map<string, vector<Real > >  vectorsIn =     pool.getRealPool();
+    std::map<string, vector<Real > >  vectorsIn =     sfxPool.getRealPool();
 
     
     for(std::map<string, vector<Real > >::iterator iter = vectorsIn.begin(); iter != vectorsIn.end(); ++iter)
@@ -201,13 +196,13 @@ void EssentiaSFX::preprocessPool(){
         finalSize = std::max(finalSize,1);
         string k =  iter->first;
         iter->second.resize(finalSize);
-        //  Nasty hack :
-        pool.remove(k);
-        for (int i =0 ; i < finalSize;i++){pool.add(k, iter->second[i]);};
+        
+        sfxPool.remove(k);
+        for (int i =0 ; i < finalSize;i++){sfxPool.add(k, iter->second[i]);};
         
     }
     
-    std::map<string, vector<vector<Real> > >  vectorsIn2 =     pool.getVectorRealPool();
+    std::map<string, vector<vector<Real> > >  vectorsIn2 =     sfxPool.getVectorRealPool();
     
     
     for(std::map<string, vector<vector<Real> > >::iterator iter = vectorsIn2.begin(); iter != vectorsIn2.end(); ++iter)
@@ -216,9 +211,9 @@ void EssentiaSFX::preprocessPool(){
         finalSize = std::max(finalSize,1);
         string k =  iter->first;
         iter->second.resize(finalSize);
-        //  Nasty hack :
-        pool.remove(k);
-        for (int i =0 ; i < finalSize;i++){pool.add(k, iter->second[i]);};
+
+        sfxPool.remove(k);
+        for (int i =0 ; i < finalSize;i++){sfxPool.add(k, iter->second[i]);};
         
     }
 

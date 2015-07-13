@@ -11,22 +11,24 @@ void essentiaRT::setup(t_classid c)
     essentia::init();
     cout <<"arch : " << 8* sizeof(t_sample) << endl;
     //essentia::setDebugLevel(essentia::EAll);
-
+    
 }
 
 essentiaRT::essentiaRT (int argc,const t_atom *argv):
 sampleRate(Samplerate()),
 frameSize(FRAMESIZE),
 hopSize(512),
-onset_thresh(1.25)
+onset_thresh(1.25),
+delayMode(0)
+
 
 {
     
     //Debug
-//#ifdef DEBUG_PD
-//    std::ofstream   fout("/dev/null");
-//    std::cout.rdbuf(fout.rdbuf());
-//#endif
+    //#ifdef DEBUG_PD
+    //    std::ofstream   fout("/dev/null");
+    //    std::cout.rdbuf(fout.rdbuf());
+    //#endif
     // Flext
     AddInSignal("In");
     AddOutSignal("Out");
@@ -35,25 +37,26 @@ onset_thresh(1.25)
     
     FLEXT_ADDBANG(0,my_bang);
     FLEXT_ADDTIMER(SFXTimer, m_sfxAggr);
-
-
+    
+    
     audioBuffer = vector<Real> (frameSize,0);
     audioBufferOut= vector<Real> (frameSize,0);
-
-
+    
+    
     essentiaBufferCounter = 0;
-
-
+    
+    
     if(argc==1) onset_thresh = flext::GetAFloat(argv[0]);
     
+    onsetDetection.setup(frameSize, hopSize, sampleRate,onset_thresh);
+    SFX.setup(frameSize,512,sampleRate);
+//    onsetDetection = new EssentiaOnset(frameSize, hopSize, sampleRate,onset_thresh);
+//    SFX = new EssentiaSFX(frameSize,512,sampleRate);
     
-    onsetDetection = new EssentiaOnset(frameSize, hopSize, sampleRate,pool,onset_thresh);
-    SFX = new EssentiaSFX(frameSize,512,sampleRate);
-
-    isSFX = false;
-    isAggregating = false;
-
-
+    isComputingSFX = false;
+    isAggregatingSFX = false;
+    
+    
     
     //m_features(argc, argv);
 }
@@ -61,32 +64,35 @@ onset_thresh(1.25)
 
 essentiaRT::~essentiaRT()
 {
+    if(aggrThread.joinable()){
+        aggrThread.join();
+    }
+//    delete SFX;
+//    delete onsetDetection;
 
-    delete SFX;
-    delete onsetDetection;
-    
 }
 
-void essentiaRT::CbSignal()//m_signal(int n, t_sample *const *insigs, t_sample *const *outsigs)
+void essentiaRT::CbSignal()
 {
     int n = Blocksize();
+    if(n!=audioBuffer.size())
+        audioBuffer.resize(n);
     
-    const t_sample *in = InSig()[0];//insigs[0];
-    
-    audioBuffer.resize(n);
-
-    
+    const t_sample *in = InSig()[0];//insigs[0];    
     memcpy(&audioBuffer[0], in, n*sizeof(t_sample));
-
+    
     compute();
-
-//    cout << audioBuffer << endl;
-
+    
+    //    cout << audioBuffer << endl;
+    
 }
 
+// 64 bit : copy double to array of float
 void essentiaRT::CbSignal64(){
     int n = Blocksize();
-    audioBuffer.resize(n);
+    if(n!=audioBuffer.size())
+        audioBuffer.resize(n);
+    
     while(n--){
         audioBuffer[n] = InSig()[0][n];
     }
@@ -95,14 +101,14 @@ void essentiaRT::CbSignal64(){
 
 
 void essentiaRT::compute(){
-    Real onset = onsetDetection->compute(audioBuffer, audioBufferOut);
+    Real onset = onsetDetection.compute(audioBuffer, audioBufferOut);
     if(onset>0){
         vector<Real> tst(1,onset) ;
-        pool.set("i.strength",tst);
+        onsetDetection.pool.set("i.strength",tst);
         onsetCB();
     }
-    if(isSFX && !isAggregating){
-        SFX->compute(audioBuffer);
+    if(isComputingSFX && !isAggregatingSFX){
+        SFX.compute(audioBuffer);
     }
     
 }
@@ -111,31 +117,21 @@ void essentiaRT::onsetCB(){
     //trigger sfx
     //ioi mode: output last,clear,then retrigger sfx
     if(delayMode ==0 ){
-        try{
-            // careful with that : aggregate time should be inferior than 2 consecutive callbacks for non blocking audio thread
-            if(aggrThread.joinable()){
-            aggrThread.join();
-            }
-            aggrThread.~thread();
-        aggrThread = thread(&essentiaRT::m_sfxAggr,this,nullptr);
-        }
-        catch(exception const& e){
-            std::cout << e.what() << std::endl;
-        }
+        m_sfxAggr(nullptr);
         SFXTimer.Delay(MAX_SFX_TIME);
-        isSFX=true;
+        isComputingSFX=true;
         
     }
     // delay mode clear, trigger sfx and start timer
-    else if(!isAggregating){
-            SFX->clear();
-            isSFX=true;
-            SFXTimer.Delay(delayMode/1000.);
+    else if(!isAggregatingSFX){
+        SFX.clear();
+        isComputingSFX=true;
+        SFXTimer.Delay(delayMode/1000.);
         
     }
-    onsetDetection->preprocessPool();
+    onsetDetection.preprocessPool();
     //output onsetStrength first
-    std::map<string, vector<Real> > features = getFeatures(pool);
+    std::map<string, vector<Real> > features = getFeatures(onsetDetection.pool);
     std::map<string, vector<Real>  >::iterator st = features.find("i.strength");
     AtomList listOut(2);
     SetString(listOut[0],"i.strength");
@@ -146,9 +142,11 @@ void essentiaRT::onsetCB(){
     
     //output the rest
     outputListOfFeatures(features);
+    onsetDetection.pool.clear();
     
-
-
+    
+    
+    
 }
 
 void essentiaRT::m_features(int argc, const t_atom *argv)
@@ -166,37 +164,57 @@ void essentiaRT::m_features(int argc, const t_atom *argv)
 void essentiaRT::m_settings(int argc, const t_atom *argv)
 {
     essentia::ParameterMap pM;
-       string curset =  GetString(argv[0]);
+    string curset =  GetString(argv[0]);
     
     if(curset=="onset_threshold"){
         pM.add("threshold",GetAFloat(argv[1]));
-        onsetDetection->superFluxP->setParameters(pM);
-
+        onsetDetection.superFluxP->setParameters(pM);
+        
     }
-
+    
 }
 
 void essentiaRT::my_bang() {
-    std::map<string, vector<Real> > features = getFeatures(pool);
+    std::map<string, vector<Real> > features = getFeatures(onsetDetection.pool);
     
     outputListOfFeatures(features);
 }
 
 void essentiaRT::m_sfxAggr(void * i ){
-    isAggregating = true;
-    SFX->aggregate();
-    outputListOfFeatures(getFeatures(SFX->aggrPool),2);
-    SFX->clear();
-    isAggregating = false;
     
+    try{
+        // careful with that : aggregate time should be inferior than 2 consecutive callbacks for non blocking audio thread
+        if(aggrThread.joinable()){
+            aggrThread.join();
+        }
+        aggrThread.~thread();
+        
+        SFX.preprocessPool();
+            aggrThread = thread(&essentiaRT::aggrThreadFunc,this);
+//        }
+    }
+    catch(exception const& e){
+        std::cout << e.what() << std::endl;
+    }
     
 }
 
 
-std::map<string, vector<Real> > essentiaRT::getFeatures(Pool p)
+void essentiaRT::aggrThreadFunc(){
+    if(SFX.sfxPool.getRealPool().size()>0){
+    isAggregatingSFX = true;
+    SFX.aggregate();
+    outputListOfFeatures(getFeatures(SFX.aggrPool),2);
+    SFX.clear();
+    isAggregatingSFX = false;
+    }
+}
+
+
+std::map<string, vector<Real> > essentiaRT::getFeatures(Pool & p)
 {
- 
-        std::map<string, vector<Real > >  vectorsIn =     p.getRealPool();
+    
+    std::map<string, vector<Real > >  vectorsIn =     p.getRealPool();
     std::map<string, vector<Real> > vectorsOut;
     
     for(std::map<string, vector<Real > >::iterator iter = vectorsIn.begin(); iter != vectorsIn.end(); ++iter)
@@ -225,7 +243,7 @@ std::map<string, vector<Real> > essentiaRT::getFeatures(Pool p)
         
         vectorsOut[k] = v;
     }
-
+    
     
     return vectorsOut;
 }
@@ -233,7 +251,7 @@ std::map<string, vector<Real> > essentiaRT::getFeatures(Pool p)
 
 void essentiaRT::outputListOfFeatures(const std::map<string, vector<Real> >& features,int outlet)
 {
-
+    
     for(std::map<string, vector<Real>  >::const_iterator iter = features.begin(); iter != features.end(); ++iter)
     {
         AtomList listOut(iter->second.size()+1);
@@ -252,7 +270,7 @@ void essentiaRT::outputListOfFeatures(const std::map<string, vector<Real> >& fea
             
         }
         
-       ToOutList(outlet, listOut);
+        ToOutList(outlet, listOut);
     }
     
 }
@@ -261,7 +279,7 @@ void essentiaRT::outputListOfFeatures(const std::map<string, vector<Real> >& fea
 void essentiaRT::m_delayMode(int del){
     
     delayMode = del;
-    //isSFX=false;
+    //isComputingSFX=false;
     
     
     
@@ -269,13 +287,13 @@ void essentiaRT::m_delayMode(int del){
 
 
 void essentiaRT::m_threshold(float thresh){
-    onsetDetection->superFluxP->configure("threshold",thresh*1.0/NOVELTY_MULT);
+    onsetDetection.superFluxP->configure("threshold",thresh*1.0/NOVELTY_MULT);
     
 }
 
 
 void essentiaRT::m_rthreshold(float thresh){
-    onsetDetection->superFluxP->configure("ratioThreshold",thresh);
+    onsetDetection.superFluxP->configure("ratioThreshold",thresh);
     
 }
 

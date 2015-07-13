@@ -34,7 +34,7 @@ using namespace streaming;
 class EssentiaSFX {
     
 public:
-    
+    EssentiaSFX(){};
     EssentiaSFX(int frameS,int hopS,int sR);
     ~EssentiaSFX();
     
@@ -42,10 +42,12 @@ public:
     void setup(int frameS,int hopS,int sR);
     
     void compute(vector<Real>& audioFrameIn);
+    //Pool
+    void preprocessPool();
     
     void aggregate();
     void clear();
-    Pool aggrPool;
+    Pool aggrPool,sfxPool;
 private:
     
     /// ESSENTIA
@@ -74,10 +76,9 @@ private:
     scheduler::Network *network = NULL;
     int sampleRate, frameSize, hopSize;
     
-    Pool pool;//,*outPool;
     
-    //Pool
-    void preprocessPool();
+    
+
 
     
     

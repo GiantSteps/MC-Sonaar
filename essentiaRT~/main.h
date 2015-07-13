@@ -116,10 +116,10 @@ protected:
 
     
     //Essentia core
-    EssentiaOnset *  onsetDetection;
+    EssentiaOnset   onsetDetection;
     Real onset_thresh;
     
-    EssentiaSFX *  SFX;
+    EssentiaSFX   SFX;
 
     int delayMode = 0;
     
@@ -127,12 +127,11 @@ protected:
     int essentiaBufferCounter;
     vector<Real> audioBuffer,audioBufferOut;
     std::map<string, bool> currentAlgorithms;
-    std::map<string, vector<Real> > getFeatures(Pool p);
+    std::map<string, vector<Real> > getFeatures(Pool & p);
     
     void outputListOfFeatures(const std::map<string, vector<Real> >& features,int outlet = 1);
     
-    
-    Pool pool;
+
     void compute();
     
     
@@ -147,7 +146,7 @@ protected:
     
     
     flext::Timer SFXTimer;
-    bool isSFX,isAggregating;
+    bool isComputingSFX,isAggregatingSFX;
 
 private:
     static void setup(t_classid c);
@@ -162,6 +161,7 @@ private:
     FLEXT_CALLBACK_F(m_rthreshold);
 
     
+    void aggrThreadFunc();
     
     std::thread aggrThread;
     
