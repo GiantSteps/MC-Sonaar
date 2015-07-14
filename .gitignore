@@ -1,6 +1,6 @@
 
 .DS_Stor*
-
+Build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -20,3 +20,9 @@ flext-external/.DS_Store
 flext-streaming/.DS_Store
 
 Pd/examples/00b_ListOfUtilities.pd
+
+*.pd_darwin
+*.pd_linux
+*.dll
+*.pd_linux32
+*.mxo/
