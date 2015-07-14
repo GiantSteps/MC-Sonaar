@@ -21,9 +21,6 @@
 		07A865E81A1E4544008354B9 /* main.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A865DC1A1E4544008354B9 /* main.h */; };
 		6F004B5C1B4DA2A300B246E0 /* libessentiaRT64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F37520E1B4D0AF90089C554 /* libessentiaRT64.a */; };
 		6F004B5D1B4DA2AC00B246E0 /* libflext-max_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE6580D1B4ACEAA00741735 /* libflext-max_sd.a */; };
-		6F1AE8B81B4E876C002A2721 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F37520A1B4D0AF90089C554 /* essentiaRT~.mxo */; };
-		6F1AE8BE1B4E8772002A2721 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F3753F91B4D30960089C554 /* essentiaRT~.mxo */; };
-		6F1AE8BF1B4E8776002A2721 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9974E53077083C700206F68 /* essentiaRT~.mxo */; };
 		6F26F7C51B4C4FED0074B3D9 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
 		6F3751FA1B4D0AF90089C554 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99A3B760D35508600E692EF /* Info.plist */; };
 		6F3751FC1B4D0AF90089C554 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
@@ -38,6 +35,9 @@
 		6F3753F31B4D30960089C554 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 07491CEE1A1E5D5A0087E350 /* libstdc++.6.0.9.dylib */; };
 		6F3753FB1B4D30A80089C554 /* libessentiaRTFAT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3753E21B4D2FAA0089C554 /* libessentiaRTFAT.a */; };
 		6F390AA01B4D80EC002C42A6 /* libflext-max_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE6580D1B4ACEAA00741735 /* libflext-max_sd.a */; };
+		6F5257C81B55832A00E303FB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99A3B760D35508600E692EF /* Info.plist */; };
+		6F5257C91B55849700E303FB /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6F37520A1B4D0AF90089C554 /* essentiaRT~.mxo */; };
+		6F5257CA1B55866300E303FB /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9974E53077083C700206F68 /* essentiaRT~.mxo */; };
 		6FE657FC1B4ACE8300741735 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
 		6FE6581C1B4AD19F00741735 /* libflext-pd_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE658071B4ACEAA00741735 /* libflext-pd_sd.a */; };
 /* End PBXBuildFile section */
@@ -189,7 +189,7 @@
 			dstPath = $SRCROOT/../Max/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				6F1AE8B81B4E876C002A2721 /* essentiaRT~.mxo in CopyFiles */,
+				6F5257CA1B55866300E303FB /* essentiaRT~.mxo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +199,6 @@
 			dstPath = $SRCROOT/../Max/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				6F1AE8BE1B4E8772002A2721 /* essentiaRT~.mxo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +208,7 @@
 			dstPath = $SRCROOT/../Max/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				6F1AE8BF1B4E8776002A2721 /* essentiaRT~.mxo in CopyFiles */,
+				6F5257C91B55849700E303FB /* essentiaRT~.mxo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +580,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5257C81B55832A00E303FB /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +679,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
+				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$maxsdk/max-includes",
@@ -734,6 +735,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$maxsdk/max-includes",
@@ -743,7 +745,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=1",
-					FLEXT_USE_CMEM,
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=i386]" = (
 					"$(inherited)",
@@ -894,7 +895,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -931,7 +932,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -978,8 +979,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=1",
+					"MSP64=0",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "MSP64=0";
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
@@ -988,11 +989,15 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
 				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					MaxAudioAPI,
+					"-framework",
+					MaxAPI,
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
 				SECTORDER_FLAGS = "";
@@ -1022,8 +1027,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FLEXT_SYS=1",
+					"MSP64=0",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "MSP64=0";
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(maxsdk)/max-includes",
@@ -1032,11 +1037,15 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "/Library/Application Support/Cycling 74/externals/flext";
 				LIBRARY_SEARCH_PATHS = "";
 				LIBRARY_STYLE = DYNAMIC;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					MaxAudioAPI,
+					"-framework",
+					MaxAPI,
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "essentiaRT~";
 				SECTORDER_FLAGS = "";
@@ -1091,6 +1100,7 @@
 					NDEBUG,
 					FLEXT_USESIMD,
 					"DEBUGGING_ENABLED=0",
+					FLEXT_USE_CMEM,
 				);
 				GCC_STRICT_ALIASING = YES;
 				HEADER_SEARCH_PATHS = (

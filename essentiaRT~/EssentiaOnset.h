@@ -58,12 +58,10 @@ public:
     streaming::Algorithm *superFluxP;
     //// IO
     
-//    essentia::streaming::VectorInput<Real,FRAMESIZE>* gen;
+
     streaming::VectorOutput<vector<Real> >* essout;
     RingBufferInput * gen;
-//    RingBufferOutput * essout;
-//    streaming::RingBufferOutput* DBGOUT;
-//    streaming::VectorOutput< vector<Real> > * probe;
+
     
     
     Pool pool;

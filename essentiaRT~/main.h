@@ -55,6 +55,11 @@ using namespace essentia::standard;
 //stop aggregating after 6s if sfx are set on ioi (delMode = 0)
 #define MAX_SFX_TIME 6
 
+
+#ifndef MAX
+#define	MAX(a,b) (((a)>(b))?(a):(b))
+#endif	/* MAX */
+
 namespace Helper {
 
     flext::AtomList floatVectorToList(const std::vector<float>& floatVector) {
@@ -127,7 +132,7 @@ protected:
     int essentiaBufferCounter;
     vector<Real> audioBuffer,audioBufferOut;
     std::map<string, bool> currentAlgorithms;
-    std::map<string, vector<Real> > getFeatures(Pool & p);
+    std::map<string, vector<Real> > getFeatures(const Pool & p);
     
     void outputListOfFeatures(const std::map<string, vector<Real> >& features,int outlet = 1);
     

@@ -28,7 +28,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     this->sampleRate = sR;
     this->frameSize = fS;
     this->hopSize = hS;
-    //this->outPool = poolout;
+
     
     ///////////
     // Instanciate
@@ -38,8 +38,8 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
         // Input
     gen = new essentia::streaming::RingBufferInput();//factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
     gen->_bufferSize = 2*hopSize;
-    gen->output(0).setReleaseSize(gen->_bufferSize);
-    gen->output(0).setAcquireSize(gen->_bufferSize);
+    gen->output(0).setReleaseSize(hopSize);
+    gen->output(0).setAcquireSize(hopSize);
     gen->configure();
     
     fc = factory.create("FrameCutter",
@@ -47,8 +47,8 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
                         "hopSize",hopSize,
                         "startFromZero" , true,
                         "validFrameThresholdRatio", 1,
-                        "lastFrameToEndOfFile",true,
-                        "silentFrames","drop"
+                        "lastFrameToEndOfFile",false,
+                        "silentFrames","keep"
                         );
     
     w = factory.create("Windowing");
@@ -93,7 +93,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
     //mfcc
     spectrum->output("spectrum") >> mfcc->input("spectrum");
-    mfcc->output("bands")>>DEVNULL;
+    mfcc->output("bands")>>         DEVNULL;
     
     
     // centroid
@@ -101,30 +101,25 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     
     
     //Temporal Centroid
-    env->output("signal") >> TCent->input("envelope");
+    env->output("signal") >>        TCent->input("envelope");
     
     //Connect SFX 2 Pool
     flatness->output("flatness") >> PC(sfxPool,"noisiness");
-    loudness->output("power") >> PC(sfxPool,"loudness");
-    yin->output("pitch") >> PC(sfxPool,"f0");
-    yin->output("pitchConfidence") >> PC(sfxPool,"f0Confidence");
-    mfcc->output("mfcc") >> PC(sfxPool,"mfcc");
-    cent->output("centroid") >> PC(sfxPool,"centroid");
+    loudness->output("power") >>    PC(sfxPool,"loudness");
+    yin->output("pitch") >>         PC(sfxPool,"f0");
+    yin->output("pitchConfidence")>>PC(sfxPool,"f0Confidence");
+    mfcc->output("mfcc") >>         PC(sfxPool,"mfcc");
+    cent->output("centroid") >>     PC(sfxPool,"centroid");
     
     // accumulator algo are directly linked to aggrPool (computes only at the end)
-    TCent->output("TCToTotal") >> PC(aggrPool,"tempCentroid");
+    TCent->output("TCToTotal") >>   PC(aggrPool,"tempCentroid");
     
     
     
     //Connect Aggregator
     poolAggr->input("input").set(sfxPool);
     poolAggr->output("output").set(aggrPool);
-    
 
-    
-    
-    
-    
     network = new scheduler::Network(gen);
     network->initStack();
  
@@ -133,7 +128,8 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
 
 
 void EssentiaSFX::clear(){
-    
+    network->reset();
+    aggrPool.clear();
     fc->reset();
     gen->reset();
     sfxPool.clear();
@@ -142,9 +138,10 @@ void EssentiaSFX::clear(){
 }
 void EssentiaSFX::compute(vector<Real>& audioFrameIn){
     if(audioFrameIn.size()!=gen->_bufferSize){
-        gen->_bufferSize = 2*audioFrameIn.size();
-        gen->output(0).setAcquireSize(gen->_bufferSize);
-        gen->output(0).setReleaseSize(gen->_bufferSize);
+        cout << "resizing" <<audioFrameIn.size() << endl;
+        gen->_bufferSize = audioFrameIn.size();
+        gen->output(0).setAcquireSize(audioFrameIn.size());
+        gen->output(0).setReleaseSize(audioFrameIn.size());
         gen->configure();
     }
     gen->add(&audioFrameIn[0],audioFrameIn.size());
@@ -159,25 +156,27 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
 void EssentiaSFX::aggregate(){
     
 
-    aggrPool.clear();
-    poolAggr->compute();
-        
-        //rescaling values afterward
-       aggrPool.set("centroid.mean",aggrPool.value<Real>("centroid.mean")*sampleRate/2);
-       aggrPool.set("centroid.var",aggrPool.value<Real>("centroid.var")*sampleRate*sampleRate/4);
-        
+
     
+
+    
+    poolAggr->compute();
     
     // avoid first onset and empty onsets
     if(aggrPool.getRealPool().size()>0 && aggrPool.value<Real>("loudness.mean")>0){
-            // call should stop for accumulator algorithms
-            network->runStack(true);
-            // reset Algos and set shouldstop=false
-            network->reset();
-
-
+        // call should stop for accumulator algorithms
+        network->runStack(true);
     }
     
+        //rescaling values afterward
+       aggrPool.set("centroid.mean",aggrPool.value<Real>("centroid.mean")*sampleRate/2);
+       aggrPool.set("centroid.var",aggrPool.value<Real>("centroid.var")*sampleRate*sampleRate/4);
+
+        
+    
+    // reset Algos and set shouldstop=false
+    network->reset();
+
 }
 
 

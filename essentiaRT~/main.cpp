@@ -49,9 +49,9 @@ delayMode(0)
     if(argc==1) onset_thresh = flext::GetAFloat(argv[0]);
     
     onsetDetection.setup(frameSize, hopSize, sampleRate,onset_thresh);
-    SFX.setup(frameSize,512,sampleRate);
-//    onsetDetection = new EssentiaOnset(frameSize, hopSize, sampleRate,onset_thresh);
-//    SFX = new EssentiaSFX(frameSize,512,sampleRate);
+    SFX.setup(1024,512,sampleRate);
+    //    onsetDetection = new EssentiaOnset(frameSize, hopSize, sampleRate,onset_thresh);
+    //    SFX = new EssentiaSFX(frameSize,512,sampleRate);
     
     isComputingSFX = false;
     isAggregatingSFX = false;
@@ -67,9 +67,9 @@ essentiaRT::~essentiaRT()
     if(aggrThread.joinable()){
         aggrThread.join();
     }
-//    delete SFX;
-//    delete onsetDetection;
-
+    //    delete SFX;
+    //    delete onsetDetection;
+    
 }
 
 void essentiaRT::CbSignal()
@@ -78,7 +78,7 @@ void essentiaRT::CbSignal()
     if(n!=audioBuffer.size())
         audioBuffer.resize(n);
     
-    const t_sample *in = InSig()[0];//insigs[0];    
+    const t_sample *in = InSig()[0];//insigs[0];
     memcpy(&audioBuffer[0], in, n*sizeof(t_sample));
     
     compute();
@@ -128,6 +128,10 @@ void essentiaRT::onsetCB(){
         isComputingSFX=true;
         SFXTimer.Delay(delayMode/1000.);
         
+    }
+    else{
+        isComputingSFX=true;
+        SFXTimer.Delay(delayMode/1000.);
     }
     onsetDetection.preprocessPool();
     //output onsetStrength first
@@ -188,10 +192,10 @@ void essentiaRT::m_sfxAggr(void * i ){
             aggrThread.join();
         }
         aggrThread.~thread();
-        
-        SFX.preprocessPool();
-            aggrThread = thread(&essentiaRT::aggrThreadFunc,this);
-//        }
+        isAggregatingSFX = true;
+//        SFX.preprocessPool();
+        aggrThread = thread(&essentiaRT::aggrThreadFunc,this);
+        //        }
     }
     catch(exception const& e){
         std::cout << e.what() << std::endl;
@@ -202,16 +206,17 @@ void essentiaRT::m_sfxAggr(void * i ){
 
 void essentiaRT::aggrThreadFunc(){
     if(SFX.sfxPool.getRealPool().size()>0){
-    isAggregatingSFX = true;
-    SFX.aggregate();
-    outputListOfFeatures(getFeatures(SFX.aggrPool),2);
-    SFX.clear();
-    isAggregatingSFX = false;
+        isAggregatingSFX = true;
+        SFX.aggregate();
+        outputListOfFeatures(getFeatures(SFX.aggrPool),2);
+        SFX.clear();
+        
     }
+    isAggregatingSFX = false;
 }
 
 
-std::map<string, vector<Real> > essentiaRT::getFeatures(Pool & p)
+std::map<string, vector<Real> > essentiaRT::getFeatures(const Pool & p)
 {
     
     std::map<string, vector<Real > >  vectorsIn =     p.getRealPool();
@@ -287,13 +292,14 @@ void essentiaRT::m_delayMode(int del){
 
 
 void essentiaRT::m_threshold(float thresh){
-    onsetDetection.superFluxP->configure("threshold",thresh*1.0/NOVELTY_MULT);
+    
+    onsetDetection.superFluxP->configure("threshold",MAX(0,thresh*1.0/NOVELTY_MULT));
     
 }
 
 
 void essentiaRT::m_rthreshold(float thresh){
-    onsetDetection.superFluxP->configure("ratioThreshold",thresh);
+    onsetDetection.superFluxP->configure("ratioThreshold",MAX(0,thresh));
     
 }
 
