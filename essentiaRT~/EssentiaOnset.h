@@ -32,6 +32,7 @@
 #define NOVELTY_MULT 100.
 #define FRAMESIZE 2048
 
+
 using namespace std;
 using namespace chrono;
 using namespace essentia;
@@ -49,6 +50,8 @@ public:
     float compute(vector<Real>& audioFrameIn, vector<Real>& output);
     
     void preprocessPool();
+    
+    void setHopSize(int hS);
     
 //private:
     

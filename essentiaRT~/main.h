@@ -142,28 +142,28 @@ protected:
     
     // getfeatures (why virtual?)
     virtual void m_features(int argc, const t_atom *argv);
-    
-    void m_settings(int argc, const t_atom *argv);
+
     void m_sfxAggr(void *);
     void m_delayMode(int del);
     void m_threshold(float thresh);
     void m_rthreshold(float thresh);
-    
-    
+    void m_combine(float c);
+    int checkBlockSize();
+
     flext::Timer SFXTimer;
     bool isComputingSFX,isAggregatingSFX;
 
 private:
     static void setup(t_classid c);
     void onsetCB();
-    
-    FLEXT_CALLBACK_V(m_settings)
+
     FLEXT_CALLBACK_V(m_features)
     FLEXT_CALLBACK(my_bang)
     FLEXT_CALLBACK_T(m_sfxAggr);
     FLEXT_CALLBACK_I(m_delayMode);
     FLEXT_CALLBACK_F(m_threshold);
     FLEXT_CALLBACK_F(m_rthreshold);
+    FLEXT_CALLBACK_F(m_combine);
 
     
     void aggrThreadFunc();

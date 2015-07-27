@@ -37,7 +37,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     standard::AlgorithmFactory& stfactory = standard::AlgorithmFactory::instance();
         // Input
     gen = new essentia::streaming::RingBufferInput();//factory.create("RingBufferInput","bufferSize",hopSize*2,"blockSize",hopSize);
-    gen->_bufferSize = 2*hopSize;
+    gen->_bufferSize = hopSize;
     gen->output(0).setReleaseSize(hopSize);
     gen->output(0).setAcquireSize(hopSize);
     gen->configure();
@@ -46,8 +46,8 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
                         "frameSize",frameSize,
                         "hopSize",hopSize,
                         "startFromZero" , true,
-                        "validFrameThresholdRatio", 1,
-                        "lastFrameToEndOfFile",false,
+                        "validFrameThresholdRatio", 0,
+                        "lastFrameToEndOfFile",true,
                         "silentFrames","keep"
                         );
     
@@ -62,7 +62,7 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     yin = factory.create("PitchYinFFT");
     cent = factory.create("Centroid");
     TCent = factory.create("TCToTotal");
-    mfcc = factory.create("MFCC");
+    mfcc = factory.create("MFCC","inputSize",frameSize/2 + 1);
     
         // Aggregation
     const char* statsToCompute[] = {"mean", "var"};
@@ -138,7 +138,6 @@ void EssentiaSFX::clear(){
 }
 void EssentiaSFX::compute(vector<Real>& audioFrameIn){
     if(audioFrameIn.size()!=gen->_bufferSize){
-        cout << "resizing" <<audioFrameIn.size() << endl;
         gen->_bufferSize = audioFrameIn.size();
         gen->output(0).setAcquireSize(audioFrameIn.size());
         gen->output(0).setReleaseSize(audioFrameIn.size());
@@ -176,6 +175,7 @@ void EssentiaSFX::aggregate(){
     
     // reset Algos and set shouldstop=false
     network->reset();
+
 
 }
 

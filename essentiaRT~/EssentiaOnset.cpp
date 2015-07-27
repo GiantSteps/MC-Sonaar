@@ -26,11 +26,11 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
 
 
     this->sampleRate = sR;
-    this->frameSize = FRAMESIZE;
+    this->frameSize = fS;
     this->hopSize = hS;
     
     
-    combineMs = 60;
+    combineMs = 50;
     strength.resize(2);
     
     AlgorithmFactory& factory = streaming::AlgorithmFactory::instance();
@@ -39,23 +39,23 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
                         "frameSize",frameSize,
                         "hopSize",hopSize,
                         "startFromZero" , true,
-                        "validFrameThresholdRatio", 1,
-                        "lastFrameToEndOfFile",false,
+                        "validFrameThresholdRatio", .1,
+                        "lastFrameToEndOfFile",true,
                         "silentFrames","keep"
                         );
     
 
     
-    w = factory.create("Windowing","type","hann"
-                       );
+    w = factory.create("Windowing","type","hann");
     
     spectrum = factory.create("Spectrum");
     pspectrum = factory.create("PowerSpectrum");
     triF = factory.create("TriangularBands","log",false);
     
-    superFluxF = factory.create("SuperFluxNovelty","binWidth",8,"frameWidth",3);
+    superFluxF = factory.create("SuperFluxNovelty","binWidth",3,"frameWidth",1);
     superFluxP= factory.create("SuperFluxPeaks","ratioThreshold" , 4,"threshold" ,.7/NOVELTY_MULT
-                               ,"pre_max",80,"pre_avg",100,"frameRate", sampleRate*1.0/hopSize,"combine",combineMs);
+                               ,"pre_max",50,"pre_avg",80,"frameRate", sampleRate*1.0/hopSize,"combine",combineMs
+                               ,"activation_slope",true);
     superFluxP->input(0).setAcquireSize(1);
     superFluxP->input(0).setReleaseSize(1);
 
@@ -108,16 +108,18 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
 //    essentia::setDebugLevel( essentia::EScheduler);
 }
 
-
+// return 0 for activation_slope and >0 for maximum
 float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
-
+    strength.clear();
     essout->setVector(&strength);
-
-    if(5*audioFrameIn.size()!=gen->_bufferSize){
-        gen->_bufferSize = 5*audioFrameIn.size();
+    
+    if(audioFrameIn.size()!=gen->_bufferSize){
+        gen->_bufferSize = audioFrameIn.size();
         gen->output(0).setAcquireSize(audioFrameIn.size());
         gen->output(0).setReleaseSize(audioFrameIn.size());
         gen->configure();
+
+
     }
     
     gen->add(&audioFrameIn[0], audioFrameIn.size());
@@ -131,25 +133,31 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
     network->runStack(false);
 
 
-    float val =0;
+    float val =-1;
     frameCount+= audioFrameIn.size();
 
     if(frameCount*1000.0>combineMs*sampleRate){
-       val = strength.size()>0?strength[0].size()>0?strength[0][0]:0:0;
+       val = strength.size()>0?strength[0].size()>0?strength[0][0]:-1:-1;
         if(val>0){
+            val*=NOVELTY_MULT;
             frameCount = 0;
-
         }
     }
 
-    strength.clear();
-
-
+    
     
     return val;
         
 
 
+}
+
+void EssentiaOnset::setHopSize(int hS){
+    
+    hopSize = hS;
+    fc->configure("hopSize",hopSize);
+    superFluxP->configure("frameRate",sampleRate*1.0/hopSize);
+    
 }
 
 void EssentiaOnset::preprocessPool(){
