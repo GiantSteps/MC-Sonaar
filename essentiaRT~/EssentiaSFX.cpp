@@ -63,6 +63,9 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     cent = factory.create("Centroid");
     TCent = factory.create("TCToTotal");
     mfcc = factory.create("MFCC","inputSize",frameSize/2 + 1);
+    hpcp = factory.create("HPCP","size",36);
+    spectralPeaks = factory.create("SpectralPeaks","sampleRate",sampleRate);
+    
     
         // Aggregation
     const char* statsToCompute[] = {"mean", "var"};
@@ -96,6 +99,11 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     mfcc->output("bands")>>         DEVNULL;
     
     
+    // hpcp
+    spectrum->output("spectrum") >> spectralPeaks->input("spectrum");
+    spectralPeaks->output("frequencies") >> hpcp->input("frequencies");
+    spectralPeaks->output("magnitudes") >> hpcp->input("magnitudes");
+    
     // centroid
     spectrum->output("spectrum") >> cent->input("array");
     
@@ -104,12 +112,13 @@ void EssentiaSFX::setup(int fS,int hS,int sR){
     env->output("signal") >>        TCent->input("envelope");
     
     //Connect SFX 2 Pool
-    flatness->output("flatness") >> PC(sfxPool,"noisiness");
-    loudness->output("power") >>    PC(sfxPool,"loudness");
-    yin->output("pitch") >>         PC(sfxPool,"f0");
-    yin->output("pitchConfidence")>>PC(sfxPool,"f0Confidence");
-    mfcc->output("mfcc") >>         PC(sfxPool,"mfcc");
-    cent->output("centroid") >>     PC(sfxPool,"centroid");
+    flatness->output("flatness")>>      PC(sfxPool,"noisiness");
+    loudness->output("power")   >>      PC(sfxPool,"loudness");
+    yin->output("pitch")        >>      PC(sfxPool,"f0");
+    yin->output("pitchConfidence")>>    PC(sfxPool,"f0Confidence");
+    mfcc->output("mfcc")        >>      PC(sfxPool,"mfcc");
+    cent->output("centroid")    >>      PC(sfxPool,"centroid");
+    hpcp->output("hpcp")        >>      PC(sfxPool,"hpcp");
     
     // accumulator algo are directly linked to aggrPool (computes only at the end)
     TCent->output("TCToTotal") >>   PC(aggrPool,"tempCentroid");
@@ -147,7 +156,7 @@ void EssentiaSFX::compute(vector<Real>& audioFrameIn){
     gen->process();
 
     network->runStack(false);
-    
+    network->runStack(false);
 
     
 }
@@ -170,11 +179,48 @@ void EssentiaSFX::aggregate(){
         //rescaling values afterward
        aggrPool.set("centroid.mean",aggrPool.value<Real>("centroid.mean")*sampleRate/2);
        aggrPool.set("centroid.var",aggrPool.value<Real>("centroid.var")*sampleRate*sampleRate/4);
+    if(aggrPool.contains<vector<Real>>("mfcc.mean")){
+    vector<Real> v = aggrPool.value<vector<Real> >("mfcc.mean");
+    float factor = (frameSize);
+    aggrPool.remove("mfcc.mean");
+    for(auto& e:v){
+        aggrPool.add("mfcc.mean", e*1.0/factor);
+    }
+    
+    
+    
+     v = aggrPool.value<vector<Real> >("mfcc.var");
+    factor*=factor;
+    aggrPool.remove("mfcc.var");
+    for(auto& e:v){
+        aggrPool.add("mfcc.var", e*1.0/factor);
+    }
+    }
+    
+    // only one frame was aquired  ( no aggregation but we still want output!)
+    else if (sfxPool.contains<vector<vector<Real>> >("mfcc")){
+        vector<Real> v = sfxPool.value<vector<vector<Real> > >("mfcc")[0];
+        float factor = (frameSize);
+        aggrPool.removeNamespace("mfcc");
+        aggrPool.remove("mfcc");
+        for(auto& e:v){
+            aggrPool.add("mfcc.mean", e*1.0/factor);
+            aggrPool.add("mfcc.var", 0);
+        }
+        v = sfxPool.value<vector<vector<Real>> >("hpcp")[0];
+        aggrPool.removeNamespace("hpcp");
+        aggrPool.remove("hpcp");
+        for(auto& e:v){
+            aggrPool.add("hpcp.mean", e);
+            aggrPool.add("hpcp.var", 0);
+        }
+
 
         
+    }
     
-    // reset Algos and set shouldstop=false
-    network->reset();
+    
+
 
 
 }
@@ -184,37 +230,8 @@ void EssentiaSFX::aggregate(){
 
 void EssentiaSFX::preprocessPool(){
     
-    // crop to avoid next transient influence, assuming that the onset callback appears after few frames of the transeient
-    std::map<string, vector<Real > >  vectorsIn =     sfxPool.getRealPool();
+    
 
-    
-    for(std::map<string, vector<Real > >::iterator iter = vectorsIn.begin(); iter != vectorsIn.end(); ++iter)
-    {
-        
-        int finalSize = iter->second.size()-CROP_LAST_FRAME;
-        finalSize = std::max(finalSize,1);
-        string k =  iter->first;
-        iter->second.resize(finalSize);
-        
-        sfxPool.remove(k);
-        for (int i =0 ; i < finalSize;i++){sfxPool.add(k, iter->second[i]);};
-        
-    }
-    
-    std::map<string, vector<vector<Real> > >  vectorsIn2 =     sfxPool.getVectorRealPool();
-    
-    
-    for(std::map<string, vector<vector<Real> > >::iterator iter = vectorsIn2.begin(); iter != vectorsIn2.end(); ++iter)
-    {
-        int finalSize = iter->second.size()-CROP_LAST_FRAME;
-        finalSize = std::max(finalSize,1);
-        string k =  iter->first;
-        iter->second.resize(finalSize);
-
-        sfxPool.remove(k);
-        for (int i =0 ; i < finalSize;i++){sfxPool.add(k, iter->second[i]);};
-        
-    }
 
 
     

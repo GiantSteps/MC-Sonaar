@@ -125,6 +125,7 @@ protected:
     Real onset_thresh;
     
     EssentiaSFX   SFX;
+    long sfxCount;
 
     int delayMode = 0;
     

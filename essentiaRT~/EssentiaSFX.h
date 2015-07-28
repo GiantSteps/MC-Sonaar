@@ -48,6 +48,7 @@ public:
     void aggregate();
     void clear();
     Pool aggrPool,sfxPool;
+    int frameSize, hopSize;
 private:
     
     /// ESSENTIA
@@ -62,8 +63,10 @@ private:
     essentia::streaming::Algorithm *yin;
     essentia::streaming::Algorithm *mfcc;
     essentia::streaming::Algorithm *TCent;
+    essentia::streaming::Algorithm *spectralPeaks,*hpcp;
 
     essentia::standard::Algorithm *poolAggr;
+    
     
     //// IO
     essentia::streaming::RingBufferInput* gen;
@@ -74,7 +77,7 @@ private:
     
     
     scheduler::Network *network = NULL;
-    int sampleRate, frameSize, hopSize;
+    int sampleRate;
     
     
     

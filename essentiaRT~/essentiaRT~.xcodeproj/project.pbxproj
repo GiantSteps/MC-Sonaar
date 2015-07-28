@@ -216,12 +216,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		034768DDFF38A45A11DB9C8B /* Products */ = {
+		034768DDFF38A45A11DB9C8B /* Productsz */ = {
 			isa = PBXGroup;
 			children = (
 				6F57B35C1B665F8B00DA46B4 /* buggy */,
 			);
-			name = Products;
+			name = Productsz;
 			path = Build/Products;
 			sourceTree = "<group>";
 		};
@@ -230,7 +230,7 @@
 			children = (
 				08FB77ACFE841707C02AAC07 /* Source */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
-				034768DDFF38A45A11DB9C8B /* Products */,
+				034768DDFF38A45A11DB9C8B /* Productsz */,
 				6F37520B1B4D0AF90089C554 /* max static copy-Info.plist */,
 				6F3753FA1B4D30960089C554 /* max static64 copy-Info.plist */,
 				6F3754151B4D49470089C554 /* max staticFAT copy-Info.plist */,
@@ -387,7 +387,7 @@
 				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* xsample */;
-			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Productsz */;
 			projectDirPath = "";
 			projectReferences = (
 				{
@@ -856,7 +856,7 @@
 		E9A5BC930A33819900AD9F03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BuildOut = "/Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/Builds/OSX";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -890,7 +890,7 @@
 		E9A5BC940A33819900AD9F03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BuildOut = "/Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/Builds/OSX";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";

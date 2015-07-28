@@ -84,17 +84,33 @@ void essentiaRT::CbSignal64(){
 
 void essentiaRT::compute(){
     Real onset = onsetDetection.compute(audioBuffer, audioBufferOut);
+    
+    
+    // on local maxima
     if(onset>0){
         vector<Real> tst(1,onset) ;
         onsetDetection.pool.set("i.strength",tst);
         onsetCB();
     }
+    
+    // on activation slope
     else if (onset == 0){
         ToOutBang(1);
+        // we aggregate as soon as possible to avoid next transient noise
+        if(delayMode ==0 ){
+            m_sfxAggr(nullptr);
+        }
     }
+    // if compute SFX
     if(isComputingSFX && !isAggregatingSFX){
         SFX.compute(audioBuffer);
     }
+    sfxCount= sfxCount>=0?MAX(0,sfxCount-Blocksize()):-1;
+    if(sfxCount == 0){
+        m_sfxAggr(nullptr);
+        sfxCount = -1;
+    }
+
     
 }
 
@@ -103,8 +119,9 @@ void essentiaRT::onsetCB(){
     //trigger sfx
     //ioi mode: output last,clear,then retrigger sfx
     if(delayMode ==0 ){
-        m_sfxAggr(nullptr);
-        SFXTimer.Delay(MAX_SFX_TIME);
+//        m_sfxAggr(nullptr);
+        sfxCount = MAX_SFX_TIME*sampleRate;
+//        SFXTimer.Delay(MAX_SFX_TIME);
         isComputingSFX=true;
         
     }
@@ -112,13 +129,16 @@ void essentiaRT::onsetCB(){
     else if(!isAggregatingSFX){
         SFX.clear();
         isComputingSFX=true;
-        SFXTimer.Delay(delayMode/1000.);
+        sfxCount = delayMode/1000.*sampleRate;
+//        SFXTimer.Delay(delayMode/1000.);
         
     }
     else{
         isComputingSFX=true;
-        SFXTimer.Delay(delayMode/1000.);
+        sfxCount = delayMode/1000.*sampleRate;
+//        SFXTimer.Delay(delayMode/1000.);
     }
+
     onsetDetection.preprocessPool();
     //output onsetStrength first
     std::map<string, vector<Real> > features = getFeatures(onsetDetection.pool);
@@ -175,8 +195,9 @@ void essentiaRT::m_sfxAggr(void * i ){
         }
         aggrThread.~thread();
         isAggregatingSFX = true;
-//        SFX.preprocessPool();
-        aggrThread = thread(&essentiaRT::aggrThreadFunc,this);
+        SFX.preprocessPool();
+        aggrThreadFunc();
+//        aggrThread = thread(&essentiaRT::aggrThreadFunc,this);
         //        }
     }
     catch(exception const& e){
@@ -266,9 +287,12 @@ void essentiaRT::outputListOfFeatures(const std::map<string, vector<Real> >& fea
 
 
 void essentiaRT::m_delayMode(int del){
-    // safety for aggregating on more than 2 frame aquired
+    // safety for aggregating on more than 1 frame aquired
+    if(del == 0){
+        delayMode = 0;
+        return;}
     
-    int minTime =(frameSize+1.1*hopSize)*1000.0/ sampleRate;
+    int minTime =(1.1*SFX.frameSize)*1000.0/ sampleRate;
     if(del<minTime){
         delayMode=minTime;
         post("can't set a delay < %i ms",minTime);

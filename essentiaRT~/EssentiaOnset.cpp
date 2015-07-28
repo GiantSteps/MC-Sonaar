@@ -56,6 +56,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
     superFluxP= factory.create("SuperFluxPeaks","ratioThreshold" , 4,"threshold" ,.7/NOVELTY_MULT
                                ,"pre_max",50,"pre_avg",80,"frameRate", sampleRate*1.0/hopSize,"combine",combineMs
                                ,"activation_slope",true);
+    
     superFluxP->input(0).setAcquireSize(1);
     superFluxP->input(0).setReleaseSize(1);
 
@@ -92,6 +93,7 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
     
     // MFCC
     spectrum->output("spectrum") >> mfccF->input("spectrum");
+
     mfccF->output("bands") >>       DEVNULL;
     
     
@@ -163,5 +165,11 @@ void EssentiaOnset::setHopSize(int hS){
 void EssentiaOnset::preprocessPool(){
     
     pool.set("i.centroid",pool.value<Real>("i.centroid")*sampleRate/2);
+    vector<Real> v = pool.value<vector<Real> >("i.mfcc");
+    for(auto& e:v){
+        e/=(frameSize/2 +1);
+    }
+    pool.set("i.mfcc", v);
+    
     
 }
