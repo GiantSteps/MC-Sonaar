@@ -54,7 +54,7 @@ using namespace essentia::standard;
 
 //stop aggregating after 6s if sfx are set on ioi (delMode = 0)
 #define MAX_SFX_TIME 6
-
+#define THREADED_SFX
 
 #ifndef MAX
 #define	MAX(a,b) (((a)>(b))?(a):(b))
@@ -132,7 +132,6 @@ protected:
     ///essentia Environement
     int essentiaBufferCounter;
     vector<Real> audioBuffer,audioBufferOut;
-    std::map<string, bool> currentAlgorithms;
     std::map<string, vector<Real> > getFeatures(const Pool & p);
     
     void outputListOfFeatures(const std::map<string, vector<Real> >& features,int outlet = 1);
@@ -141,8 +140,6 @@ protected:
     void compute();
     
     
-    // getfeatures (why virtual?)
-    virtual void m_features(int argc, const t_atom *argv);
 
     void m_sfxAggr(void *);
     void m_delayMode(int del);
@@ -156,9 +153,9 @@ protected:
 
 private:
     static void setup(t_classid c);
-    void onsetCB();
+    void  onsetCB();
+    FLEXT_CALLBACK(onsetCB)
 
-    FLEXT_CALLBACK_V(m_features)
     FLEXT_CALLBACK(my_bang)
     FLEXT_CALLBACK_T(m_sfxAggr);
     FLEXT_CALLBACK_I(m_delayMode);

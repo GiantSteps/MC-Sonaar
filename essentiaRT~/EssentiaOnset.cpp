@@ -46,15 +46,15 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
     
 
     
-    w = factory.create("Windowing","type","hann");
+    w = factory.create("Windowing","type","square","zeroPhase",true);
     
     spectrum = factory.create("Spectrum");
     pspectrum = factory.create("PowerSpectrum");
     triF = factory.create("TriangularBands","log",false);
     
-    superFluxF = factory.create("SuperFluxNovelty","binWidth",3,"frameWidth",1);
+    superFluxF = factory.create("SuperFluxNovelty","binWidth",5,"frameWidth",1);
     superFluxP= factory.create("SuperFluxPeaks","ratioThreshold" , 4,"threshold" ,.7/NOVELTY_MULT
-                               ,"pre_max",50,"pre_avg",80,"frameRate", sampleRate*1.0/hopSize,"combine",combineMs
+                               ,"pre_max",80,"pre_avg",120,"frameRate", sampleRate*1.0/hopSize,"combine",combineMs
                                ,"activation_slope",true);
     
     superFluxP->input(0).setAcquireSize(1);
@@ -81,9 +81,9 @@ void EssentiaOnset::setup(int fS,int hS,int sR,Real threshold){
     
     // cutting, overlapping
     gen->output("signal") >>        fc->input("signal");
-    fc->output("frame")  >>         w->input("frame");
-    w->output("frame") >>           spectrum->input("frame");
-    //w->output("frame") >> pspectrum->input("signal");
+    fc->output("frame") >> w->input("frame") ;
+    w->output("frame") >>         spectrum->input("frame");
+    // //w->output("frame") >> pspectrum->input("signal");
     // SuperFlux
     spectrum->output("spectrum") >> triF->input("spectrum");
     triF->output("bands")>>         superFluxF->input("bands");
@@ -144,6 +144,7 @@ float EssentiaOnset::compute(vector<Real>& audioFrameIn, vector<Real>& output){
             val*=NOVELTY_MULT;
             frameCount = 0;
         }
+
     }
 
     

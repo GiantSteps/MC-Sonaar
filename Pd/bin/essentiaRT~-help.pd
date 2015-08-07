@@ -1,24 +1,18 @@
-#N canvas 11 22 950 778 10;
+#N canvas 172 77 1380 785 10;
 #X declare -path ../utils;
 #X obj 159 27 route list;
 #X floatatom 226 92 5 0 0 0 - - -;
 #X obj 226 112 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 159 217 route list;
-#X obj 265 -22 soundfiler;
+#X obj 265 -27 soundfiler;
 #X obj 265 -70 loadbang;
 #X obj -289 269 output~;
 #X obj -213 458 timer;
 #X floatatom -213 479 5 0 0 0 - - -;
 #X obj -213 438 bang;
 #X obj -182 438 bang;
-#X obj -297 407 essentiaRT~ 5;
 #X obj 322 -70 declare -path ../utils;
-#X msg -276 383 delayMode 0;
-#X text -203 383 inter-onset calculation;
-#X msg -283 359 delayMode \$1;
-#X text -199 360 window-size in ms.;
-#X floatatom -283 338 5 0 0 0 - - -;
 #X floatatom 293 71 7 0 0 0 - - -;
 #X floatatom 206 538 7 0 0 1 noisiness.mean - -;
 #X floatatom 230 517 7 0 0 1 noisiness.variance - -;
@@ -33,19 +27,19 @@
 #X text 339 71 instantaneous spectral centroid (Hz.);
 #X obj 159 194 r averaged;
 #X obj 159 136 prepend set;
-#X msg 159 158 -577.448 52.1542 27.4233 40.3283 -1.14934 6.63623 -8.1706
--10.6832 -25.5045 -14.6483 -2.76898 -3.78842 -2.21012;
+#X msg 159 158 -625.211 49.6839 24.8957 38.5335 -1.54583 6.12848 -9.00362
+-12.4989 -27.614 -15.8694 -3.89285 -3.52167 0.868298;
 #X text 234 135 mfcc's;
 #X floatatom 351 398 7 0 0 1 loudness.mean - -;
 #X floatatom 376 374 7 0 0 1 loudness.variance - -;
 #X floatatom 400 352 7 0 0 1 spectralCentroid.mean - -;
 #X floatatom 424 329 7 0 0 1 spectralCentroid.variance - -;
 #X floatatom 448 306 7 0 0 1 Temporal_Centroid - -;
-#X msg 158 646 -881.375 10.3469 23.6043 40.8862 8.0462 11.8588 -5.29131
--5.05792 -9.09229 -9.86698 -7.93261 -6.89168 -9.57839;
+#X msg 158 646 -1079.46 3.61265 5.38112 8.59229 2.09916 2.64114 -0.850128
+-0.913489 -1.54426 -1.69527 -1.25465 -1.2813 -1.70437;
 #X obj 182 563 prepend set;
-#X msg 182 585 42459.7 136.807 189.586 643.414 27.3876 45.957 61.5925
-57.8028 100.121 89.8813 69.0339 56.5613 105.515;
+#X msg 182 585 24329.6 147.105 174.245 431.731 27.8324 39.9121 22.7159
+23.7496 33.2039 35.0812 24.195 21.4253 40.1613;
 #X obj 158 624 prepend set;
 #X text 232 623 mfcc's mean values;
 #X text 259 563 mfcc's variance values;
@@ -53,7 +47,6 @@
 f0.mean f0.var f0Confidence.mean f0Confidence.var loudness.mean loudness.var
 centroid.mean centroid.var tempCentroid;
 #X obj 159 47 route i.mfcc i.strength i.centroid;
-#X msg 265 -46 read -resize ./testSound.wav sample;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array sample 154350 float 2;
 #X coords 0 1 154350 -1 100 70 1;
@@ -79,9 +72,6 @@ with the message "delayMode.";
 the detected onsets (on a fixed window of 2048 points). The features
 provided are the onset strength \, the instantaneous spectral centroid
 and the instantaneous MFCC's.;
-#X text -244 313 "delayMode" sets the time over which the averaged
-descriptors are calcutated. A time of 0 considers the full chunk between
-onset reports.;
 #X text -302 15 - creation argument: threshold level (dB scale) to
 catch onsets and report features. It will typically be in the range
 10 and 50 \, depending on the source. With a higher threshold \, the
@@ -90,46 +80,137 @@ by percussive instruments.;
 #X text -302 105 - outlet 1: onset detector novelty function at audio
 rate (used internally for onset detection \, could be monitored to
 set a precise threshold).;
-#X obj -297 242 tabplay2~ sample;
-#X obj -297 222 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-0 1;
-#X connect 0 0 46 0;
+#X obj -298 221 tabplay2~ sample;
+#X obj -298 201 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj -297 407 essentiaRT~;
+#X floatatom -136 205 5 0 0 0 - - -;
+#X obj -299 243 *~ 1;
+#X msg 265 -48 read -resize ./testSound.wav sample;
+#N canvas 111 312 450 300 click 0;
+#X obj -9 116 cycle~ 440;
+#X obj -8 149 *~;
+#X obj -37 31 r instantaneous;
+#X obj -37 58 t b;
+#N canvas 1096 329 450 300 env 0;
+#X obj 17 17 inlet;
+#X obj 128 180 outlet~;
+#X obj 128 127 vline~;
+#X obj 128 157 *~;
+#X obj 17 179 outlet;
+#X obj 17 39 t f b;
+#X obj 193 13 inlet;
+#X obj 17 95 pipe 10;
+#X obj 68 95 pack 1 10;
+#X obj 128 73 delay 10;
+#X obj 128 95 pack 0 10;
+#X connect 0 0 5 0;
+#X connect 2 0 3 1;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 5 0 7 0;
+#X connect 5 1 8 0;
+#X connect 5 1 9 0;
+#X connect 6 0 7 1;
+#X connect 6 0 8 1;
+#X connect 6 0 9 1;
+#X connect 6 0 10 1;
+#X connect 7 0 4 0;
+#X connect 8 0 2 0;
+#X connect 9 0 10 0;
+#X connect 10 0 2 0;
+#X restore -38 82 pd env 9;
+#X obj -8 214 outlet~;
+#X obj 132 30 inlet;
+#X obj -8 176 *~ 1;
+#X obj 36 159 inlet;
+#X connect 0 0 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 1 1 1;
+#X connect 6 0 4 1;
+#X connect 7 0 5 0;
+#X connect 8 0 7 1;
+#X restore -179 223 pd click;
+#X floatatom -179 204 5 0 0 0 - - -;
+#N canvas 101 346 576 291 parameters 1;
+#X msg -235 67 delayMode 0;
+#X text -162 67 inter-onset calculation;
+#X msg -242 43 delayMode \$1;
+#X text -158 44 window-size in ms.;
+#X floatatom -242 22 5 0 0 0 - - -;
+#X text -203 -3 "delayMode" sets the time over which the averaged descriptors
+are calcutated. A time of 0 considers the full chunk between onset
+reports.;
+#X obj -241 90 s essentiaRT-in;
+#X msg -230 135 rthreshold \$1;
+#X msg -230 170 threshold \$1;
+#X floatatom -273 134 5 0 0 0 - - -;
+#X floatatom -274 169 7 0 0 0 - - -;
+#X floatatom -274 241 5 0 0 0 - - -;
+#X msg -242 243 combine \$1;
+#X obj -231 201 s essentiaRT-in;
+#X obj -243 268 s essentiaRT-in;
+#X text -117 125 rthreshold (ratio threshold) represents the dynamic
+sensitivity common values are [2 - 7] (default:4);
+#X text -118 168 threshold (threshold) represents the absolute sensitivity
+(minimum energy for onsets) common values are [0.1 - 1] (default :
+0.7);
+#X text -125 240 combine allows you to filter out too close onsets
+default is 60ms;
+#X connect 0 0 6 0;
+#X connect 2 0 6 0;
+#X connect 4 0 2 0;
+#X connect 7 0 13 0;
+#X connect 8 0 13 0;
+#X connect 9 0 7 0;
+#X connect 10 0 8 0;
+#X connect 11 0 12 0;
+#X connect 12 0 14 0;
+#X restore -183 319 pd parameters;
+#X obj -291 391 r essentiaRT-in;
+#X text -94 318 <=== open for parametrisation help;
+#X connect 0 0 40 0;
 #X connect 1 0 2 0;
-#X connect 3 0 45 0;
-#X connect 5 0 47 0;
+#X connect 3 0 39 0;
+#X connect 5 0 56 0;
 #X connect 7 0 8 0;
 #X connect 9 0 7 0;
 #X connect 10 0 7 1;
-#X connect 11 1 9 0;
-#X connect 11 1 26 0;
-#X connect 11 2 10 0;
-#X connect 11 2 27 0;
-#X connect 13 0 11 0;
-#X connect 15 0 11 0;
-#X connect 17 0 15 0;
-#X connect 28 0 0 0;
-#X connect 30 0 3 0;
-#X connect 31 0 32 0;
-#X connect 40 0 41 0;
-#X connect 42 0 39 0;
-#X connect 45 0 42 0;
-#X connect 45 1 40 0;
-#X connect 45 2 19 0;
-#X connect 45 3 20 0;
-#X connect 45 4 21 0;
-#X connect 45 5 22 0;
-#X connect 45 6 23 0;
-#X connect 45 7 24 0;
-#X connect 45 8 34 0;
-#X connect 45 9 35 0;
-#X connect 45 10 36 0;
-#X connect 45 11 37 0;
-#X connect 45 12 38 0;
-#X connect 46 0 31 0;
-#X connect 46 1 1 0;
-#X connect 46 2 18 0;
-#X connect 47 0 4 0;
-#X connect 59 0 6 0;
-#X connect 59 0 6 1;
-#X connect 59 0 11 0;
-#X connect 60 0 59 0;
+#X connect 22 0 0 0;
+#X connect 24 0 3 0;
+#X connect 25 0 26 0;
+#X connect 34 0 35 0;
+#X connect 36 0 33 0;
+#X connect 39 0 36 0;
+#X connect 39 1 34 0;
+#X connect 39 2 13 0;
+#X connect 39 3 14 0;
+#X connect 39 4 15 0;
+#X connect 39 5 16 0;
+#X connect 39 6 17 0;
+#X connect 39 7 18 0;
+#X connect 39 8 28 0;
+#X connect 39 9 29 0;
+#X connect 39 10 30 0;
+#X connect 39 11 31 0;
+#X connect 39 12 32 0;
+#X connect 40 0 25 0;
+#X connect 40 1 1 0;
+#X connect 40 2 12 0;
+#X connect 51 0 55 0;
+#X connect 52 0 51 0;
+#X connect 53 1 9 0;
+#X connect 53 1 20 0;
+#X connect 53 2 10 0;
+#X connect 53 2 21 0;
+#X connect 54 0 57 1;
+#X connect 55 0 6 1;
+#X connect 55 0 6 0;
+#X connect 55 0 53 0;
+#X connect 56 0 4 0;
+#X connect 57 0 6 1;
+#X connect 57 0 6 0;
+#X connect 58 0 57 0;
+#X connect 60 0 53 0;

@@ -22,6 +22,7 @@
 		6F004B5C1B4DA2A300B246E0 /* libessentiaRT64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F37520E1B4D0AF90089C554 /* libessentiaRT64.a */; };
 		6F004B5D1B4DA2AC00B246E0 /* libflext-max_sd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE6580D1B4ACEAA00741735 /* libflext-max_sd.a */; };
 		6F26F7C51B4C4FED0074B3D9 /* libessentiaRT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA5A4A41B21F0AD002C23E4 /* libessentiaRT.a */; };
+		6F33BDA81B68CDB4005FAC44 /* essentiaRT~.mxo in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9974E53077083C700206F68 /* essentiaRT~.mxo */; };
 		6F3751FA1B4D0AF90089C554 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99A3B760D35508600E692EF /* Info.plist */; };
 		6F3751FC1B4D0AF90089C554 /* EssentiaOnset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D51A1E4544008354B9 /* EssentiaOnset.cpp */; };
 		6F3751FD1B4D0AF90089C554 /* EssentiaSFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A865D61A1E4544008354B9 /* EssentiaSFX.cpp */; };
@@ -159,6 +160,16 @@
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		6F33BDA11B68CDA7005FAC44 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "/Users/mhermant/Documents/Work/Dev/PD/MC-Sonaar/tests";
+			dstSubfolderSpec = 0;
+			files = (
+				6F33BDA81B68CDB4005FAC44 /* essentiaRT~.mxo in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -320,6 +331,7 @@
 				6F3751F91B4D0AF90089C554 /* Resources */,
 				6F3751FB1B4D0AF90089C554 /* Sources */,
 				6F3751FF1B4D0AF90089C554 /* Frameworks */,
+				6F33BDA11B68CDA7005FAC44 /* CopyFiles */,
 			);
 			buildRules = (
 			);

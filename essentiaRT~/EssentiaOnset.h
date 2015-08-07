@@ -29,8 +29,8 @@
 
 
 // multiply novelty function and threshold for easier parametriation, the true computation is Not Multiplied, only inputs and outputs
-#define NOVELTY_MULT 100.
-#define FRAMESIZE 2048
+#define NOVELTY_MULT 1000000
+#define FRAMESIZE 4096
 
 
 using namespace std;
@@ -57,7 +57,8 @@ public:
     
     /// ESSENTIA
     /// algos
-    streaming::Algorithm *w,*spectrum,*triF,*superFluxF, * fc,*centroidF,*mfccF,*pspectrum;
+    streaming::Algorithm *spectrum,*triF,*superFluxF, * fc,*centroidF,*mfccF,*pspectrum,*w;
+
     streaming::Algorithm *superFluxP;
     //// IO
     

@@ -53,7 +53,7 @@ private:
     
     /// ESSENTIA
     /// algos
-    essentia::streaming::Algorithm *w,*spectrum,  * fc, *env;
+    essentia::streaming::Algorithm *spectrum,  * fc, *env,*w;
     
     
     essentia::streaming::Algorithm *loudness,*flatness;

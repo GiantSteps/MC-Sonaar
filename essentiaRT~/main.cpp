@@ -3,7 +3,7 @@
 
 void essentiaRT::setup(t_classid c)
 {
-    FLEXT_CADDMETHOD_(c, 0, "features", m_features);
+    FLEXT_CADDMETHOD_(c, 0, "outInstant", onsetCB);
     FLEXT_CADDMETHOD_(c,0,"delayMode",m_delayMode);
     FLEXT_CADDMETHOD_(c,0,"threshold",m_threshold);
     FLEXT_CADDMETHOD_(c,0,"rthreshold",m_rthreshold);
@@ -26,7 +26,7 @@ delayMode(0)
 
 {
     
-
+    
     // Flext
     AddInSignal("In");
     AddOutSignal("Out");
@@ -47,12 +47,12 @@ delayMode(0)
     if(argc==1) onset_thresh = flext::GetAFloat(argv[0]);
     
     onsetDetection.setup(frameSize, hopSize, sampleRate,onset_thresh);
-    SFX.setup(1024,512,sampleRate);
+    SFX.setup(2048,256,sampleRate);
     
     isComputingSFX = false;
     isAggregatingSFX = false;
     
-
+    
 }
 
 
@@ -61,7 +61,7 @@ essentiaRT::~essentiaRT()
     if(aggrThread.joinable()){
         aggrThread.join();
     }
-
+    
     
 }
 
@@ -70,7 +70,7 @@ void essentiaRT::CbSignal()
     int n = checkBlockSize();
     memcpy(&audioBuffer[0], InSig()[0], n*sizeof(t_sample));
     compute();
-
+    
     
 }
 
@@ -83,14 +83,20 @@ void essentiaRT::CbSignal64(){
 
 
 void essentiaRT::compute(){
+    
+    
     Real onset = onsetDetection.compute(audioBuffer, audioBufferOut);
     
     
     // on local maxima
     if(onset>0){
+        
         vector<Real> tst(1,onset) ;
         onsetDetection.pool.set("i.strength",tst);
         onsetCB();
+        
+        
+        
     }
     
     // on activation slope
@@ -100,17 +106,21 @@ void essentiaRT::compute(){
         if(delayMode ==0 ){
             m_sfxAggr(nullptr);
         }
+        
     }
+    
+    
+    
     // if compute SFX
     if(isComputingSFX && !isAggregatingSFX){
         SFX.compute(audioBuffer);
     }
     sfxCount= sfxCount>=0?MAX(0,sfxCount-Blocksize()):-1;
-    if(sfxCount == 0){
+    if(sfxCount == 0 ){
         m_sfxAggr(nullptr);
         sfxCount = -1;
     }
-
+    
     
 }
 
@@ -119,9 +129,7 @@ void essentiaRT::onsetCB(){
     //trigger sfx
     //ioi mode: output last,clear,then retrigger sfx
     if(delayMode ==0 ){
-//        m_sfxAggr(nullptr);
         sfxCount = MAX_SFX_TIME*sampleRate;
-//        SFXTimer.Delay(MAX_SFX_TIME);
         isComputingSFX=true;
         
     }
@@ -130,24 +138,26 @@ void essentiaRT::onsetCB(){
         SFX.clear();
         isComputingSFX=true;
         sfxCount = delayMode/1000.*sampleRate;
-//        SFXTimer.Delay(delayMode/1000.);
         
     }
     else{
         isComputingSFX=true;
         sfxCount = delayMode/1000.*sampleRate;
-//        SFXTimer.Delay(delayMode/1000.);
     }
-
+    
+    
+    
     onsetDetection.preprocessPool();
     //output onsetStrength first
     std::map<string, vector<Real> > features = getFeatures(onsetDetection.pool);
     std::map<string, vector<Real>  >::iterator st = features.find("i.strength");
-    AtomList listOut(2);
-    SetString(listOut[0],"i.strength");
-    SetFloat(listOut[1],(st->second)[0]);
-    ToOutList(1, listOut);
-    features.erase(st);
+    if(st!= features.end()){
+        AtomList listOut(2);
+        SetString(listOut[0],"i.strength");
+        SetFloat(listOut[1],(st->second)[0]);
+        ToOutList(1, listOut);
+        features.erase(st);
+    }
     
     
     //output the rest
@@ -161,21 +171,11 @@ void essentiaRT::onsetCB(){
 
 int essentiaRT::checkBlockSize(){
     if(hopSize!=Blocksize()){
-//        onsetDetection.setHopSize(hopSize);
+        //        onsetDetection.setHopSize(hopSize);
         hopSize = Blocksize();
         audioBuffer.resize(hopSize);
     }
     return hopSize;
-}
-
-void essentiaRT::m_features(int argc, const t_atom *argv)
-{
-    currentAlgorithms.clear();
-    for(int i=0; i<argc; i++)
-        currentAlgorithms[GetString(argv[i])] = true;
-    
-    //Always want onsets
-    currentAlgorithms["onsets"] = true;
 }
 
 
@@ -187,24 +187,22 @@ void essentiaRT::my_bang() {
 }
 
 void essentiaRT::m_sfxAggr(void * i ){
-    
+#ifdef THREADED_SFX
     try{
         // careful with that : aggregate time should be inferior than 2 consecutive callbacks for non blocking audio thread
-        if(aggrThread.joinable()){
-            aggrThread.join();
-        }
+        if(aggrThread.joinable()){aggrThread.join();}
         aggrThread.~thread();
         isAggregatingSFX = true;
         SFX.preprocessPool();
-        aggrThreadFunc();
-//        aggrThread = thread(&essentiaRT::aggrThreadFunc,this);
-        //        }
+        aggrThread = thread(&essentiaRT::aggrThreadFunc,this);
+        
     }
-    catch(exception const& e){
-
-        std::cout << e.what() << std::endl;
-
-    }
+    catch(exception const& e){std::cout << e.what() << std::endl;}
+#else
+    isAggregatingSFX = true;
+    SFX.preprocessPool();
+    aggrThreadFunc();
+#endif
     
 }
 
@@ -317,7 +315,7 @@ void essentiaRT::m_threshold(float thresh){
 void essentiaRT::m_rthreshold(float rthresh){
     if(rthresh<1)
         rthresh = 0;
-        
+    
     onsetDetection.superFluxP->configure("ratioThreshold",MAX(0,rthresh));
     
 }
